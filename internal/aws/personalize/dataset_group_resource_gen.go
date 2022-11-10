@@ -25,12 +25,13 @@ func datasetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_group_arn": {
 			// Property: DatasetGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the dataset group.",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the dataset group.",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the dataset group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,14 +42,15 @@ func datasetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"domain": {
 			// Property: Domain
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The domain of a Domain dataset group.",
-			//   "enum": [
-			//     "ECOMMERCE",
-			//     "VIDEO_ON_DEMAND"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The domain of a Domain dataset group.",
+			//	  "enum": [
+			//	    "ECOMMERCE",
+			//	    "VIDEO_ON_DEMAND"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The domain of a Domain dataset group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,12 +69,13 @@ func datasetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn": {
 			// Property: KmsKeyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.",
-			//   "maxLength": 2048,
-			//   "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.",
+			//	  "maxLength": 2048,
+			//	  "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -89,13 +92,14 @@ func datasetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the new dataset group.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the new dataset group.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the new dataset group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -110,13 +114,14 @@ func datasetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.",
 			Type:        types.StringType,
 			Optional:    true,

@@ -23,36 +23,39 @@ func serviceActionAssociationDataSource(ctx context.Context) (datasource.DataSou
 		"product_id": {
 			// Property: ProductId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"provisioning_artifact_id": {
 			// Property: ProvisioningArtifactId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"service_action_id": {
 			// Property: ServiceActionId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

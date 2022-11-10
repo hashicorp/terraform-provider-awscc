@@ -25,11 +25,12 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Number (ARN) of the extension.",
-			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Number (ARN) of the extension.",
+			//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Number (ARN) of the extension.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -45,10 +46,11 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"log_delivery_bucket": {
 			// Property: LogDeliveryBucket
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A url to the S3 bucket where logs for the testType run will be available",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A url to the S3 bucket where logs for the testType run will be available",
+			//	  "type": "string"
+			//	}
 			Description: "A url to the S3 bucket where logs for the testType run will be available",
 			Type:        types.StringType,
 			Optional:    true,
@@ -61,12 +63,13 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"public_type_arn": {
 			// Property: PublicTypeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
-			//   "maxLength": 1024,
-			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
+			//	  "maxLength": 1024,
+			//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			Type:        types.StringType,
 			Computed:    true,
@@ -77,12 +80,13 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"public_version_number": {
 			// Property: PublicVersionNumber
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version number of a public third-party extension",
-			//   "maxLength": 64,
-			//   "minLength": 5,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version number of a public third-party extension",
+			//	  "maxLength": 64,
+			//	  "minLength": 5,
+			//	  "type": "string"
+			//	}
 			Description: "The version number of a public third-party extension",
 			Type:        types.StringType,
 			Optional:    true,
@@ -98,13 +102,14 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"publisher_id": {
 			// Property: PublisherId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
-			//   "maxLength": 40,
-			//   "minLength": 1,
-			//   "pattern": "[0-9a-zA-Z]{40}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+			//	  "maxLength": 40,
+			//	  "minLength": 1,
+			//	  "pattern": "[0-9a-zA-Z]{40}",
+			//	  "type": "string"
+			//	}
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,15 +120,16 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The kind of extension",
-			//   "enum": [
-			//     "RESOURCE",
-			//     "MODULE",
-			//     "HOOK"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The kind of extension",
+			//	  "enum": [
+			//	    "RESOURCE",
+			//	    "MODULE",
+			//	    "HOOK"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The kind of extension",
 			Type:        types.StringType,
 			Optional:    true,
@@ -143,11 +149,12 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"type_name": {
 			// Property: TypeName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			//	  "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -163,11 +170,12 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		"type_version_arn": {
 			// Property: TypeVersionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
+			//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",
 			Type:        types.StringType,
 			Computed:    true,

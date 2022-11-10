@@ -24,9 +24,10 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,17 +37,18 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		"expiry_events_configuration": {
 			// Property: ExpiryEventsConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "DaysBeforeExpiry": {
-			//       "maximum": 45,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "DaysBeforeExpiry": {
+			//	      "maximum": 45,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"days_before_expiry": {

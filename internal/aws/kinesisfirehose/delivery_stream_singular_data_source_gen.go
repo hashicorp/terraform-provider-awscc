@@ -23,281 +23,282 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"amazonopensearchservice_destination_configuration": {
 			// Property: AmazonopensearchserviceDestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BufferingHints": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IntervalInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "SizeInMBs": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ClusterEndpoint": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "https:.*",
-			//       "type": "string"
-			//     },
-			//     "DomainARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "IndexName": {
-			//       "maxLength": 80,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "IndexRotationPeriod": {
-			//       "enum": [
-			//         "NoRotation",
-			//         "OneHour",
-			//         "OneDay",
-			//         "OneWeek",
-			//         "OneMonth"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "ProcessingConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "Processors": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "ParameterName": {
-			//                       "type": "string"
-			//                     },
-			//                     "ParameterValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ParameterValue",
-			//                     "ParameterName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "RecordDeAggregation",
-			//                   "Lambda",
-			//                   "MetadataExtraction",
-			//                   "AppendDelimiterToRecord"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RetryOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DurationInSeconds": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "S3BackupMode": {
-			//       "enum": [
-			//         "FailedDocumentsOnly",
-			//         "AllDocuments"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TypeName": {
-			//       "maxLength": 100,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "VpcConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "SecurityGroupIds": {
-			//           "items": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 5,
-			//           "minItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "SubnetIds": {
-			//           "items": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 16,
-			//           "minItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "required": [
-			//         "RoleARN",
-			//         "SubnetIds",
-			//         "SecurityGroupIds"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "IndexName",
-			//     "S3Configuration",
-			//     "RoleARN"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BufferingHints": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IntervalInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "SizeInMBs": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ClusterEndpoint": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "https:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "DomainARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "IndexName": {
+			//	      "maxLength": 80,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "IndexRotationPeriod": {
+			//	      "enum": [
+			//	        "NoRotation",
+			//	        "OneHour",
+			//	        "OneDay",
+			//	        "OneWeek",
+			//	        "OneMonth"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "ProcessingConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Processors": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "ParameterName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ParameterValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ParameterValue",
+			//	                    "ParameterName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "RecordDeAggregation",
+			//	                  "Lambda",
+			//	                  "MetadataExtraction",
+			//	                  "AppendDelimiterToRecord"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RetryOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DurationInSeconds": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "S3BackupMode": {
+			//	      "enum": [
+			//	        "FailedDocumentsOnly",
+			//	        "AllDocuments"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TypeName": {
+			//	      "maxLength": 100,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "VpcConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "SecurityGroupIds": {
+			//	          "items": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 5,
+			//	          "minItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "SubnetIds": {
+			//	          "items": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 16,
+			//	          "minItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "RoleARN",
+			//	        "SubnetIds",
+			//	        "SecurityGroupIds"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "IndexName",
+			//	    "S3Configuration",
+			//	    "RoleARN"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"buffering_hints": {
@@ -563,37 +564,39 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"delivery_stream_encryption_configuration_input": {
 			// Property: DeliveryStreamEncryptionConfigurationInput
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "KeyARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "KeyType": {
-			//       "enum": [
-			//         "AWS_OWNED_CMK",
-			//         "CUSTOMER_MANAGED_CMK"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "KeyType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "KeyARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "KeyType": {
+			//	      "enum": [
+			//	        "AWS_OWNED_CMK",
+			//	        "CUSTOMER_MANAGED_CMK"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "KeyType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key_arn": {
@@ -613,306 +616,309 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"delivery_stream_name": {
 			// Property: DeliveryStreamName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9._-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9._-]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"delivery_stream_type": {
 			// Property: DeliveryStreamType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DirectPut",
-			//     "KinesisStreamAsSource"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DirectPut",
+			//	    "KinesisStreamAsSource"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"elasticsearch_destination_configuration": {
 			// Property: ElasticsearchDestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BufferingHints": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IntervalInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "SizeInMBs": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ClusterEndpoint": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "https:.*",
-			//       "type": "string"
-			//     },
-			//     "DomainARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "IndexName": {
-			//       "maxLength": 80,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "IndexRotationPeriod": {
-			//       "enum": [
-			//         "NoRotation",
-			//         "OneHour",
-			//         "OneDay",
-			//         "OneWeek",
-			//         "OneMonth"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "ProcessingConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "Processors": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "ParameterName": {
-			//                       "type": "string"
-			//                     },
-			//                     "ParameterValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ParameterValue",
-			//                     "ParameterName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "RecordDeAggregation",
-			//                   "Lambda",
-			//                   "MetadataExtraction",
-			//                   "AppendDelimiterToRecord"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RetryOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DurationInSeconds": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "S3BackupMode": {
-			//       "enum": [
-			//         "FailedDocumentsOnly",
-			//         "AllDocuments"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TypeName": {
-			//       "maxLength": 100,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "VpcConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "SecurityGroupIds": {
-			//           "items": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 5,
-			//           "minItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "SubnetIds": {
-			//           "items": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 16,
-			//           "minItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "required": [
-			//         "RoleARN",
-			//         "SubnetIds",
-			//         "SecurityGroupIds"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "IndexName",
-			//     "S3Configuration",
-			//     "RoleARN"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BufferingHints": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IntervalInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "SizeInMBs": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ClusterEndpoint": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "https:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "DomainARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "IndexName": {
+			//	      "maxLength": 80,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "IndexRotationPeriod": {
+			//	      "enum": [
+			//	        "NoRotation",
+			//	        "OneHour",
+			//	        "OneDay",
+			//	        "OneWeek",
+			//	        "OneMonth"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "ProcessingConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Processors": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "ParameterName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ParameterValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ParameterValue",
+			//	                    "ParameterName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "RecordDeAggregation",
+			//	                  "Lambda",
+			//	                  "MetadataExtraction",
+			//	                  "AppendDelimiterToRecord"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RetryOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DurationInSeconds": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "S3BackupMode": {
+			//	      "enum": [
+			//	        "FailedDocumentsOnly",
+			//	        "AllDocuments"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TypeName": {
+			//	      "maxLength": 100,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "VpcConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "SecurityGroupIds": {
+			//	          "items": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 5,
+			//	          "minItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "SubnetIds": {
+			//	          "items": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 16,
+			//	          "minItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "RoleARN",
+			//	        "SubnetIds",
+			//	        "SecurityGroupIds"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "IndexName",
+			//	    "S3Configuration",
+			//	    "RoleARN"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"buffering_hints": {
@@ -1178,425 +1184,426 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"extended_s3_destination_configuration": {
 			// Property: ExtendedS3DestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BucketARN": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "BufferingHints": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IntervalInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "SizeInMBs": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CompressionFormat": {
-			//       "enum": [
-			//         "UNCOMPRESSED",
-			//         "GZIP",
-			//         "ZIP",
-			//         "Snappy",
-			//         "HADOOP_SNAPPY"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "DataFormatConversionConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "InputFormatConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Deserializer": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "HiveJsonSerDe": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "TimestampFormats": {
-			//                       "items": {
-			//                         "type": "string"
-			//                       },
-			//                       "type": "array",
-			//                       "uniqueItems": true
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "OpenXJsonSerDe": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "CaseInsensitive": {
-			//                       "type": "boolean"
-			//                     },
-			//                     "ColumnToJsonKeyMappings": {
-			//                       "patternProperties": {
-			//                         "": {
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "type": "object"
-			//                     },
-			//                     "ConvertDotsInJsonKeysToUnderscores": {
-			//                       "type": "boolean"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "OutputFormatConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Serializer": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "OrcSerDe": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "BlockSizeBytes": {
-			//                       "type": "integer"
-			//                     },
-			//                     "BloomFilterColumns": {
-			//                       "items": {
-			//                         "type": "string"
-			//                       },
-			//                       "type": "array",
-			//                       "uniqueItems": true
-			//                     },
-			//                     "BloomFilterFalsePositiveProbability": {
-			//                       "type": "number"
-			//                     },
-			//                     "Compression": {
-			//                       "type": "string"
-			//                     },
-			//                     "DictionaryKeyThreshold": {
-			//                       "type": "number"
-			//                     },
-			//                     "EnablePadding": {
-			//                       "type": "boolean"
-			//                     },
-			//                     "FormatVersion": {
-			//                       "type": "string"
-			//                     },
-			//                     "PaddingTolerance": {
-			//                       "type": "number"
-			//                     },
-			//                     "RowIndexStride": {
-			//                       "type": "integer"
-			//                     },
-			//                     "StripeSizeBytes": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "ParquetSerDe": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "BlockSizeBytes": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Compression": {
-			//                       "type": "string"
-			//                     },
-			//                     "EnableDictionaryCompression": {
-			//                       "type": "boolean"
-			//                     },
-			//                     "MaxPaddingBytes": {
-			//                       "type": "integer"
-			//                     },
-			//                     "PageSizeBytes": {
-			//                       "type": "integer"
-			//                     },
-			//                     "WriterVersion": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "SchemaConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CatalogId": {
-			//               "type": "string"
-			//             },
-			//             "DatabaseName": {
-			//               "type": "string"
-			//             },
-			//             "Region": {
-			//               "type": "string"
-			//             },
-			//             "RoleARN": {
-			//               "maxLength": 512,
-			//               "minLength": 1,
-			//               "pattern": "arn:.*",
-			//               "type": "string"
-			//             },
-			//             "TableName": {
-			//               "type": "string"
-			//             },
-			//             "VersionId": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "DynamicPartitioningConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "RetryOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DurationInSeconds": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "EncryptionConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "KMSEncryptionConfig": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AWSKMSKeyARN": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "AWSKMSKeyARN"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "NoEncryptionConfig": {
-			//           "enum": [
-			//             "NoEncryption"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ErrorOutputPrefix": {
-			//       "maxLength": 1024,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "Prefix": {
-			//       "maxLength": 1024,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "ProcessingConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "Processors": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "ParameterName": {
-			//                       "type": "string"
-			//                     },
-			//                     "ParameterValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ParameterValue",
-			//                     "ParameterName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "RecordDeAggregation",
-			//                   "Lambda",
-			//                   "MetadataExtraction",
-			//                   "AppendDelimiterToRecord"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "S3BackupConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "S3BackupMode": {
-			//       "enum": [
-			//         "Disabled",
-			//         "Enabled"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "BucketARN",
-			//     "RoleARN"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BucketARN": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "BufferingHints": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IntervalInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "SizeInMBs": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CompressionFormat": {
+			//	      "enum": [
+			//	        "UNCOMPRESSED",
+			//	        "GZIP",
+			//	        "ZIP",
+			//	        "Snappy",
+			//	        "HADOOP_SNAPPY"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "DataFormatConversionConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "InputFormatConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Deserializer": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "HiveJsonSerDe": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "TimestampFormats": {
+			//	                      "items": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "type": "array",
+			//	                      "uniqueItems": true
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "OpenXJsonSerDe": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "CaseInsensitive": {
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "ColumnToJsonKeyMappings": {
+			//	                      "patternProperties": {
+			//	                        "": {
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "type": "object"
+			//	                    },
+			//	                    "ConvertDotsInJsonKeysToUnderscores": {
+			//	                      "type": "boolean"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "OutputFormatConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Serializer": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "OrcSerDe": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "BlockSizeBytes": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "BloomFilterColumns": {
+			//	                      "items": {
+			//	                        "type": "string"
+			//	                      },
+			//	                      "type": "array",
+			//	                      "uniqueItems": true
+			//	                    },
+			//	                    "BloomFilterFalsePositiveProbability": {
+			//	                      "type": "number"
+			//	                    },
+			//	                    "Compression": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "DictionaryKeyThreshold": {
+			//	                      "type": "number"
+			//	                    },
+			//	                    "EnablePadding": {
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "FormatVersion": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PaddingTolerance": {
+			//	                      "type": "number"
+			//	                    },
+			//	                    "RowIndexStride": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "StripeSizeBytes": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "ParquetSerDe": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "BlockSizeBytes": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Compression": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "EnableDictionaryCompression": {
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "MaxPaddingBytes": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "PageSizeBytes": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "WriterVersion": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "SchemaConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CatalogId": {
+			//	              "type": "string"
+			//	            },
+			//	            "DatabaseName": {
+			//	              "type": "string"
+			//	            },
+			//	            "Region": {
+			//	              "type": "string"
+			//	            },
+			//	            "RoleARN": {
+			//	              "maxLength": 512,
+			//	              "minLength": 1,
+			//	              "pattern": "arn:.*",
+			//	              "type": "string"
+			//	            },
+			//	            "TableName": {
+			//	              "type": "string"
+			//	            },
+			//	            "VersionId": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "DynamicPartitioningConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "RetryOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DurationInSeconds": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "EncryptionConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "KMSEncryptionConfig": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AWSKMSKeyARN": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "AWSKMSKeyARN"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "NoEncryptionConfig": {
+			//	          "enum": [
+			//	            "NoEncryption"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ErrorOutputPrefix": {
+			//	      "maxLength": 1024,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "Prefix": {
+			//	      "maxLength": 1024,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "ProcessingConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Processors": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "ParameterName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ParameterValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ParameterValue",
+			//	                    "ParameterName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "RecordDeAggregation",
+			//	                  "Lambda",
+			//	                  "MetadataExtraction",
+			//	                  "AppendDelimiterToRecord"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "S3BackupConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "S3BackupMode": {
+			//	      "enum": [
+			//	        "Disabled",
+			//	        "Enabled"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "BucketARN",
+			//	    "RoleARN"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"bucket_arn": {
@@ -2089,268 +2096,269 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"http_endpoint_destination_configuration": {
 			// Property: HttpEndpointDestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BufferingHints": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IntervalInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "SizeInMBs": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "EndpointConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AccessKey": {
-			//           "maxLength": 4096,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 256,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Url": {
-			//           "maxLength": 1000,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Url"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ProcessingConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "Processors": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "ParameterName": {
-			//                       "type": "string"
-			//                     },
-			//                     "ParameterValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ParameterValue",
-			//                     "ParameterName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "RecordDeAggregation",
-			//                   "Lambda",
-			//                   "MetadataExtraction",
-			//                   "AppendDelimiterToRecord"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RequestConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CommonAttributes": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "AttributeName": {
-			//                 "maxLength": 256,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "AttributeValue": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 0,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "AttributeName",
-			//               "AttributeValue"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 50,
-			//           "minItems": 0,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "ContentEncoding": {
-			//           "enum": [
-			//             "NONE",
-			//             "GZIP"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RetryOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DurationInSeconds": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "S3BackupMode": {
-			//       "type": "string"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "EndpointConfiguration",
-			//     "S3Configuration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BufferingHints": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IntervalInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "SizeInMBs": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "EndpointConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AccessKey": {
+			//	          "maxLength": 4096,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 256,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Url": {
+			//	          "maxLength": 1000,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Url"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ProcessingConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Processors": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "ParameterName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ParameterValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ParameterValue",
+			//	                    "ParameterName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "RecordDeAggregation",
+			//	                  "Lambda",
+			//	                  "MetadataExtraction",
+			//	                  "AppendDelimiterToRecord"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RequestConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CommonAttributes": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "AttributeName": {
+			//	                "maxLength": 256,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "AttributeValue": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 0,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "AttributeName",
+			//	              "AttributeValue"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 50,
+			//	          "minItems": 0,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "ContentEncoding": {
+			//	          "enum": [
+			//	            "NONE",
+			//	            "GZIP"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RetryOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DurationInSeconds": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "S3BackupMode": {
+			//	      "type": "string"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "EndpointConfiguration",
+			//	    "S3Configuration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"buffering_hints": {
@@ -2622,28 +2630,29 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"kinesis_stream_source_configuration": {
 			// Property: KinesisStreamSourceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "KinesisStreamARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "RoleARN",
-			//     "KinesisStreamARN"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "KinesisStreamARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "RoleARN",
+			//	    "KinesisStreamARN"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"kinesis_stream_arn": {
@@ -2663,333 +2672,334 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"redshift_destination_configuration": {
 			// Property: RedshiftDestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ClusterJDBCURL": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "CopyCommand": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CopyOptions": {
-			//           "maxLength": 204800,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "DataTableColumns": {
-			//           "maxLength": 204800,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "DataTableName": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "DataTableName"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Password": {
-			//       "maxLength": 512,
-			//       "minLength": 6,
-			//       "type": "string"
-			//     },
-			//     "ProcessingConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "Processors": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "ParameterName": {
-			//                       "type": "string"
-			//                     },
-			//                     "ParameterValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ParameterValue",
-			//                     "ParameterName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "RecordDeAggregation",
-			//                   "Lambda",
-			//                   "MetadataExtraction",
-			//                   "AppendDelimiterToRecord"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RetryOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DurationInSeconds": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "S3BackupConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "S3BackupMode": {
-			//       "enum": [
-			//         "Disabled",
-			//         "Enabled"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Username": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3Configuration",
-			//     "Username",
-			//     "ClusterJDBCURL",
-			//     "CopyCommand",
-			//     "RoleARN",
-			//     "Password"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ClusterJDBCURL": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "CopyCommand": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CopyOptions": {
+			//	          "maxLength": 204800,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "DataTableColumns": {
+			//	          "maxLength": 204800,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "DataTableName": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DataTableName"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Password": {
+			//	      "maxLength": 512,
+			//	      "minLength": 6,
+			//	      "type": "string"
+			//	    },
+			//	    "ProcessingConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Processors": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "ParameterName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ParameterValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ParameterValue",
+			//	                    "ParameterName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "RecordDeAggregation",
+			//	                  "Lambda",
+			//	                  "MetadataExtraction",
+			//	                  "AppendDelimiterToRecord"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RetryOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DurationInSeconds": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "S3BackupConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "S3BackupMode": {
+			//	      "enum": [
+			//	        "Disabled",
+			//	        "Enabled"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Username": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3Configuration",
+			//	    "Username",
+			//	    "ClusterJDBCURL",
+			//	    "CopyCommand",
+			//	    "RoleARN",
+			//	    "Password"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cloudwatch_logging_options": {
@@ -3327,99 +3337,100 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"s3_destination_configuration": {
 			// Property: S3DestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BucketARN": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     },
-			//     "BufferingHints": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IntervalInSeconds": {
-			//           "type": "integer"
-			//         },
-			//         "SizeInMBs": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CompressionFormat": {
-			//       "enum": [
-			//         "UNCOMPRESSED",
-			//         "GZIP",
-			//         "ZIP",
-			//         "Snappy",
-			//         "HADOOP_SNAPPY"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "EncryptionConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "KMSEncryptionConfig": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AWSKMSKeyARN": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "AWSKMSKeyARN"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "NoEncryptionConfig": {
-			//           "enum": [
-			//             "NoEncryption"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ErrorOutputPrefix": {
-			//       "maxLength": 1024,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "Prefix": {
-			//       "maxLength": 1024,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "RoleARN": {
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "arn:.*",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "BucketARN",
-			//     "RoleARN"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BucketARN": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    },
+			//	    "BufferingHints": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IntervalInSeconds": {
+			//	          "type": "integer"
+			//	        },
+			//	        "SizeInMBs": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CompressionFormat": {
+			//	      "enum": [
+			//	        "UNCOMPRESSED",
+			//	        "GZIP",
+			//	        "ZIP",
+			//	        "Snappy",
+			//	        "HADOOP_SNAPPY"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "EncryptionConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "KMSEncryptionConfig": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AWSKMSKeyARN": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "AWSKMSKeyARN"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "NoEncryptionConfig": {
+			//	          "enum": [
+			//	            "NoEncryption"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ErrorOutputPrefix": {
+			//	      "maxLength": 1024,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "Prefix": {
+			//	      "maxLength": 1024,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "RoleARN": {
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "arn:.*",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "BucketARN",
+			//	    "RoleARN"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"bucket_arn": {
@@ -3521,211 +3532,212 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"splunk_destination_configuration": {
 			// Property: SplunkDestinationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CloudWatchLoggingOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "LogGroupName": {
-			//           "type": "string"
-			//         },
-			//         "LogStreamName": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "HECAcknowledgmentTimeoutInSeconds": {
-			//       "maximum": 600,
-			//       "minimum": 180,
-			//       "type": "integer"
-			//     },
-			//     "HECEndpoint": {
-			//       "maxLength": 2048,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "HECEndpointType": {
-			//       "enum": [
-			//         "Raw",
-			//         "Event"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "HECToken": {
-			//       "maxLength": 2048,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     },
-			//     "ProcessingConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         },
-			//         "Processors": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "ParameterName": {
-			//                       "type": "string"
-			//                     },
-			//                     "ParameterValue": {
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "ParameterValue",
-			//                     "ParameterName"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "type": "array",
-			//                 "uniqueItems": true
-			//               },
-			//               "Type": {
-			//                 "enum": [
-			//                   "RecordDeAggregation",
-			//                   "Lambda",
-			//                   "MetadataExtraction",
-			//                   "AppendDelimiterToRecord"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Type"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RetryOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DurationInSeconds": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "S3BackupMode": {
-			//       "type": "string"
-			//     },
-			//     "S3Configuration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "BucketARN": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         },
-			//         "BufferingHints": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "IntervalInSeconds": {
-			//               "type": "integer"
-			//             },
-			//             "SizeInMBs": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CloudWatchLoggingOptions": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroupName": {
-			//               "type": "string"
-			//             },
-			//             "LogStreamName": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CompressionFormat": {
-			//           "enum": [
-			//             "UNCOMPRESSED",
-			//             "GZIP",
-			//             "ZIP",
-			//             "Snappy",
-			//             "HADOOP_SNAPPY"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "EncryptionConfiguration": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "KMSEncryptionConfig": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AWSKMSKeyARN": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "AWSKMSKeyARN"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "NoEncryptionConfig": {
-			//               "enum": [
-			//                 "NoEncryption"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "ErrorOutputPrefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "RoleARN": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "arn:.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketARN",
-			//         "RoleARN"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "HECEndpoint",
-			//     "S3Configuration",
-			//     "HECToken",
-			//     "HECEndpointType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CloudWatchLoggingOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogGroupName": {
+			//	          "type": "string"
+			//	        },
+			//	        "LogStreamName": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "HECAcknowledgmentTimeoutInSeconds": {
+			//	      "maximum": 600,
+			//	      "minimum": 180,
+			//	      "type": "integer"
+			//	    },
+			//	    "HECEndpoint": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "HECEndpointType": {
+			//	      "enum": [
+			//	        "Raw",
+			//	        "Event"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "HECToken": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    },
+			//	    "ProcessingConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Processors": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "ParameterName": {
+			//	                      "type": "string"
+			//	                    },
+			//	                    "ParameterValue": {
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "ParameterValue",
+			//	                    "ParameterName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "type": "array",
+			//	                "uniqueItems": true
+			//	              },
+			//	              "Type": {
+			//	                "enum": [
+			//	                  "RecordDeAggregation",
+			//	                  "Lambda",
+			//	                  "MetadataExtraction",
+			//	                  "AppendDelimiterToRecord"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Type"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RetryOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DurationInSeconds": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "S3BackupMode": {
+			//	      "type": "string"
+			//	    },
+			//	    "S3Configuration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "BucketARN": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "BufferingHints": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "IntervalInSeconds": {
+			//	              "type": "integer"
+			//	            },
+			//	            "SizeInMBs": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CloudWatchLoggingOptions": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroupName": {
+			//	              "type": "string"
+			//	            },
+			//	            "LogStreamName": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CompressionFormat": {
+			//	          "enum": [
+			//	            "UNCOMPRESSED",
+			//	            "GZIP",
+			//	            "ZIP",
+			//	            "Snappy",
+			//	            "HADOOP_SNAPPY"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "EncryptionConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "KMSEncryptionConfig": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AWSKMSKeyARN": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "AWSKMSKeyARN"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "NoEncryptionConfig": {
+			//	              "enum": [
+			//	                "NoEncryption"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "ErrorOutputPrefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "RoleARN": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "arn:.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketARN",
+			//	        "RoleARN"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "HECEndpoint",
+			//	    "S3Configuration",
+			//	    "HECToken",
+			//	    "HECEndpointType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cloudwatch_logging_options": {
@@ -3940,31 +3952,32 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

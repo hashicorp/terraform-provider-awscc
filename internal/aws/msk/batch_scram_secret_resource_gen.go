@@ -23,9 +23,10 @@ func batchScramSecretResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,13 +36,14 @@ func batchScramSecretResource(ctx context.Context) (resource.Resource, error) {
 		"secret_arn_list": {
 			// Property: SecretArnList
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,

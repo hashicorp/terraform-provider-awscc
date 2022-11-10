@@ -23,10 +23,11 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the theme.\u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the theme.\u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,25 +35,27 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "pattern": "^[0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "pattern": "^[0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"base_theme_id": {
 			// Property: BaseThemeId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t\u003ccode\u003eListThemes\u003c/code\u003e or choose \u003cb\u003eThemes\u003c/b\u003e from\n\t\t\twithin a QuickSight analysis. \u003c/p\u003e",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "[\\w\\-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t\u003ccode\u003eListThemes\u003c/code\u003e or choose \u003cb\u003eThemes\u003c/b\u003e from\n\t\t\twithin a QuickSight analysis. \u003c/p\u003e",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w\\-]+",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin a QuickSight analysis. </p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,207 +63,208 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "\u003cp\u003eThe theme configuration. This configuration contains all of the display properties for\n            a theme.\u003c/p\u003e",
-			//   "properties": {
-			//     "DataColorPalette": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. \u003c/p\u003e",
-			//       "properties": {
-			//         "Colors": {
-			//           "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
-			//           "items": {
-			//             "pattern": "^#[A-F0-9]{6}$",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         },
-			//         "EmptyFillColor": {
-			//           "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "MinMaxGradient": {
-			//           "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
-			//           "items": {
-			//             "pattern": "^#[A-F0-9]{6}$",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Sheet": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
-			//       "properties": {
-			//         "Tile": {
-			//           "additionalProperties": false,
-			//           "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
-			//           "properties": {
-			//             "Border": {
-			//               "additionalProperties": false,
-			//               "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
-			//               "properties": {
-			//                 "Show": {
-			//                   "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "TileLayout": {
-			//           "additionalProperties": false,
-			//           "description": "\u003cp\u003eThe display options for the layout of tiles on a sheet.\u003c/p\u003e",
-			//           "properties": {
-			//             "Gutter": {
-			//               "additionalProperties": false,
-			//               "description": "\u003cp\u003eThe display options for gutter spacing between tiles on a sheet.\u003c/p\u003e",
-			//               "properties": {
-			//                 "Show": {
-			//                   "description": "\u003cp\u003eThis Boolean value controls whether to display a gutter space between sheet tiles.\n        \u003c/p\u003e",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Margin": {
-			//               "additionalProperties": false,
-			//               "description": "\u003cp\u003eThe display options for margins around the outside edge of sheets.\u003c/p\u003e",
-			//               "properties": {
-			//                 "Show": {
-			//                   "description": "\u003cp\u003eThis Boolean value controls whether to display sheet margins.\u003c/p\u003e",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Typography": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe typeface for the theme.\u003c/p\u003e",
-			//       "properties": {
-			//         "FontFamilies": {
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "FontFamily": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "maxItems": 5,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "UIColorPalette": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n        \u003c/p\u003e",
-			//       "properties": {
-			//         "Accent": {
-			//           "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "AccentForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "Danger": {
-			//           "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "DangerForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "Dimension": {
-			//           "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "DimensionForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "Measure": {
-			//           "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "MeasureForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "PrimaryBackground": {
-			//           "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "PrimaryForeground": {
-			//           "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "SecondaryBackground": {
-			//           "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "SecondaryForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "Success": {
-			//           "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "SuccessForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "Warning": {
-			//           "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         },
-			//         "WarningForeground": {
-			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
-			//           "pattern": "^#[A-F0-9]{6}$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "\u003cp\u003eThe theme configuration. This configuration contains all of the display properties for\n            a theme.\u003c/p\u003e",
+			//	  "properties": {
+			//	    "DataColorPalette": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. \u003c/p\u003e",
+			//	      "properties": {
+			//	        "Colors": {
+			//	          "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
+			//	          "items": {
+			//	            "pattern": "^#[A-F0-9]{6}$",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        },
+			//	        "EmptyFillColor": {
+			//	          "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "MinMaxGradient": {
+			//	          "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
+			//	          "items": {
+			//	            "pattern": "^#[A-F0-9]{6}$",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Sheet": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
+			//	      "properties": {
+			//	        "Tile": {
+			//	          "additionalProperties": false,
+			//	          "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
+			//	          "properties": {
+			//	            "Border": {
+			//	              "additionalProperties": false,
+			//	              "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
+			//	              "properties": {
+			//	                "Show": {
+			//	                  "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "TileLayout": {
+			//	          "additionalProperties": false,
+			//	          "description": "\u003cp\u003eThe display options for the layout of tiles on a sheet.\u003c/p\u003e",
+			//	          "properties": {
+			//	            "Gutter": {
+			//	              "additionalProperties": false,
+			//	              "description": "\u003cp\u003eThe display options for gutter spacing between tiles on a sheet.\u003c/p\u003e",
+			//	              "properties": {
+			//	                "Show": {
+			//	                  "description": "\u003cp\u003eThis Boolean value controls whether to display a gutter space between sheet tiles.\n        \u003c/p\u003e",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Margin": {
+			//	              "additionalProperties": false,
+			//	              "description": "\u003cp\u003eThe display options for margins around the outside edge of sheets.\u003c/p\u003e",
+			//	              "properties": {
+			//	                "Show": {
+			//	                  "description": "\u003cp\u003eThis Boolean value controls whether to display sheet margins.\u003c/p\u003e",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Typography": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe typeface for the theme.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "FontFamilies": {
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "FontFamily": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 5,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "UIColorPalette": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n        \u003c/p\u003e",
+			//	      "properties": {
+			//	        "Accent": {
+			//	          "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "AccentForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "Danger": {
+			//	          "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "DangerForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "Dimension": {
+			//	          "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "DimensionForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "Measure": {
+			//	          "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "MeasureForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "PrimaryBackground": {
+			//	          "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "PrimaryForeground": {
+			//	          "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "SecondaryBackground": {
+			//	          "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "SecondaryForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "Success": {
+			//	          "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "SuccessForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "Warning": {
+			//	          "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        },
+			//	        "WarningForeground": {
+			//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
+			//	          "pattern": "^#[A-F0-9]{6}$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -497,11 +501,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe date and time that the theme was created.\u003c/p\u003e",
-			//   "format": "string",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe date and time that the theme was created.\u003c/p\u003e",
+			//	  "format": "string",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The date and time that the theme was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -509,11 +514,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe date and time that the theme was last updated.\u003c/p\u003e",
-			//   "format": "string",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe date and time that the theme was last updated.\u003c/p\u003e",
+			//	  "format": "string",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The date and time that the theme was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -521,12 +527,13 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA display name for the theme.\u003c/p\u003e",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA display name for the theme.\u003c/p\u003e",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "<p>A display name for the theme.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -534,38 +541,39 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"permissions": {
 			// Property: Permissions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA valid grouping of resource permissions to apply to the new theme.\n\t\t\t\u003c/p\u003e",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
-			//     "properties": {
-			//       "Actions": {
-			//         "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "maxItems": 16,
-			//         "minItems": 1,
-			//         "type": "array"
-			//       },
-			//       "Principal": {
-			//         "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Actions",
-			//       "Principal"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 64,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA valid grouping of resource permissions to apply to the new theme.\n\t\t\t\u003c/p\u003e",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
+			//	    "properties": {
+			//	      "Actions": {
+			//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "maxItems": 16,
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      },
+			//	      "Principal": {
+			//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Actions",
+			//	      "Principal"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 64,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "<p>A valid grouping of resource permissions to apply to the new theme.\n\t\t\t</p>",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -588,35 +596,36 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA map of the key-value pairs for the resource tag or tags that you want to add to the\n\t\t\tresource.\u003c/p\u003e",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA map of the key-value pairs for the resource tag or tags that you want to add to the\n\t\t\tresource.\u003c/p\u003e",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "<p>A map of the key-value pairs for the resource tag or tags that you want to add to the\n\t\t\tresource.</p>",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -639,302 +648,305 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"theme_id": {
 			// Property: ThemeId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "[\\w\\-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w\\-]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "QUICKSIGHT",
-			//     "CUSTOM",
-			//     "ALL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "QUICKSIGHT",
+			//	    "CUSTOM",
+			//	    "ALL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "\u003cp\u003eA version of a theme.\u003c/p\u003e",
-			//   "properties": {
-			//     "Arn": {
-			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-			//       "type": "string"
-			//     },
-			//     "BaseThemeId": {
-			//       "description": "\u003cp\u003eThe Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.\u003c/p\u003e",
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "[\\w\\-]+",
-			//       "type": "string"
-			//     },
-			//     "Configuration": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe theme configuration. This configuration contains all of the display properties for\n            a theme.\u003c/p\u003e",
-			//       "properties": {
-			//         "DataColorPalette": {
-			//           "additionalProperties": false,
-			//           "description": "\u003cp\u003eThe theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. \u003c/p\u003e",
-			//           "properties": {
-			//             "Colors": {
-			//               "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
-			//               "items": {
-			//                 "pattern": "^#[A-F0-9]{6}$",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "minItems": 0,
-			//               "type": "array"
-			//             },
-			//             "EmptyFillColor": {
-			//               "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "MinMaxGradient": {
-			//               "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
-			//               "items": {
-			//                 "pattern": "^#[A-F0-9]{6}$",
-			//                 "type": "string"
-			//               },
-			//               "maxItems": 100,
-			//               "minItems": 0,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Sheet": {
-			//           "additionalProperties": false,
-			//           "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
-			//           "properties": {
-			//             "Tile": {
-			//               "additionalProperties": false,
-			//               "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
-			//               "properties": {
-			//                 "Border": {
-			//                   "additionalProperties": false,
-			//                   "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
-			//                   "properties": {
-			//                     "Show": {
-			//                       "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
-			//                       "type": "boolean"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "TileLayout": {
-			//               "additionalProperties": false,
-			//               "description": "\u003cp\u003eThe display options for the layout of tiles on a sheet.\u003c/p\u003e",
-			//               "properties": {
-			//                 "Gutter": {
-			//                   "additionalProperties": false,
-			//                   "description": "\u003cp\u003eThe display options for gutter spacing between tiles on a sheet.\u003c/p\u003e",
-			//                   "properties": {
-			//                     "Show": {
-			//                       "description": "\u003cp\u003eThis Boolean value controls whether to display a gutter space between sheet tiles.\n        \u003c/p\u003e",
-			//                       "type": "boolean"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "Margin": {
-			//                   "additionalProperties": false,
-			//                   "description": "\u003cp\u003eThe display options for margins around the outside edge of sheets.\u003c/p\u003e",
-			//                   "properties": {
-			//                     "Show": {
-			//                       "description": "\u003cp\u003eThis Boolean value controls whether to display sheet margins.\u003c/p\u003e",
-			//                       "type": "boolean"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Typography": {
-			//           "additionalProperties": false,
-			//           "description": "\u003cp\u003eThe typeface for the theme.\u003c/p\u003e",
-			//           "properties": {
-			//             "FontFamilies": {
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "FontFamily": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 5,
-			//               "minItems": 0,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "UIColorPalette": {
-			//           "additionalProperties": false,
-			//           "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n        \u003c/p\u003e",
-			//           "properties": {
-			//             "Accent": {
-			//               "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "AccentForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "Danger": {
-			//               "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "DangerForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "Dimension": {
-			//               "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "DimensionForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "Measure": {
-			//               "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "MeasureForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "PrimaryBackground": {
-			//               "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "PrimaryForeground": {
-			//               "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "SecondaryBackground": {
-			//               "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "SecondaryForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "Success": {
-			//               "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "SuccessForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "Warning": {
-			//               "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             },
-			//             "WarningForeground": {
-			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
-			//               "pattern": "^#[A-F0-9]{6}$",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "CreatedTime": {
-			//       "description": "\u003cp\u003eThe date and time that this theme version was created.\u003c/p\u003e",
-			//       "format": "string",
-			//       "type": "string"
-			//     },
-			//     "Description": {
-			//       "description": "\u003cp\u003eThe description of the theme.\u003c/p\u003e",
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Errors": {
-			//       "description": "\u003cp\u003eErrors associated with the theme.\u003c/p\u003e",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "\u003cp\u003eTheme error.\u003c/p\u003e",
-			//         "properties": {
-			//           "Message": {
-			//             "description": "\u003cp\u003eThe error message.\u003c/p\u003e",
-			//             "pattern": ".*\\S.*",
-			//             "type": "string"
-			//           },
-			//           "Type": {
-			//             "enum": [
-			//               "INTERNAL_FAILURE"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Status": {
-			//       "enum": [
-			//         "CREATION_IN_PROGRESS",
-			//         "CREATION_SUCCESSFUL",
-			//         "CREATION_FAILED",
-			//         "UPDATE_IN_PROGRESS",
-			//         "UPDATE_SUCCESSFUL",
-			//         "UPDATE_FAILED",
-			//         "DELETED"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "VersionNumber": {
-			//       "description": "\u003cp\u003eThe version number of the theme.\u003c/p\u003e",
-			//       "minimum": 1,
-			//       "type": "number"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "\u003cp\u003eA version of a theme.\u003c/p\u003e",
+			//	  "properties": {
+			//	    "Arn": {
+			//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
+			//	      "type": "string"
+			//	    },
+			//	    "BaseThemeId": {
+			//	      "description": "\u003cp\u003eThe Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.\u003c/p\u003e",
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "[\\w\\-]+",
+			//	      "type": "string"
+			//	    },
+			//	    "Configuration": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe theme configuration. This configuration contains all of the display properties for\n            a theme.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "DataColorPalette": {
+			//	          "additionalProperties": false,
+			//	          "description": "\u003cp\u003eThe theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. \u003c/p\u003e",
+			//	          "properties": {
+			//	            "Colors": {
+			//	              "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
+			//	              "items": {
+			//	                "pattern": "^#[A-F0-9]{6}$",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "minItems": 0,
+			//	              "type": "array"
+			//	            },
+			//	            "EmptyFillColor": {
+			//	              "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "MinMaxGradient": {
+			//	              "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
+			//	              "items": {
+			//	                "pattern": "^#[A-F0-9]{6}$",
+			//	                "type": "string"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "minItems": 0,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Sheet": {
+			//	          "additionalProperties": false,
+			//	          "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
+			//	          "properties": {
+			//	            "Tile": {
+			//	              "additionalProperties": false,
+			//	              "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
+			//	              "properties": {
+			//	                "Border": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
+			//	                  "properties": {
+			//	                    "Show": {
+			//	                      "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
+			//	                      "type": "boolean"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "TileLayout": {
+			//	              "additionalProperties": false,
+			//	              "description": "\u003cp\u003eThe display options for the layout of tiles on a sheet.\u003c/p\u003e",
+			//	              "properties": {
+			//	                "Gutter": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "\u003cp\u003eThe display options for gutter spacing between tiles on a sheet.\u003c/p\u003e",
+			//	                  "properties": {
+			//	                    "Show": {
+			//	                      "description": "\u003cp\u003eThis Boolean value controls whether to display a gutter space between sheet tiles.\n        \u003c/p\u003e",
+			//	                      "type": "boolean"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "Margin": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "\u003cp\u003eThe display options for margins around the outside edge of sheets.\u003c/p\u003e",
+			//	                  "properties": {
+			//	                    "Show": {
+			//	                      "description": "\u003cp\u003eThis Boolean value controls whether to display sheet margins.\u003c/p\u003e",
+			//	                      "type": "boolean"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Typography": {
+			//	          "additionalProperties": false,
+			//	          "description": "\u003cp\u003eThe typeface for the theme.\u003c/p\u003e",
+			//	          "properties": {
+			//	            "FontFamilies": {
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "FontFamily": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 5,
+			//	              "minItems": 0,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "UIColorPalette": {
+			//	          "additionalProperties": false,
+			//	          "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n        \u003c/p\u003e",
+			//	          "properties": {
+			//	            "Accent": {
+			//	              "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "AccentForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "Danger": {
+			//	              "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "DangerForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "Dimension": {
+			//	              "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "DimensionForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "Measure": {
+			//	              "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "MeasureForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "PrimaryBackground": {
+			//	              "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "PrimaryForeground": {
+			//	              "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "SecondaryBackground": {
+			//	              "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "SecondaryForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "Success": {
+			//	              "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "SuccessForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "Warning": {
+			//	              "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            },
+			//	            "WarningForeground": {
+			//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
+			//	              "pattern": "^#[A-F0-9]{6}$",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "CreatedTime": {
+			//	      "description": "\u003cp\u003eThe date and time that this theme version was created.\u003c/p\u003e",
+			//	      "format": "string",
+			//	      "type": "string"
+			//	    },
+			//	    "Description": {
+			//	      "description": "\u003cp\u003eThe description of the theme.\u003c/p\u003e",
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Errors": {
+			//	      "description": "\u003cp\u003eErrors associated with the theme.\u003c/p\u003e",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "\u003cp\u003eTheme error.\u003c/p\u003e",
+			//	        "properties": {
+			//	          "Message": {
+			//	            "description": "\u003cp\u003eThe error message.\u003c/p\u003e",
+			//	            "pattern": ".*\\S.*",
+			//	            "type": "string"
+			//	          },
+			//	          "Type": {
+			//	            "enum": [
+			//	              "INTERNAL_FAILURE"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Status": {
+			//	      "enum": [
+			//	        "CREATION_IN_PROGRESS",
+			//	        "CREATION_SUCCESSFUL",
+			//	        "CREATION_FAILED",
+			//	        "UPDATE_IN_PROGRESS",
+			//	        "UPDATE_SUCCESSFUL",
+			//	        "UPDATE_FAILED",
+			//	        "DELETED"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "VersionNumber": {
+			//	      "description": "\u003cp\u003eThe version number of the theme.\u003c/p\u003e",
+			//	      "minimum": 1,
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "<p>A version of a theme.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1235,12 +1247,13 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version_description": {
 			// Property: VersionDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eA description of the first version of the theme that you're creating. Every time\n\t\t\t\t\u003ccode\u003eUpdateTheme\u003c/code\u003e is called, a new version is created. Each version of the\n\t\t\ttheme has a description of the version in the \u003ccode\u003eVersionDescription\u003c/code\u003e\n\t\t\tfield.\u003c/p\u003e",
-			//   "maxLength": 512,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eA description of the first version of the theme that you're creating. Every time\n\t\t\t\t\u003ccode\u003eUpdateTheme\u003c/code\u003e is called, a new version is created. Each version of the\n\t\t\ttheme has a description of the version in the \u003ccode\u003eVersionDescription\u003c/code\u003e\n\t\t\tfield.\u003c/p\u003e",
+			//	  "maxLength": 512,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "<p>A description of the first version of the theme that you're creating. Every time\n\t\t\t\t<code>UpdateTheme</code> is called, a new version is created. Each version of the\n\t\t\ttheme has a description of the version in the <code>VersionDescription</code>\n\t\t\tfield.</p>",
 			Type:        types.StringType,
 			Computed:    true,

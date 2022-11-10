@@ -23,130 +23,131 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"advanced_event_selectors": {
 			// Property: AdvancedEventSelectors
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The advanced event selectors that were used to select events for the data store.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Advanced event selectors let you create fine-grained selectors for the following AWS CloudTrail event record ?elds. They help you control costs by logging only those events that are important to you.",
-			//     "properties": {
-			//       "FieldSelectors": {
-			//         "description": "Contains all selector statements in an advanced event selector.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "A single selector statement in an advanced event selector.",
-			//           "properties": {
-			//             "EndsWith": {
-			//               "description": "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "pattern": "(.+)",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "Equals": {
-			//               "description": "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "pattern": "(.+)",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "Field": {
-			//               "description": "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
-			//               "maxLength": 1000,
-			//               "minLength": 1,
-			//               "pattern": "([\\w|\\d|\\.|_]+)",
-			//               "type": "string"
-			//             },
-			//             "NotEndsWith": {
-			//               "description": "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "pattern": "(.+)",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "NotEquals": {
-			//               "description": "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "pattern": "(.+)",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "NotStartsWith": {
-			//               "description": "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "pattern": "(.+)",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             },
-			//             "StartsWith": {
-			//               "description": "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "pattern": "(.+)",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             }
-			//           },
-			//           "required": [
-			//             "Field"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "Name": {
-			//         "description": "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
-			//         "maxLength": 1000,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "FieldSelectors"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The advanced event selectors that were used to select events for the data store.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Advanced event selectors let you create fine-grained selectors for the following AWS CloudTrail event record ?elds. They help you control costs by logging only those events that are important to you.",
+			//	    "properties": {
+			//	      "FieldSelectors": {
+			//	        "description": "Contains all selector statements in an advanced event selector.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "A single selector statement in an advanced event selector.",
+			//	          "properties": {
+			//	            "EndsWith": {
+			//	              "description": "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "pattern": "(.+)",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "Equals": {
+			//	              "description": "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "pattern": "(.+)",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "Field": {
+			//	              "description": "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
+			//	              "maxLength": 1000,
+			//	              "minLength": 1,
+			//	              "pattern": "([\\w|\\d|\\.|_]+)",
+			//	              "type": "string"
+			//	            },
+			//	            "NotEndsWith": {
+			//	              "description": "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "pattern": "(.+)",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "NotEquals": {
+			//	              "description": "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "pattern": "(.+)",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "NotStartsWith": {
+			//	              "description": "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "pattern": "(.+)",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            },
+			//	            "StartsWith": {
+			//	              "description": "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "pattern": "(.+)",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Field"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "Name": {
+			//	        "description": "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
+			//	        "maxLength": 1000,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "FieldSelectors"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The advanced event selectors that were used to select events for the data store.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -214,10 +215,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"created_timestamp": {
 			// Property: CreatedTimestamp
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The timestamp of the event data store's creation.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The timestamp of the event data store's creation.",
+			//	  "type": "string"
+			//	}
 			Description: "The timestamp of the event data store's creation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -225,21 +227,35 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"event_data_store_arn": {
 			// Property: EventDataStoreArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the event data store.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the event data store.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the event data store.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"kms_key_id": {
+			// Property: KmsKeyId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
+			//	  "type": "string"
+			//	}
+			Description: "Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
 		"multi_region_enabled": {
 			// Property: MultiRegionEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -247,10 +263,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the event data store.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the event data store.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the event data store.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -258,10 +275,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"organization_enabled": {
 			// Property: OrganizationEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates that an event data store is collecting logged events for an organization.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates that an event data store is collecting logged events for an organization.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates that an event data store is collecting logged events for an organization.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -269,10 +287,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"retention_period": {
 			// Property: RetentionPeriod
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The retention period, in days.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The retention period, in days.",
+			//	  "type": "integer"
+			//	}
 			Description: "The retention period, in days.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -280,10 +299,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
+			//	  "type": "string"
+			//	}
 			Description: "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -291,30 +311,31 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "An arbitrary set of tags (key-value pairs) for this event data store.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "An arbitrary set of tags (key-value pairs) for this event data store.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -336,10 +357,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"termination_protection_enabled": {
 			// Property: TerminationProtectionEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the event data store is protected from termination.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the event data store is protected from termination.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the event data store is protected from termination.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -347,10 +369,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"updated_timestamp": {
 			// Property: UpdatedTimestamp
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
+			//	  "type": "string"
+			//	}
 			Description: "The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -382,6 +405,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"field":                          "Field",
 		"field_selectors":                "FieldSelectors",
 		"key":                            "Key",
+		"kms_key_id":                     "KmsKeyId",
 		"multi_region_enabled":           "MultiRegionEnabled",
 		"name":                           "Name",
 		"not_ends_with":                  "NotEndsWith",

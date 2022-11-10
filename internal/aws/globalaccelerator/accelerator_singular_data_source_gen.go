@@ -23,10 +23,11 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"accelerator_arn": {
 			// Property: AcceleratorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the accelerator.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the accelerator.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dns_name": {
 			// Property: DnsName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
+			//	  "type": "string"
+			//	}
 			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dual_stack_dns_name": {
 			// Property: DualStackDnsName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
+			//	  "type": "string"
+			//	}
 			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,11 +59,12 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enabled": {
 			// Property: Enabled
 			// CloudFormation resource type schema:
-			// {
-			//   "default": true,
-			//   "description": "Indicates whether an accelerator is enabled. The value is true or false.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": true,
+			//	  "description": "Indicates whether an accelerator is enabled. The value is true or false.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether an accelerator is enabled. The value is true or false.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -68,15 +72,16 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ip_address_type": {
 			// Property: IpAddressType
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "IPV4",
-			//   "description": "IP Address type.",
-			//   "enum": [
-			//     "IPV4",
-			//     "DUAL_STACK"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "IPV4",
+			//	  "description": "IP Address type.",
+			//	  "enum": [
+			//	    "IPV4",
+			//	    "DUAL_STACK"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "IP Address type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -84,15 +89,16 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ip_addresses": {
 			// Property: IpAddresses
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IP addresses from BYOIP Prefix pool.",
-			//   "items": {
-			//     "description": "An IPV4 address",
-			//     "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The IP addresses from BYOIP Prefix pool.",
+			//	  "items": {
+			//	    "description": "An IPV4 address",
+			//	    "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The IP addresses from BYOIP Prefix pool.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -100,13 +106,14 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ipv_4_addresses": {
 			// Property: Ipv4Addresses
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IPv4 addresses assigned to the accelerator.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The IPv4 addresses assigned to the accelerator.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The IPv4 addresses assigned to the accelerator.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -114,13 +121,14 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ipv_6_addresses": {
 			// Property: Ipv6Addresses
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IPv6 addresses assigned if the accelerator is dualstack",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The IPv6 addresses assigned if the accelerator is dualstack",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The IPv6 addresses assigned if the accelerator is dualstack",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -128,13 +136,14 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of accelerator.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9_-]{0,64}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of accelerator.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9_-]{0,64}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of accelerator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -142,32 +151,33 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Tag is a key-value pair associated with accelerator.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "Key of the tag. Value can be 1 to 127 characters.",
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Value for the tag. Value can be 1 to 255 characters.",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Tag is a key-value pair associated with accelerator.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "Key of the tag. Value can be 1 to 127 characters.",
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Value for the tag. Value can be 1 to 255 characters.",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

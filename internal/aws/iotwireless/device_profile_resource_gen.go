@@ -24,10 +24,11 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Service profile Arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Service profile Arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "Service profile Arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,11 +39,12 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Service profile Id. Returned after successful create.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Service profile Id. Returned after successful create.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,101 +55,102 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
-			//   "properties": {
-			//     "ClassBTimeout": {
-			//       "maximum": 1000,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "ClassCTimeout": {
-			//       "maximum": 1000,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "FactoryPresetFreqsList": {
-			//       "items": {
-			//         "maximum": 16700000,
-			//         "minimum": 1000000,
-			//         "type": "integer"
-			//       },
-			//       "maxItems": 20,
-			//       "type": "array"
-			//     },
-			//     "MacVersion": {
-			//       "maxLength": 64,
-			//       "type": "string"
-			//     },
-			//     "MaxDutyCycle": {
-			//       "maximum": 100,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "MaxEirp": {
-			//       "maximum": 15,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "PingSlotDr": {
-			//       "maximum": 15,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "PingSlotFreq": {
-			//       "maximum": 16700000,
-			//       "minimum": 1000000,
-			//       "type": "integer"
-			//     },
-			//     "PingSlotPeriod": {
-			//       "maximum": 4096,
-			//       "minimum": 128,
-			//       "type": "integer"
-			//     },
-			//     "RegParamsRevision": {
-			//       "maxLength": 64,
-			//       "type": "string"
-			//     },
-			//     "RfRegion": {
-			//       "maxLength": 64,
-			//       "type": "string"
-			//     },
-			//     "RxDataRate2": {
-			//       "maximum": 15,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "RxDelay1": {
-			//       "maximum": 15,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "RxDrOffset1": {
-			//       "maximum": 7,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "RxFreq2": {
-			//       "maximum": 16700000,
-			//       "minimum": 1000000,
-			//       "type": "integer"
-			//     },
-			//     "Supports32BitFCnt": {
-			//       "type": "boolean"
-			//     },
-			//     "SupportsClassB": {
-			//       "type": "boolean"
-			//     },
-			//     "SupportsClassC": {
-			//       "type": "boolean"
-			//     },
-			//     "SupportsJoin": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
+			//	  "properties": {
+			//	    "ClassBTimeout": {
+			//	      "maximum": 1000,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "ClassCTimeout": {
+			//	      "maximum": 1000,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "FactoryPresetFreqsList": {
+			//	      "items": {
+			//	        "maximum": 16700000,
+			//	        "minimum": 1000000,
+			//	        "type": "integer"
+			//	      },
+			//	      "maxItems": 20,
+			//	      "type": "array"
+			//	    },
+			//	    "MacVersion": {
+			//	      "maxLength": 64,
+			//	      "type": "string"
+			//	    },
+			//	    "MaxDutyCycle": {
+			//	      "maximum": 100,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "MaxEirp": {
+			//	      "maximum": 15,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "PingSlotDr": {
+			//	      "maximum": 15,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "PingSlotFreq": {
+			//	      "maximum": 16700000,
+			//	      "minimum": 1000000,
+			//	      "type": "integer"
+			//	    },
+			//	    "PingSlotPeriod": {
+			//	      "maximum": 4096,
+			//	      "minimum": 128,
+			//	      "type": "integer"
+			//	    },
+			//	    "RegParamsRevision": {
+			//	      "maxLength": 64,
+			//	      "type": "string"
+			//	    },
+			//	    "RfRegion": {
+			//	      "maxLength": 64,
+			//	      "type": "string"
+			//	    },
+			//	    "RxDataRate2": {
+			//	      "maximum": 15,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "RxDelay1": {
+			//	      "maximum": 15,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "RxDrOffset1": {
+			//	      "maximum": 7,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "RxFreq2": {
+			//	      "maximum": 16700000,
+			//	      "minimum": 1000000,
+			//	      "type": "integer"
+			//	    },
+			//	    "Supports32BitFCnt": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SupportsClassB": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SupportsClassC": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SupportsJoin": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -379,11 +382,12 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of service profile",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of service profile",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Name of service profile",
 			Type:        types.StringType,
 			Optional:    true,
@@ -398,29 +402,30 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the device profile.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the device profile.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the device profile.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

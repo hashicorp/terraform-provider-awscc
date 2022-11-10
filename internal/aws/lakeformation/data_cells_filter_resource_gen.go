@@ -24,17 +24,18 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"column_names": {
 			// Property: ColumnNames
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of columns to be included in this Data Cells Filter.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "A string representing a resource's name.",
-			//     "maxLength": 255,
-			//     "minLength": 1,
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of columns to be included in this Data Cells Filter.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "A string representing a resource's name.",
+			//	    "maxLength": 255,
+			//	    "minLength": 1,
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of columns to be included in this Data Cells Filter.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -51,24 +52,25 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"column_wildcard": {
 			// Property: ColumnWildcard
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object representing the Data Cells Filter's Columns. Either Column Names or a Wildcard is required",
-			//   "properties": {
-			//     "ExcludedColumnNames": {
-			//       "description": "A list of column names to be excluded from the Data Cells Filter.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "description": "A string representing a resource's name.",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object representing the Data Cells Filter's Columns. Either Column Names or a Wildcard is required",
+			//	  "properties": {
+			//	    "ExcludedColumnNames": {
+			//	      "description": "A list of column names to be excluded from the Data Cells Filter.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "description": "A string representing a resource's name.",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object representing the Data Cells Filter's Columns. Either Column Names or a Wildcard is required",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -98,12 +100,13 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"database_name": {
 			// Property: DatabaseName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Database that the Table resides in.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Database that the Table resides in.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Database that the Table resides in.",
 			Type:        types.StringType,
 			Required:    true,
@@ -117,12 +120,13 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The desired name of the Data Cells Filter.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The desired name of the Data Cells Filter.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The desired name of the Data Cells Filter.",
 			Type:        types.StringType,
 			Required:    true,
@@ -136,22 +140,23 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"row_filter": {
 			// Property: RowFilter
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object representing the Data Cells Filter's Row Filter. Either a Filter Expression or a Wildcard is required",
-			//   "properties": {
-			//     "AllRowsWildcard": {
-			//       "additionalProperties": false,
-			//       "description": "An empty object representing a row wildcard.",
-			//       "type": "object"
-			//     },
-			//     "FilterExpression": {
-			//       "description": "A PartiQL predicate.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object representing the Data Cells Filter's Row Filter. Either a Filter Expression or a Wildcard is required",
+			//	  "properties": {
+			//	    "AllRowsWildcard": {
+			//	      "additionalProperties": false,
+			//	      "description": "An empty object representing a row wildcard.",
+			//	      "type": "object"
+			//	    },
+			//	    "FilterExpression": {
+			//	      "description": "A PartiQL predicate.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object representing the Data Cells Filter's Row Filter. Either a Filter Expression or a Wildcard is required",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -187,12 +192,13 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"table_catalog_id": {
 			// Property: TableCatalogId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Catalog Id of the Table on which to create a Data Cells Filter.",
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Catalog Id of the Table on which to create a Data Cells Filter.",
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Description: "The Catalog Id of the Table on which to create a Data Cells Filter.",
 			Type:        types.StringType,
 			Required:    true,
@@ -206,12 +212,13 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"table_name": {
 			// Property: TableName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Table to create a Data Cells Filter for.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Table to create a Data Cells Filter for.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Table to create a Data Cells Filter for.",
 			Type:        types.StringType,
 			Required:    true,

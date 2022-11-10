@@ -25,12 +25,13 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_group_arn": {
 			// Property: DatasetGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the dataset group that provides the training data.",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the dataset group that provides the training data.",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the dataset group that provides the training data.",
 			Type:        types.StringType,
 			Required:    true,
@@ -45,11 +46,12 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"event_type": {
 			// Property: EventType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -65,13 +67,14 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the solution",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the solution",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the solution",
 			Type:        types.StringType,
 			Required:    true,
@@ -86,10 +89,11 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"perform_auto_ml": {
 			// Property: PerformAutoML
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -102,10 +106,11 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"perform_hpo": {
 			// Property: PerformHPO
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -118,12 +123,13 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"recipe_arn": {
 			// Property: RecipeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the recipe to use for model training. Only specified when performAutoML is false.",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the recipe to use for model training. Only specified when performAutoML is false.",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the recipe to use for model training. Only specified when performAutoML is false.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -140,12 +146,13 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"solution_arn": {
 			// Property: SolutionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the solution",
-			//   "maxLength": 256,
-			//   "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the solution",
+			//	  "maxLength": 256,
+			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the solution",
 			Type:        types.StringType,
 			Computed:    true,
@@ -156,201 +163,202 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		"solution_config": {
 			// Property: SolutionConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.",
-			//   "properties": {
-			//     "AlgorithmHyperParameters": {
-			//       "additionalProperties": false,
-			//       "description": "Lists the hyperparameter names and ranges.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "AutoMLConfig": {
-			//       "additionalProperties": false,
-			//       "description": "The AutoMLConfig object containing a list of recipes to search when AutoML is performed.",
-			//       "properties": {
-			//         "MetricName": {
-			//           "description": "The metric to optimize.",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         },
-			//         "RecipeList": {
-			//           "description": "The list of candidate recipes.",
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "maxLength": 256,
-			//             "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "EventValueThreshold": {
-			//       "description": "Only events with a value greater than or equal to this threshold are used for training a model.",
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     },
-			//     "FeatureTransformationParameters": {
-			//       "additionalProperties": false,
-			//       "description": "Lists the feature transformation parameters.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "HpoConfig": {
-			//       "additionalProperties": false,
-			//       "description": "Describes the properties for hyperparameter optimization (HPO)",
-			//       "properties": {
-			//         "AlgorithmHyperParameterRanges": {
-			//           "additionalProperties": false,
-			//           "description": "The hyperparameters and their allowable ranges",
-			//           "properties": {
-			//             "CategoricalHyperParameterRanges": {
-			//               "description": "The categorical hyperparameters and their ranges.",
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "Provides the name and values of a Categorical hyperparameter.",
-			//                 "properties": {
-			//                   "Name": {
-			//                     "description": "The name of the hyperparameter.",
-			//                     "maxLength": 256,
-			//                     "type": "string"
-			//                   },
-			//                   "Values": {
-			//                     "description": "A list of the categories for the hyperparameter.",
-			//                     "insertionOrder": true,
-			//                     "items": {
-			//                       "maxLength": 1000,
-			//                       "type": "string"
-			//                     },
-			//                     "maxItems": 100,
-			//                     "type": "array"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "ContinuousHyperParameterRanges": {
-			//               "description": "The continuous hyperparameters and their ranges.",
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "Provides the name and range of a continuous hyperparameter.",
-			//                 "properties": {
-			//                   "MaxValue": {
-			//                     "description": "The maximum allowable value for the hyperparameter.",
-			//                     "minimum": -1000000,
-			//                     "type": "number"
-			//                   },
-			//                   "MinValue": {
-			//                     "description": "The minimum allowable value for the hyperparameter.",
-			//                     "minimum": -1000000,
-			//                     "type": "number"
-			//                   },
-			//                   "Name": {
-			//                     "description": "The name of the hyperparameter.",
-			//                     "maxLength": 256,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             },
-			//             "IntegerHyperParameterRanges": {
-			//               "description": "The integer hyperparameters and their ranges.",
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "Provides the name and range of an integer-valued hyperparameter.",
-			//                 "properties": {
-			//                   "MaxValue": {
-			//                     "description": "The maximum allowable value for the hyperparameter.",
-			//                     "maximum": 1000000,
-			//                     "type": "integer"
-			//                   },
-			//                   "MinValue": {
-			//                     "description": "The minimum allowable value for the hyperparameter.",
-			//                     "minimum": -1000000,
-			//                     "type": "integer"
-			//                   },
-			//                   "Name": {
-			//                     "description": "The name of the hyperparameter.",
-			//                     "maxLength": 256,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "HpoObjective": {
-			//           "additionalProperties": false,
-			//           "description": "The metric to optimize during HPO.",
-			//           "properties": {
-			//             "MetricName": {
-			//               "description": "The name of the metric",
-			//               "maxLength": 256,
-			//               "type": "string"
-			//             },
-			//             "MetricRegex": {
-			//               "description": "A regular expression for finding the metric in the training job logs.",
-			//               "maxLength": 256,
-			//               "type": "string"
-			//             },
-			//             "Type": {
-			//               "description": "The type of the metric. Valid values are Maximize and Minimize.",
-			//               "enum": [
-			//                 "Maximize",
-			//                 "Minimize"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "HpoResourceConfig": {
-			//           "additionalProperties": false,
-			//           "description": "Describes the resource configuration for hyperparameter optimization (HPO).",
-			//           "properties": {
-			//             "MaxNumberOfTrainingJobs": {
-			//               "description": "The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.",
-			//               "maxLength": 256,
-			//               "type": "string"
-			//             },
-			//             "MaxParallelTrainingJobs": {
-			//               "description": "The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.",
-			//               "maxLength": 256,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.",
+			//	  "properties": {
+			//	    "AlgorithmHyperParameters": {
+			//	      "additionalProperties": false,
+			//	      "description": "Lists the hyperparameter names and ranges.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "AutoMLConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "The AutoMLConfig object containing a list of recipes to search when AutoML is performed.",
+			//	      "properties": {
+			//	        "MetricName": {
+			//	          "description": "The metric to optimize.",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        },
+			//	        "RecipeList": {
+			//	          "description": "The list of candidate recipes.",
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "maxLength": 256,
+			//	            "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "EventValueThreshold": {
+			//	      "description": "Only events with a value greater than or equal to this threshold are used for training a model.",
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    },
+			//	    "FeatureTransformationParameters": {
+			//	      "additionalProperties": false,
+			//	      "description": "Lists the feature transformation parameters.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "HpoConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes the properties for hyperparameter optimization (HPO)",
+			//	      "properties": {
+			//	        "AlgorithmHyperParameterRanges": {
+			//	          "additionalProperties": false,
+			//	          "description": "The hyperparameters and their allowable ranges",
+			//	          "properties": {
+			//	            "CategoricalHyperParameterRanges": {
+			//	              "description": "The categorical hyperparameters and their ranges.",
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "Provides the name and values of a Categorical hyperparameter.",
+			//	                "properties": {
+			//	                  "Name": {
+			//	                    "description": "The name of the hyperparameter.",
+			//	                    "maxLength": 256,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Values": {
+			//	                    "description": "A list of the categories for the hyperparameter.",
+			//	                    "insertionOrder": true,
+			//	                    "items": {
+			//	                      "maxLength": 1000,
+			//	                      "type": "string"
+			//	                    },
+			//	                    "maxItems": 100,
+			//	                    "type": "array"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "ContinuousHyperParameterRanges": {
+			//	              "description": "The continuous hyperparameters and their ranges.",
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "Provides the name and range of a continuous hyperparameter.",
+			//	                "properties": {
+			//	                  "MaxValue": {
+			//	                    "description": "The maximum allowable value for the hyperparameter.",
+			//	                    "minimum": -1000000,
+			//	                    "type": "number"
+			//	                  },
+			//	                  "MinValue": {
+			//	                    "description": "The minimum allowable value for the hyperparameter.",
+			//	                    "minimum": -1000000,
+			//	                    "type": "number"
+			//	                  },
+			//	                  "Name": {
+			//	                    "description": "The name of the hyperparameter.",
+			//	                    "maxLength": 256,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            },
+			//	            "IntegerHyperParameterRanges": {
+			//	              "description": "The integer hyperparameters and their ranges.",
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "Provides the name and range of an integer-valued hyperparameter.",
+			//	                "properties": {
+			//	                  "MaxValue": {
+			//	                    "description": "The maximum allowable value for the hyperparameter.",
+			//	                    "maximum": 1000000,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "MinValue": {
+			//	                    "description": "The minimum allowable value for the hyperparameter.",
+			//	                    "minimum": -1000000,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "Name": {
+			//	                    "description": "The name of the hyperparameter.",
+			//	                    "maxLength": 256,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "HpoObjective": {
+			//	          "additionalProperties": false,
+			//	          "description": "The metric to optimize during HPO.",
+			//	          "properties": {
+			//	            "MetricName": {
+			//	              "description": "The name of the metric",
+			//	              "maxLength": 256,
+			//	              "type": "string"
+			//	            },
+			//	            "MetricRegex": {
+			//	              "description": "A regular expression for finding the metric in the training job logs.",
+			//	              "maxLength": 256,
+			//	              "type": "string"
+			//	            },
+			//	            "Type": {
+			//	              "description": "The type of the metric. Valid values are Maximize and Minimize.",
+			//	              "enum": [
+			//	                "Maximize",
+			//	                "Minimize"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "HpoResourceConfig": {
+			//	          "additionalProperties": false,
+			//	          "description": "Describes the resource configuration for hyperparameter optimization (HPO).",
+			//	          "properties": {
+			//	            "MaxNumberOfTrainingJobs": {
+			//	              "description": "The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.",
+			//	              "maxLength": 256,
+			//	              "type": "string"
+			//	            },
+			//	            "MaxParallelTrainingJobs": {
+			//	              "description": "The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.",
+			//	              "maxLength": 256,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

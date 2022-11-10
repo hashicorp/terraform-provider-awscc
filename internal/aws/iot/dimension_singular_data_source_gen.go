@@ -23,10 +23,11 @@ func dimensionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN (Amazon resource name) of the created dimension.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN (Amazon resource name) of the created dimension.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN (Amazon resource name) of the created dimension.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,13 +35,14 @@ func dimensionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique identifier for the dimension.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9:_-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique identifier for the dimension.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9:_-]+",
+			//	  "type": "string"
+			//	}
 			Description: "A unique identifier for the dimension.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,19 +50,20 @@ func dimensionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"string_values": {
 			// Property: StringValues
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the value or list of values for the dimension.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 256,
-			//     "minLength": 1,
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the value or list of values for the dimension.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 256,
+			//	    "minLength": 1,
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Specifies the value or list of values for the dimension.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
@@ -68,36 +71,37 @@ func dimensionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata that can be used to manage the dimension.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The tag's key.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The tag's value.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Metadata that can be used to manage the dimension.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The tag's key.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The tag's value.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Metadata that can be used to manage the dimension.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -120,13 +124,14 @@ func dimensionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the type of the dimension.",
-			//   "enum": [
-			//     "TOPIC_FILTER"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the type of the dimension.",
+			//	  "enum": [
+			//	    "TOPIC_FILTER"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the type of the dimension.",
 			Type:        types.StringType,
 			Computed:    true,

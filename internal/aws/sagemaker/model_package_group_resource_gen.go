@@ -25,10 +25,11 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time at which the model package group was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time at which the model package group was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time at which the model package group was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +40,14 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"model_package_group_arn": {
 			// Property: ModelPackageGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the model package group.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "arn:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the model package group.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "arn:.*",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,12 +58,13 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"model_package_group_description": {
 			// Property: ModelPackageGroupDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the model package group.",
-			//   "maxLength": 1024,
-			//   "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the model package group.",
+			//	  "maxLength": 1024,
+			//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the model package group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -78,12 +81,13 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"model_package_group_name": {
 			// Property: ModelPackageGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the model package group.",
-			//   "maxLength": 63,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the model package group.",
+			//	  "maxLength": 63,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the model package group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -98,9 +102,10 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"model_package_group_policy": {
 			// Property: ModelPackageGroupPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -111,18 +116,19 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"model_package_group_status": {
 			// Property: ModelPackageGroupStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of a modelpackage group job.",
-			//   "enum": [
-			//     "Pending",
-			//     "InProgress",
-			//     "Completed",
-			//     "Failed",
-			//     "Deleting",
-			//     "DeleteFailed"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of a modelpackage group job.",
+			//	  "enum": [
+			//	    "Pending",
+			//	    "InProgress",
+			//	    "Completed",
+			//	    "Failed",
+			//	    "Deleting",
+			//	    "DeleteFailed"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The status of a modelpackage group job.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -133,35 +139,36 @@ func modelPackageGroupResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array"
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

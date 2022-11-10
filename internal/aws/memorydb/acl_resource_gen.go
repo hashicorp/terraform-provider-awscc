@@ -25,11 +25,12 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		"acl_name": {
 			// Property: ACLName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the acl.",
-			//   "pattern": "[a-z][a-z0-9\\\\-]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the acl.",
+			//	  "pattern": "[a-z][a-z0-9\\\\-]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the acl.",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,10 +44,11 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the acl.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the acl.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the acl.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,10 +59,11 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates acl status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates acl status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
+			//	  "type": "string"
+			//	}
 			Description: "Indicates acl status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
 			Type:        types.StringType,
 			Computed:    true,
@@ -71,38 +74,39 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this cluster.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this cluster.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this cluster.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -138,16 +142,17 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		"user_names": {
 			// Property: UserNames
 			// CloudFormation resource type schema:
-			// {
-			//   "$comment": "List of users.",
-			//   "description": "List of users associated to this acl.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "$comment": "List of users.",
+			//	  "description": "List of users associated to this acl.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "List of users associated to this acl.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,

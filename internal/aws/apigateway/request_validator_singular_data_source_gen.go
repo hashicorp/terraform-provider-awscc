@@ -23,10 +23,11 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the request validator.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the request validator.",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the request validator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		"request_validator_id": {
 			// Property: RequestValidatorId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ID of the request validator.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ID of the request validator.",
+			//	  "type": "string"
+			//	}
 			Description: "ID of the request validator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the targeted API entity.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the targeted API entity.",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the targeted API entity.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		"validate_request_body": {
 			// Property: ValidateRequestBody
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -67,10 +71,11 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		"validate_request_parameters": {
 			// Property: ValidateRequestParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether to validate request parameters.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether to validate request parameters.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether to validate request parameters.",
 			Type:        types.BoolType,
 			Computed:    true,

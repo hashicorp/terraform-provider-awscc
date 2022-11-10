@@ -23,11 +23,12 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name for the created Registry.",
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name for the created Registry.",
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name for the created Registry.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,12 +36,13 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the registry. If description is not provided, there will not be any default value for this.",
-			//   "maxLength": 1000,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the registry. If description is not provided, there will not be any default value for this.",
+			//	  "maxLength": 1000,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "A description of the registry. If description is not provided, there will not be any default value for this.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,12 +50,13 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,34 +64,35 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of tags to tag the Registry",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A key to identify the tag.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Corresponding tag value for the key.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 10,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of tags to tag the Registry",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A key to identify the tag.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Corresponding tag value for the key.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 10,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "List of tags to tag the Registry",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

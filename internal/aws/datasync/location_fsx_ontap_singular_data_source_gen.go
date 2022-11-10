@@ -23,12 +23,13 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the FSx ONAP file system.",
-			//   "maxLength": 128,
-			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the FSx ONAP file system.",
+			//	  "maxLength": 128,
+			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the FSx ONAP file system.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Amazon FSx ONTAP file system location that is created.",
-			//   "maxLength": 128,
-			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Amazon FSx ONTAP file system location that is created.",
+			//	  "maxLength": 128,
+			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx ONTAP file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,12 +51,13 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The URL of the FSx ONTAP file system that was described.",
-			//   "maxLength": 4360,
-			//   "pattern": "^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The URL of the FSx ONTAP file system that was described.",
+			//	  "maxLength": 4360,
+			//	  "pattern": "^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\\-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The URL of the FSx ONTAP file system that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,86 +65,87 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration settings for NFS or SMB protocol.",
-			//   "properties": {
-			//     "NFS": {
-			//       "additionalProperties": false,
-			//       "description": "NFS protocol configuration for FSx ONTAP file system.",
-			//       "properties": {
-			//         "MountOptions": {
-			//           "additionalProperties": false,
-			//           "description": "The NFS mount options that DataSync can use to mount your NFS share.",
-			//           "properties": {
-			//             "Version": {
-			//               "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
-			//               "enum": [
-			//                 "AUTOMATIC",
-			//                 "NFS3",
-			//                 "NFS4_0",
-			//                 "NFS4_1"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "MountOptions"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "SMB": {
-			//       "additionalProperties": false,
-			//       "description": "SMB protocol configuration for FSx ONTAP file system.",
-			//       "properties": {
-			//         "Domain": {
-			//           "description": "The name of the Windows domain that the SMB server belongs to.",
-			//           "maxLength": 253,
-			//           "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
-			//           "type": "string"
-			//         },
-			//         "MountOptions": {
-			//           "additionalProperties": false,
-			//           "description": "The mount options used by DataSync to access the SMB server.",
-			//           "properties": {
-			//             "Version": {
-			//               "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
-			//               "enum": [
-			//                 "AUTOMATIC",
-			//                 "SMB2",
-			//                 "SMB3"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "Password": {
-			//           "description": "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
-			//           "maxLength": 104,
-			//           "pattern": "^.{0,104}$",
-			//           "type": "string"
-			//         },
-			//         "User": {
-			//           "description": "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
-			//           "maxLength": 104,
-			//           "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "User",
-			//         "Password",
-			//         "MountOptions"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration settings for NFS or SMB protocol.",
+			//	  "properties": {
+			//	    "NFS": {
+			//	      "additionalProperties": false,
+			//	      "description": "NFS protocol configuration for FSx ONTAP file system.",
+			//	      "properties": {
+			//	        "MountOptions": {
+			//	          "additionalProperties": false,
+			//	          "description": "The NFS mount options that DataSync can use to mount your NFS share.",
+			//	          "properties": {
+			//	            "Version": {
+			//	              "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
+			//	              "enum": [
+			//	                "AUTOMATIC",
+			//	                "NFS3",
+			//	                "NFS4_0",
+			//	                "NFS4_1"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "MountOptions"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "SMB": {
+			//	      "additionalProperties": false,
+			//	      "description": "SMB protocol configuration for FSx ONTAP file system.",
+			//	      "properties": {
+			//	        "Domain": {
+			//	          "description": "The name of the Windows domain that the SMB server belongs to.",
+			//	          "maxLength": 253,
+			//	          "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
+			//	          "type": "string"
+			//	        },
+			//	        "MountOptions": {
+			//	          "additionalProperties": false,
+			//	          "description": "The mount options used by DataSync to access the SMB server.",
+			//	          "properties": {
+			//	            "Version": {
+			//	              "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
+			//	              "enum": [
+			//	                "AUTOMATIC",
+			//	                "SMB2",
+			//	                "SMB3"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "Password": {
+			//	          "description": "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
+			//	          "maxLength": 104,
+			//	          "pattern": "^.{0,104}$",
+			//	          "type": "string"
+			//	        },
+			//	        "User": {
+			//	          "description": "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
+			//	          "maxLength": 104,
+			//	          "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "User",
+			//	        "Password",
+			//	        "MountOptions"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configuration settings for NFS or SMB protocol.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -218,18 +222,19 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"security_group_arns": {
 			// Property: SecurityGroupArns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARNs of the security groups that are to use to configure the FSx ONTAP file system.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 128,
-			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The ARNs of the security groups that are to use to configure the FSx ONTAP file system.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 128,
+			//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The ARNs of the security groups that are to use to configure the FSx ONTAP file system.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -237,12 +242,13 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"storage_virtual_machine_arn": {
 			// Property: StorageVirtualMachineArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the FSx ONTAP SVM.",
-			//   "maxLength": 162,
-			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:storage-virtual-machine/fs-[0-9a-f]+/svm-[0-9a-f]{17,}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the FSx ONTAP SVM.",
+			//	  "maxLength": 162,
+			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:storage-virtual-machine/fs-[0-9a-f]+/svm-[0-9a-f]{17,}$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the FSx ONTAP SVM.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -250,12 +256,13 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A subdirectory in the location's path.",
-			//   "maxLength": 4096,
-			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A subdirectory in the location's path.",
+			//	  "maxLength": 4096,
+			//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A subdirectory in the location's path.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -263,39 +270,40 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key for an AWS resource tag.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for an AWS resource tag.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key for an AWS resource tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for an AWS resource tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

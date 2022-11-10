@@ -24,9 +24,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,88 +37,89 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"broker_node_group_info": {
 			// Property: BrokerNodeGroupInfo
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BrokerAZDistribution": {
-			//       "maxLength": 9,
-			//       "minLength": 6,
-			//       "type": "string"
-			//     },
-			//     "ClientSubnets": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "ConnectivityInfo": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "PublicAccess": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Type": {
-			//               "maxLength": 23,
-			//               "minLength": 7,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "InstanceType": {
-			//       "maxLength": 32,
-			//       "minLength": 5,
-			//       "type": "string"
-			//     },
-			//     "SecurityGroups": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "StorageInfo": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "EBSStorageInfo": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ProvisionedThroughput": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Enabled": {
-			//                   "type": "boolean"
-			//                 },
-			//                 "VolumeThroughput": {
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "VolumeSize": {
-			//               "maximum": 16384,
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "ClientSubnets",
-			//     "InstanceType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BrokerAZDistribution": {
+			//	      "maxLength": 9,
+			//	      "minLength": 6,
+			//	      "type": "string"
+			//	    },
+			//	    "ClientSubnets": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "ConnectivityInfo": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "PublicAccess": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Type": {
+			//	              "maxLength": 23,
+			//	              "minLength": 7,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "InstanceType": {
+			//	      "maxLength": 32,
+			//	      "minLength": 5,
+			//	      "type": "string"
+			//	    },
+			//	    "SecurityGroups": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "StorageInfo": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "EBSStorageInfo": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ProvisionedThroughput": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Enabled": {
+			//	                  "type": "boolean"
+			//	                },
+			//	                "VolumeThroughput": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "VolumeSize": {
+			//	              "maximum": 16384,
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ClientSubnets",
+			//	    "InstanceType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"broker_az_distribution": {
@@ -270,71 +272,72 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"client_authentication": {
 			// Property: ClientAuthentication
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Sasl": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Iam": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Scram": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Tls": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CertificateAuthorityArnList": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Unauthenticated": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enabled": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "Enabled"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Sasl": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Iam": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Scram": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Tls": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CertificateAuthorityArnList": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Unauthenticated": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Enabled"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"sasl": {
@@ -442,11 +445,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -459,22 +463,23 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"configuration_info": {
 			// Property: ConfigurationInfo
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Arn": {
-			//       "type": "string"
-			//     },
-			//     "Revision": {
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "Revision",
-			//     "Arn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Arn": {
+			//	      "type": "string"
+			//	    },
+			//	    "Revision": {
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Revision",
+			//	    "Arn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -498,10 +503,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"current_version": {
 			// Property: CurrentVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The current version of the MSK cluster",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The current version of the MSK cluster",
+			//	  "type": "string"
+			//	}
 			Description: "The current version of the MSK cluster",
 			Type:        types.StringType,
 			Optional:    true,
@@ -513,41 +519,42 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_info": {
 			// Property: EncryptionInfo
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "EncryptionAtRest": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DataVolumeKMSKeyId": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "DataVolumeKMSKeyId"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "EncryptionInTransit": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "ClientBroker": {
-			//           "enum": [
-			//             "TLS",
-			//             "TLS_PLAINTEXT",
-			//             "PLAINTEXT"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "InCluster": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EncryptionAtRest": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DataVolumeKMSKeyId": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DataVolumeKMSKeyId"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "EncryptionInTransit": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "ClientBroker": {
+			//	          "enum": [
+			//	            "TLS",
+			//	            "TLS_PLAINTEXT",
+			//	            "PLAINTEXT"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "InCluster": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"encryption_at_rest": {
@@ -617,17 +624,18 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"enhanced_monitoring": {
 			// Property: EnhancedMonitoring
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DEFAULT",
-			//     "PER_BROKER",
-			//     "PER_TOPIC_PER_BROKER",
-			//     "PER_TOPIC_PER_PARTITION"
-			//   ],
-			//   "maxLength": 23,
-			//   "minLength": 7,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DEFAULT",
+			//	    "PER_BROKER",
+			//	    "PER_TOPIC_PER_BROKER",
+			//	    "PER_TOPIC_PER_PARTITION"
+			//	  ],
+			//	  "maxLength": 23,
+			//	  "minLength": 7,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -647,11 +655,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"kafka_version": {
 			// Property: KafkaVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -661,69 +670,70 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"logging_info": {
 			// Property: LoggingInfo
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BrokerLogs": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CloudWatchLogs": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "LogGroup": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Firehose": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DeliveryStream": {
-			//               "type": "string"
-			//             },
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "S3": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Bucket": {
-			//               "type": "string"
-			//             },
-			//             "Enabled": {
-			//               "type": "boolean"
-			//             },
-			//             "Prefix": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Enabled"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "BrokerLogs"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BrokerLogs": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CloudWatchLogs": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LogGroup": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Firehose": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DeliveryStream": {
+			//	              "type": "string"
+			//	            },
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "S3": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Bucket": {
+			//	              "type": "string"
+			//	            },
+			//	            "Enabled": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Prefix": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Enabled"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "BrokerLogs"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"broker_logs": {
@@ -832,54 +842,56 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"number_of_broker_nodes": {
 			// Property: NumberOfBrokerNodes
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Required: true,
 		},
 		"open_monitoring": {
 			// Property: OpenMonitoring
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Prometheus": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "JmxExporter": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "EnabledInBroker": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "EnabledInBroker"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "NodeExporter": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "EnabledInBroker": {
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "EnabledInBroker"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "Prometheus"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Prometheus": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "JmxExporter": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "EnabledInBroker": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "EnabledInBroker"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "NodeExporter": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "EnabledInBroker": {
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "EnabledInBroker"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Prometheus"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"prometheus": {
@@ -935,15 +947,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"storage_mode": {
 			// Property: StorageMode
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "LOCAL",
-			//     "TIERED"
-			//   ],
-			//   "maxLength": 6,
-			//   "minLength": 5,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "LOCAL",
+			//	    "TIERED"
+			//	  ],
+			//	  "maxLength": 6,
+			//	  "minLength": 5,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -961,16 +974,17 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

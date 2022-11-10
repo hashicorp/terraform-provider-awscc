@@ -23,10 +23,11 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AllowList ARN.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AllowList ARN.",
+			//	  "type": "string"
+			//	}
 			Description: "AllowList ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,33 +35,34 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"criteria": {
 			// Property: Criteria
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AllowList criteria.",
-			//   "properties": {
-			//     "Regex": {
-			//       "description": "The S3 object key for the AllowList.",
-			//       "type": "string"
-			//     },
-			//     "S3WordsList": {
-			//       "additionalProperties": false,
-			//       "description": "The S3 location for the AllowList.",
-			//       "properties": {
-			//         "BucketName": {
-			//           "type": "string"
-			//         },
-			//         "ObjectKey": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketName",
-			//         "ObjectKey"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "AllowList criteria.",
+			//	  "properties": {
+			//	    "Regex": {
+			//	      "description": "The S3 object key for the AllowList.",
+			//	      "type": "string"
+			//	    },
+			//	    "S3WordsList": {
+			//	      "additionalProperties": false,
+			//	      "description": "The S3 location for the AllowList.",
+			//	      "properties": {
+			//	        "BucketName": {
+			//	          "type": "string"
+			//	        },
+			//	        "ObjectKey": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketName",
+			//	        "ObjectKey"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "AllowList criteria.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -96,10 +98,11 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of AllowList.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of AllowList.",
+			//	  "type": "string"
+			//	}
 			Description: "Description of AllowList.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -107,10 +110,11 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AllowList ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AllowList ID.",
+			//	  "type": "string"
+			//	}
 			Description: "AllowList ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,10 +122,11 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of AllowList.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of AllowList.",
+			//	  "type": "string"
+			//	}
 			Description: "Name of AllowList.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -129,20 +134,21 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AllowList status.",
-			//   "enum": [
-			//     "OK",
-			//     "S3_OBJECT_NOT_FOUND",
-			//     "S3_USER_ACCESS_DENIED",
-			//     "S3_OBJECT_ACCESS_DENIED",
-			//     "S3_THROTTLED",
-			//     "S3_OBJECT_OVERSIZE",
-			//     "S3_OBJECT_EMPTY",
-			//     "UNKNOWN_ERROR"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AllowList status.",
+			//	  "enum": [
+			//	    "OK",
+			//	    "S3_OBJECT_NOT_FOUND",
+			//	    "S3_USER_ACCESS_DENIED",
+			//	    "S3_OBJECT_ACCESS_DENIED",
+			//	    "S3_THROTTLED",
+			//	    "S3_OBJECT_OVERSIZE",
+			//	    "S3_OBJECT_EMPTY",
+			//	    "UNKNOWN_ERROR"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "AllowList status.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -150,30 +156,31 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The tag's key.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The tag's value.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The tag's key.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The tag's value.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

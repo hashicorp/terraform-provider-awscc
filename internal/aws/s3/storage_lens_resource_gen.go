@@ -25,261 +25,262 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"storage_lens_configuration": {
 			// Property: StorageLensConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies the details of Amazon S3 Storage Lens configuration.",
-			//   "properties": {
-			//     "AccountLevel": {
-			//       "additionalProperties": false,
-			//       "description": "Account-level metrics configurations.",
-			//       "properties": {
-			//         "ActivityMetrics": {
-			//           "additionalProperties": false,
-			//           "description": "Enables activity metrics.",
-			//           "properties": {
-			//             "IsEnabled": {
-			//               "description": "Specifies whether activity metrics are enabled or disabled.",
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "BucketLevel": {
-			//           "additionalProperties": false,
-			//           "description": "Bucket-level metrics configurations.",
-			//           "properties": {
-			//             "ActivityMetrics": {
-			//               "additionalProperties": false,
-			//               "description": "Enables activity metrics.",
-			//               "properties": {
-			//                 "IsEnabled": {
-			//                   "description": "Specifies whether activity metrics are enabled or disabled.",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "PrefixLevel": {
-			//               "additionalProperties": false,
-			//               "description": "Prefix-level metrics configurations.",
-			//               "properties": {
-			//                 "StorageMetrics": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "IsEnabled": {
-			//                       "description": "Specifies whether prefix-level storage metrics are enabled or disabled.",
-			//                       "type": "boolean"
-			//                     },
-			//                     "SelectionCriteria": {
-			//                       "additionalProperties": false,
-			//                       "description": "Selection criteria for prefix-level metrics.",
-			//                       "properties": {
-			//                         "Delimiter": {
-			//                           "description": "Delimiter to divide S3 key into hierarchy of prefixes.",
-			//                           "type": "string"
-			//                         },
-			//                         "MaxDepth": {
-			//                           "description": "Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.",
-			//                           "type": "integer"
-			//                         },
-			//                         "MinStorageBytesPercentage": {
-			//                           "description": "The minimum storage bytes threshold for the prefixes to be included in the analysis.",
-			//                           "type": "number"
-			//                         }
-			//                       },
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "StorageMetrics"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "BucketLevel"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "AwsOrg": {
-			//       "additionalProperties": false,
-			//       "description": "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
-			//       "properties": {
-			//         "Arn": {
-			//           "description": "The Amazon Resource Name (ARN) of the specified resource.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Arn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DataExport": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies how Amazon S3 Storage Lens metrics should be exported.",
-			//       "properties": {
-			//         "CloudWatchMetrics": {
-			//           "additionalProperties": false,
-			//           "description": "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
-			//           "properties": {
-			//             "IsEnabled": {
-			//               "description": "Specifies whether CloudWatch metrics are enabled or disabled.",
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "required": [
-			//             "IsEnabled"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "S3BucketDestination": {
-			//           "additionalProperties": false,
-			//           "description": "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
-			//           "properties": {
-			//             "AccountId": {
-			//               "description": "The AWS account ID that owns the destination S3 bucket.",
-			//               "type": "string"
-			//             },
-			//             "Arn": {
-			//               "description": "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
-			//               "type": "string"
-			//             },
-			//             "Encryption": {
-			//               "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-			//               "properties": {
-			//                 "SSEKMS": {
-			//                   "additionalProperties": false,
-			//                   "description": "AWS KMS server-side encryption.",
-			//                   "properties": {
-			//                     "KeyId": {
-			//                       "description": "The ARN of the KMS key to use for encryption.",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "KeyId"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "SSES3": {
-			//                   "additionalProperties": false,
-			//                   "description": "S3 default server-side encryption.",
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Format": {
-			//               "description": "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
-			//               "enum": [
-			//                 "CSV",
-			//                 "Parquet"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "OutputSchemaVersion": {
-			//               "description": "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
-			//               "enum": [
-			//                 "V_1"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "Prefix": {
-			//               "description": "The prefix to use for Amazon S3 Storage Lens export.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "OutputSchemaVersion",
-			//             "Format",
-			//             "AccountId",
-			//             "Arn"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Exclude": {
-			//       "additionalProperties": false,
-			//       "description": "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
-			//       "properties": {
-			//         "Buckets": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "description": "The Amazon Resource Name (ARN) of the specified resource.",
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "Regions": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "description": "An AWS Region.",
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Id": {
-			//       "description": "The ID that identifies the Amazon S3 Storage Lens configuration.",
-			//       "maxLength": 64,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9\\-_.]+$",
-			//       "type": "string"
-			//     },
-			//     "Include": {
-			//       "additionalProperties": false,
-			//       "description": "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
-			//       "properties": {
-			//         "Buckets": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "description": "The Amazon Resource Name (ARN) of the specified resource.",
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "Regions": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "description": "An AWS Region.",
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "IsEnabled": {
-			//       "description": "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
-			//       "type": "boolean"
-			//     },
-			//     "StorageLensArn": {
-			//       "description": "The ARN for the Amazon S3 Storage Lens configuration.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Id",
-			//     "AccountLevel",
-			//     "IsEnabled"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies the details of Amazon S3 Storage Lens configuration.",
+			//	  "properties": {
+			//	    "AccountLevel": {
+			//	      "additionalProperties": false,
+			//	      "description": "Account-level metrics configurations.",
+			//	      "properties": {
+			//	        "ActivityMetrics": {
+			//	          "additionalProperties": false,
+			//	          "description": "Enables activity metrics.",
+			//	          "properties": {
+			//	            "IsEnabled": {
+			//	              "description": "Specifies whether activity metrics are enabled or disabled.",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "BucketLevel": {
+			//	          "additionalProperties": false,
+			//	          "description": "Bucket-level metrics configurations.",
+			//	          "properties": {
+			//	            "ActivityMetrics": {
+			//	              "additionalProperties": false,
+			//	              "description": "Enables activity metrics.",
+			//	              "properties": {
+			//	                "IsEnabled": {
+			//	                  "description": "Specifies whether activity metrics are enabled or disabled.",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "PrefixLevel": {
+			//	              "additionalProperties": false,
+			//	              "description": "Prefix-level metrics configurations.",
+			//	              "properties": {
+			//	                "StorageMetrics": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "IsEnabled": {
+			//	                      "description": "Specifies whether prefix-level storage metrics are enabled or disabled.",
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "SelectionCriteria": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Selection criteria for prefix-level metrics.",
+			//	                      "properties": {
+			//	                        "Delimiter": {
+			//	                          "description": "Delimiter to divide S3 key into hierarchy of prefixes.",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "MaxDepth": {
+			//	                          "description": "Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.",
+			//	                          "type": "integer"
+			//	                        },
+			//	                        "MinStorageBytesPercentage": {
+			//	                          "description": "The minimum storage bytes threshold for the prefixes to be included in the analysis.",
+			//	                          "type": "number"
+			//	                        }
+			//	                      },
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "StorageMetrics"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "BucketLevel"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "AwsOrg": {
+			//	      "additionalProperties": false,
+			//	      "description": "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
+			//	      "properties": {
+			//	        "Arn": {
+			//	          "description": "The Amazon Resource Name (ARN) of the specified resource.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Arn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DataExport": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies how Amazon S3 Storage Lens metrics should be exported.",
+			//	      "properties": {
+			//	        "CloudWatchMetrics": {
+			//	          "additionalProperties": false,
+			//	          "description": "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
+			//	          "properties": {
+			//	            "IsEnabled": {
+			//	              "description": "Specifies whether CloudWatch metrics are enabled or disabled.",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "IsEnabled"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "S3BucketDestination": {
+			//	          "additionalProperties": false,
+			//	          "description": "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
+			//	          "properties": {
+			//	            "AccountId": {
+			//	              "description": "The AWS account ID that owns the destination S3 bucket.",
+			//	              "type": "string"
+			//	            },
+			//	            "Arn": {
+			//	              "description": "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
+			//	              "type": "string"
+			//	            },
+			//	            "Encryption": {
+			//	              "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+			//	              "properties": {
+			//	                "SSEKMS": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "AWS KMS server-side encryption.",
+			//	                  "properties": {
+			//	                    "KeyId": {
+			//	                      "description": "The ARN of the KMS key to use for encryption.",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "KeyId"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "SSES3": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "S3 default server-side encryption.",
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Format": {
+			//	              "description": "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
+			//	              "enum": [
+			//	                "CSV",
+			//	                "Parquet"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "OutputSchemaVersion": {
+			//	              "description": "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
+			//	              "enum": [
+			//	                "V_1"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "Prefix": {
+			//	              "description": "The prefix to use for Amazon S3 Storage Lens export.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "OutputSchemaVersion",
+			//	            "Format",
+			//	            "AccountId",
+			//	            "Arn"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Exclude": {
+			//	      "additionalProperties": false,
+			//	      "description": "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
+			//	      "properties": {
+			//	        "Buckets": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "description": "The Amazon Resource Name (ARN) of the specified resource.",
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "Regions": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "description": "An AWS Region.",
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Id": {
+			//	      "description": "The ID that identifies the Amazon S3 Storage Lens configuration.",
+			//	      "maxLength": 64,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9\\-_.]+$",
+			//	      "type": "string"
+			//	    },
+			//	    "Include": {
+			//	      "additionalProperties": false,
+			//	      "description": "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
+			//	      "properties": {
+			//	        "Buckets": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "description": "The Amazon Resource Name (ARN) of the specified resource.",
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "Regions": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "description": "An AWS Region.",
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "IsEnabled": {
+			//	      "description": "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "StorageLensArn": {
+			//	      "description": "The ARN for the Amazon S3 Storage Lens configuration.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Id",
+			//	    "AccountLevel",
+			//	    "IsEnabled"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Specifies the details of Amazon S3 Storage Lens configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -669,35 +670,36 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

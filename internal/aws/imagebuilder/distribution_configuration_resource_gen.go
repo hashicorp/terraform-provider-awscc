@@ -24,10 +24,11 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the distribution configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,10 +39,11 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the distribution configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the distribution configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the distribution configuration.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,225 +55,226 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		"distributions": {
 			// Property: Distributions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The distributions of the distribution configuration.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The distributions of the distribution configuration.",
-			//     "properties": {
-			//       "AmiDistributionConfiguration": {
-			//         "additionalProperties": false,
-			//         "description": "The specific AMI settings (for example, launch permissions, AMI tags).",
-			//         "properties": {
-			//           "AmiTags": {
-			//             "additionalProperties": false,
-			//             "description": "The tags to apply to AMIs distributed to this Region.",
-			//             "patternProperties": {
-			//               "": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Description": {
-			//             "description": "The description of the AMI distribution configuration.",
-			//             "type": "string"
-			//           },
-			//           "KmsKeyId": {
-			//             "description": "The KMS key identifier used to encrypt the distributed image.",
-			//             "type": "string"
-			//           },
-			//           "LaunchPermissionConfiguration": {
-			//             "additionalProperties": false,
-			//             "description": "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
-			//             "properties": {
-			//               "OrganizationArns": {
-			//                 "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "OrganizationalUnitArns": {
-			//                 "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "UserGroups": {
-			//                 "description": "The name of the group.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "UserIds": {
-			//                 "description": "The AWS account ID.",
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Name": {
-			//             "description": "The name of the AMI distribution configuration.",
-			//             "type": "string"
-			//           },
-			//           "TargetAccountIds": {
-			//             "description": "The ID of accounts to which you want to distribute an image.",
-			//             "insertionOrder": true,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ContainerDistributionConfiguration": {
-			//         "additionalProperties": false,
-			//         "description": "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
-			//         "properties": {
-			//           "ContainerTags": {
-			//             "description": "Tags that are attached to the container distribution configuration.",
-			//             "insertionOrder": true,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "type": "array"
-			//           },
-			//           "Description": {
-			//             "description": "The description of the container distribution configuration.",
-			//             "type": "string"
-			//           },
-			//           "TargetRepository": {
-			//             "additionalProperties": false,
-			//             "description": "The destination repository for the container distribution configuration.",
-			//             "properties": {
-			//               "RepositoryName": {
-			//                 "description": "The repository name of target container repository.",
-			//                 "type": "string"
-			//               },
-			//               "Service": {
-			//                 "description": "The service of target container repository.",
-			//                 "enum": [
-			//                   "ECR"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "FastLaunchConfigurations": {
-			//         "description": "The Windows faster-launching configurations to use for AMI distribution.",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "The Windows faster-launching configuration to use for AMI distribution.",
-			//           "properties": {
-			//             "AccountId": {
-			//               "description": "The owner account ID for the fast-launch enabled Windows AMI.",
-			//               "type": "string"
-			//             },
-			//             "Enabled": {
-			//               "description": "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
-			//               "type": "boolean"
-			//             },
-			//             "LaunchTemplate": {
-			//               "additionalProperties": false,
-			//               "description": "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
-			//               "properties": {
-			//                 "LaunchTemplateId": {
-			//                   "description": "The ID of the launch template to use for faster launching for a Windows AMI.",
-			//                   "type": "string"
-			//                 },
-			//                 "LaunchTemplateName": {
-			//                   "description": "The name of the launch template to use for faster launching for a Windows AMI.",
-			//                   "type": "string"
-			//                 },
-			//                 "LaunchTemplateVersion": {
-			//                   "description": "The version of the launch template to use for faster launching for a Windows AMI.",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "MaxParallelLaunches": {
-			//               "description": "The maximum number of parallel instances that are launched for creating resources.",
-			//               "type": "integer"
-			//             },
-			//             "SnapshotConfiguration": {
-			//               "additionalProperties": false,
-			//               "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
-			//               "properties": {
-			//                 "TargetResourceCount": {
-			//                   "description": "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "LaunchTemplateConfigurations": {
-			//         "description": "A group of launchTemplateConfiguration settings that apply to image distribution.",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "launchTemplateConfiguration settings that apply to image distribution.",
-			//           "properties": {
-			//             "AccountId": {
-			//               "description": "The account ID that this configuration applies to.",
-			//               "type": "string"
-			//             },
-			//             "LaunchTemplateId": {
-			//               "description": "Identifies the EC2 launch template to use.",
-			//               "type": "string"
-			//             },
-			//             "SetDefaultVersion": {
-			//               "description": "Set the specified EC2 launch template as the default launch template for the specified account.",
-			//               "type": "boolean"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "LicenseConfigurationArns": {
-			//         "description": "The License Manager Configuration to associate with the AMI in the specified Region.",
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "description": "The Amazon Resource Name (ARN) of the License Manager configuration.",
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "Region": {
-			//         "description": "region",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Region"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The distributions of the distribution configuration.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The distributions of the distribution configuration.",
+			//	    "properties": {
+			//	      "AmiDistributionConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "description": "The specific AMI settings (for example, launch permissions, AMI tags).",
+			//	        "properties": {
+			//	          "AmiTags": {
+			//	            "additionalProperties": false,
+			//	            "description": "The tags to apply to AMIs distributed to this Region.",
+			//	            "patternProperties": {
+			//	              "": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Description": {
+			//	            "description": "The description of the AMI distribution configuration.",
+			//	            "type": "string"
+			//	          },
+			//	          "KmsKeyId": {
+			//	            "description": "The KMS key identifier used to encrypt the distributed image.",
+			//	            "type": "string"
+			//	          },
+			//	          "LaunchPermissionConfiguration": {
+			//	            "additionalProperties": false,
+			//	            "description": "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
+			//	            "properties": {
+			//	              "OrganizationArns": {
+			//	                "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "OrganizationalUnitArns": {
+			//	                "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "UserGroups": {
+			//	                "description": "The name of the group.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "UserIds": {
+			//	                "description": "The AWS account ID.",
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Name": {
+			//	            "description": "The name of the AMI distribution configuration.",
+			//	            "type": "string"
+			//	          },
+			//	          "TargetAccountIds": {
+			//	            "description": "The ID of accounts to which you want to distribute an image.",
+			//	            "insertionOrder": true,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ContainerDistributionConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "description": "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
+			//	        "properties": {
+			//	          "ContainerTags": {
+			//	            "description": "Tags that are attached to the container distribution configuration.",
+			//	            "insertionOrder": true,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "Description": {
+			//	            "description": "The description of the container distribution configuration.",
+			//	            "type": "string"
+			//	          },
+			//	          "TargetRepository": {
+			//	            "additionalProperties": false,
+			//	            "description": "The destination repository for the container distribution configuration.",
+			//	            "properties": {
+			//	              "RepositoryName": {
+			//	                "description": "The repository name of target container repository.",
+			//	                "type": "string"
+			//	              },
+			//	              "Service": {
+			//	                "description": "The service of target container repository.",
+			//	                "enum": [
+			//	                  "ECR"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "FastLaunchConfigurations": {
+			//	        "description": "The Windows faster-launching configurations to use for AMI distribution.",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "The Windows faster-launching configuration to use for AMI distribution.",
+			//	          "properties": {
+			//	            "AccountId": {
+			//	              "description": "The owner account ID for the fast-launch enabled Windows AMI.",
+			//	              "type": "string"
+			//	            },
+			//	            "Enabled": {
+			//	              "description": "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
+			//	              "type": "boolean"
+			//	            },
+			//	            "LaunchTemplate": {
+			//	              "additionalProperties": false,
+			//	              "description": "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
+			//	              "properties": {
+			//	                "LaunchTemplateId": {
+			//	                  "description": "The ID of the launch template to use for faster launching for a Windows AMI.",
+			//	                  "type": "string"
+			//	                },
+			//	                "LaunchTemplateName": {
+			//	                  "description": "The name of the launch template to use for faster launching for a Windows AMI.",
+			//	                  "type": "string"
+			//	                },
+			//	                "LaunchTemplateVersion": {
+			//	                  "description": "The version of the launch template to use for faster launching for a Windows AMI.",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "MaxParallelLaunches": {
+			//	              "description": "The maximum number of parallel instances that are launched for creating resources.",
+			//	              "type": "integer"
+			//	            },
+			//	            "SnapshotConfiguration": {
+			//	              "additionalProperties": false,
+			//	              "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
+			//	              "properties": {
+			//	                "TargetResourceCount": {
+			//	                  "description": "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "LaunchTemplateConfigurations": {
+			//	        "description": "A group of launchTemplateConfiguration settings that apply to image distribution.",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "launchTemplateConfiguration settings that apply to image distribution.",
+			//	          "properties": {
+			//	            "AccountId": {
+			//	              "description": "The account ID that this configuration applies to.",
+			//	              "type": "string"
+			//	            },
+			//	            "LaunchTemplateId": {
+			//	              "description": "Identifies the EC2 launch template to use.",
+			//	              "type": "string"
+			//	            },
+			//	            "SetDefaultVersion": {
+			//	              "description": "Set the specified EC2 launch template as the default launch template for the specified account.",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "LicenseConfigurationArns": {
+			//	        "description": "The License Manager Configuration to associate with the AMI in the specified Region.",
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "description": "The Amazon Resource Name (ARN) of the License Manager configuration.",
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "Region": {
+			//	        "description": "region",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Region"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The distributions of the distribution configuration.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -642,10 +645,11 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the distribution configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the distribution configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the distribution configuration.",
 			Type:        types.StringType,
 			Required:    true,
@@ -656,16 +660,17 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags associated with the component.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags associated with the component.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags associated with the component.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

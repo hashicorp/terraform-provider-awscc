@@ -25,111 +25,112 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe configuration of the studio component, based on component type.\u003c/p\u003e",
-			//   "properties": {
-			//     "ActiveDirectoryConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a Microsoft Active Directory (Microsoft AD) studio\n            resource.\u003c/p\u003e",
-			//       "properties": {
-			//         "ComputerAttributes": {
-			//           "description": "\u003cp\u003eA collection of custom attributes for an Active Directory computer.\u003c/p\u003e",
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "\u003cp\u003eAn LDAP attribute of an Active Directory computer account, in the form of a name:value\n            pair.\u003c/p\u003e",
-			//             "properties": {
-			//               "Name": {
-			//                 "description": "\u003cp\u003eThe name for the LDAP attribute.\u003c/p\u003e",
-			//                 "maxLength": 40,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "description": "\u003cp\u003eThe value for the LDAP attribute.\u003c/p\u003e",
-			//                 "maxLength": 64,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "maxItems": 50,
-			//           "minItems": 0,
-			//           "type": "array"
-			//         },
-			//         "DirectoryId": {
-			//           "description": "\u003cp\u003eThe directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.\u003c/p\u003e",
-			//           "type": "string"
-			//         },
-			//         "OrganizationalUnitDistinguishedName": {
-			//           "description": "\u003cp\u003eThe distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.\u003c/p\u003e",
-			//           "maxLength": 2000,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ComputeFarmConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a render farm that is associated with a studio resource.\u003c/p\u003e",
-			//       "properties": {
-			//         "ActiveDirectoryUser": {
-			//           "description": "\u003cp\u003eThe name of an Active Directory user that is used on ComputeFarm worker\n            instances.\u003c/p\u003e",
-			//           "type": "string"
-			//         },
-			//         "Endpoint": {
-			//           "description": "\u003cp\u003eThe endpoint of the ComputeFarm that is accessed by the studio component\n            resource.\u003c/p\u003e",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "LicenseServiceConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a license service that is associated with a studio\n            resource.\u003c/p\u003e",
-			//       "properties": {
-			//         "Endpoint": {
-			//           "description": "\u003cp\u003eThe endpoint of the license service that is accessed by the studio component\n            resource.\u003c/p\u003e",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "SharedFileSystemConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "\u003cp\u003eThe configuration for a shared file storage system that is associated with a studio\n            resource.\u003c/p\u003e",
-			//       "properties": {
-			//         "Endpoint": {
-			//           "description": "\u003cp\u003eThe endpoint of the shared file system that is accessed by the studio component\n            resource.\u003c/p\u003e",
-			//           "type": "string"
-			//         },
-			//         "FileSystemId": {
-			//           "description": "\u003cp\u003eThe unique identifier for a file system.\u003c/p\u003e",
-			//           "type": "string"
-			//         },
-			//         "LinuxMountPoint": {
-			//           "description": "\u003cp\u003eThe mount location for a shared file system on a Linux virtual workstation.\u003c/p\u003e",
-			//           "maxLength": 128,
-			//           "minLength": 0,
-			//           "pattern": "^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$",
-			//           "type": "string"
-			//         },
-			//         "ShareName": {
-			//           "description": "\u003cp\u003eThe name of the file share.\u003c/p\u003e",
-			//           "type": "string"
-			//         },
-			//         "WindowsMountDrive": {
-			//           "description": "\u003cp\u003eThe mount location for a shared file system on a Windows virtual workstation.\u003c/p\u003e",
-			//           "pattern": "^[A-Z]$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe configuration of the studio component, based on component type.\u003c/p\u003e",
+			//	  "properties": {
+			//	    "ActiveDirectoryConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe configuration for a Microsoft Active Directory (Microsoft AD) studio\n            resource.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "ComputerAttributes": {
+			//	          "description": "\u003cp\u003eA collection of custom attributes for an Active Directory computer.\u003c/p\u003e",
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "\u003cp\u003eAn LDAP attribute of an Active Directory computer account, in the form of a name:value\n            pair.\u003c/p\u003e",
+			//	            "properties": {
+			//	              "Name": {
+			//	                "description": "\u003cp\u003eThe name for the LDAP attribute.\u003c/p\u003e",
+			//	                "maxLength": 40,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "description": "\u003cp\u003eThe value for the LDAP attribute.\u003c/p\u003e",
+			//	                "maxLength": 64,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 50,
+			//	          "minItems": 0,
+			//	          "type": "array"
+			//	        },
+			//	        "DirectoryId": {
+			//	          "description": "\u003cp\u003eThe directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        },
+			//	        "OrganizationalUnitDistinguishedName": {
+			//	          "description": "\u003cp\u003eThe distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.\u003c/p\u003e",
+			//	          "maxLength": 2000,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ComputeFarmConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe configuration for a render farm that is associated with a studio resource.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "ActiveDirectoryUser": {
+			//	          "description": "\u003cp\u003eThe name of an Active Directory user that is used on ComputeFarm worker\n            instances.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        },
+			//	        "Endpoint": {
+			//	          "description": "\u003cp\u003eThe endpoint of the ComputeFarm that is accessed by the studio component\n            resource.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "LicenseServiceConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe configuration for a license service that is associated with a studio\n            resource.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "Endpoint": {
+			//	          "description": "\u003cp\u003eThe endpoint of the license service that is accessed by the studio component\n            resource.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "SharedFileSystemConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "\u003cp\u003eThe configuration for a shared file storage system that is associated with a studio\n            resource.\u003c/p\u003e",
+			//	      "properties": {
+			//	        "Endpoint": {
+			//	          "description": "\u003cp\u003eThe endpoint of the shared file system that is accessed by the studio component\n            resource.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        },
+			//	        "FileSystemId": {
+			//	          "description": "\u003cp\u003eThe unique identifier for a file system.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        },
+			//	        "LinuxMountPoint": {
+			//	          "description": "\u003cp\u003eThe mount location for a shared file system on a Linux virtual workstation.\u003c/p\u003e",
+			//	          "maxLength": 128,
+			//	          "minLength": 0,
+			//	          "pattern": "^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$",
+			//	          "type": "string"
+			//	        },
+			//	        "ShareName": {
+			//	          "description": "\u003cp\u003eThe name of the file share.\u003c/p\u003e",
+			//	          "type": "string"
+			//	        },
+			//	        "WindowsMountDrive": {
+			//	          "description": "\u003cp\u003eThe mount location for a shared file system on a Windows virtual workstation.\u003c/p\u003e",
+			//	          "pattern": "^[A-Z]$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "<p>The configuration of the studio component, based on component type.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -348,12 +349,13 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe description.\u003c/p\u003e",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe description.\u003c/p\u003e",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "<p>The description.</p>",
 			Type:        types.StringType,
 			Optional:    true,
@@ -368,15 +370,16 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"ec_2_security_group_ids": {
 			// Property: Ec2SecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe EC2 security groups that control access to the studio component.\u003c/p\u003e",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "maxItems": 30,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe EC2 security groups that control access to the studio component.\u003c/p\u003e",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 30,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "<p>The EC2 security groups that control access to the studio component.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -391,44 +394,45 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"initialization_scripts": {
 			// Property: InitializationScripts
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
-			//     "properties": {
-			//       "LaunchProfileProtocolVersion": {
-			//         "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
-			//         "maxLength": 10,
-			//         "minLength": 0,
-			//         "pattern": "^2021\\-03\\-31$",
-			//         "type": "string"
-			//       },
-			//       "Platform": {
-			//         "enum": [
-			//           "LINUX",
-			//           "WINDOWS"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "RunContext": {
-			//         "enum": [
-			//           "SYSTEM_INITIALIZATION",
-			//           "USER_INITIALIZATION"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "Script": {
-			//         "description": "\u003cp\u003eThe initialization script.\u003c/p\u003e",
-			//         "maxLength": 5120,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
+			//	    "properties": {
+			//	      "LaunchProfileProtocolVersion": {
+			//	        "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
+			//	        "maxLength": 10,
+			//	        "minLength": 0,
+			//	        "pattern": "^2021\\-03\\-31$",
+			//	        "type": "string"
+			//	      },
+			//	      "Platform": {
+			//	        "enum": [
+			//	          "LINUX",
+			//	          "WINDOWS"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "RunContext": {
+			//	        "enum": [
+			//	          "SYSTEM_INITIALIZATION",
+			//	          "USER_INITIALIZATION"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "Script": {
+			//	        "description": "\u003cp\u003eThe initialization script.\u003c/p\u003e",
+			//	        "maxLength": 5120,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "<p>Initialization scripts for studio components.</p>",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -500,12 +504,13 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe name for the studio component.\u003c/p\u003e",
-			//   "maxLength": 64,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe name for the studio component.\u003c/p\u003e",
+			//	  "maxLength": 64,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "<p>The name for the studio component.</p>",
 			Type:        types.StringType,
 			Required:    true,
@@ -516,11 +521,12 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"runtime_role_arn": {
 			// Property: RuntimeRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -534,32 +540,33 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"script_parameters": {
 			// Property: ScriptParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eParameters for the studio component scripts.\u003c/p\u003e",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "\u003cp\u003eA parameter for a studio component script, in the form of a key:value pair.\u003c/p\u003e",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "\u003cp\u003eA script parameter key.\u003c/p\u003e",
-			//         "maxLength": 64,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z_][a-zA-Z0-9_]+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "\u003cp\u003eA script parameter value.\u003c/p\u003e",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 30,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eParameters for the studio component scripts.\u003c/p\u003e",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "\u003cp\u003eA parameter for a studio component script, in the form of a key:value pair.\u003c/p\u003e",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "\u003cp\u003eA script parameter key.\u003c/p\u003e",
+			//	        "maxLength": 64,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z_][a-zA-Z0-9_]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "\u003cp\u003eA script parameter value.\u003c/p\u003e",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 30,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "<p>Parameters for the studio component scripts.</p>",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -604,11 +611,12 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"secure_initialization_role_arn": {
 			// Property: SecureInitializationRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -622,9 +630,10 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"studio_component_id": {
 			// Property: StudioComponentId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -634,10 +643,11 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "\u003cp\u003eThe studio ID. \u003c/p\u003e",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "\u003cp\u003eThe studio ID. \u003c/p\u003e",
+			//	  "type": "string"
+			//	}
 			Description: "<p>The studio ID. </p>",
 			Type:        types.StringType,
 			Required:    true,
@@ -648,15 +658,16 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"subtype": {
 			// Property: Subtype
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "AWS_MANAGED_MICROSOFT_AD",
-			//     "AMAZON_FSX_FOR_WINDOWS",
-			//     "AMAZON_FSX_FOR_LUSTRE",
-			//     "CUSTOM"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "AWS_MANAGED_MICROSOFT_AD",
+			//	    "AMAZON_FSX_FOR_WINDOWS",
+			//	    "AMAZON_FSX_FOR_LUSTRE",
+			//	    "CUSTOM"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -676,15 +687,17 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -697,16 +710,17 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "ACTIVE_DIRECTORY",
-			//     "SHARED_FILE_SYSTEM",
-			//     "COMPUTE_FARM",
-			//     "LICENSE_SERVICE",
-			//     "CUSTOM"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "ACTIVE_DIRECTORY",
+			//	    "SHARED_FILE_SYSTEM",
+			//	    "COMPUTE_FARM",
+			//	    "LICENSE_SERVICE",
+			//	    "CUSTOM"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

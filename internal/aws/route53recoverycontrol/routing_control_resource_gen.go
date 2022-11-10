@@ -24,10 +24,11 @@ func routingControlResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn associated with Control Panel",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn associated with Control Panel",
+			//	  "type": "string"
+			//	}
 			Description: "Arn associated with Control Panel",
 			Type:        types.StringType,
 			Optional:    true,
@@ -41,10 +42,11 @@ func routingControlResource(ctx context.Context) (resource.Resource, error) {
 		"control_panel_arn": {
 			// Property: ControlPanelArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the control panel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the control panel.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the control panel.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -57,12 +59,13 @@ func routingControlResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the routing control. You can use any non-white space character in the name.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the routing control. You can use any non-white space character in the name.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the routing control. You can use any non-white space character in the name.",
 			Type:        types.StringType,
 			Required:    true,
@@ -73,10 +76,11 @@ func routingControlResource(ctx context.Context) (resource.Resource, error) {
 		"routing_control_arn": {
 			// Property: RoutingControlArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the routing control.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the routing control.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the routing control.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,15 +91,16 @@ func routingControlResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-			//   "enum": [
-			//     "PENDING",
-			//     "DEPLOYED",
-			//     "PENDING_DELETION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+			//	  "enum": [
+			//	    "PENDING",
+			//	    "DEPLOYED",
+			//	    "PENDING_DELETION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,

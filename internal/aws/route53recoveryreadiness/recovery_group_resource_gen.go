@@ -25,17 +25,18 @@ func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 		"cells": {
 			// Property: Cells
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 256,
-			//     "minLength": 1,
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 256,
+			//	    "minLength": 1,
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "type": "array"
+			//	}
 			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -52,11 +53,12 @@ func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 		"recovery_group_arn": {
 			// Property: RecoveryGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "A collection of tags associated with a resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,13 +69,14 @@ func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 		"recovery_group_name": {
 			// Property: RecoveryGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the recovery group to create.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the recovery group to create.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the recovery group to create.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -90,27 +93,28 @@ func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A collection of tags associated with a resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

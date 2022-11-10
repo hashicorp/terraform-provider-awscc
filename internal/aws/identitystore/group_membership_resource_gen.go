@@ -25,13 +25,14 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 		"group_id": {
 			// Property: GroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique identifier for a group in the identity store.",
-			//   "maxLength": 47,
-			//   "minLength": 1,
-			//   "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique identifier for a group in the identity store.",
+			//	  "maxLength": 47,
+			//	  "minLength": 1,
+			//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The unique identifier for a group in the identity store.",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,13 +44,14 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 		"identity_store_id": {
 			// Property: IdentityStoreId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The globally unique identifier for the identity store.",
-			//   "maxLength": 36,
-			//   "minLength": 1,
-			//   "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The globally unique identifier for the identity store.",
+			//	  "maxLength": 36,
+			//	  "minLength": 1,
+			//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The globally unique identifier for the identity store.",
 			Type:        types.StringType,
 			Required:    true,
@@ -64,23 +66,24 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 		"member_id": {
 			// Property: MemberId
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object containing the identifier of a group member.",
-			//   "properties": {
-			//     "UserId": {
-			//       "description": "The identifier for a user in the identity store.",
-			//       "maxLength": 47,
-			//       "minLength": 1,
-			//       "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "UserId"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object containing the identifier of a group member.",
+			//	  "properties": {
+			//	    "UserId": {
+			//	      "description": "The identifier for a user in the identity store.",
+			//	      "maxLength": 47,
+			//	      "minLength": 1,
+			//	      "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "UserId"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "An object containing the identifier of a group member.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -101,13 +104,14 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 		"membership_id": {
 			// Property: MembershipId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier for a GroupMembership in the identity store.",
-			//   "maxLength": 47,
-			//   "minLength": 1,
-			//   "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier for a GroupMembership in the identity store.",
+			//	  "maxLength": 47,
+			//	  "minLength": 1,
+			//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier for a GroupMembership in the identity store.",
 			Type:        types.StringType,
 			Computed:    true,

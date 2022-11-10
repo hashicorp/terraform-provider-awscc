@@ -23,11 +23,12 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the configuration",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the configuration",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the configuration",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,13 +36,14 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"configuration_name": {
 			// Property: ConfigurationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the configuration",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[A-Za-z0-9-_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the configuration",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[A-Za-z0-9-_]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the configuration",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,15 +51,16 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"guardrail_policies": {
 			// Property: GuardrailPolicies
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "pattern": "",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "pattern": "",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -65,11 +68,12 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"iam_role_arn": {
 			// Property: IamRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the IAM role that defines the permissions for AWS Chatbot",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the IAM role that defines the permissions for AWS Chatbot",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
 			Type:        types.StringType,
 			Computed:    true,
@@ -77,12 +81,13 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"logging_level": {
 			// Property: LoggingLevel
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "NONE",
-			//   "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-			//   "pattern": "^(ERROR|INFO|NONE)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "NONE",
+			//	  "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
+			//	  "pattern": "^(ERROR|INFO|NONE)$",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
 			Type:        types.StringType,
 			Computed:    true,
@@ -90,13 +95,14 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"slack_channel_id": {
 			// Property: SlackChannelId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The id of the Slack channel",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[A-Za-z0-9]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The id of the Slack channel",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[A-Za-z0-9]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The id of the Slack channel",
 			Type:        types.StringType,
 			Computed:    true,
@@ -104,13 +110,14 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"slack_workspace_id": {
 			// Property: SlackWorkspaceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The id of the Slack workspace",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9A-Z]{1,255}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The id of the Slack workspace",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9A-Z]{1,255}$",
+			//	  "type": "string"
+			//	}
 			Description: "The id of the Slack workspace",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,15 +125,16 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"sns_topic_arns": {
 			// Property: SnsTopicArns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "pattern": "",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "pattern": "",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -134,11 +142,12 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"user_role_required": {
 			// Property: UserRoleRequired
 			// CloudFormation resource type schema:
-			// {
-			//   "default": false,
-			//   "description": "Enables use of a user role requirement in your chat configuration",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": false,
+			//	  "description": "Enables use of a user role requirement in your chat configuration",
+			//	  "type": "boolean"
+			//	}
 			Description: "Enables use of a user role requirement in your chat configuration",
 			Type:        types.BoolType,
 			Computed:    true,

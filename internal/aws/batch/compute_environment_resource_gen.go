@@ -23,9 +23,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"compute_environment_arn": {
 			// Property: ComputeEnvironmentArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,9 +36,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"compute_environment_name": {
 			// Property: ComputeEnvironmentName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -49,123 +51,127 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"compute_resources": {
 			// Property: ComputeResources
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllocationStrategy": {
-			//       "type": "string"
-			//     },
-			//     "BidPercentage": {
-			//       "type": "integer"
-			//     },
-			//     "DesiredvCpus": {
-			//       "type": "integer"
-			//     },
-			//     "Ec2Configuration": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ImageIdOverride": {
-			//             "type": "string"
-			//           },
-			//           "ImageType": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "ImageType"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Ec2KeyPair": {
-			//       "type": "string"
-			//     },
-			//     "ImageId": {
-			//       "type": "string"
-			//     },
-			//     "InstanceRole": {
-			//       "type": "string"
-			//     },
-			//     "InstanceTypes": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "LaunchTemplate": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "LaunchTemplateId": {
-			//           "type": "string"
-			//         },
-			//         "LaunchTemplateName": {
-			//           "type": "string"
-			//         },
-			//         "Version": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "MaxvCpus": {
-			//       "type": "integer"
-			//     },
-			//     "MinvCpus": {
-			//       "type": "integer"
-			//     },
-			//     "PlacementGroup": {
-			//       "type": "string"
-			//     },
-			//     "SecurityGroupIds": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "SpotIamFleetRole": {
-			//       "type": "string"
-			//     },
-			//     "Subnets": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Tags": {
-			//       "additionalProperties": false,
-			//       "description": "A key-value pair to associate with a resource.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Type": {
-			//       "type": "string"
-			//     },
-			//     "UpdateToLatestImageVersion": {
-			//       "default": false,
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "required": [
-			//     "Subnets",
-			//     "Type",
-			//     "MaxvCpus"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllocationStrategy": {
+			//	      "type": "string"
+			//	    },
+			//	    "BidPercentage": {
+			//	      "type": "integer"
+			//	    },
+			//	    "DesiredvCpus": {
+			//	      "type": "integer"
+			//	    },
+			//	    "Ec2Configuration": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ImageIdOverride": {
+			//	            "type": "string"
+			//	          },
+			//	          "ImageKubernetesVersion": {
+			//	            "type": "string"
+			//	          },
+			//	          "ImageType": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "ImageType"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Ec2KeyPair": {
+			//	      "type": "string"
+			//	    },
+			//	    "ImageId": {
+			//	      "type": "string"
+			//	    },
+			//	    "InstanceRole": {
+			//	      "type": "string"
+			//	    },
+			//	    "InstanceTypes": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "LaunchTemplate": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "LaunchTemplateId": {
+			//	          "type": "string"
+			//	        },
+			//	        "LaunchTemplateName": {
+			//	          "type": "string"
+			//	        },
+			//	        "Version": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "MaxvCpus": {
+			//	      "type": "integer"
+			//	    },
+			//	    "MinvCpus": {
+			//	      "type": "integer"
+			//	    },
+			//	    "PlacementGroup": {
+			//	      "type": "string"
+			//	    },
+			//	    "SecurityGroupIds": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "SpotIamFleetRole": {
+			//	      "type": "string"
+			//	    },
+			//	    "Subnets": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Tags": {
+			//	      "additionalProperties": false,
+			//	      "description": "A key-value pair to associate with a resource.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Type": {
+			//	      "type": "string"
+			//	    },
+			//	    "UpdateToLatestImageVersion": {
+			//	      "default": false,
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Subnets",
+			//	    "Type",
+			//	    "MaxvCpus"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
@@ -201,6 +207,15 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 							map[string]tfsdk.Attribute{
 								"image_id_override": {
 									// Property: ImageIdOverride
+									Type:     types.StringType,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"image_kubernetes_version": {
+									// Property: ImageKubernetesVersion
 									Type:     types.StringType,
 									Optional: true,
 									Computed: true,
@@ -384,13 +399,67 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				resource.UseStateForUnknown(),
 			},
 		},
+		"eks_configuration": {
+			// Property: EksConfiguration
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EksClusterArn": {
+			//	      "default": false,
+			//	      "type": "string"
+			//	    },
+			//	    "KubernetesNamespace": {
+			//	      "default": false,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "EksClusterArn",
+			//	    "KubernetesNamespace"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"eks_cluster_arn": {
+						// Property: EksClusterArn
+						Type:     types.StringType,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Bool{Value: false}),
+							resource.UseStateForUnknown(),
+						},
+					},
+					"kubernetes_namespace": {
+						// Property: KubernetesNamespace
+						Type:     types.StringType,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Bool{Value: false}),
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"replace_compute_environment": {
 			// Property: ReplaceComputeEnvironment
 			// CloudFormation resource type schema:
-			// {
-			//   "default": true,
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": true,
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -403,9 +472,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"service_role": {
 			// Property: ServiceRole
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -416,9 +486,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -429,16 +500,17 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -452,9 +524,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -464,9 +537,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"unmanagedv_cpus": {
 			// Property: UnmanagedvCpus
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
@@ -477,20 +551,21 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"update_policy": {
 			// Property: UpdatePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "JobExecutionTimeoutMinutes": {
-			//       "default": 30,
-			//       "type": "integer"
-			//     },
-			//     "TerminateJobsOnUpdate": {
-			//       "default": false,
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "JobExecutionTimeoutMinutes": {
+			//	      "default": 30,
+			//	      "type": "integer"
+			//	    },
+			//	    "TerminateJobsOnUpdate": {
+			//	      "default": false,
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"job_execution_timeout_minutes": {
@@ -552,12 +627,16 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"desiredv_cpus":                  "DesiredvCpus",
 		"ec_2_configuration":             "Ec2Configuration",
 		"ec_2_key_pair":                  "Ec2KeyPair",
+		"eks_cluster_arn":                "EksClusterArn",
+		"eks_configuration":              "EksConfiguration",
 		"image_id":                       "ImageId",
 		"image_id_override":              "ImageIdOverride",
+		"image_kubernetes_version":       "ImageKubernetesVersion",
 		"image_type":                     "ImageType",
 		"instance_role":                  "InstanceRole",
 		"instance_types":                 "InstanceTypes",
 		"job_execution_timeout_minutes":  "JobExecutionTimeoutMinutes",
+		"kubernetes_namespace":           "KubernetesNamespace",
 		"launch_template":                "LaunchTemplate",
 		"launch_template_id":             "LaunchTemplateId",
 		"launch_template_name":           "LaunchTemplateName",

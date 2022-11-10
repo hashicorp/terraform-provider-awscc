@@ -23,10 +23,11 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parent_id": {
 			// Property: ParentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The parent resource's identifier.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The parent resource's identifier.",
+			//	  "type": "string"
+			//	}
 			Description: "The parent resource's identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"path_part": {
 			// Property: PathPart
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The last path segment for this resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The last path segment for this resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The last path segment for this resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique primary identifier for a Resource",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique primary identifier for a Resource",
+			//	  "type": "string"
+			//	}
 			Description: "A unique primary identifier for a Resource",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the RestApi resource in which you want to create this resource..",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the RestApi resource in which you want to create this resource..",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the RestApi resource in which you want to create this resource..",
 			Type:        types.StringType,
 			Computed:    true,

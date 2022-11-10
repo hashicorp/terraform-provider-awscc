@@ -23,21 +23,22 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"alarms": {
 			// Property: Alarms
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
-			//   "properties": {
-			//     "AlarmRoleArn": {
-			//       "description": "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
-			//       "type": "string"
-			//     },
-			//     "NotificationLambdaArn": {
-			//       "description": "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
+			//	  "properties": {
+			//	    "AlarmRoleArn": {
+			//	      "description": "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
+			//	      "type": "string"
+			//	    },
+			//	    "NotificationLambdaArn": {
+			//	      "description": "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -72,10 +73,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"notification_sender_email": {
 			// Property: NotificationSenderEmail
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The email address that sends alarm notifications.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The email address that sends alarm notifications.",
+			//	  "type": "string"
+			//	}
 			Description: "The email address that sends alarm notifications.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -87,10 +89,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_arn": {
 			// Property: PortalArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the portal, which has the following format.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the portal, which has the following format.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the portal, which has the following format.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -101,10 +104,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_auth_mode": {
 			// Property: PortalAuthMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
+			//	  "type": "string"
+			//	}
 			Description: "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -117,10 +121,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_client_id": {
 			// Property: PortalClientId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS SSO application generated client ID (used with AWS SSO APIs).",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS SSO application generated client ID (used with AWS SSO APIs).",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -131,10 +136,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_contact_email": {
 			// Property: PortalContactEmail
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS administrator's contact email address.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS administrator's contact email address.",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS administrator's contact email address.",
 			Type:        types.StringType,
 			Required:    true,
@@ -142,10 +148,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_description": {
 			// Property: PortalDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the portal.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the portal.",
+			//	  "type": "string"
+			//	}
 			Description: "A description for the portal.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -157,10 +164,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_id": {
 			// Property: PortalId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the portal.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the portal.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the portal.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -171,10 +179,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_name": {
 			// Property: PortalName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A friendly name for the portal.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A friendly name for the portal.",
+			//	  "type": "string"
+			//	}
 			Description: "A friendly name for the portal.",
 			Type:        types.StringType,
 			Required:    true,
@@ -182,10 +191,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_start_url": {
 			// Property: PortalStartUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
+			//	  "type": "string"
+			//	}
 			Description: "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -196,10 +206,11 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
 			Type:        types.StringType,
 			Required:    true,
@@ -207,29 +218,30 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the portal.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted.",
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the portal.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the portal.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

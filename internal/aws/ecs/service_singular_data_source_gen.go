@@ -23,24 +23,25 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"capacity_provider_strategy": {
 			// Property: CapacityProviderStrategy
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Base": {
-			//         "type": "integer"
-			//       },
-			//       "CapacityProvider": {
-			//         "type": "string"
-			//       },
-			//       "Weight": {
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Base": {
+			//	        "type": "integer"
+			//	      },
+			//	      "CapacityProvider": {
+			//	        "type": "string"
+			//	      },
+			//	      "Weight": {
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"base": {
@@ -65,43 +66,45 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"deployment_configuration": {
 			// Property: DeploymentConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "DeploymentCircuitBreaker": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Enable": {
-			//           "type": "boolean"
-			//         },
-			//         "Rollback": {
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "Enable",
-			//         "Rollback"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "MaximumPercent": {
-			//       "type": "integer"
-			//     },
-			//     "MinimumHealthyPercent": {
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "DeploymentCircuitBreaker": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Enable": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Rollback": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Enable",
+			//	        "Rollback"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "MaximumPercent": {
+			//	      "type": "integer"
+			//	    },
+			//	    "MinimumHealthyPercent": {
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"deployment_circuit_breaker": {
@@ -139,20 +142,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"deployment_controller": {
 			// Property: DeploymentController
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Type": {
-			//       "enum": [
-			//         "CODE_DEPLOY",
-			//         "ECS",
-			//         "EXTERNAL"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Type": {
+			//	      "enum": [
+			//	        "CODE_DEPLOY",
+			//	        "ECS",
+			//	        "EXTERNAL"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"type": {
@@ -167,77 +171,83 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"desired_count": {
 			// Property: DesiredCount
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"enable_ecs_managed_tags": {
 			// Property: EnableECSManagedTags
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"enable_execute_command": {
 			// Property: EnableExecuteCommand
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"health_check_grace_period_seconds": {
 			// Property: HealthCheckGracePeriodSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"launch_type": {
 			// Property: LaunchType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "EC2",
-			//     "FARGATE",
-			//     "EXTERNAL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "EC2",
+			//	    "FARGATE",
+			//	    "EXTERNAL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"load_balancers": {
 			// Property: LoadBalancers
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ContainerName": {
-			//         "type": "string"
-			//       },
-			//       "ContainerPort": {
-			//         "type": "integer"
-			//       },
-			//       "LoadBalancerName": {
-			//         "type": "string"
-			//       },
-			//       "TargetGroupArn": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ContainerName": {
+			//	        "type": "string"
+			//	      },
+			//	      "ContainerPort": {
+			//	        "type": "integer"
+			//	      },
+			//	      "LoadBalancerName": {
+			//	        "type": "string"
+			//	      },
+			//	      "TargetGroupArn": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"container_name": {
@@ -267,46 +277,48 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"network_configuration": {
 			// Property: NetworkConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AwsvpcConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AssignPublicIp": {
-			//           "enum": [
-			//             "DISABLED",
-			//             "ENABLED"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "SecurityGroups": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "Subnets": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AwsvpcConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AssignPublicIp": {
+			//	          "enum": [
+			//	            "DISABLED",
+			//	            "ENABLED"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "SecurityGroups": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "Subnets": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"awsvpc_configuration": {
@@ -339,28 +351,29 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"placement_constraints": {
 			// Property: PlacementConstraints
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Expression": {
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "enum": [
-			//           "distinctInstance",
-			//           "memberOf"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Type"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Expression": {
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "enum": [
+			//	          "distinctInstance",
+			//	          "memberOf"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Type"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"expression": {
@@ -380,29 +393,30 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"placement_strategies": {
 			// Property: PlacementStrategies
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Field": {
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "enum": [
-			//           "binpack",
-			//           "random",
-			//           "spread"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Type"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Field": {
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "enum": [
+			//	          "binpack",
+			//	          "random",
+			//	          "spread"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Type"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"field": {
@@ -422,90 +436,97 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"platform_version": {
 			// Property: PlatformVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "LATEST",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "LATEST",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"propagate_tags": {
 			// Property: PropagateTags
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "SERVICE",
-			//     "TASK_DEFINITION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "SERVICE",
+			//	    "TASK_DEFINITION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"role": {
 			// Property: Role
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"scheduling_strategy": {
 			// Property: SchedulingStrategy
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DAEMON",
-			//     "REPLICA"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DAEMON",
+			//	    "REPLICA"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"service_name": {
 			// Property: ServiceName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"service_registries": {
 			// Property: ServiceRegistries
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ContainerName": {
-			//         "type": "string"
-			//       },
-			//       "ContainerPort": {
-			//         "type": "integer"
-			//       },
-			//       "Port": {
-			//         "type": "integer"
-			//       },
-			//       "RegistryArn": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ContainerName": {
+			//	        "type": "string"
+			//	      },
+			//	      "ContainerPort": {
+			//	        "type": "integer"
+			//	      },
+			//	      "Port": {
+			//	        "type": "integer"
+			//	      },
+			//	      "RegistryArn": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"container_name": {
@@ -535,21 +556,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -569,9 +591,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"task_definition": {
 			// Property: TaskDefinition
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

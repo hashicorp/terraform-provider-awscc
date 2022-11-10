@@ -25,11 +25,12 @@ func contactListResource(ctx context.Context) (resource.Resource, error) {
 		"contact_list_name": {
 			// Property: ContactListName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the contact list.",
-			//   "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the contact list.",
+			//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the contact list.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -45,11 +46,12 @@ func contactListResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the contact list.",
-			//   "maxLength": 500,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the contact list.",
+			//	  "maxLength": 500,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the contact list.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -64,33 +66,34 @@ func contactListResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags (keys and values) associated with the contact list.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags (keys and values) associated with the contact list.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "The tags (keys and values) associated with the contact list.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -125,44 +128,45 @@ func contactListResource(ctx context.Context) (resource.Resource, error) {
 		"topics": {
 			// Property: Topics
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The topics associated with the contact list.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "DefaultSubscriptionStatus": {
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "description": "The description of the topic.",
-			//         "maxLength": 500,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       },
-			//       "DisplayName": {
-			//         "description": "The display name of the topic.",
-			//         "maxLength": 128,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       },
-			//       "TopicName": {
-			//         "description": "The name of the topic.",
-			//         "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "TopicName",
-			//       "DisplayName",
-			//       "DefaultSubscriptionStatus"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 20,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The topics associated with the contact list.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "DefaultSubscriptionStatus": {
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "description": "The description of the topic.",
+			//	        "maxLength": 500,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      },
+			//	      "DisplayName": {
+			//	        "description": "The display name of the topic.",
+			//	        "maxLength": 128,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      },
+			//	      "TopicName": {
+			//	        "description": "The name of the topic.",
+			//	        "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "TopicName",
+			//	      "DisplayName",
+			//	      "DefaultSubscriptionStatus"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 20,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "The topics associated with the contact list.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

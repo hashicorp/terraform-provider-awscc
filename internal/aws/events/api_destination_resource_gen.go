@@ -24,10 +24,11 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The arn of the api destination.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The arn of the api destination.",
+			//	  "type": "string"
+			//	}
 			Description: "The arn of the api destination.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,10 +39,11 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"connection_arn": {
 			// Property: ConnectionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The arn of the connection.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The arn of the connection.",
+			//	  "type": "string"
+			//	}
 			Description: "The arn of the connection.",
 			Type:        types.StringType,
 			Required:    true,
@@ -49,10 +51,11 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 512,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 512,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -66,18 +69,19 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"http_method": {
 			// Property: HttpMethod
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "GET",
-			//     "HEAD",
-			//     "POST",
-			//     "OPTIONS",
-			//     "PUT",
-			//     "DELETE",
-			//     "PATCH"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "GET",
+			//	    "HEAD",
+			//	    "POST",
+			//	    "OPTIONS",
+			//	    "PUT",
+			//	    "DELETE",
+			//	    "PATCH"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -95,10 +99,11 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"invocation_endpoint": {
 			// Property: InvocationEndpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Url endpoint to invoke.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Url endpoint to invoke.",
+			//	  "type": "string"
+			//	}
 			Description: "Url endpoint to invoke.",
 			Type:        types.StringType,
 			Required:    true,
@@ -106,10 +111,11 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"invocation_rate_limit_per_second": {
 			// Property: InvocationRateLimitPerSecond
 			// CloudFormation resource type schema:
-			// {
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
@@ -123,12 +129,13 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the apiDestination.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the apiDestination.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of the apiDestination.",
 			Type:        types.StringType,
 			Optional:    true,

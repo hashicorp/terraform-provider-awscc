@@ -23,10 +23,11 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The CIDR block used for destination matches.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The CIDR block used for destination matches.",
+			//	  "type": "string"
+			//	}
 			Description: "The CIDR block used for destination matches.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		"local_gateway_route_table_id": {
 			// Property: LocalGatewayRouteTableId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the local gateway route table.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the local gateway route table.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the local gateway route table.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,21 +47,35 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		"local_gateway_virtual_interface_group_id": {
 			// Property: LocalGatewayVirtualInterfaceGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the virtual interface group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the virtual interface group.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the virtual interface group.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"network_interface_id": {
+			// Property: NetworkInterfaceId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The ID of the network interface.",
+			//	  "type": "string"
+			//	}
+			Description: "The ID of the network interface.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the route.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the route.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the route.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +83,11 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The route type.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The route type.",
+			//	  "type": "string"
+			//	}
 			Description: "The route type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -97,8 +114,9 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		"destination_cidr_block":                   "DestinationCidrBlock",
 		"local_gateway_route_table_id":             "LocalGatewayRouteTableId",
 		"local_gateway_virtual_interface_group_id": "LocalGatewayVirtualInterfaceGroupId",
-		"state": "State",
-		"type":  "Type",
+		"network_interface_id":                     "NetworkInterfaceId",
+		"state":                                    "State",
+		"type":                                     "Type",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

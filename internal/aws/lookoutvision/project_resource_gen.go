@@ -25,10 +25,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -38,13 +39,14 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"project_name": {
 			// Property: ProjectName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Amazon Lookout for Vision project",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Amazon Lookout for Vision project",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Amazon Lookout for Vision project",
 			Type:        types.StringType,
 			Required:    true,

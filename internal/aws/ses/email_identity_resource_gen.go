@@ -25,17 +25,18 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"configuration_set_attributes": {
 			// Property: ConfigurationSetAttributes
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Used to associate a configuration set with an email identity.",
-			//   "properties": {
-			//     "ConfigurationSetName": {
-			//       "description": "The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Used to associate a configuration set with an email identity.",
+			//	  "properties": {
+			//	    "ConfigurationSetName": {
+			//	      "description": "The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Used to associate a configuration set with an email identity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -60,17 +61,18 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_attributes": {
 			// Property: DkimAttributes
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Used to enable or disable DKIM authentication for an email identity.",
-			//   "properties": {
-			//     "SigningEnabled": {
-			//       "description": "Sets the DKIM signing configuration for the identity. When you set this value true, then the messages that are sent from the identity are signed using DKIM. If you set this value to false, your messages are sent without DKIM signing.",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Used to enable or disable DKIM authentication for an email identity.",
+			//	  "properties": {
+			//	    "SigningEnabled": {
+			//	      "description": "Sets the DKIM signing configuration for the identity. When you set this value true, then the messages that are sent from the identity are signed using DKIM. If you set this value to false, your messages are sent without DKIM signing.",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Used to enable or disable DKIM authentication for an email identity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -95,9 +97,10 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_dns_token_name_1": {
 			// Property: DkimDNSTokenName1
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -107,9 +110,10 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_dns_token_name_2": {
 			// Property: DkimDNSTokenName2
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -119,9 +123,10 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_dns_token_name_3": {
 			// Property: DkimDNSTokenName3
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -131,9 +136,10 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_dns_token_value_1": {
 			// Property: DkimDNSTokenValue1
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -143,9 +149,10 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_dns_token_value_2": {
 			// Property: DkimDNSTokenValue2
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -155,9 +162,10 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_dns_token_value_3": {
 			// Property: DkimDNSTokenValue3
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -167,26 +175,27 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"dkim_signing_attributes": {
 			// Property: DkimSigningAttributes
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for Easy DKIM.",
-			//   "properties": {
-			//     "DomainSigningPrivateKey": {
-			//       "description": "[Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.",
-			//       "type": "string"
-			//     },
-			//     "DomainSigningSelector": {
-			//       "description": "[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.",
-			//       "type": "string"
-			//     },
-			//     "NextSigningKeyLength": {
-			//       "description": "[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.",
-			//       "pattern": "RSA_1024_BIT|RSA_2048_BIT",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for Easy DKIM.",
+			//	  "properties": {
+			//	    "DomainSigningPrivateKey": {
+			//	      "description": "[Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.",
+			//	      "type": "string"
+			//	    },
+			//	    "DomainSigningSelector": {
+			//	      "description": "[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.",
+			//	      "type": "string"
+			//	    },
+			//	    "NextSigningKeyLength": {
+			//	      "description": "[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.",
+			//	      "pattern": "RSA_1024_BIT|RSA_2048_BIT",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for Easy DKIM.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -236,10 +245,11 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"email_identity": {
 			// Property: EmailIdentity
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The email address or domain to verify.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The email address or domain to verify.",
+			//	  "type": "string"
+			//	}
 			Description: "The email address or domain to verify.",
 			Type:        types.StringType,
 			Required:    true,
@@ -250,17 +260,18 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"feedback_attributes": {
 			// Property: FeedbackAttributes
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Used to enable or disable feedback forwarding for an identity.",
-			//   "properties": {
-			//     "EmailForwardingEnabled": {
-			//       "description": "If the value is true, you receive email notifications when bounce or complaint events occur",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Used to enable or disable feedback forwarding for an identity.",
+			//	  "properties": {
+			//	    "EmailForwardingEnabled": {
+			//	      "description": "If the value is true, you receive email notifications when bounce or complaint events occur",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Used to enable or disable feedback forwarding for an identity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -285,22 +296,23 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 		"mail_from_attributes": {
 			// Property: MailFromAttributes
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Used to enable or disable the custom Mail-From domain configuration for an email identity.",
-			//   "properties": {
-			//     "BehaviorOnMxFailure": {
-			//       "description": "The action to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue , the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email.",
-			//       "pattern": "USE_DEFAULT_VALUE|REJECT_MESSAGE",
-			//       "type": "string"
-			//     },
-			//     "MailFromDomain": {
-			//       "description": "The custom MAIL FROM domain that you want the verified identity to use",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Used to enable or disable the custom Mail-From domain configuration for an email identity.",
+			//	  "properties": {
+			//	    "BehaviorOnMxFailure": {
+			//	      "description": "The action to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue , the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email.",
+			//	      "pattern": "USE_DEFAULT_VALUE|REJECT_MESSAGE",
+			//	      "type": "string"
+			//	    },
+			//	    "MailFromDomain": {
+			//	      "description": "The custom MAIL FROM domain that you want the verified identity to use",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Used to enable or disable the custom Mail-From domain configuration for an email identity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

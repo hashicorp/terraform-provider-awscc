@@ -23,9 +23,10 @@ func applicationFleetAssociationResource(ctx context.Context) (resource.Resource
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,9 +36,10 @@ func applicationFleetAssociationResource(ctx context.Context) (resource.Resource
 		"fleet_name": {
 			// Property: FleetName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

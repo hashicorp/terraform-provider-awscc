@@ -25,17 +25,18 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		"log_level": {
 			// Property: LogLevel
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			//   "enum": [
-			//     "ERROR",
-			//     "WARN",
-			//     "INFO",
-			//     "DEBUG",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+			//	  "enum": [
+			//	    "ERROR",
+			//	    "WARN",
+			//	    "INFO",
+			//	    "DEBUG",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
 			Type:        types.StringType,
 			Required:    true,
@@ -52,13 +53,14 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		"target_id": {
 			// Property: TargetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			//   "maxLength": 140,
-			//   "minLength": 13,
-			//   "pattern": "[a-zA-Z0-9.:_-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
+			//	  "maxLength": 140,
+			//	  "minLength": 13,
+			//	  "pattern": "[a-zA-Z0-9.:_-]+",
+			//	  "type": "string"
+			//	}
 			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,13 +71,14 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		"target_name": {
 			// Property: TargetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The target name.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9.:_-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The target name.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9.:_-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The target name.",
 			Type:        types.StringType,
 			Required:    true,
@@ -90,16 +93,17 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		"target_type": {
 			// Property: TargetType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
-			//   "enum": [
-			//     "THING_GROUP",
-			//     "CLIENT_ID",
-			//     "SOURCE_IP",
-			//     "PRINCIPAL_ID"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
+			//	  "enum": [
+			//	    "THING_GROUP",
+			//	    "CLIENT_ID",
+			//	    "SOURCE_IP",
+			//	    "PRINCIPAL_ID"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
 			Type:        types.StringType,
 			Required:    true,

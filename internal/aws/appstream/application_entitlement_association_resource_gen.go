@@ -23,9 +23,10 @@ func applicationEntitlementAssociationResource(ctx context.Context) (resource.Re
 		"application_identifier": {
 			// Property: ApplicationIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,9 +36,10 @@ func applicationEntitlementAssociationResource(ctx context.Context) (resource.Re
 		"entitlement_name": {
 			// Property: EntitlementName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -47,9 +49,10 @@ func applicationEntitlementAssociationResource(ctx context.Context) (resource.Re
 		"stack_name": {
 			// Property: StackName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

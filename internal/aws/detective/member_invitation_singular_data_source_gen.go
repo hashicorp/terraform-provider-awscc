@@ -23,11 +23,12 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		"disable_email_notification": {
 			// Property: DisableEmailNotification
 			// CloudFormation resource type schema:
-			// {
-			//   "default": false,
-			//   "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": false,
+			//	  "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
+			//	  "type": "boolean"
+			//	}
 			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -35,11 +36,12 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		"graph_arn": {
 			// Property: GraphArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the graph to which the member account will be invited",
-			//   "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the graph to which the member account will be invited",
+			//	  "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the graph to which the member account will be invited",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,11 +49,12 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		"member_email_address": {
 			// Property: MemberEmailAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			//   "pattern": ".*@.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
+			//	  "pattern": ".*@.*",
+			//	  "type": "string"
+			//	}
 			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -59,11 +62,12 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		"member_id": {
 			// Property: MemberId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS account ID to be invited to join the graph as a member",
-			//   "pattern": "[0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS account ID to be invited to join the graph as a member",
+			//	  "pattern": "[0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS account ID to be invited to join the graph as a member",
 			Type:        types.StringType,
 			Computed:    true,
@@ -71,12 +75,13 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		"message": {
 			// Property: Message
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -25,35 +25,36 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of ConformancePackInputParameter objects.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Input parameters in the form of key-value pairs for the conformance pack.",
-			//     "properties": {
-			//       "ParameterName": {
-			//         "description": "Key part of key-value pair with value being parameter value",
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       },
-			//       "ParameterValue": {
-			//         "description": "Value part of key-value pair with key being parameter Name",
-			//         "maxLength": 4096,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "ParameterName",
-			//       "ParameterValue"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 60,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of ConformancePackInputParameter objects.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Input parameters in the form of key-value pairs for the conformance pack.",
+			//	    "properties": {
+			//	      "ParameterName": {
+			//	        "description": "Key part of key-value pair with value being parameter value",
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      },
+			//	      "ParameterValue": {
+			//	        "description": "Value part of key-value pair with key being parameter Name",
+			//	        "maxLength": 4096,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ParameterName",
+			//	      "ParameterValue"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 60,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "A list of ConformancePackInputParameter objects.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -89,13 +90,14 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"conformance_pack_name": {
 			// Property: ConformancePackName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the conformance pack which will be assigned as the unique identifier.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the conformance pack which will be assigned as the unique identifier.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the conformance pack which will be assigned as the unique identifier.",
 			Type:        types.StringType,
 			Required:    true,
@@ -110,12 +112,13 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"delivery_s3_bucket": {
 			// Property: DeliveryS3Bucket
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AWS Config stores intermediate files while processing conformance pack template.",
-			//   "maxLength": 63,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AWS Config stores intermediate files while processing conformance pack template.",
+			//	  "maxLength": 63,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -130,12 +133,13 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"delivery_s3_key_prefix": {
 			// Property: DeliveryS3KeyPrefix
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The prefix for delivery S3 bucket.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The prefix for delivery S3 bucket.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The prefix for delivery S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -150,12 +154,13 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"template_body": {
 			// Property: TemplateBody
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
-			//   "maxLength": 51200,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
+			//	  "maxLength": 51200,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -171,13 +176,14 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"template_s3_uri": {
 			// Property: TemplateS3Uri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "pattern": "s3://.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "pattern": "s3://.*",
+			//	  "type": "string"
+			//	}
 			Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -194,23 +200,24 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"template_ssm_document_details": {
 			// Property: TemplateSSMDocumentDetails
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
-			//   "properties": {
-			//     "DocumentName": {
-			//       "maxLength": 128,
-			//       "minLength": 3,
-			//       "type": "string"
-			//     },
-			//     "DocumentVersion": {
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
+			//	  "properties": {
+			//	    "DocumentName": {
+			//	      "maxLength": 128,
+			//	      "minLength": 3,
+			//	      "type": "string"
+			//	    },
+			//	    "DocumentVersion": {
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

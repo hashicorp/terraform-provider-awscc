@@ -23,10 +23,11 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		"cidr": {
 			// Property: Cidr
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents a single IPv4 or IPv6 CIDR",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents a single IPv4 or IPv6 CIDR",
+			//	  "type": "string"
+			//	}
 			Description: "Represents a single IPv4 or IPv6 CIDR",
 			Type:        types.StringType,
 			Optional:    true,
@@ -39,9 +40,10 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -53,10 +55,11 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		"ipam_pool_allocation_id": {
 			// Property: IpamPoolAllocationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of the allocation.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of the allocation.",
+			//	  "type": "string"
+			//	}
 			Description: "Id of the allocation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +70,11 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		"ipam_pool_id": {
 			// Property: IpamPoolId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of the IPAM Pool.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of the IPAM Pool.",
+			//	  "type": "string"
+			//	}
 			Description: "Id of the IPAM Pool.",
 			Type:        types.StringType,
 			Required:    true,
@@ -81,10 +85,11 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		"netmask_length": {
 			// Property: NetmaskLength
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
+			//	  "type": "integer"
+			//	}
 			Description: "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
 			Type:        types.Int64Type,
 			Optional:    true,

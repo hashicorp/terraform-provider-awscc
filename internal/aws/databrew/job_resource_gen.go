@@ -25,103 +25,104 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"data_catalog_outputs": {
 			// Property: DataCatalogOutputs
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "CatalogId": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "DatabaseName": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "DatabaseOptions": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "TableName": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "TempDirectory": {
-			//             "additionalProperties": false,
-			//             "description": "S3 Output location",
-			//             "properties": {
-			//               "Bucket": {
-			//                 "type": "string"
-			//               },
-			//               "BucketOwner": {
-			//                 "maxLength": 12,
-			//                 "minLength": 12,
-			//                 "type": "string"
-			//               },
-			//               "Key": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Bucket"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "TableName"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Overwrite": {
-			//         "type": "boolean"
-			//       },
-			//       "S3Options": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Location": {
-			//             "additionalProperties": false,
-			//             "description": "S3 Output location",
-			//             "properties": {
-			//               "Bucket": {
-			//                 "type": "string"
-			//               },
-			//               "BucketOwner": {
-			//                 "maxLength": 12,
-			//                 "minLength": 12,
-			//                 "type": "string"
-			//               },
-			//               "Key": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Bucket"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "Location"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "TableName": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "DatabaseName",
-			//       "TableName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "CatalogId": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "DatabaseName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "DatabaseOptions": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "TableName": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "TempDirectory": {
+			//	            "additionalProperties": false,
+			//	            "description": "S3 Output location",
+			//	            "properties": {
+			//	              "Bucket": {
+			//	                "type": "string"
+			//	              },
+			//	              "BucketOwner": {
+			//	                "maxLength": 12,
+			//	                "minLength": 12,
+			//	                "type": "string"
+			//	              },
+			//	              "Key": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Bucket"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "TableName"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Overwrite": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "S3Options": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Location": {
+			//	            "additionalProperties": false,
+			//	            "description": "S3 Output location",
+			//	            "properties": {
+			//	              "Bucket": {
+			//	                "type": "string"
+			//	              },
+			//	              "BucketOwner": {
+			//	                "maxLength": 12,
+			//	                "minLength": 12,
+			//	                "type": "string"
+			//	              },
+			//	              "Key": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Bucket"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Location"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "TableName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "DatabaseName",
+			//	      "TableName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"catalog_id": {
@@ -278,66 +279,67 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"database_outputs": {
 			// Property: DatabaseOutputs
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "DatabaseOptions": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "TableName": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "TempDirectory": {
-			//             "additionalProperties": false,
-			//             "description": "S3 Output location",
-			//             "properties": {
-			//               "Bucket": {
-			//                 "type": "string"
-			//               },
-			//               "BucketOwner": {
-			//                 "maxLength": 12,
-			//                 "minLength": 12,
-			//                 "type": "string"
-			//               },
-			//               "Key": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Bucket"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "TableName"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "DatabaseOutputMode": {
-			//         "description": "Database table name",
-			//         "enum": [
-			//           "NEW_TABLE"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "GlueConnectionName": {
-			//         "description": "Glue connection name",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "GlueConnectionName",
-			//       "DatabaseOptions"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "DatabaseOptions": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "TableName": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "TempDirectory": {
+			//	            "additionalProperties": false,
+			//	            "description": "S3 Output location",
+			//	            "properties": {
+			//	              "Bucket": {
+			//	                "type": "string"
+			//	              },
+			//	              "BucketOwner": {
+			//	                "maxLength": 12,
+			//	                "minLength": 12,
+			//	                "type": "string"
+			//	              },
+			//	              "Key": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Bucket"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "TableName"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "DatabaseOutputMode": {
+			//	        "description": "Database table name",
+			//	        "enum": [
+			//	          "NEW_TABLE"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "GlueConnectionName": {
+			//	        "description": "Glue connection name",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "GlueConnectionName",
+			//	      "DatabaseOptions"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"database_options": {
@@ -427,12 +429,13 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"dataset_name": {
 			// Property: DatasetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Dataset name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Dataset name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Optional:    true,
@@ -447,12 +450,13 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_key_arn": {
 			// Property: EncryptionKeyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Encryption Key Arn",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Encryption Key Arn",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "Encryption Key Arn",
 			Type:        types.StringType,
 			Optional:    true,
@@ -467,14 +471,15 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_mode": {
 			// Property: EncryptionMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Encryption mode",
-			//   "enum": [
-			//     "SSE-KMS",
-			//     "SSE-S3"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Encryption mode",
+			//	  "enum": [
+			//	    "SSE-KMS",
+			//	    "SSE-S3"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Encryption mode",
 			Type:        types.StringType,
 			Optional:    true,
@@ -492,26 +497,27 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"job_sample": {
 			// Property: JobSample
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Job Sample",
-			//   "properties": {
-			//     "Mode": {
-			//       "description": "Sample configuration mode for profile jobs.",
-			//       "enum": [
-			//         "FULL_DATASET",
-			//         "CUSTOM_ROWS"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Size": {
-			//       "description": "Sample configuration size for profile jobs.",
-			//       "format": "int64",
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Job Sample",
+			//	  "properties": {
+			//	    "Mode": {
+			//	      "description": "Sample configuration mode for profile jobs.",
+			//	      "enum": [
+			//	        "FULL_DATASET",
+			//	        "CUSTOM_ROWS"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Size": {
+			//	      "description": "Sample configuration size for profile jobs.",
+			//	      "format": "int64",
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Job Sample",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -552,14 +558,15 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"log_subscription": {
 			// Property: LogSubscription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Log subscription",
-			//   "enum": [
-			//     "ENABLE",
-			//     "DISABLE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Log subscription",
+			//	  "enum": [
+			//	    "ENABLE",
+			//	    "DISABLE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Log subscription",
 			Type:        types.StringType,
 			Optional:    true,
@@ -577,10 +584,11 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"max_capacity": {
 			// Property: MaxCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Max capacity",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Max capacity",
+			//	  "type": "integer"
+			//	}
 			Description: "Max capacity",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -592,10 +600,11 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"max_retries": {
 			// Property: MaxRetries
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Max retries",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Max retries",
+			//	  "type": "integer"
+			//	}
 			Description: "Max retries",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -607,12 +616,13 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Job name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Job name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Job name",
 			Type:        types.StringType,
 			Required:    true,
@@ -626,27 +636,28 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"output_location": {
 			// Property: OutputLocation
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Output location",
-			//   "properties": {
-			//     "Bucket": {
-			//       "type": "string"
-			//     },
-			//     "BucketOwner": {
-			//       "maxLength": 12,
-			//       "minLength": 12,
-			//       "type": "string"
-			//     },
-			//     "Key": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Bucket"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Output location",
+			//	  "properties": {
+			//	    "Bucket": {
+			//	      "type": "string"
+			//	    },
+			//	    "BucketOwner": {
+			//	      "maxLength": 12,
+			//	      "minLength": 12,
+			//	      "type": "string"
+			//	    },
+			//	    "Key": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Bucket"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Output location",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -687,102 +698,103 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"outputs": {
 			// Property: Outputs
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "CompressionFormat": {
-			//         "enum": [
-			//           "GZIP",
-			//           "LZ4",
-			//           "SNAPPY",
-			//           "BZIP2",
-			//           "DEFLATE",
-			//           "LZO",
-			//           "BROTLI",
-			//           "ZSTD",
-			//           "ZLIB"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "Format": {
-			//         "enum": [
-			//           "CSV",
-			//           "JSON",
-			//           "PARQUET",
-			//           "GLUEPARQUET",
-			//           "AVRO",
-			//           "ORC",
-			//           "XML",
-			//           "TABLEAUHYPER"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "FormatOptions": {
-			//         "additionalProperties": false,
-			//         "description": "Format options for job Output",
-			//         "properties": {
-			//           "Csv": {
-			//             "additionalProperties": false,
-			//             "description": "Output Csv options",
-			//             "properties": {
-			//               "Delimiter": {
-			//                 "maxLength": 1,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Location": {
-			//         "additionalProperties": false,
-			//         "description": "S3 Output location",
-			//         "properties": {
-			//           "Bucket": {
-			//             "type": "string"
-			//           },
-			//           "BucketOwner": {
-			//             "maxLength": 12,
-			//             "minLength": 12,
-			//             "type": "string"
-			//           },
-			//           "Key": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Bucket"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "MaxOutputFiles": {
-			//         "maximum": 999,
-			//         "minimum": 1,
-			//         "type": "integer"
-			//       },
-			//       "Overwrite": {
-			//         "type": "boolean"
-			//       },
-			//       "PartitionColumns": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       }
-			//     },
-			//     "required": [
-			//       "Location"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "CompressionFormat": {
+			//	        "enum": [
+			//	          "GZIP",
+			//	          "LZ4",
+			//	          "SNAPPY",
+			//	          "BZIP2",
+			//	          "DEFLATE",
+			//	          "LZO",
+			//	          "BROTLI",
+			//	          "ZSTD",
+			//	          "ZLIB"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "Format": {
+			//	        "enum": [
+			//	          "CSV",
+			//	          "JSON",
+			//	          "PARQUET",
+			//	          "GLUEPARQUET",
+			//	          "AVRO",
+			//	          "ORC",
+			//	          "XML",
+			//	          "TABLEAUHYPER"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "FormatOptions": {
+			//	        "additionalProperties": false,
+			//	        "description": "Format options for job Output",
+			//	        "properties": {
+			//	          "Csv": {
+			//	            "additionalProperties": false,
+			//	            "description": "Output Csv options",
+			//	            "properties": {
+			//	              "Delimiter": {
+			//	                "maxLength": 1,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Location": {
+			//	        "additionalProperties": false,
+			//	        "description": "S3 Output location",
+			//	        "properties": {
+			//	          "Bucket": {
+			//	            "type": "string"
+			//	          },
+			//	          "BucketOwner": {
+			//	            "maxLength": 12,
+			//	            "minLength": 12,
+			//	            "type": "string"
+			//	          },
+			//	          "Key": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Bucket"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "MaxOutputFiles": {
+			//	        "maximum": 999,
+			//	        "minimum": 1,
+			//	        "type": "integer"
+			//	      },
+			//	      "Overwrite": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "PartitionColumns": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Location"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"compression_format": {
@@ -945,203 +957,204 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"profile_configuration": {
 			// Property: ProfileConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Profile Job configuration",
-			//   "properties": {
-			//     "ColumnStatisticsConfigurations": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Selectors": {
-			//             "insertionOrder": true,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Name": {
-			//                   "maxLength": 255,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Regex": {
-			//                   "maxLength": 255,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "minItems": 1,
-			//             "type": "array"
-			//           },
-			//           "Statistics": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "IncludedStatistics": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "pattern": "^[A-Z\\_]+$",
-			//                   "type": "string"
-			//                 },
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               },
-			//               "Overrides": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Parameters": {
-			//                       "additionalProperties": false,
-			//                       "patternProperties": {
-			//                         "": {
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "type": "object"
-			//                     },
-			//                     "Statistic": {
-			//                       "maxLength": 128,
-			//                       "minLength": 1,
-			//                       "pattern": "^[A-Z\\_]+$",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Statistic",
-			//                     "Parameters"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "required": [
-			//           "Statistics"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "DatasetStatisticsConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "IncludedStatistics": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "pattern": "^[A-Z\\_]+$",
-			//             "type": "string"
-			//           },
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "Overrides": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Parameters": {
-			//                 "additionalProperties": false,
-			//                 "patternProperties": {
-			//                   "": {
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Statistic": {
-			//                 "maxLength": 128,
-			//                 "minLength": 1,
-			//                 "pattern": "^[A-Z\\_]+$",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Statistic",
-			//               "Parameters"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "EntityDetectorConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AllowedStatistics": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Statistics": {
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "maxLength": 128,
-			//                 "minLength": 1,
-			//                 "pattern": "^[A-Z\\_]+$",
-			//                 "type": "string"
-			//               },
-			//               "minItems": 1,
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Statistics"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "EntityTypes": {
-			//           "insertionOrder": true,
-			//           "items": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "pattern": "^[A-Z_][A-Z\\\\d_]*$",
-			//             "type": "string"
-			//           },
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "EntityTypes"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ProfileColumns": {
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Name": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Regex": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Profile Job configuration",
+			//	  "properties": {
+			//	    "ColumnStatisticsConfigurations": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Selectors": {
+			//	            "insertionOrder": true,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Name": {
+			//	                  "maxLength": 255,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Regex": {
+			//	                  "maxLength": 255,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "minItems": 1,
+			//	            "type": "array"
+			//	          },
+			//	          "Statistics": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "IncludedStatistics": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "pattern": "^[A-Z\\_]+$",
+			//	                  "type": "string"
+			//	                },
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              },
+			//	              "Overrides": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Parameters": {
+			//	                      "additionalProperties": false,
+			//	                      "patternProperties": {
+			//	                        "": {
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "type": "object"
+			//	                    },
+			//	                    "Statistic": {
+			//	                      "maxLength": 128,
+			//	                      "minLength": 1,
+			//	                      "pattern": "^[A-Z\\_]+$",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Statistic",
+			//	                    "Parameters"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Statistics"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "DatasetStatisticsConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "IncludedStatistics": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "pattern": "^[A-Z\\_]+$",
+			//	            "type": "string"
+			//	          },
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "Overrides": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Parameters": {
+			//	                "additionalProperties": false,
+			//	                "patternProperties": {
+			//	                  "": {
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Statistic": {
+			//	                "maxLength": 128,
+			//	                "minLength": 1,
+			//	                "pattern": "^[A-Z\\_]+$",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Statistic",
+			//	              "Parameters"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "EntityDetectorConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AllowedStatistics": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Statistics": {
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "maxLength": 128,
+			//	                "minLength": 1,
+			//	                "pattern": "^[A-Z\\_]+$",
+			//	                "type": "string"
+			//	              },
+			//	              "minItems": 1,
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Statistics"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "EntityTypes": {
+			//	          "insertionOrder": true,
+			//	          "items": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "pattern": "^[A-Z_][A-Z\\\\d_]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EntityTypes"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ProfileColumns": {
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Name": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Regex": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Profile Job configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1401,12 +1414,13 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"project_name": {
 			// Property: ProjectName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Project name",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Project name",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Project name",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1421,23 +1435,24 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"recipe": {
 			// Property: Recipe
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Name": {
-			//       "description": "Recipe name",
-			//       "type": "string"
-			//     },
-			//     "Version": {
-			//       "description": "Recipe version",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "Recipe name",
+			//	      "type": "string"
+			//	    },
+			//	    "Version": {
+			//	      "description": "Recipe version",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -1467,10 +1482,11 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role arn",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role arn",
+			//	  "type": "string"
+			//	}
 			Description: "Role arn",
 			Type:        types.StringType,
 			Required:    true,
@@ -1478,32 +1494,33 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -1535,10 +1552,11 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"timeout": {
 			// Property: Timeout
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Timeout",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Timeout",
+			//	  "type": "integer"
+			//	}
 			Description: "Timeout",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -1550,14 +1568,15 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Job type",
-			//   "enum": [
-			//     "PROFILE",
-			//     "RECIPE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Job type",
+			//	  "enum": [
+			//	    "PROFILE",
+			//	    "RECIPE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Job type",
 			Type:        types.StringType,
 			Required:    true,
@@ -1574,33 +1593,34 @@ func jobResource(ctx context.Context) (resource.Resource, error) {
 		"validation_configurations": {
 			// Property: ValidationConfigurations
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Data quality rules configuration",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Configuration to attach Rulesets to the job",
-			//     "properties": {
-			//       "RulesetArn": {
-			//         "description": "Arn of the Ruleset",
-			//         "maxLength": 2048,
-			//         "minLength": 20,
-			//         "type": "string"
-			//       },
-			//       "ValidationMode": {
-			//         "enum": [
-			//           "CHECK_ALL"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "RulesetArn"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Data quality rules configuration",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Configuration to attach Rulesets to the job",
+			//	    "properties": {
+			//	      "RulesetArn": {
+			//	        "description": "Arn of the Ruleset",
+			//	        "maxLength": 2048,
+			//	        "minLength": 20,
+			//	        "type": "string"
+			//	      },
+			//	      "ValidationMode": {
+			//	        "enum": [
+			//	          "CHECK_ALL"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "RulesetArn"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Data quality rules configuration",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,12 +23,13 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of the flow.",
-			//   "maxLength": 2048,
-			//   "pattern": "[\\w!@#\\-.?,\\s]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of the flow.",
+			//	  "maxLength": 2048,
+			//	  "pattern": "[\\w!@#\\-.?,\\s]*",
+			//	  "type": "string"
+			//	}
 			Description: "Description of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,610 +37,611 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"destination_flow_config_list": {
 			// Property: DestinationFlowConfigList
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of Destination connectors of the flow.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Configurations of destination connector.",
-			//     "properties": {
-			//       "ApiVersion": {
-			//         "description": "The API version that the destination connector uses.",
-			//         "maxLength": 256,
-			//         "pattern": "\\S+",
-			//         "type": "string"
-			//       },
-			//       "ConnectorProfileName": {
-			//         "description": "Name of destination connector profile",
-			//         "maxLength": 256,
-			//         "pattern": "[\\w/!@#+=.-]+",
-			//         "type": "string"
-			//       },
-			//       "ConnectorType": {
-			//         "description": "Destination connector type",
-			//         "enum": [
-			//           "SAPOData",
-			//           "Salesforce",
-			//           "Singular",
-			//           "Slack",
-			//           "Redshift",
-			//           "S3",
-			//           "Marketo",
-			//           "Googleanalytics",
-			//           "Zendesk",
-			//           "Servicenow",
-			//           "Datadog",
-			//           "Trendmicro",
-			//           "Snowflake",
-			//           "Dynatrace",
-			//           "Infornexus",
-			//           "Amplitude",
-			//           "Veeva",
-			//           "CustomConnector",
-			//           "EventBridge",
-			//           "Upsolver",
-			//           "LookoutMetrics"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "DestinationConnectorProperties": {
-			//         "description": "Destination connector details",
-			//         "properties": {
-			//           "CustomConnector": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "CustomProperties": {
-			//                 "additionalProperties": false,
-			//                 "description": "A map for properties for custom connector.",
-			//                 "patternProperties": {
-			//                   "": {
-			//                     "description": "A string containing the value for the property",
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "EntityName": {
-			//                 "maxLength": 1024,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "IdFieldNames": {
-			//                 "description": "List of fields used as ID when performing a write operation.",
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "WriteOperationType": {
-			//                 "enum": [
-			//                   "INSERT",
-			//                   "UPSERT",
-			//                   "UPDATE",
-			//                   "DELETE"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "EntityName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "EventBridge": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Object"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "LookoutMetrics": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Marketo": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Object"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Redshift": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BucketPrefix": {
-			//                 "maxLength": 512,
-			//                 "type": "string"
-			//               },
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "IntermediateBucketName": {
-			//                 "maxLength": 63,
-			//                 "minLength": 3,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Object",
-			//               "IntermediateBucketName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "S3": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BucketName": {
-			//                 "maxLength": 63,
-			//                 "minLength": 3,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "BucketPrefix": {
-			//                 "maxLength": 512,
-			//                 "type": "string"
-			//               },
-			//               "S3OutputFormatConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "AggregationConfig": {
-			//                     "properties": {
-			//                       "AggregationType": {
-			//                         "enum": [
-			//                           "None",
-			//                           "SingleFile"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "FileType": {
-			//                     "enum": [
-			//                       "CSV",
-			//                       "JSON",
-			//                       "PARQUET"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "PrefixConfig": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "PrefixFormat": {
-			//                         "enum": [
-			//                           "YEAR",
-			//                           "MONTH",
-			//                           "DAY",
-			//                           "HOUR",
-			//                           "MINUTE"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "PrefixType": {
-			//                         "enum": [
-			//                           "FILENAME",
-			//                           "PATH",
-			//                           "PATH_AND_FILENAME"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "PreserveSourceDataTyping": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "BucketName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "SAPOData": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "IdFieldNames": {
-			//                 "description": "List of fields used as ID when performing a write operation.",
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "ObjectPath": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "SuccessResponseHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "WriteOperationType": {
-			//                 "enum": [
-			//                   "INSERT",
-			//                   "UPSERT",
-			//                   "UPDATE",
-			//                   "DELETE"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "ObjectPath"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Salesforce": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DataTransferApi": {
-			//                 "enum": [
-			//                   "AUTOMATIC",
-			//                   "BULKV2",
-			//                   "REST_SYNC"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "IdFieldNames": {
-			//                 "description": "List of fields used as ID when performing a write operation.",
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "WriteOperationType": {
-			//                 "enum": [
-			//                   "INSERT",
-			//                   "UPSERT",
-			//                   "UPDATE",
-			//                   "DELETE"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Object"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Snowflake": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BucketPrefix": {
-			//                 "maxLength": 512,
-			//                 "type": "string"
-			//               },
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "IntermediateBucketName": {
-			//                 "maxLength": 63,
-			//                 "minLength": 3,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Object",
-			//               "IntermediateBucketName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Upsolver": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BucketName": {
-			//                 "maxLength": 63,
-			//                 "minLength": 16,
-			//                 "pattern": "^(upsolver-appflow)\\S*",
-			//                 "type": "string"
-			//               },
-			//               "BucketPrefix": {
-			//                 "maxLength": 512,
-			//                 "type": "string"
-			//               },
-			//               "S3OutputFormatConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "AggregationConfig": {
-			//                     "properties": {
-			//                       "AggregationType": {
-			//                         "enum": [
-			//                           "None",
-			//                           "SingleFile"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "FileType": {
-			//                     "enum": [
-			//                       "CSV",
-			//                       "JSON",
-			//                       "PARQUET"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "PrefixConfig": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "PrefixFormat": {
-			//                         "enum": [
-			//                           "YEAR",
-			//                           "MONTH",
-			//                           "DAY",
-			//                           "HOUR",
-			//                           "MINUTE"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "PrefixType": {
-			//                         "enum": [
-			//                           "FILENAME",
-			//                           "PATH",
-			//                           "PATH_AND_FILENAME"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "PrefixConfig"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "BucketName",
-			//               "S3OutputFormatConfig"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Zendesk": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ErrorHandlingConfig": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "BucketName": {
-			//                     "maxLength": 63,
-			//                     "minLength": 3,
-			//                     "pattern": "\\S+",
-			//                     "type": "string"
-			//                   },
-			//                   "BucketPrefix": {
-			//                     "maxLength": 512,
-			//                     "type": "string"
-			//                   },
-			//                   "FailOnFirstError": {
-			//                     "type": "boolean"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "IdFieldNames": {
-			//                 "description": "List of fields used as ID when performing a write operation.",
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Object": {
-			//                 "maxLength": 512,
-			//                 "pattern": "\\S+",
-			//                 "type": "string"
-			//               },
-			//               "WriteOperationType": {
-			//                 "enum": [
-			//                   "INSERT",
-			//                   "UPSERT",
-			//                   "UPDATE",
-			//                   "DELETE"
-			//                 ],
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Object"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "ConnectorType",
-			//       "DestinationConnectorProperties"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of Destination connectors of the flow.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Configurations of destination connector.",
+			//	    "properties": {
+			//	      "ApiVersion": {
+			//	        "description": "The API version that the destination connector uses.",
+			//	        "maxLength": 256,
+			//	        "pattern": "\\S+",
+			//	        "type": "string"
+			//	      },
+			//	      "ConnectorProfileName": {
+			//	        "description": "Name of destination connector profile",
+			//	        "maxLength": 256,
+			//	        "pattern": "[\\w/!@#+=.-]+",
+			//	        "type": "string"
+			//	      },
+			//	      "ConnectorType": {
+			//	        "description": "Destination connector type",
+			//	        "enum": [
+			//	          "SAPOData",
+			//	          "Salesforce",
+			//	          "Singular",
+			//	          "Slack",
+			//	          "Redshift",
+			//	          "S3",
+			//	          "Marketo",
+			//	          "Googleanalytics",
+			//	          "Zendesk",
+			//	          "Servicenow",
+			//	          "Datadog",
+			//	          "Trendmicro",
+			//	          "Snowflake",
+			//	          "Dynatrace",
+			//	          "Infornexus",
+			//	          "Amplitude",
+			//	          "Veeva",
+			//	          "CustomConnector",
+			//	          "EventBridge",
+			//	          "Upsolver",
+			//	          "LookoutMetrics"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "DestinationConnectorProperties": {
+			//	        "description": "Destination connector details",
+			//	        "properties": {
+			//	          "CustomConnector": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "CustomProperties": {
+			//	                "additionalProperties": false,
+			//	                "description": "A map for properties for custom connector.",
+			//	                "patternProperties": {
+			//	                  "": {
+			//	                    "description": "A string containing the value for the property",
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "EntityName": {
+			//	                "maxLength": 1024,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "IdFieldNames": {
+			//	                "description": "List of fields used as ID when performing a write operation.",
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "WriteOperationType": {
+			//	                "enum": [
+			//	                  "INSERT",
+			//	                  "UPSERT",
+			//	                  "UPDATE",
+			//	                  "DELETE"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "EntityName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "EventBridge": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Object"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "LookoutMetrics": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Marketo": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Object"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Redshift": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BucketPrefix": {
+			//	                "maxLength": 512,
+			//	                "type": "string"
+			//	              },
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "IntermediateBucketName": {
+			//	                "maxLength": 63,
+			//	                "minLength": 3,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Object",
+			//	              "IntermediateBucketName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "S3": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BucketName": {
+			//	                "maxLength": 63,
+			//	                "minLength": 3,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "BucketPrefix": {
+			//	                "maxLength": 512,
+			//	                "type": "string"
+			//	              },
+			//	              "S3OutputFormatConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "AggregationConfig": {
+			//	                    "properties": {
+			//	                      "AggregationType": {
+			//	                        "enum": [
+			//	                          "None",
+			//	                          "SingleFile"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "FileType": {
+			//	                    "enum": [
+			//	                      "CSV",
+			//	                      "JSON",
+			//	                      "PARQUET"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PrefixConfig": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "PrefixFormat": {
+			//	                        "enum": [
+			//	                          "YEAR",
+			//	                          "MONTH",
+			//	                          "DAY",
+			//	                          "HOUR",
+			//	                          "MINUTE"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "PrefixType": {
+			//	                        "enum": [
+			//	                          "FILENAME",
+			//	                          "PATH",
+			//	                          "PATH_AND_FILENAME"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "PreserveSourceDataTyping": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "BucketName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "SAPOData": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "IdFieldNames": {
+			//	                "description": "List of fields used as ID when performing a write operation.",
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "ObjectPath": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "SuccessResponseHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "WriteOperationType": {
+			//	                "enum": [
+			//	                  "INSERT",
+			//	                  "UPSERT",
+			//	                  "UPDATE",
+			//	                  "DELETE"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ObjectPath"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Salesforce": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DataTransferApi": {
+			//	                "enum": [
+			//	                  "AUTOMATIC",
+			//	                  "BULKV2",
+			//	                  "REST_SYNC"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "IdFieldNames": {
+			//	                "description": "List of fields used as ID when performing a write operation.",
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "WriteOperationType": {
+			//	                "enum": [
+			//	                  "INSERT",
+			//	                  "UPSERT",
+			//	                  "UPDATE",
+			//	                  "DELETE"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Object"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Snowflake": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BucketPrefix": {
+			//	                "maxLength": 512,
+			//	                "type": "string"
+			//	              },
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "IntermediateBucketName": {
+			//	                "maxLength": 63,
+			//	                "minLength": 3,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Object",
+			//	              "IntermediateBucketName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Upsolver": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BucketName": {
+			//	                "maxLength": 63,
+			//	                "minLength": 16,
+			//	                "pattern": "^(upsolver-appflow)\\S*",
+			//	                "type": "string"
+			//	              },
+			//	              "BucketPrefix": {
+			//	                "maxLength": 512,
+			//	                "type": "string"
+			//	              },
+			//	              "S3OutputFormatConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "AggregationConfig": {
+			//	                    "properties": {
+			//	                      "AggregationType": {
+			//	                        "enum": [
+			//	                          "None",
+			//	                          "SingleFile"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "FileType": {
+			//	                    "enum": [
+			//	                      "CSV",
+			//	                      "JSON",
+			//	                      "PARQUET"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "PrefixConfig": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "PrefixFormat": {
+			//	                        "enum": [
+			//	                          "YEAR",
+			//	                          "MONTH",
+			//	                          "DAY",
+			//	                          "HOUR",
+			//	                          "MINUTE"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "PrefixType": {
+			//	                        "enum": [
+			//	                          "FILENAME",
+			//	                          "PATH",
+			//	                          "PATH_AND_FILENAME"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "PrefixConfig"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "BucketName",
+			//	              "S3OutputFormatConfig"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Zendesk": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ErrorHandlingConfig": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "BucketName": {
+			//	                    "maxLength": 63,
+			//	                    "minLength": 3,
+			//	                    "pattern": "\\S+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "BucketPrefix": {
+			//	                    "maxLength": 512,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FailOnFirstError": {
+			//	                    "type": "boolean"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "IdFieldNames": {
+			//	                "description": "List of fields used as ID when performing a write operation.",
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Object": {
+			//	                "maxLength": 512,
+			//	                "pattern": "\\S+",
+			//	                "type": "string"
+			//	              },
+			//	              "WriteOperationType": {
+			//	                "enum": [
+			//	                  "INSERT",
+			//	                  "UPSERT",
+			//	                  "UPDATE",
+			//	                  "DELETE"
+			//	                ],
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Object"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ConnectorType",
+			//	      "DestinationConnectorProperties"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of Destination connectors of the flow.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1201,12 +1203,13 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"flow_arn": {
 			// Property: FlowArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN identifier of the flow.",
-			//   "maxLength": 512,
-			//   "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN identifier of the flow.",
+			//	  "maxLength": 512,
+			//	  "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
+			//	  "type": "string"
+			//	}
 			Description: "ARN identifier of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1214,13 +1217,14 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"flow_name": {
 			// Property: FlowName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the flow.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the flow.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1228,13 +1232,14 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_arn": {
 			// Property: KMSArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "arn:aws:kms:.*:[0-9]+:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:aws:kms:.*:[0-9]+:.*",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1242,357 +1247,358 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_flow_config": {
 			// Property: SourceFlowConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configurations of Source connector of the flow.",
-			//   "properties": {
-			//     "ApiVersion": {
-			//       "description": "The API version that the destination connector uses.",
-			//       "maxLength": 256,
-			//       "pattern": "\\S+",
-			//       "type": "string"
-			//     },
-			//     "ConnectorProfileName": {
-			//       "description": "Name of source connector profile",
-			//       "maxLength": 256,
-			//       "pattern": "[\\w/!@#+=.-]+",
-			//       "type": "string"
-			//     },
-			//     "ConnectorType": {
-			//       "description": "Type of source connector",
-			//       "enum": [
-			//         "SAPOData",
-			//         "Salesforce",
-			//         "Singular",
-			//         "Slack",
-			//         "Redshift",
-			//         "S3",
-			//         "Marketo",
-			//         "Googleanalytics",
-			//         "Zendesk",
-			//         "Servicenow",
-			//         "Datadog",
-			//         "Trendmicro",
-			//         "Snowflake",
-			//         "Dynatrace",
-			//         "Infornexus",
-			//         "Amplitude",
-			//         "Veeva",
-			//         "CustomConnector",
-			//         "EventBridge",
-			//         "Upsolver",
-			//         "LookoutMetrics"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "IncrementalPullConfig": {
-			//       "description": "Configuration for scheduled incremental data pull",
-			//       "properties": {
-			//         "DatetimeTypeFieldName": {
-			//           "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "SourceConnectorProperties": {
-			//       "description": "Source connector details required to query a connector",
-			//       "properties": {
-			//         "Amplitude": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "CustomConnector": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CustomProperties": {
-			//               "additionalProperties": false,
-			//               "description": "A map for properties for custom connector.",
-			//               "patternProperties": {
-			//                 "": {
-			//                   "description": "A string containing the value for the property",
-			//                   "maxLength": 2048,
-			//                   "minLength": 1,
-			//                   "pattern": "\\S+",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "EntityName": {
-			//               "maxLength": 1024,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "EntityName"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Datadog": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Dynatrace": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "GoogleAnalytics": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "InforNexus": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Marketo": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "S3": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "BucketName": {
-			//               "maxLength": 63,
-			//               "minLength": 3,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             },
-			//             "BucketPrefix": {
-			//               "maxLength": 512,
-			//               "type": "string"
-			//             },
-			//             "S3InputFormatConfig": {
-			//               "properties": {
-			//                 "S3InputFileType": {
-			//                   "enum": [
-			//                     "CSV",
-			//                     "JSON"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "required": [
-			//             "BucketName",
-			//             "BucketPrefix"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "SAPOData": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ObjectPath": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ObjectPath"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Salesforce": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DataTransferApi": {
-			//               "enum": [
-			//                 "AUTOMATIC",
-			//                 "BULKV2",
-			//                 "REST_SYNC"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "EnableDynamicFieldUpdate": {
-			//               "type": "boolean"
-			//             },
-			//             "IncludeDeletedRecords": {
-			//               "type": "boolean"
-			//             },
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ServiceNow": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Singular": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Slack": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Trendmicro": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Veeva": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "DocumentType": {
-			//               "maxLength": 512,
-			//               "pattern": "[\\s\\w_-]+",
-			//               "type": "string"
-			//             },
-			//             "IncludeAllVersions": {
-			//               "type": "boolean"
-			//             },
-			//             "IncludeRenditions": {
-			//               "type": "boolean"
-			//             },
-			//             "IncludeSourceFiles": {
-			//               "type": "boolean"
-			//             },
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "Zendesk": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Object": {
-			//               "maxLength": 512,
-			//               "pattern": "\\S+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Object"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "ConnectorType",
-			//     "SourceConnectorProperties"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configurations of Source connector of the flow.",
+			//	  "properties": {
+			//	    "ApiVersion": {
+			//	      "description": "The API version that the destination connector uses.",
+			//	      "maxLength": 256,
+			//	      "pattern": "\\S+",
+			//	      "type": "string"
+			//	    },
+			//	    "ConnectorProfileName": {
+			//	      "description": "Name of source connector profile",
+			//	      "maxLength": 256,
+			//	      "pattern": "[\\w/!@#+=.-]+",
+			//	      "type": "string"
+			//	    },
+			//	    "ConnectorType": {
+			//	      "description": "Type of source connector",
+			//	      "enum": [
+			//	        "SAPOData",
+			//	        "Salesforce",
+			//	        "Singular",
+			//	        "Slack",
+			//	        "Redshift",
+			//	        "S3",
+			//	        "Marketo",
+			//	        "Googleanalytics",
+			//	        "Zendesk",
+			//	        "Servicenow",
+			//	        "Datadog",
+			//	        "Trendmicro",
+			//	        "Snowflake",
+			//	        "Dynatrace",
+			//	        "Infornexus",
+			//	        "Amplitude",
+			//	        "Veeva",
+			//	        "CustomConnector",
+			//	        "EventBridge",
+			//	        "Upsolver",
+			//	        "LookoutMetrics"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "IncrementalPullConfig": {
+			//	      "description": "Configuration for scheduled incremental data pull",
+			//	      "properties": {
+			//	        "DatetimeTypeFieldName": {
+			//	          "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "SourceConnectorProperties": {
+			//	      "description": "Source connector details required to query a connector",
+			//	      "properties": {
+			//	        "Amplitude": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "CustomConnector": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CustomProperties": {
+			//	              "additionalProperties": false,
+			//	              "description": "A map for properties for custom connector.",
+			//	              "patternProperties": {
+			//	                "": {
+			//	                  "description": "A string containing the value for the property",
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 1,
+			//	                  "pattern": "\\S+",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "EntityName": {
+			//	              "maxLength": 1024,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "EntityName"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Datadog": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Dynatrace": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "GoogleAnalytics": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "InforNexus": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Marketo": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "S3": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "BucketName": {
+			//	              "maxLength": 63,
+			//	              "minLength": 3,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            },
+			//	            "BucketPrefix": {
+			//	              "maxLength": 512,
+			//	              "type": "string"
+			//	            },
+			//	            "S3InputFormatConfig": {
+			//	              "properties": {
+			//	                "S3InputFileType": {
+			//	                  "enum": [
+			//	                    "CSV",
+			//	                    "JSON"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "BucketName",
+			//	            "BucketPrefix"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "SAPOData": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ObjectPath": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ObjectPath"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Salesforce": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DataTransferApi": {
+			//	              "enum": [
+			//	                "AUTOMATIC",
+			//	                "BULKV2",
+			//	                "REST_SYNC"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "EnableDynamicFieldUpdate": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "IncludeDeletedRecords": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ServiceNow": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Singular": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Slack": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Trendmicro": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Veeva": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "DocumentType": {
+			//	              "maxLength": 512,
+			//	              "pattern": "[\\s\\w_-]+",
+			//	              "type": "string"
+			//	            },
+			//	            "IncludeAllVersions": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "IncludeRenditions": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "IncludeSourceFiles": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "Zendesk": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Object": {
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Object"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ConnectorType",
+			//	    "SourceConnectorProperties"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Configurations of Source connector of the flow.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1913,33 +1919,34 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of Tags.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A label for tagging AppFlow resources",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A string used to identify this tag",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "A string containing the value for the tag",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of Tags.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A label for tagging AppFlow resources",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A string used to identify this tag",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "A string containing the value for the tag",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of Tags.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1962,420 +1969,421 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tasks": {
 			// Property: Tasks
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of tasks for the flow.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ConnectorOperator": {
-			//         "description": "Operation to be performed on provided source fields",
-			//         "properties": {
-			//           "Amplitude": {
-			//             "enum": [
-			//               "BETWEEN"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "CustomConnector": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "GREATER_THAN",
-			//               "CONTAINS",
-			//               "BETWEEN",
-			//               "LESS_THAN_OR_EQUAL_TO",
-			//               "GREATER_THAN_OR_EQUAL_TO",
-			//               "EQUAL_TO",
-			//               "NOT_EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Datadog": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "BETWEEN",
-			//               "EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Dynatrace": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "BETWEEN",
-			//               "EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "GoogleAnalytics": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "BETWEEN"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "InforNexus": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "BETWEEN",
-			//               "EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Marketo": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "GREATER_THAN",
-			//               "BETWEEN",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "S3": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "GREATER_THAN",
-			//               "BETWEEN",
-			//               "LESS_THAN_OR_EQUAL_TO",
-			//               "GREATER_THAN_OR_EQUAL_TO",
-			//               "EQUAL_TO",
-			//               "NOT_EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "SAPOData": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "CONTAINS",
-			//               "GREATER_THAN",
-			//               "BETWEEN",
-			//               "LESS_THAN_OR_EQUAL_TO",
-			//               "GREATER_THAN_OR_EQUAL_TO",
-			//               "EQUAL_TO",
-			//               "NOT_EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Salesforce": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "CONTAINS",
-			//               "GREATER_THAN",
-			//               "BETWEEN",
-			//               "LESS_THAN_OR_EQUAL_TO",
-			//               "GREATER_THAN_OR_EQUAL_TO",
-			//               "EQUAL_TO",
-			//               "NOT_EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "ServiceNow": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "CONTAINS",
-			//               "GREATER_THAN",
-			//               "BETWEEN",
-			//               "LESS_THAN_OR_EQUAL_TO",
-			//               "GREATER_THAN_OR_EQUAL_TO",
-			//               "EQUAL_TO",
-			//               "NOT_EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Singular": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Slack": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "BETWEEN",
-			//               "EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Trendmicro": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Veeva": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "LESS_THAN",
-			//               "GREATER_THAN",
-			//               "BETWEEN",
-			//               "LESS_THAN_OR_EQUAL_TO",
-			//               "GREATER_THAN_OR_EQUAL_TO",
-			//               "EQUAL_TO",
-			//               "NOT_EQUAL_TO",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Zendesk": {
-			//             "enum": [
-			//               "PROJECTION",
-			//               "GREATER_THAN",
-			//               "ADDITION",
-			//               "MULTIPLICATION",
-			//               "DIVISION",
-			//               "SUBTRACTION",
-			//               "MASK_ALL",
-			//               "MASK_FIRST_N",
-			//               "MASK_LAST_N",
-			//               "VALIDATE_NON_NULL",
-			//               "VALIDATE_NON_ZERO",
-			//               "VALIDATE_NON_NEGATIVE",
-			//               "VALIDATE_NUMERIC",
-			//               "NO_OP"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "DestinationField": {
-			//         "description": "A field value on which source field should be validated",
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       },
-			//       "SourceFields": {
-			//         "description": "Source fields on which particular task will be applied",
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "TaskProperties": {
-			//         "additionalProperties": false,
-			//         "description": "A Map used to store task related info",
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "An object used to store task related info",
-			//           "properties": {
-			//             "Key": {
-			//               "enum": [
-			//                 "VALUE",
-			//                 "VALUES",
-			//                 "DATA_TYPE",
-			//                 "UPPER_BOUND",
-			//                 "LOWER_BOUND",
-			//                 "SOURCE_DATA_TYPE",
-			//                 "DESTINATION_DATA_TYPE",
-			//                 "VALIDATION_ACTION",
-			//                 "MASK_VALUE",
-			//                 "MASK_LENGTH",
-			//                 "TRUNCATE_LENGTH",
-			//                 "MATH_OPERATION_FIELDS_ORDER",
-			//                 "CONCAT_FORMAT",
-			//                 "SUBFIELD_CATEGORY_MAP",
-			//                 "EXCLUDE_SOURCE_FIELDS_LIST",
-			//                 "INCLUDE_NEW_FIELDS"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "maxLength": 2048,
-			//               "pattern": ".+",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Key",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "TaskType": {
-			//         "description": "Type of task",
-			//         "enum": [
-			//           "Arithmetic",
-			//           "Filter",
-			//           "Map",
-			//           "Map_all",
-			//           "Mask",
-			//           "Merge",
-			//           "Passthrough",
-			//           "Truncate",
-			//           "Validate"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "SourceFields",
-			//       "TaskType"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of tasks for the flow.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ConnectorOperator": {
+			//	        "description": "Operation to be performed on provided source fields",
+			//	        "properties": {
+			//	          "Amplitude": {
+			//	            "enum": [
+			//	              "BETWEEN"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "CustomConnector": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "GREATER_THAN",
+			//	              "CONTAINS",
+			//	              "BETWEEN",
+			//	              "LESS_THAN_OR_EQUAL_TO",
+			//	              "GREATER_THAN_OR_EQUAL_TO",
+			//	              "EQUAL_TO",
+			//	              "NOT_EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Datadog": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "BETWEEN",
+			//	              "EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Dynatrace": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "BETWEEN",
+			//	              "EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "GoogleAnalytics": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "BETWEEN"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "InforNexus": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "BETWEEN",
+			//	              "EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Marketo": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "GREATER_THAN",
+			//	              "BETWEEN",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "S3": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "GREATER_THAN",
+			//	              "BETWEEN",
+			//	              "LESS_THAN_OR_EQUAL_TO",
+			//	              "GREATER_THAN_OR_EQUAL_TO",
+			//	              "EQUAL_TO",
+			//	              "NOT_EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "SAPOData": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "CONTAINS",
+			//	              "GREATER_THAN",
+			//	              "BETWEEN",
+			//	              "LESS_THAN_OR_EQUAL_TO",
+			//	              "GREATER_THAN_OR_EQUAL_TO",
+			//	              "EQUAL_TO",
+			//	              "NOT_EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Salesforce": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "CONTAINS",
+			//	              "GREATER_THAN",
+			//	              "BETWEEN",
+			//	              "LESS_THAN_OR_EQUAL_TO",
+			//	              "GREATER_THAN_OR_EQUAL_TO",
+			//	              "EQUAL_TO",
+			//	              "NOT_EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "ServiceNow": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "CONTAINS",
+			//	              "GREATER_THAN",
+			//	              "BETWEEN",
+			//	              "LESS_THAN_OR_EQUAL_TO",
+			//	              "GREATER_THAN_OR_EQUAL_TO",
+			//	              "EQUAL_TO",
+			//	              "NOT_EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Singular": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Slack": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "BETWEEN",
+			//	              "EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Trendmicro": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Veeva": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "LESS_THAN",
+			//	              "GREATER_THAN",
+			//	              "BETWEEN",
+			//	              "LESS_THAN_OR_EQUAL_TO",
+			//	              "GREATER_THAN_OR_EQUAL_TO",
+			//	              "EQUAL_TO",
+			//	              "NOT_EQUAL_TO",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Zendesk": {
+			//	            "enum": [
+			//	              "PROJECTION",
+			//	              "GREATER_THAN",
+			//	              "ADDITION",
+			//	              "MULTIPLICATION",
+			//	              "DIVISION",
+			//	              "SUBTRACTION",
+			//	              "MASK_ALL",
+			//	              "MASK_FIRST_N",
+			//	              "MASK_LAST_N",
+			//	              "VALIDATE_NON_NULL",
+			//	              "VALIDATE_NON_ZERO",
+			//	              "VALIDATE_NON_NEGATIVE",
+			//	              "VALIDATE_NUMERIC",
+			//	              "NO_OP"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "DestinationField": {
+			//	        "description": "A field value on which source field should be validated",
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      },
+			//	      "SourceFields": {
+			//	        "description": "Source fields on which particular task will be applied",
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "TaskProperties": {
+			//	        "additionalProperties": false,
+			//	        "description": "A Map used to store task related info",
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "An object used to store task related info",
+			//	          "properties": {
+			//	            "Key": {
+			//	              "enum": [
+			//	                "VALUE",
+			//	                "VALUES",
+			//	                "DATA_TYPE",
+			//	                "UPPER_BOUND",
+			//	                "LOWER_BOUND",
+			//	                "SOURCE_DATA_TYPE",
+			//	                "DESTINATION_DATA_TYPE",
+			//	                "VALIDATION_ACTION",
+			//	                "MASK_VALUE",
+			//	                "MASK_LENGTH",
+			//	                "TRUNCATE_LENGTH",
+			//	                "MATH_OPERATION_FIELDS_ORDER",
+			//	                "CONCAT_FORMAT",
+			//	                "SUBFIELD_CATEGORY_MAP",
+			//	                "EXCLUDE_SOURCE_FIELDS_LIST",
+			//	                "INCLUDE_NEW_FIELDS"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "maxLength": 2048,
+			//	              "pattern": ".+",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Key",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "TaskType": {
+			//	        "description": "Type of task",
+			//	        "enum": [
+			//	          "Arithmetic",
+			//	          "Filter",
+			//	          "Map",
+			//	          "Map_all",
+			//	          "Mask",
+			//	          "Merge",
+			//	          "Passthrough",
+			//	          "Truncate",
+			//	          "Validate"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "SourceFields",
+			//	      "TaskType"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of tasks for the flow.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -2512,70 +2520,71 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"trigger_config": {
 			// Property: TriggerConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Trigger settings of the flow.",
-			//   "properties": {
-			//     "TriggerProperties": {
-			//       "additionalProperties": false,
-			//       "description": "Details required based on the type of trigger",
-			//       "properties": {
-			//         "DataPullMode": {
-			//           "enum": [
-			//             "Incremental",
-			//             "Complete"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "FirstExecutionFrom": {
-			//           "type": "number"
-			//         },
-			//         "FlowErrorDeactivationThreshold": {
-			//           "maximum": 100,
-			//           "minimum": 1,
-			//           "type": "integer"
-			//         },
-			//         "ScheduleEndTime": {
-			//           "type": "number"
-			//         },
-			//         "ScheduleExpression": {
-			//           "maxLength": 256,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "ScheduleOffset": {
-			//           "maximum": 36000,
-			//           "minimum": 0,
-			//           "type": "number"
-			//         },
-			//         "ScheduleStartTime": {
-			//           "type": "number"
-			//         },
-			//         "TimeZone": {
-			//           "maxLength": 256,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ScheduleExpression"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TriggerType": {
-			//       "description": "Trigger type of the flow",
-			//       "enum": [
-			//         "Scheduled",
-			//         "Event",
-			//         "OnDemand"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "TriggerType"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Trigger settings of the flow.",
+			//	  "properties": {
+			//	    "TriggerProperties": {
+			//	      "additionalProperties": false,
+			//	      "description": "Details required based on the type of trigger",
+			//	      "properties": {
+			//	        "DataPullMode": {
+			//	          "enum": [
+			//	            "Incremental",
+			//	            "Complete"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "FirstExecutionFrom": {
+			//	          "type": "number"
+			//	        },
+			//	        "FlowErrorDeactivationThreshold": {
+			//	          "maximum": 100,
+			//	          "minimum": 1,
+			//	          "type": "integer"
+			//	        },
+			//	        "ScheduleEndTime": {
+			//	          "type": "number"
+			//	        },
+			//	        "ScheduleExpression": {
+			//	          "maxLength": 256,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "ScheduleOffset": {
+			//	          "maximum": 36000,
+			//	          "minimum": 0,
+			//	          "type": "number"
+			//	        },
+			//	        "ScheduleStartTime": {
+			//	          "type": "number"
+			//	        },
+			//	        "TimeZone": {
+			//	          "maxLength": 256,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ScheduleExpression"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TriggerType": {
+			//	      "description": "Trigger type of the flow",
+			//	      "enum": [
+			//	        "Scheduled",
+			//	        "Event",
+			//	        "OnDemand"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "TriggerType"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Trigger settings of the flow.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

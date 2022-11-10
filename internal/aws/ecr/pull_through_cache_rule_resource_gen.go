@@ -25,13 +25,14 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		"ecr_repository_prefix": {
 			// Property: EcrRepositoryPrefix
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
-			//   "maxLength": 20,
-			//   "minLength": 2,
-			//   "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
+			//	  "maxLength": 20,
+			//	  "minLength": 2,
+			//	  "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
+			//	  "type": "string"
+			//	}
 			Description: "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -48,10 +49,11 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		"upstream_registry_url": {
 			// Property: UpstreamRegistryUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
+			//	  "type": "string"
+			//	}
 			Description: "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
 			Type:        types.StringType,
 			Optional:    true,

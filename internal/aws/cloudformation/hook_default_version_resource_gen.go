@@ -25,11 +25,12 @@ func hookDefaultVersionResource(ctx context.Context) (resource.Resource, error) 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a HookDefaultVersion",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a HookDefaultVersion",
+			//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a HookDefaultVersion",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,11 +41,12 @@ func hookDefaultVersionResource(ctx context.Context) (resource.Resource, error) 
 		"type_name": {
 			// Property: TypeName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -59,11 +61,12 @@ func hookDefaultVersionResource(ctx context.Context) (resource.Resource, error) 
 		"type_version_arn": {
 			// Property: TypeVersionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the type version.",
-			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the type version.",
+			//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the type version.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -78,11 +81,12 @@ func hookDefaultVersionResource(ctx context.Context) (resource.Resource, error) 
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of an existing version of the hook to set as the default.",
-			//   "pattern": "^[A-Za-z0-9-]{1,128}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of an existing version of the hook to set as the default.",
+			//	  "pattern": "^[A-Za-z0-9-]{1,128}$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of an existing version of the hook to set as the default.",
 			Type:        types.StringType,
 			Optional:    true,

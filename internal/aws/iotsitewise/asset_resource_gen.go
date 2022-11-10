@@ -24,10 +24,11 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_arn": {
 			// Property: AssetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the asset",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the asset",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the asset",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,10 +39,11 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_description": {
 			// Property: AssetDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the asset",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the asset",
+			//	  "type": "string"
+			//	}
 			Description: "A description for the asset",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,32 +55,33 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_hierarchies": {
 			// Property: AssetHierarchies
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A hierarchy specifies allowed parent/child asset relationships.",
-			//     "properties": {
-			//       "ChildAssetId": {
-			//         "description": "The ID of the child asset to be associated.",
-			//         "type": "string"
-			//       },
-			//       "LogicalId": {
-			//         "description": "The LogicalID of a hierarchy in the parent asset's model.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "LogicalId",
-			//       "ChildAssetId"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A hierarchy specifies allowed parent/child asset relationships.",
+			//	    "properties": {
+			//	      "ChildAssetId": {
+			//	        "description": "The ID of the child asset to be associated.",
+			//	        "type": "string"
+			//	      },
+			//	      "LogicalId": {
+			//	        "description": "The LogicalID of a hierarchy in the parent asset's model.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LogicalId",
+			//	      "ChildAssetId"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"child_asset_id": {
@@ -108,10 +111,11 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_id": {
 			// Property: AssetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the asset",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the asset",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the asset",
 			Type:        types.StringType,
 			Computed:    true,
@@ -122,10 +126,11 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_model_id": {
 			// Property: AssetModelId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the asset model from which to create the asset.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the asset model from which to create the asset.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the asset model from which to create the asset.",
 			Type:        types.StringType,
 			Required:    true,
@@ -133,10 +138,11 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_name": {
 			// Property: AssetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique, friendly name for the asset.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique, friendly name for the asset.",
+			//	  "type": "string"
+			//	}
 			Description: "A unique, friendly name for the asset.",
 			Type:        types.StringType,
 			Required:    true,
@@ -144,43 +150,44 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_properties": {
 			// Property: AssetProperties
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The asset property's definition, alias, unit, and notification state.",
-			//     "properties": {
-			//       "Alias": {
-			//         "description": "The property alias that identifies the property.",
-			//         "type": "string"
-			//       },
-			//       "LogicalId": {
-			//         "description": "Customer provided ID for property.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "NotificationState": {
-			//         "description": "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
-			//         "enum": [
-			//           "ENABLED",
-			//           "DISABLED"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "Unit": {
-			//         "description": "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "LogicalId"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The asset property's definition, alias, unit, and notification state.",
+			//	    "properties": {
+			//	      "Alias": {
+			//	        "description": "The property alias that identifies the property.",
+			//	        "type": "string"
+			//	      },
+			//	      "LogicalId": {
+			//	        "description": "Customer provided ID for property.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "NotificationState": {
+			//	        "description": "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
+			//	        "enum": [
+			//	          "ENABLED",
+			//	          "DISABLED"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "Unit": {
+			//	        "description": "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LogicalId"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"alias": {
@@ -240,28 +247,29 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the asset.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the asset.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the asset.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

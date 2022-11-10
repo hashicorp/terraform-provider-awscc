@@ -23,10 +23,11 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"carrier_gateway_id": {
 			// Property: CarrierGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the carrier gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the carrier gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the carrier gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the owner.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the owner.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the owner.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the carrier gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the carrier gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the carrier gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,30 +59,31 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the carrier gateway.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the carrier gateway.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The tags for the carrier gateway.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -100,10 +104,11 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,12 +23,13 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The accountId",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The accountId",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The accountId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,15 +37,16 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"frequency": {
 			// Property: Frequency
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The frequency at which anomaly reports are sent over email. ",
-			//   "enum": [
-			//     "DAILY",
-			//     "IMMEDIATE",
-			//     "WEEKLY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The frequency at which anomaly reports are sent over email. ",
+			//	  "enum": [
+			//	    "DAILY",
+			//	    "IMMEDIATE",
+			//	    "WEEKLY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The frequency at which anomaly reports are sent over email. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,16 +54,17 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"monitor_arn_list": {
 			// Property: MonitorArnList
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of cost anomaly monitors.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "Subscription ARN",
-			//     "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of cost anomaly monitors.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "Subscription ARN",
+			//	    "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of cost anomaly monitors.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -69,37 +72,38 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"resource_tags": {
 			// Property: ResourceTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags to assign to subscription.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name for the tag.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Tags to assign to subscription.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name for the tag.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "Tags to assign to subscription.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -122,39 +126,40 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"subscribers": {
 			// Property: Subscribers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of subscriber",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Address": {
-			//         "pattern": "(^[a-zA-Z0-9.!#$%\u0026'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+(\\.fifo)?$)",
-			//         "type": "string"
-			//       },
-			//       "Status": {
-			//         "enum": [
-			//           "CONFIRMED",
-			//           "DECLINED"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "Type": {
-			//         "enum": [
-			//           "EMAIL",
-			//           "SNS"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Address",
-			//       "Type"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of subscriber",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Address": {
+			//	        "pattern": "(^[a-zA-Z0-9.!#$%\u0026'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+(\\.fifo)?$)",
+			//	        "type": "string"
+			//	      },
+			//	      "Status": {
+			//	        "enum": [
+			//	          "CONFIRMED",
+			//	          "DECLINED"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "Type": {
+			//	        "enum": [
+			//	          "EMAIL",
+			//	          "SNS"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Address",
+			//	      "Type"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of subscriber",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -180,11 +185,12 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"subscription_arn": {
 			// Property: SubscriptionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Subscription ARN",
-			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Subscription ARN",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Subscription ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -192,13 +198,14 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"subscription_name": {
 			// Property: SubscriptionName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the subscription.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "pattern": "[\\S\\s]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the subscription.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "pattern": "[\\S\\s]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the subscription.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -206,11 +213,12 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		"threshold": {
 			// Property: Threshold
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The dollar value that triggers a notification if the threshold is exceeded. ",
-			//   "minimum": 0,
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "The dollar value that triggers a notification if the threshold is exceeded. ",
+			//	  "minimum": 0,
+			//	  "type": "number"
+			//	}
 			Description: "The dollar value that triggers a notification if the threshold is exceeded. ",
 			Type:        types.Float64Type,
 			Computed:    true,

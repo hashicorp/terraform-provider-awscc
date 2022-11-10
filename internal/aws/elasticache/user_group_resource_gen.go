@@ -25,10 +25,11 @@ func userGroupResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the user account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the user account.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the user account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +40,14 @@ func userGroupResource(ctx context.Context) (resource.Resource, error) {
 		"engine": {
 			// Property: Engine
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Must be redis.",
-			//   "enum": [
-			//     "redis"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Must be redis.",
+			//	  "enum": [
+			//	    "redis"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Must be redis.",
 			Type:        types.StringType,
 			Required:    true,
@@ -61,10 +63,11 @@ func userGroupResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
+			//	  "type": "string"
+			//	}
 			Description: "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,11 +78,12 @@ func userGroupResource(ctx context.Context) (resource.Resource, error) {
 		"user_group_id": {
 			// Property: UserGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the user group.",
-			//   "pattern": "[a-z][a-z0-9\\\\-]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the user group.",
+			//	  "pattern": "[a-z][a-z0-9\\\\-]*",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the user group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -93,16 +97,17 @@ func userGroupResource(ctx context.Context) (resource.Resource, error) {
 		"user_ids": {
 			// Property: UserIds
 			// CloudFormation resource type schema:
-			// {
-			//   "$comment": "List of users.",
-			//   "description": "List of users associated to this user group.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "$comment": "List of users.",
+			//	  "description": "List of users associated to this user group.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "List of users associated to this user group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,

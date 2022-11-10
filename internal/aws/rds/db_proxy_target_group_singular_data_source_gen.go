@@ -23,40 +23,41 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		"connection_pool_configuration_info": {
 			// Property: ConnectionPoolConfigurationInfo
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ConnectionBorrowTimeout": {
-			//       "description": "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
-			//       "type": "integer"
-			//     },
-			//     "InitQuery": {
-			//       "description": "One or more SQL statements for the proxy to run when opening each new database connection.",
-			//       "type": "string"
-			//     },
-			//     "MaxConnectionsPercent": {
-			//       "description": "The maximum size of the connection pool for each target in a target group.",
-			//       "maximum": 100,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "MaxIdleConnectionsPercent": {
-			//       "description": "Controls how actively the proxy closes idle database connections in the connection pool.",
-			//       "maximum": 100,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "SessionPinningFilters": {
-			//       "description": "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ConnectionBorrowTimeout": {
+			//	      "description": "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
+			//	      "type": "integer"
+			//	    },
+			//	    "InitQuery": {
+			//	      "description": "One or more SQL statements for the proxy to run when opening each new database connection.",
+			//	      "type": "string"
+			//	    },
+			//	    "MaxConnectionsPercent": {
+			//	      "description": "The maximum size of the connection pool for each target in a target group.",
+			//	      "maximum": 100,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "MaxIdleConnectionsPercent": {
+			//	      "description": "Controls how actively the proxy closes idle database connections in the connection pool.",
+			//	      "maximum": 100,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "SessionPinningFilters": {
+			//	      "description": "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"connection_borrow_timeout": {
@@ -96,38 +97,41 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		"db_cluster_identifiers": {
 			// Property: DBClusterIdentifiers
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"db_instance_identifiers": {
 			// Property: DBInstanceIdentifiers
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"db_proxy_name": {
 			// Property: DBProxyName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier for the proxy.",
-			//   "maxLength": 64,
-			//   "pattern": "[A-z][0-z]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier for the proxy.",
+			//	  "maxLength": 64,
+			//	  "pattern": "[A-z][0-z]*",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier for the proxy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -135,10 +139,11 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		"target_group_arn": {
 			// Property: TargetGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) representing the target group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) representing the target group.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) representing the target group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -146,13 +151,14 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		"target_group_name": {
 			// Property: TargetGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier for the DBProxyTargetGroup",
-			//   "enum": [
-			//     "default"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier for the DBProxyTargetGroup",
+			//	  "enum": [
+			//	    "default"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The identifier for the DBProxyTargetGroup",
 			Type:        types.StringType,
 			Computed:    true,

@@ -25,9 +25,10 @@ func domainNameApiAssociationResource(ctx context.Context) (resource.Resource, e
 		"api_association_identifier": {
 			// Property: ApiAssociationIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,21 +38,23 @@ func domainNameApiAssociationResource(ctx context.Context) (resource.Resource, e
 		"api_id": {
 			// Property: ApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 253,
-			//   "minLength": 1,
-			//   "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 253,
+			//	  "minLength": 1,
+			//	  "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

@@ -23,19 +23,20 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		"capacity_providers": {
 			// Property: CapacityProviders
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of capacity providers to associate with the cluster",
-			//   "items": {
-			//     "anyOf": [
-			//       {},
-			//       {}
-			//     ],
-			//     "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "List of capacity providers to associate with the cluster",
+			//	  "items": {
+			//	    "anyOf": [
+			//	      {},
+			//	      {}
+			//	    ],
+			//	    "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "List of capacity providers to associate with the cluster",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -43,12 +44,13 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the cluster",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the cluster",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the cluster",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,37 +58,38 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		"default_capacity_provider_strategy": {
 			// Property: DefaultCapacityProviderStrategy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of capacity providers to associate with the cluster",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Base": {
-			//         "maximum": 100000,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       },
-			//       "CapacityProvider": {
-			//         "anyOf": [
-			//           {},
-			//           {}
-			//         ],
-			//         "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			//         "type": "string"
-			//       },
-			//       "Weight": {
-			//         "maximum": 1000,
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       }
-			//     },
-			//     "required": [
-			//       "CapacityProvider"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of capacity providers to associate with the cluster",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Base": {
+			//	        "maximum": 100000,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      },
+			//	      "CapacityProvider": {
+			//	        "anyOf": [
+			//	          {},
+			//	          {}
+			//	        ],
+			//	        "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+			//	        "type": "string"
+			//	      },
+			//	      "Weight": {
+			//	        "maximum": 1000,
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "CapacityProvider"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of capacity providers to associate with the cluster",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,63 +23,64 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"decryption": {
 			// Property: Decryption
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The type of encryption that is used on the content ingested from this source.",
-			//   "properties": {
-			//     "Algorithm": {
-			//       "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-			//       "enum": [
-			//         "aes128",
-			//         "aes192",
-			//         "aes256"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "ConstantInitializationVector": {
-			//       "description": "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
-			//       "type": "string"
-			//     },
-			//     "DeviceId": {
-			//       "description": "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//       "type": "string"
-			//     },
-			//     "KeyType": {
-			//       "default": "static-key",
-			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			//       "enum": [
-			//         "speke",
-			//         "static-key"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Region": {
-			//       "description": "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//       "type": "string"
-			//     },
-			//     "ResourceId": {
-			//       "description": "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//       "type": "string"
-			//     },
-			//     "RoleArn": {
-			//       "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-			//       "type": "string"
-			//     },
-			//     "SecretArn": {
-			//       "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-			//       "type": "string"
-			//     },
-			//     "Url": {
-			//       "description": "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Algorithm",
-			//     "RoleArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The type of encryption that is used on the content ingested from this source.",
+			//	  "properties": {
+			//	    "Algorithm": {
+			//	      "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+			//	      "enum": [
+			//	        "aes128",
+			//	        "aes192",
+			//	        "aes256"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "ConstantInitializationVector": {
+			//	      "description": "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
+			//	      "type": "string"
+			//	    },
+			//	    "DeviceId": {
+			//	      "description": "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+			//	      "type": "string"
+			//	    },
+			//	    "KeyType": {
+			//	      "default": "static-key",
+			//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+			//	      "enum": [
+			//	        "speke",
+			//	        "static-key"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Region": {
+			//	      "description": "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+			//	      "type": "string"
+			//	    },
+			//	    "ResourceId": {
+			//	      "description": "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+			//	      "type": "string"
+			//	    },
+			//	    "RoleArn": {
+			//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+			//	      "type": "string"
+			//	    },
+			//	    "SecretArn": {
+			//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+			//	      "type": "string"
+			//	    },
+			//	    "Url": {
+			//	      "description": "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Algorithm",
+			//	    "RoleArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The type of encryption that is used on the content ingested from this source.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -144,10 +145,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
+			//	  "type": "string"
+			//	}
 			Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -155,10 +157,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"entitlement_arn": {
 			// Property: EntitlementArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -166,10 +169,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"flow_arn": {
 			// Property: FlowArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the flow.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the flow.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -177,10 +181,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ingest_ip": {
 			// Property: IngestIp
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IP address that the flow will be listening on for incoming content.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IP address that the flow will be listening on for incoming content.",
+			//	  "type": "string"
+			//	}
 			Description: "The IP address that the flow will be listening on for incoming content.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -188,10 +193,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ingest_port": {
 			// Property: IngestPort
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The port that the flow will be listening on for incoming content.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The port that the flow will be listening on for incoming content.",
+			//	  "type": "integer"
+			//	}
 			Description: "The port that the flow will be listening on for incoming content.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -199,10 +205,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_bitrate": {
 			// Property: MaxBitrate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
+			//	  "type": "integer"
+			//	}
 			Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -210,11 +217,12 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_latency": {
 			// Property: MaxLatency
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 2000,
-			//   "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "default": 2000,
+			//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+			//	  "type": "integer"
+			//	}
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -222,10 +230,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the source.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the source.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the source.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -233,16 +242,17 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The protocol that is used by the source.",
-			//   "enum": [
-			//     "zixi-push",
-			//     "rtp-fec",
-			//     "rtp",
-			//     "rist"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The protocol that is used by the source.",
+			//	  "enum": [
+			//	    "zixi-push",
+			//	    "rtp-fec",
+			//	    "rtp",
+			//	    "rist"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The protocol that is used by the source.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -250,10 +260,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_arn": {
 			// Property: SourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the source.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the source.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the source.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -261,10 +272,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_ingest_port": {
 			// Property: SourceIngestPort
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
+			//	  "type": "string"
+			//	}
 			Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
 			Type:        types.StringType,
 			Computed:    true,
@@ -272,10 +284,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stream_id": {
 			// Property: StreamId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+			//	  "type": "string"
+			//	}
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -283,10 +296,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_interface_name": {
 			// Property: VpcInterfaceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the VPC Interface this Source is configured with.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the VPC Interface this Source is configured with.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the VPC Interface this Source is configured with.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -294,10 +308,11 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"whitelist_cidr": {
 			// Property: WhitelistCidr
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+			//	  "type": "string"
+			//	}
 			Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
 			Type:        types.StringType,
 			Computed:    true,

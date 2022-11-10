@@ -23,10 +23,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of an association between a Resolver rule and a VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of an association between a Resolver rule and a VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of an association between a Resolver rule and a VPC.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -39,10 +40,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		"resolver_rule_association_id": {
 			// Property: ResolverRuleAssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Primary Identifier for Resolver Rule Association",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Primary Identifier for Resolver Rule Association",
+			//	  "type": "string"
+			//	}
 			Description: "Primary Identifier for Resolver Rule Association",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,10 +55,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		"resolver_rule_id": {
 			// Property: ResolverRuleId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
 			Type:        types.StringType,
 			Required:    true,
@@ -67,10 +70,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		"vpc_id": {
 			// Property: VPCId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC that you associated the Resolver rule with.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC that you associated the Resolver rule with.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC that you associated the Resolver rule with.",
 			Type:        types.StringType,
 			Required:    true,

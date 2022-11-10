@@ -23,10 +23,11 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filter_expression": {
 			// Property: FilterExpression
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The filter expression defining criteria by which to group traces.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The filter expression defining criteria by which to group traces.",
+			//	  "type": "string"
+			//	}
 			Description: "The filter expression defining criteria by which to group traces.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,12 +35,13 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"group_arn": {
 			// Property: GroupARN
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the group that was generated on creation.",
-			//   "maxLength": 400,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the group that was generated on creation.",
+			//	  "maxLength": 400,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the group that was generated on creation.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,12 +49,13 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"group_name": {
 			// Property: GroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The case-sensitive name of the new group. Names must be unique.",
-			//   "maxLength": 32,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The case-sensitive name of the new group. Names must be unique.",
+			//	  "maxLength": 32,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The case-sensitive name of the new group. Names must be unique.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,20 +63,21 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"insights_configuration": {
 			// Property: InsightsConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "InsightsEnabled": {
-			//       "description": "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
-			//       "type": "boolean"
-			//     },
-			//     "NotificationsEnabled": {
-			//       "description": "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "InsightsEnabled": {
+			//	      "description": "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "NotificationsEnabled": {
+			//	      "description": "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"insights_enabled": {
@@ -95,26 +99,27 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

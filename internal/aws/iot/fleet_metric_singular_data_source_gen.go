@@ -23,10 +23,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aggregation_field": {
 			// Property: AggregationField
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The aggregation field to perform aggregation and metric emission",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The aggregation field to perform aggregation and metric emission",
+			//	  "type": "string"
+			//	}
 			Description: "The aggregation field to perform aggregation and metric emission",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,29 +35,30 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aggregation_type": {
 			// Property: AggregationType
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Aggregation types supported by Fleet Indexing",
-			//   "properties": {
-			//     "Name": {
-			//       "description": "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
-			//       "type": "string"
-			//     },
-			//     "Values": {
-			//       "description": "Fleet Indexing aggregation type values",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name",
-			//     "Values"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Aggregation types supported by Fleet Indexing",
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
+			//	      "type": "string"
+			//	    },
+			//	    "Values": {
+			//	      "description": "Fleet Indexing aggregation type values",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name",
+			//	    "Values"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Aggregation types supported by Fleet Indexing",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -79,10 +81,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_date": {
 			// Property: CreationDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The creation date of a fleet metric",
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "The creation date of a fleet metric",
+			//	  "type": "number"
+			//	}
 			Description: "The creation date of a fleet metric",
 			Type:        types.Float64Type,
 			Computed:    true,
@@ -90,10 +93,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of a fleet metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of a fleet metric",
+			//	  "type": "string"
+			//	}
 			Description: "The description of a fleet metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -101,10 +105,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"index_name": {
 			// Property: IndexName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The index name of a fleet metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The index name of a fleet metric",
+			//	  "type": "string"
+			//	}
 			Description: "The index name of a fleet metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -112,10 +117,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_modified_date": {
 			// Property: LastModifiedDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The last modified date of a fleet metric",
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "The last modified date of a fleet metric",
+			//	  "type": "number"
+			//	}
 			Description: "The last modified date of a fleet metric",
 			Type:        types.Float64Type,
 			Computed:    true,
@@ -123,10 +129,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"metric_arn": {
 			// Property: MetricArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Number (ARN) of a fleet metric metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Number (ARN) of a fleet metric metric",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Number (ARN) of a fleet metric metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -134,10 +141,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"metric_name": {
 			// Property: MetricName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the fleet metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the fleet metric",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the fleet metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -145,10 +153,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"period": {
 			// Property: Period
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The period of metric emission in seconds",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The period of metric emission in seconds",
+			//	  "type": "integer"
+			//	}
 			Description: "The period of metric emission in seconds",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -156,10 +165,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"query_string": {
 			// Property: QueryString
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Fleet Indexing query used by a fleet metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Fleet Indexing query used by a fleet metric",
+			//	  "type": "string"
+			//	}
 			Description: "The Fleet Indexing query used by a fleet metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -167,10 +177,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"query_version": {
 			// Property: QueryVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of a Fleet Indexing query used by a fleet metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of a Fleet Indexing query used by a fleet metric",
+			//	  "type": "string"
+			//	}
 			Description: "The version of a Fleet Indexing query used by a fleet metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -178,36 +189,37 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The tag's key",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The tag's value",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The tag's key",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The tag's value",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -230,10 +242,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"unit": {
 			// Property: Unit
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unit of data points emitted by a fleet metric",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unit of data points emitted by a fleet metric",
+			//	  "type": "string"
+			//	}
 			Description: "The unit of data points emitted by a fleet metric",
 			Type:        types.StringType,
 			Computed:    true,
@@ -241,10 +254,11 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of a fleet metric",
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "The version of a fleet metric",
+			//	  "type": "number"
+			//	}
 			Description: "The version of a fleet metric",
 			Type:        types.Float64Type,
 			Computed:    true,

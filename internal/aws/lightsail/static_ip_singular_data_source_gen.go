@@ -23,10 +23,11 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"attached_to": {
 			// Property: AttachedTo
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The instance where the static IP is attached.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The instance where the static IP is attached.",
+			//	  "type": "string"
+			//	}
 			Description: "The instance where the static IP is attached.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ip_address": {
 			// Property: IpAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The static IP address.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The static IP address.",
+			//	  "type": "string"
+			//	}
 			Description: "The static IP address.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"is_attached": {
 			// Property: IsAttached
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A Boolean value indicating whether the static IP is attached.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "A Boolean value indicating whether the static IP is attached.",
+			//	  "type": "boolean"
+			//	}
 			Description: "A Boolean value indicating whether the static IP is attached.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -56,19 +59,21 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"static_ip_arn": {
 			// Property: StaticIpArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"static_ip_name": {
 			// Property: StaticIpName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the static IP address.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the static IP address.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the static IP address.",
 			Type:        types.StringType,
 			Computed:    true,

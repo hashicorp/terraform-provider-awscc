@@ -24,10 +24,11 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN of the Scheduling Policy.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN of the Scheduling Policy.",
+			//	  "type": "string"
+			//	}
 			Description: "ARN of the Scheduling Policy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,42 +39,43 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"fairshare_policy": {
 			// Property: FairsharePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Fair Share Policy for the Job Queue.",
-			//   "properties": {
-			//     "ComputeReservation": {
-			//       "maximum": 99,
-			//       "minimum": 0,
-			//       "type": "number"
-			//     },
-			//     "ShareDecaySeconds": {
-			//       "maximum": 604800,
-			//       "minimum": 0,
-			//       "type": "number"
-			//     },
-			//     "ShareDistribution": {
-			//       "description": "List of Share Attributes",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ShareIdentifier": {
-			//             "type": "string"
-			//           },
-			//           "WeightFactor": {
-			//             "maximum": 1000,
-			//             "minimum": 0,
-			//             "type": "number"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Fair Share Policy for the Job Queue.",
+			//	  "properties": {
+			//	    "ComputeReservation": {
+			//	      "maximum": 99,
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    },
+			//	    "ShareDecaySeconds": {
+			//	      "maximum": 604800,
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    },
+			//	    "ShareDistribution": {
+			//	      "description": "List of Share Attributes",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ShareIdentifier": {
+			//	            "type": "string"
+			//	          },
+			//	          "WeightFactor": {
+			//	            "maximum": 1000,
+			//	            "minimum": 0,
+			//	            "type": "number"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Fair Share Policy for the Job Queue.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -147,11 +149,12 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of Scheduling Policy.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of Scheduling Policy.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Name of Scheduling Policy.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -164,16 +167,17 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

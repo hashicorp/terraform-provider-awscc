@@ -25,11 +25,12 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		"keyspace_name": {
 			// Property: KeyspaceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name for Cassandra keyspace",
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name for Cassandra keyspace",
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name for Cassandra keyspace",
 			Type:        types.StringType,
 			Optional:    true,
@@ -45,32 +46,33 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -23,20 +23,22 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"database_name": {
 			// Property: DatabaseName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the database which the table to be created belongs to.",
-			//   "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the database which the table to be created belongs to.",
+			//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the database which the table to be created belongs to.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -44,54 +46,55 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"magnetic_store_write_properties": {
 			// Property: MagneticStoreWriteProperties
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The properties that determine whether magnetic store writes are enabled.",
-			//   "properties": {
-			//     "EnableMagneticStoreWrites": {
-			//       "description": "Boolean flag indicating whether magnetic store writes are enabled.",
-			//       "type": "boolean"
-			//     },
-			//     "MagneticStoreRejectedDataLocation": {
-			//       "additionalProperties": false,
-			//       "description": "Location to store information about records that were asynchronously rejected during magnetic store writes.",
-			//       "properties": {
-			//         "S3Configuration": {
-			//           "additionalProperties": false,
-			//           "description": "S3 configuration for location to store rejections from magnetic store writes",
-			//           "properties": {
-			//             "BucketName": {
-			//               "description": "The bucket name used to store the data.",
-			//               "type": "string"
-			//             },
-			//             "EncryptionOption": {
-			//               "description": "Either SSE_KMS or SSE_S3.",
-			//               "type": "string"
-			//             },
-			//             "KmsKeyId": {
-			//               "description": "Must be provided if SSE_KMS is specified as the encryption option",
-			//               "type": "string"
-			//             },
-			//             "ObjectKeyPrefix": {
-			//               "description": "String used to prefix all data in the bucket.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "EncryptionOption",
-			//             "BucketName"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "EnableMagneticStoreWrites"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The properties that determine whether magnetic store writes are enabled.",
+			//	  "properties": {
+			//	    "EnableMagneticStoreWrites": {
+			//	      "description": "Boolean flag indicating whether magnetic store writes are enabled.",
+			//	      "type": "boolean"
+			//	    },
+			//	    "MagneticStoreRejectedDataLocation": {
+			//	      "additionalProperties": false,
+			//	      "description": "Location to store information about records that were asynchronously rejected during magnetic store writes.",
+			//	      "properties": {
+			//	        "S3Configuration": {
+			//	          "additionalProperties": false,
+			//	          "description": "S3 configuration for location to store rejections from magnetic store writes",
+			//	          "properties": {
+			//	            "BucketName": {
+			//	              "description": "The bucket name used to store the data.",
+			//	              "type": "string"
+			//	            },
+			//	            "EncryptionOption": {
+			//	              "description": "Either SSE_KMS or SSE_S3.",
+			//	              "type": "string"
+			//	            },
+			//	            "KmsKeyId": {
+			//	              "description": "Must be provided if SSE_KMS is specified as the encryption option",
+			//	              "type": "string"
+			//	            },
+			//	            "ObjectKeyPrefix": {
+			//	              "description": "String used to prefix all data in the bucket.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "EncryptionOption",
+			//	            "BucketName"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "EnableMagneticStoreWrites"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The properties that determine whether magnetic store writes are enabled.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -150,10 +153,11 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The table name exposed as a read-only attribute.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The table name exposed as a read-only attribute.",
+			//	  "type": "string"
+			//	}
 			Description: "The table name exposed as a read-only attribute.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -161,21 +165,22 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"retention_properties": {
 			// Property: RetentionProperties
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The retention duration of the memory store and the magnetic store.",
-			//   "properties": {
-			//     "MagneticStoreRetentionPeriodInDays": {
-			//       "description": "The duration for which data must be stored in the magnetic store.",
-			//       "type": "string"
-			//     },
-			//     "MemoryStoreRetentionPeriodInHours": {
-			//       "description": "The duration for which data must be stored in the memory store.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The retention duration of the memory store and the magnetic store.",
+			//	  "properties": {
+			//	    "MagneticStoreRetentionPeriodInDays": {
+			//	      "description": "The duration for which data must be stored in the magnetic store.",
+			//	      "type": "string"
+			//	    },
+			//	    "MemoryStoreRetentionPeriodInHours": {
+			//	      "description": "The duration for which data must be stored in the memory store.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The retention duration of the memory store and the magnetic store.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -198,11 +203,12 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"table_name": {
 			// Property: TableName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
-			//   "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
+			//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -210,29 +216,30 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array"
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

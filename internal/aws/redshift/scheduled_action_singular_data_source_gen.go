@@ -23,10 +23,11 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"enable": {
 			// Property: Enable
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
+			//	  "type": "boolean"
+			//	}
 			Description: "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"end_time": {
 			// Property: EndTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
+			//	  "type": "string"
+			//	}
 			Description: "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"iam_role": {
 			// Property: IamRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IAM role to assume to run the target action.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IAM role to assume to run the target action.",
+			//	  "type": "string"
+			//	}
 			Description: "The IAM role to assume to run the target action.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,14 +59,15 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"next_invocations": {
 			// Property: NextInvocations
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of times when the scheduled action will run.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of times when the scheduled action will run.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of times when the scheduled action will run.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -71,10 +75,11 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"schedule": {
 			// Property: Schedule
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The schedule in `at( )` or `cron( )` format.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The schedule in `at( )` or `cron( )` format.",
+			//	  "type": "string"
+			//	}
 			Description: "The schedule in `at( )` or `cron( )` format.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -82,11 +87,12 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"scheduled_action_description": {
 			// Property: ScheduledActionDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the scheduled action.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the scheduled action.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the scheduled action.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -94,11 +100,12 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"scheduled_action_name": {
 			// Property: ScheduledActionName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the scheduled action. The name must be unique within an account.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the scheduled action. The name must be unique within an account.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the scheduled action. The name must be unique within an account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -106,10 +113,11 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"start_time": {
 			// Property: StartTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
+			//	  "type": "string"
+			//	}
 			Description: "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -117,14 +125,15 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the scheduled action.",
-			//   "enum": [
-			//     "ACTIVE",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the scheduled action.",
+			//	  "enum": [
+			//	    "ACTIVE",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The state of the scheduled action.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -132,63 +141,64 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"target_action": {
 			// Property: TargetAction
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
-			//   "properties": {
-			//     "PauseCluster": {
-			//       "additionalProperties": false,
-			//       "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
-			//       "properties": {
-			//         "ClusterIdentifier": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ClusterIdentifier"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ResizeCluster": {
-			//       "additionalProperties": false,
-			//       "description": "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
-			//       "properties": {
-			//         "Classic": {
-			//           "type": "boolean"
-			//         },
-			//         "ClusterIdentifier": {
-			//           "type": "string"
-			//         },
-			//         "ClusterType": {
-			//           "type": "string"
-			//         },
-			//         "NodeType": {
-			//           "type": "string"
-			//         },
-			//         "NumberOfNodes": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "ClusterIdentifier"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ResumeCluster": {
-			//       "additionalProperties": false,
-			//       "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
-			//       "properties": {
-			//         "ClusterIdentifier": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ClusterIdentifier"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
+			//	  "properties": {
+			//	    "PauseCluster": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
+			//	      "properties": {
+			//	        "ClusterIdentifier": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ClusterIdentifier"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ResizeCluster": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
+			//	      "properties": {
+			//	        "Classic": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "ClusterIdentifier": {
+			//	          "type": "string"
+			//	        },
+			//	        "ClusterType": {
+			//	          "type": "string"
+			//	        },
+			//	        "NodeType": {
+			//	          "type": "string"
+			//	        },
+			//	        "NumberOfNodes": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ClusterIdentifier"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ResumeCluster": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
+			//	      "properties": {
+			//	        "ClusterIdentifier": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ClusterIdentifier"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A JSON format string of the Amazon Redshift API operation with input parameters.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

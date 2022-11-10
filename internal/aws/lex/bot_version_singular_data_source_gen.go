@@ -23,13 +23,14 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_id": {
 			// Property: BotId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique ID of resource",
-			//   "maxLength": 10,
-			//   "minLength": 10,
-			//   "pattern": "^[0-9a-zA-Z]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique ID of resource",
+			//	  "maxLength": 10,
+			//	  "minLength": 10,
+			//	  "pattern": "^[0-9a-zA-Z]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Unique ID of resource",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_version": {
 			// Property: BotVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of a bot.",
-			//   "maxLength": 5,
-			//   "minLength": 1,
-			//   "pattern": "^(DRAFT|[0-9]+)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of a bot.",
+			//	  "maxLength": 5,
+			//	  "minLength": 1,
+			//	  "pattern": "^(DRAFT|[0-9]+)$",
+			//	  "type": "string"
+			//	}
 			Description: "The version of a bot.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,43 +53,44 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_version_locale_specification": {
 			// Property: BotVersionLocaleSpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "BotVersionLocaleDetails": {
-			//         "additionalProperties": false,
-			//         "description": "The version of a bot used for a bot locale.",
-			//         "properties": {
-			//           "SourceBotVersion": {
-			//             "description": "The version of a bot.",
-			//             "maxLength": 5,
-			//             "minLength": 1,
-			//             "pattern": "^(DRAFT|[0-9]+)$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "SourceBotVersion"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "LocaleId": {
-			//         "description": "The identifier of the language and locale that the bot will be used in.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "LocaleId",
-			//       "BotVersionLocaleDetails"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "BotVersionLocaleDetails": {
+			//	        "additionalProperties": false,
+			//	        "description": "The version of a bot used for a bot locale.",
+			//	        "properties": {
+			//	          "SourceBotVersion": {
+			//	            "description": "The version of a bot.",
+			//	            "maxLength": 5,
+			//	            "minLength": 1,
+			//	            "pattern": "^(DRAFT|[0-9]+)$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "SourceBotVersion"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "LocaleId": {
+			//	        "description": "The identifier of the language and locale that the bot will be used in.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LocaleId",
+			//	      "BotVersionLocaleDetails"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -119,11 +122,12 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the version. Use the description to help identify the version in lists.",
-			//   "maxLength": 200,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the version. Use the description to help identify the version in lists.",
+			//	  "maxLength": 200,
+			//	  "type": "string"
+			//	}
 			Description: "A description of the version. Use the description to help identify the version in lists.",
 			Type:        types.StringType,
 			Computed:    true,

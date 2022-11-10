@@ -18,6 +18,7 @@ A storage lake of event data against which you can run complex SQL-based queries
 ### Optional
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
+- `kms_key_id` (String) Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
 - `multi_region_enabled` (Boolean) Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
 - `name` (String) The name of the event data store.
 - `organization_enabled` (Boolean) Indicates that an event data store is collecting logged events for an organization.

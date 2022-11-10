@@ -23,10 +23,11 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the customer gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the customer gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the customer gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		"device_id": {
 			// Property: DeviceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the device",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the device",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the device",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the global network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the global network.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		"link_id": {
 			// Property: LinkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the link",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the link",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the link",
 			Type:        types.StringType,
 			Computed:    true,

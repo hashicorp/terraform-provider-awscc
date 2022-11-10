@@ -25,10 +25,11 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Kinesis Video stream.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Kinesis Video stream.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Kinesis Video stream.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,12 +40,13 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"data_retention_in_hours": {
 			// Property: DataRetentionInHours
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of hours till which Kinesis Video will retain the data in the stream",
-			//   "maximum": 87600,
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of hours till which Kinesis Video will retain the data in the stream",
+			//	  "maximum": 87600,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Description: "The number of hours till which Kinesis Video will retain the data in the stream",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -59,13 +61,14 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"device_name": {
 			// Property: DeviceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the device that is writing to the stream.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_.-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the device that is writing to the stream.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_.-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the device that is writing to the stream.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -81,13 +84,14 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": ".+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": ".+",
+			//	  "type": "string"
+			//	}
 			Description: "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -103,13 +107,14 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"media_type": {
 			// Property: MediaType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*",
+			//	  "type": "string"
+			//	}
 			Description: "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -125,13 +130,14 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Kinesis Video stream.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_.-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Kinesis Video stream.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_.-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Kinesis Video stream.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -148,37 +154,38 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs associated with the Kinesis Video Stream.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associated with the Kinesis Video Stream.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs associated with the Kinesis Video Stream.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associated with the Kinesis Video Stream.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of key-value pairs associated with the Kinesis Video Stream.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

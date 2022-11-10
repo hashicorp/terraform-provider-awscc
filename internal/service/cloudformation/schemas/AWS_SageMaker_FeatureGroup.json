@@ -179,7 +179,6 @@
     "/properties/FeatureGroupName",
     "/properties/RecordIdentifierFeatureName",
     "/properties/EventTimeFeatureName",
-    "/properties/FeatureDefinitions",
     "/properties/OnlineStoreConfig",
     "/properties/OfflineStoreConfig",
     "/properties/RoleArn",
@@ -204,12 +203,24 @@
         "glue:CreateDatabase",
         "glue:GetDatabase",
         "sagemaker:CreateFeatureGroup",
-        "sagemaker:DescribeFeatureGroup"
+        "sagemaker:DescribeFeatureGroup",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateFeatureGroup",
+        "sagemaker:DescribeFeatureGroup",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags",
+        "sagemaker:DeleteTags"
       ]
     },
     "read": {
       "permissions": [
-        "sagemaker:DescribeFeatureGroup"
+        "sagemaker:DescribeFeatureGroup",
+        "sagemaker:ListTags"
       ]
     },
     "delete": {

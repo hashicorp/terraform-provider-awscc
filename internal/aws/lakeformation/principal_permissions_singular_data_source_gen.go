@@ -23,82 +23,86 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		"catalog": {
 			// Property: Catalog
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"permissions": {
 			// Property: Permissions
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "enum": [
-			//       "ALL",
-			//       "SELECT",
-			//       "ALTER",
-			//       "DROP",
-			//       "DELETE",
-			//       "INSERT",
-			//       "DESCRIBE",
-			//       "CREATE_DATABASE",
-			//       "CREATE_TABLE",
-			//       "DATA_LOCATION_ACCESS",
-			//       "CREATE_TAG",
-			//       "ASSOCIATE"
-			//     ],
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "enum": [
+			//	      "ALL",
+			//	      "SELECT",
+			//	      "ALTER",
+			//	      "DROP",
+			//	      "DELETE",
+			//	      "INSERT",
+			//	      "DESCRIBE",
+			//	      "CREATE_DATABASE",
+			//	      "CREATE_TABLE",
+			//	      "DATA_LOCATION_ACCESS",
+			//	      "CREATE_TAG",
+			//	      "ASSOCIATE"
+			//	    ],
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"permissions_with_grant_option": {
 			// Property: PermissionsWithGrantOption
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "enum": [
-			//       "ALL",
-			//       "SELECT",
-			//       "ALTER",
-			//       "DROP",
-			//       "DELETE",
-			//       "INSERT",
-			//       "DESCRIBE",
-			//       "CREATE_DATABASE",
-			//       "CREATE_TABLE",
-			//       "DATA_LOCATION_ACCESS",
-			//       "CREATE_TAG",
-			//       "ASSOCIATE"
-			//     ],
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "enum": [
+			//	      "ALL",
+			//	      "SELECT",
+			//	      "ALTER",
+			//	      "DROP",
+			//	      "DELETE",
+			//	      "INSERT",
+			//	      "DESCRIBE",
+			//	      "CREATE_DATABASE",
+			//	      "CREATE_TABLE",
+			//	      "DATA_LOCATION_ACCESS",
+			//	      "CREATE_TAG",
+			//	      "ASSOCIATE"
+			//	    ],
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"principal": {
 			// Property: Principal
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "DataLakePrincipalIdentifier": {
-			//       "maxLength": 255,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "DataLakePrincipalIdentifier": {
+			//	      "maxLength": 255,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"data_lake_principal_identifier": {
@@ -113,257 +117,259 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		"principal_identifier": {
 			// Property: PrincipalIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"resource": {
 			// Property: Resource
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Catalog": {
-			//       "additionalProperties": false,
-			//       "type": "object"
-			//     },
-			//     "DataCellsFilter": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "DatabaseName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "TableCatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "TableName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "TableCatalogId",
-			//         "DatabaseName",
-			//         "TableName",
-			//         "Name"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DataLocation": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "ResourceArn": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "ResourceArn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Database": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "Name"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "LFTag": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "TagKey": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "TagValues": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 50,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "TagKey",
-			//         "TagValues"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "LFTagPolicy": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "Expression": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "TagKey": {
-			//                 "maxLength": 128,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "TagValues": {
-			//                 "insertionOrder": false,
-			//                 "items": {
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 },
-			//                 "maxItems": 50,
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "maxItems": 5,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         },
-			//         "ResourceType": {
-			//           "enum": [
-			//             "DATABASE",
-			//             "TABLE"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "ResourceType",
-			//         "Expression"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Table": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "DatabaseName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "TableWildcard": {
-			//           "additionalProperties": false,
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "DatabaseName"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TableWithColumns": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "ColumnNames": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "ColumnWildcard": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ExcludedColumnNames": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "maxLength": 255,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "DatabaseName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "DatabaseName",
-			//         "Name"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Catalog": {
+			//	      "additionalProperties": false,
+			//	      "type": "object"
+			//	    },
+			//	    "DataCellsFilter": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "DatabaseName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "TableCatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "TableName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "TableCatalogId",
+			//	        "DatabaseName",
+			//	        "TableName",
+			//	        "Name"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DataLocation": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "ResourceArn": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "ResourceArn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Database": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "Name"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "LFTag": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "TagKey": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "TagValues": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 50,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "TagKey",
+			//	        "TagValues"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "LFTagPolicy": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "Expression": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "TagKey": {
+			//	                "maxLength": 128,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "TagValues": {
+			//	                "insertionOrder": false,
+			//	                "items": {
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                },
+			//	                "maxItems": 50,
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 5,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        },
+			//	        "ResourceType": {
+			//	          "enum": [
+			//	            "DATABASE",
+			//	            "TABLE"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "ResourceType",
+			//	        "Expression"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Table": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "DatabaseName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "TableWildcard": {
+			//	          "additionalProperties": false,
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "DatabaseName"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TableWithColumns": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "ColumnNames": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "ColumnWildcard": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ExcludedColumnNames": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "maxLength": 255,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "DatabaseName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "DatabaseName",
+			//	        "Name"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"catalog": {
@@ -570,9 +576,10 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		"resource_identifier": {
 			// Property: ResourceIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

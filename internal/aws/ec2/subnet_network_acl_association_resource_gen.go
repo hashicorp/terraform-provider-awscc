@@ -23,9 +23,10 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		"association_id": {
 			// Property: AssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,10 +36,11 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		"network_acl_id": {
 			// Property: NetworkAclId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the network ACL",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the network ACL",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the network ACL",
 			Type:        types.StringType,
 			Required:    true,
@@ -49,10 +51,11 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the subnet",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the subnet",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the subnet",
 			Type:        types.StringType,
 			Required:    true,

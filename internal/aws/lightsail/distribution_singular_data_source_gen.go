@@ -23,10 +23,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"able_to_update_bundle": {
 			// Property: AbleToUpdateBundle
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"bundle_id": {
 			// Property: BundleId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The bundle ID to use for the distribution.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The bundle ID to use for the distribution.",
+			//	  "type": "string"
+			//	}
 			Description: "The bundle ID to use for the distribution.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,96 +47,97 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"cache_behavior_settings": {
 			// Property: CacheBehaviorSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that describes the cache behavior settings for the distribution.",
-			//   "properties": {
-			//     "AllowedHTTPMethods": {
-			//       "description": "The HTTP methods that are processed and forwarded to the distribution's origin.",
-			//       "type": "string"
-			//     },
-			//     "CachedHTTPMethods": {
-			//       "description": "The HTTP method responses that are cached by your distribution.",
-			//       "type": "string"
-			//     },
-			//     "DefaultTTL": {
-			//       "description": "The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.",
-			//       "format": "int64",
-			//       "type": "integer"
-			//     },
-			//     "ForwardedCookies": {
-			//       "additionalProperties": false,
-			//       "description": "An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.",
-			//       "properties": {
-			//         "CookiesAllowList": {
-			//           "description": "The specific cookies to forward to your distribution's origin.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "Option": {
-			//           "description": "Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ForwardedHeaders": {
-			//       "additionalProperties": false,
-			//       "description": "An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.",
-			//       "properties": {
-			//         "HeadersAllowList": {
-			//           "description": "The specific headers to forward to your distribution's origin.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "Option": {
-			//           "description": "The headers that you want your distribution to forward to your origin and base caching on.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "ForwardedQueryStrings": {
-			//       "additionalProperties": false,
-			//       "description": "An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.",
-			//       "properties": {
-			//         "Option": {
-			//           "description": "Indicates whether the distribution forwards and caches based on query strings.",
-			//           "type": "boolean"
-			//         },
-			//         "QueryStringsAllowList": {
-			//           "description": "The specific query strings that the distribution forwards to the origin.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "MaximumTTL": {
-			//       "description": "The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
-			//       "format": "int64",
-			//       "type": "integer"
-			//     },
-			//     "MinimumTTL": {
-			//       "description": "The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
-			//       "format": "int64",
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that describes the cache behavior settings for the distribution.",
+			//	  "properties": {
+			//	    "AllowedHTTPMethods": {
+			//	      "description": "The HTTP methods that are processed and forwarded to the distribution's origin.",
+			//	      "type": "string"
+			//	    },
+			//	    "CachedHTTPMethods": {
+			//	      "description": "The HTTP method responses that are cached by your distribution.",
+			//	      "type": "string"
+			//	    },
+			//	    "DefaultTTL": {
+			//	      "description": "The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.",
+			//	      "format": "int64",
+			//	      "type": "integer"
+			//	    },
+			//	    "ForwardedCookies": {
+			//	      "additionalProperties": false,
+			//	      "description": "An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.",
+			//	      "properties": {
+			//	        "CookiesAllowList": {
+			//	          "description": "The specific cookies to forward to your distribution's origin.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "Option": {
+			//	          "description": "Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ForwardedHeaders": {
+			//	      "additionalProperties": false,
+			//	      "description": "An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.",
+			//	      "properties": {
+			//	        "HeadersAllowList": {
+			//	          "description": "The specific headers to forward to your distribution's origin.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "Option": {
+			//	          "description": "The headers that you want your distribution to forward to your origin and base caching on.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "ForwardedQueryStrings": {
+			//	      "additionalProperties": false,
+			//	      "description": "An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.",
+			//	      "properties": {
+			//	        "Option": {
+			//	          "description": "Indicates whether the distribution forwards and caches based on query strings.",
+			//	          "type": "boolean"
+			//	        },
+			//	        "QueryStringsAllowList": {
+			//	          "description": "The specific query strings that the distribution forwards to the origin.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "MaximumTTL": {
+			//	      "description": "The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
+			//	      "format": "int64",
+			//	      "type": "integer"
+			//	    },
+			//	    "MinimumTTL": {
+			//	      "description": "The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
+			//	      "format": "int64",
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that describes the cache behavior settings for the distribution.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -238,27 +241,28 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"cache_behaviors": {
 			// Property: CacheBehaviors
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of objects that describe the per-path cache behavior for the distribution.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Describes the per-path cache behavior of an Amazon Lightsail content delivery network (CDN) distribution.",
-			//     "properties": {
-			//       "Behavior": {
-			//         "description": "The cache behavior for the specified path.",
-			//         "type": "string"
-			//       },
-			//       "Path": {
-			//         "description": "The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of objects that describe the per-path cache behavior for the distribution.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Describes the per-path cache behavior of an Amazon Lightsail content delivery network (CDN) distribution.",
+			//	    "properties": {
+			//	      "Behavior": {
+			//	        "description": "The cache behavior for the specified path.",
+			//	        "type": "string"
+			//	      },
+			//	      "Path": {
+			//	        "description": "The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of objects that describe the per-path cache behavior for the distribution.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -281,10 +285,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"certificate_name": {
 			// Property: CertificateName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The certificate attached to the Distribution.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The certificate attached to the Distribution.",
+			//	  "type": "string"
+			//	}
 			Description: "The certificate attached to the Distribution.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -292,17 +297,18 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"default_cache_behavior": {
 			// Property: DefaultCacheBehavior
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that describes the default cache behavior for the distribution.",
-			//   "properties": {
-			//     "Behavior": {
-			//       "description": "The cache behavior of the distribution.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that describes the default cache behavior for the distribution.",
+			//	  "properties": {
+			//	    "Behavior": {
+			//	      "description": "The cache behavior of the distribution.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that describes the default cache behavior for the distribution.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -319,20 +325,22 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"distribution_arn": {
 			// Property: DistributionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"distribution_name": {
 			// Property: DistributionName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the distribution.",
-			//   "pattern": "\\w[\\w\\-]*\\w",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the distribution.",
+			//	  "pattern": "\\w[\\w\\-]*\\w",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the distribution.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -340,10 +348,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"ip_address_type": {
 			// Property: IpAddressType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IP address type for the distribution.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IP address type for the distribution.",
+			//	  "type": "string"
+			//	}
 			Description: "The IP address type for the distribution.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -351,10 +360,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"is_enabled": {
 			// Property: IsEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the distribution is enabled.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the distribution is enabled.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the distribution is enabled.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -362,25 +372,26 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"origin": {
 			// Property: Origin
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.",
-			//   "properties": {
-			//     "Name": {
-			//       "description": "The name of the origin resource.",
-			//       "type": "string"
-			//     },
-			//     "ProtocolPolicy": {
-			//       "description": "The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.",
-			//       "type": "string"
-			//     },
-			//     "RegionName": {
-			//       "description": "The AWS Region name of the origin resource.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.",
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "The name of the origin resource.",
+			//	      "type": "string"
+			//	    },
+			//	    "ProtocolPolicy": {
+			//	      "description": "The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.",
+			//	      "type": "string"
+			//	    },
+			//	    "RegionName": {
+			//	      "description": "The AWS Region name of the origin resource.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -409,10 +420,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The status of the distribution.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The status of the distribution.",
+			//	  "type": "string"
+			//	}
 			Description: "The status of the distribution.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -420,34 +432,35 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

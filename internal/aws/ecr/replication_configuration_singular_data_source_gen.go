@@ -23,10 +23,11 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		"registry_id": {
 			// Property: RegistryId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The RegistryId associated with the aws account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The RegistryId associated with the aws account.",
+			//	  "type": "string"
+			//	}
 			Description: "The RegistryId associated with the aws account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,88 +35,89 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		"replication_configuration": {
 			// Property: ReplicationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object representing the replication configuration for a registry.",
-			//   "properties": {
-			//     "Rules": {
-			//       "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "An array of objects representing the details of a replication destination.",
-			//         "properties": {
-			//           "Destinations": {
-			//             "description": "An array of objects representing the details of a replication destination.",
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "An array of objects representing the details of a replication destination.",
-			//               "properties": {
-			//                 "Region": {
-			//                   "description": "A Region to replicate to.",
-			//                   "pattern": "[0-9a-z-]{2,25}",
-			//                   "type": "string"
-			//                 },
-			//                 "RegistryId": {
-			//                   "description": "The account ID of the destination registry to replicate to.",
-			//                   "pattern": "^[0-9]{12}$",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Region",
-			//                 "RegistryId"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 25,
-			//             "minItems": 1,
-			//             "type": "array"
-			//           },
-			//           "RepositoryFilters": {
-			//             "description": "An array of objects representing the details of a repository filter.",
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "An array of objects representing the details of a repository filter.",
-			//               "properties": {
-			//                 "Filter": {
-			//                   "description": "The repository filter to be applied for replication.",
-			//                   "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$",
-			//                   "type": "string"
-			//                 },
-			//                 "FilterType": {
-			//                   "description": "Type of repository filter",
-			//                   "enum": [
-			//                     "PREFIX_MATCH"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Filter",
-			//                 "FilterType"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 100,
-			//             "minItems": 0,
-			//             "type": "array"
-			//           }
-			//         },
-			//         "required": [
-			//           "Destinations"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 0,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "Rules"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object representing the replication configuration for a registry.",
+			//	  "properties": {
+			//	    "Rules": {
+			//	      "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "An array of objects representing the details of a replication destination.",
+			//	        "properties": {
+			//	          "Destinations": {
+			//	            "description": "An array of objects representing the details of a replication destination.",
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "An array of objects representing the details of a replication destination.",
+			//	              "properties": {
+			//	                "Region": {
+			//	                  "description": "A Region to replicate to.",
+			//	                  "pattern": "[0-9a-z-]{2,25}",
+			//	                  "type": "string"
+			//	                },
+			//	                "RegistryId": {
+			//	                  "description": "The account ID of the destination registry to replicate to.",
+			//	                  "pattern": "^[0-9]{12}$",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Region",
+			//	                "RegistryId"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 25,
+			//	            "minItems": 1,
+			//	            "type": "array"
+			//	          },
+			//	          "RepositoryFilters": {
+			//	            "description": "An array of objects representing the details of a repository filter.",
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "An array of objects representing the details of a repository filter.",
+			//	              "properties": {
+			//	                "Filter": {
+			//	                  "description": "The repository filter to be applied for replication.",
+			//	                  "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$",
+			//	                  "type": "string"
+			//	                },
+			//	                "FilterType": {
+			//	                  "description": "Type of repository filter",
+			//	                  "enum": [
+			//	                    "PREFIX_MATCH"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Filter",
+			//	                "FilterType"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 100,
+			//	            "minItems": 0,
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Destinations"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 0,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Rules"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "An object representing the replication configuration for a registry.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

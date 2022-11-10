@@ -24,21 +24,22 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"access_log_setting": {
 			// Property: AccessLogSetting
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies settings for logging access in this stage.",
-			//   "properties": {
-			//     "DestinationArn": {
-			//       "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. This parameter is required to enable access logging.",
-			//       "type": "string"
-			//     },
-			//     "Format": {
-			//       "description": "A single line format of the access logs of data, as specified by selected $context variables (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least $context.requestId. This parameter is required to enable access logging.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies settings for logging access in this stage.",
+			//	  "properties": {
+			//	    "DestinationArn": {
+			//	      "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. This parameter is required to enable access logging.",
+			//	      "type": "string"
+			//	    },
+			//	    "Format": {
+			//	      "description": "A single line format of the access logs of data, as specified by selected $context variables (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least $context.requestId. This parameter is required to enable access logging.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Specifies settings for logging access in this stage.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -73,10 +74,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"cache_cluster_enabled": {
 			// Property: CacheClusterEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether cache clustering is enabled for the stage.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether cache clustering is enabled for the stage.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether cache clustering is enabled for the stage.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -88,10 +90,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"cache_cluster_size": {
 			// Property: CacheClusterSize
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The stage's cache cluster size.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The stage's cache cluster size.",
+			//	  "type": "string"
+			//	}
 			Description: "The stage's cache cluster size.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -103,37 +106,38 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"canary_setting": {
 			// Property: CanarySetting
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies settings for the canary deployment in this stage.",
-			//   "properties": {
-			//     "DeploymentId": {
-			//       "description": "The identifier of the deployment that the stage points to.",
-			//       "type": "string"
-			//     },
-			//     "PercentTraffic": {
-			//       "description": "The percentage (0-100) of traffic diverted to a canary deployment.",
-			//       "maximum": 100,
-			//       "minimum": 0,
-			//       "type": "number"
-			//     },
-			//     "StageVariableOverrides": {
-			//       "additionalProperties": false,
-			//       "description": "Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "UseStageCache": {
-			//       "description": "Whether the canary deployment uses the stage cache or not.",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies settings for the canary deployment in this stage.",
+			//	  "properties": {
+			//	    "DeploymentId": {
+			//	      "description": "The identifier of the deployment that the stage points to.",
+			//	      "type": "string"
+			//	    },
+			//	    "PercentTraffic": {
+			//	      "description": "The percentage (0-100) of traffic diverted to a canary deployment.",
+			//	      "maximum": 100,
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    },
+			//	    "StageVariableOverrides": {
+			//	      "additionalProperties": false,
+			//	      "description": "Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "UseStageCache": {
+			//	      "description": "Whether the canary deployment uses the stage cache or not.",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Specifies settings for the canary deployment in this stage.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -192,10 +196,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"client_certificate_id": {
 			// Property: ClientCertificateId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage. ",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage. ",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage. ",
 			Type:        types.StringType,
 			Optional:    true,
@@ -207,10 +212,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"deployment_id": {
 			// Property: DeploymentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the deployment that the stage is associated with. This parameter is required to create a stage. ",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the deployment that the stage is associated with. This parameter is required to create a stage. ",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the deployment that the stage is associated with. This parameter is required to create a stage. ",
 			Type:        types.StringType,
 			Optional:    true,
@@ -222,10 +228,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the stage.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the stage.",
+			//	  "type": "string"
+			//	}
 			Description: "A description of the stage.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -237,10 +244,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"documentation_version": {
 			// Property: DocumentationVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version ID of the API documentation snapshot.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version ID of the API documentation snapshot.",
+			//	  "type": "string"
+			//	}
 			Description: "The version ID of the API documentation snapshot.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -252,61 +260,62 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"method_settings": {
 			// Property: MethodSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Settings for all methods in the stage.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Configures settings for all methods in a stage.",
-			//     "properties": {
-			//       "CacheDataEncrypted": {
-			//         "description": "Indicates whether the cached responses are encrypted.",
-			//         "type": "boolean"
-			//       },
-			//       "CacheTtlInSeconds": {
-			//         "description": "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
-			//         "type": "integer"
-			//       },
-			//       "CachingEnabled": {
-			//         "description": "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.",
-			//         "type": "boolean"
-			//       },
-			//       "DataTraceEnabled": {
-			//         "description": "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
-			//         "type": "boolean"
-			//       },
-			//       "HttpMethod": {
-			//         "description": "The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
-			//         "type": "string"
-			//       },
-			//       "LoggingLevel": {
-			//         "description": "The logging level for this method. For valid values, see the loggingLevel property of the Stage (https://docs.aws.amazon.com/apigateway/api-reference/resource/stage/#loggingLevel) resource in the Amazon API Gateway API Reference.",
-			//         "type": "string"
-			//       },
-			//       "MetricsEnabled": {
-			//         "description": "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
-			//         "type": "boolean"
-			//       },
-			//       "ResourcePath": {
-			//         "description": "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
-			//         "type": "string"
-			//       },
-			//       "ThrottlingBurstLimit": {
-			//         "description": "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
-			//         "minimum": 0,
-			//         "type": "integer"
-			//       },
-			//       "ThrottlingRateLimit": {
-			//         "description": "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
-			//         "minimum": 0,
-			//         "type": "number"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Settings for all methods in the stage.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Configures settings for all methods in a stage.",
+			//	    "properties": {
+			//	      "CacheDataEncrypted": {
+			//	        "description": "Indicates whether the cached responses are encrypted.",
+			//	        "type": "boolean"
+			//	      },
+			//	      "CacheTtlInSeconds": {
+			//	        "description": "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
+			//	        "type": "integer"
+			//	      },
+			//	      "CachingEnabled": {
+			//	        "description": "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.",
+			//	        "type": "boolean"
+			//	      },
+			//	      "DataTraceEnabled": {
+			//	        "description": "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
+			//	        "type": "boolean"
+			//	      },
+			//	      "HttpMethod": {
+			//	        "description": "The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
+			//	        "type": "string"
+			//	      },
+			//	      "LoggingLevel": {
+			//	        "description": "The logging level for this method. For valid values, see the loggingLevel property of the Stage (https://docs.aws.amazon.com/apigateway/api-reference/resource/stage/#loggingLevel) resource in the Amazon API Gateway API Reference.",
+			//	        "type": "string"
+			//	      },
+			//	      "MetricsEnabled": {
+			//	        "description": "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
+			//	        "type": "boolean"
+			//	      },
+			//	      "ResourcePath": {
+			//	        "description": "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
+			//	        "type": "string"
+			//	      },
+			//	      "ThrottlingBurstLimit": {
+			//	        "description": "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
+			//	        "minimum": 0,
+			//	        "type": "integer"
+			//	      },
+			//	      "ThrottlingRateLimit": {
+			//	        "description": "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
+			//	        "minimum": 0,
+			//	        "type": "number"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Settings for all methods in the stage.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -427,10 +436,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the RestApi resource that you're deploying with this stage.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the RestApi resource that you're deploying with this stage.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the RestApi resource that you're deploying with this stage.",
 			Type:        types.StringType,
 			Required:    true,
@@ -441,10 +451,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"stage_name": {
 			// Property: StageName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the stage, which API Gateway uses as the first path segment in the invoked Uniform Resource Identifier (URI).",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the stage, which API Gateway uses as the first path segment in the invoked Uniform Resource Identifier (URI).",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the stage, which API Gateway uses as the first path segment in the invoked Uniform Resource Identifier (URI).",
 			Type:        types.StringType,
 			Optional:    true,
@@ -457,35 +468,36 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of arbitrary tags (key-value pairs) to associate with the stage.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Identify and categorize resources.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the stage.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Identify and categorize resources.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -519,10 +531,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"tracing_enabled": {
 			// Property: TracingEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether active X-Ray tracing is enabled for this stage.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether active X-Ray tracing is enabled for this stage.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether active X-Ray tracing is enabled for this stage.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -534,16 +547,17 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"variables": {
 			// Property: Variables
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

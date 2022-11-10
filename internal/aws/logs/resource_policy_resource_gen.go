@@ -25,13 +25,14 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_document": {
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The policy document",
-			//   "maxLength": 5120,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The policy document",
+			//	  "maxLength": 5120,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The policy document",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,13 +43,14 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy_name": {
 			// Property: PolicyName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for resource policy",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for resource policy",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A name for resource policy",
 			Type:        types.StringType,
 			Required:    true,

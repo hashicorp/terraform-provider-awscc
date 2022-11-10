@@ -23,30 +23,33 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"attributes": {
 			// Property: Attributes
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the attribute group. ",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the attribute group. ",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the attribute group. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -54,23 +57,25 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "[a-z0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "[a-z0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the attribute group. ",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "\\w+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the attribute group. ",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "\\w+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the attribute group. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -78,16 +83,18 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,

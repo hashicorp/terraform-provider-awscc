@@ -23,32 +23,33 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of ConformancePackInputParameter objects.",
-			//   "items": {
-			//     "description": "Input parameters in the form of key-value pairs for the conformance pack.",
-			//     "properties": {
-			//       "ParameterName": {
-			//         "maxLength": 255,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       },
-			//       "ParameterValue": {
-			//         "maxLength": 4096,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "ParameterName",
-			//       "ParameterValue"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 60,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of ConformancePackInputParameter objects.",
+			//	  "items": {
+			//	    "description": "Input parameters in the form of key-value pairs for the conformance pack.",
+			//	    "properties": {
+			//	      "ParameterName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      },
+			//	      "ParameterValue": {
+			//	        "maxLength": 4096,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "ParameterName",
+			//	      "ParameterValue"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 60,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "A list of ConformancePackInputParameter objects.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -69,12 +70,13 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"delivery_s3_bucket": {
 			// Property: DeliveryS3Bucket
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AWS Config stores intermediate files while processing conformance pack template.",
-			//   "maxLength": 63,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AWS Config stores intermediate files while processing conformance pack template.",
+			//	  "maxLength": 63,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -82,12 +84,13 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"delivery_s3_key_prefix": {
 			// Property: DeliveryS3KeyPrefix
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The prefix for the delivery S3 bucket.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The prefix for the delivery S3 bucket.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The prefix for the delivery S3 bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -95,15 +98,16 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"excluded_accounts": {
 			// Property: ExcludedAccounts
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "maxItems": 1000,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 1000,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -111,13 +115,14 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"organization_conformance_pack_name": {
 			// Property: OrganizationConformancePackName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the organization conformance pack.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the organization conformance pack.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the organization conformance pack.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -125,12 +130,13 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"template_body": {
 			// Property: TemplateBody
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A string containing full conformance pack template body.",
-			//   "maxLength": 51200,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A string containing full conformance pack template body.",
+			//	  "maxLength": 51200,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "A string containing full conformance pack template body.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -138,13 +144,14 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"template_s3_uri": {
 			// Property: TemplateS3Uri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Location of file containing the template body.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "pattern": "s3://.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Location of file containing the template body.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "pattern": "s3://.*",
+			//	  "type": "string"
+			//	}
 			Description: "Location of file containing the template body.",
 			Type:        types.StringType,
 			Computed:    true,

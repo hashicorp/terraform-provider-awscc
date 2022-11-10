@@ -23,48 +23,49 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_stages": {
 			// Property: ApiStages
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The API stages to associate with this usage plan.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ApiId": {
-			//         "description": "The ID of an API that is in the specified Stage property that you want to associate with the usage plan.",
-			//         "type": "string"
-			//       },
-			//       "Stage": {
-			//         "description": "The name of the stage to associate with the usage plan.",
-			//         "type": "string"
-			//       },
-			//       "Throttle": {
-			//         "additionalProperties": false,
-			//         "description": "Map containing method-level throttling information for an API stage in a usage plan. The key for the map is the path and method for which to configure custom throttling, for example, '/pets/GET'. Duplicates are not allowed.",
-			//         "patternProperties": {
-			//           "": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BurstLimit": {
-			//                 "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
-			//                 "minimum": 0,
-			//                 "type": "integer"
-			//               },
-			//               "RateLimit": {
-			//                 "description": "The API request steady-state rate limit (average requests per second over an extended period of time).",
-			//                 "minimum": 0,
-			//                 "type": "number"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The API stages to associate with this usage plan.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ApiId": {
+			//	        "description": "The ID of an API that is in the specified Stage property that you want to associate with the usage plan.",
+			//	        "type": "string"
+			//	      },
+			//	      "Stage": {
+			//	        "description": "The name of the stage to associate with the usage plan.",
+			//	        "type": "string"
+			//	      },
+			//	      "Throttle": {
+			//	        "additionalProperties": false,
+			//	        "description": "Map containing method-level throttling information for an API stage in a usage plan. The key for the map is the path and method for which to configure custom throttling, for example, '/pets/GET'. Duplicates are not allowed.",
+			//	        "patternProperties": {
+			//	          "": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BurstLimit": {
+			//	                "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
+			//	                "minimum": 0,
+			//	                "type": "integer"
+			//	              },
+			//	              "RateLimit": {
+			//	                "description": "The API request steady-state rate limit (average requests per second over an extended period of time).",
+			//	                "minimum": 0,
+			//	                "type": "number"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The API stages to associate with this usage plan.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -109,10 +110,11 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the usage plan.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the usage plan.",
+			//	  "type": "string"
+			//	}
 			Description: "A description of the usage plan.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -120,10 +122,11 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The provider-assigned unique ID for this managed resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The provider-assigned unique ID for this managed resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The provider-assigned unique ID for this managed resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -131,27 +134,28 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"quota": {
 			// Property: Quota
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configures the number of requests that users can make within a given interval.",
-			//   "properties": {
-			//     "Limit": {
-			//       "description": "The maximum number of requests that users can make within the specified time period.",
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "Offset": {
-			//       "description": "For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.",
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "Period": {
-			//       "description": "The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configures the number of requests that users can make within a given interval.",
+			//	  "properties": {
+			//	    "Limit": {
+			//	      "description": "The maximum number of requests that users can make within the specified time period.",
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "Offset": {
+			//	      "description": "For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.",
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "Period": {
+			//	      "description": "The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configures the number of requests that users can make within a given interval.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -180,34 +184,35 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of arbitrary tags (key-value pairs) to associate with the usage plan.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the usage plan.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of arbitrary tags (key-value pairs) to associate with the usage plan.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -230,23 +235,24 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"throttle": {
 			// Property: Throttle
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configures the overall request rate (average requests per second) and burst capacity.",
-			//   "properties": {
-			//     "BurstLimit": {
-			//       "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "RateLimit": {
-			//       "description": "The API request steady-state rate limit (average requests per second over an extended period of time).",
-			//       "minimum": 0,
-			//       "type": "number"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configures the overall request rate (average requests per second) and burst capacity.",
+			//	  "properties": {
+			//	    "BurstLimit": {
+			//	      "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "RateLimit": {
+			//	      "description": "The API request steady-state rate limit (average requests per second over an extended period of time).",
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configures the overall request rate (average requests per second) and burst capacity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -269,10 +275,11 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"usage_plan_name": {
 			// Property: UsagePlanName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the usage plan.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the usage plan.",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the usage plan.",
 			Type:        types.StringType,
 			Computed:    true,

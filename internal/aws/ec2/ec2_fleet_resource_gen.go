@@ -25,9 +25,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"context": {
 			// Property: Context
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -38,13 +39,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"excess_capacity_termination_policy": {
 			// Property: ExcessCapacityTerminationPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "termination",
-			//     "no-termination"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "termination",
+			//	    "no-termination"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -61,9 +63,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"fleet_id": {
 			// Property: FleetId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -73,340 +76,341 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"launch_template_configs": {
 			// Property: LaunchTemplateConfigs
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "LaunchTemplateSpecification": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "LaunchTemplateId": {
-			//             "type": "string"
-			//           },
-			//           "LaunchTemplateName": {
-			//             "maxLength": 128,
-			//             "minLength": 3,
-			//             "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+",
-			//             "type": "string"
-			//           },
-			//           "Version": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Version"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Overrides": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "AvailabilityZone": {
-			//               "type": "string"
-			//             },
-			//             "InstanceRequirements": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "AcceleratorCount": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Min": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "AcceleratorManufacturers": {
-			//                   "items": {
-			//                     "enum": [
-			//                       "nvidia",
-			//                       "amd",
-			//                       "amazon-web-services",
-			//                       "xilinx"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "AcceleratorNames": {
-			//                   "items": {
-			//                     "enum": [
-			//                       "a100",
-			//                       "v100",
-			//                       "k80",
-			//                       "t4",
-			//                       "m60",
-			//                       "radeon-pro-v520",
-			//                       "vu9p",
-			//                       "inferentia",
-			//                       "k520"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "AcceleratorTotalMemoryMiB": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Min": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "AcceleratorTypes": {
-			//                   "items": {
-			//                     "enum": [
-			//                       "gpu",
-			//                       "fpga",
-			//                       "inference"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "AllowedInstanceTypes": {
-			//                   "items": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "pattern": "[a-zA-Z0-9\\.\\*]+",
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "BareMetal": {
-			//                   "enum": [
-			//                     "included",
-			//                     "required",
-			//                     "excluded"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "BaselineEbsBandwidthMbps": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Min": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "BurstablePerformance": {
-			//                   "enum": [
-			//                     "included",
-			//                     "required",
-			//                     "excluded"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "CpuManufacturers": {
-			//                   "items": {
-			//                     "enum": [
-			//                       "intel",
-			//                       "amd",
-			//                       "amazon-web-services"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "ExcludedInstanceTypes": {
-			//                   "items": {
-			//                     "maxLength": 30,
-			//                     "minLength": 1,
-			//                     "pattern": "[a-zA-Z0-9\\.\\*]+",
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "InstanceGenerations": {
-			//                   "items": {
-			//                     "enum": [
-			//                       "current",
-			//                       "previous"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "LocalStorage": {
-			//                   "enum": [
-			//                     "included",
-			//                     "required",
-			//                     "excluded"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "LocalStorageTypes": {
-			//                   "items": {
-			//                     "enum": [
-			//                       "hdd",
-			//                       "ssd"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array",
-			//                   "uniqueItems": false
-			//                 },
-			//                 "MemoryGiBPerVCpu": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "number"
-			//                     },
-			//                     "Min": {
-			//                       "type": "number"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "MemoryMiB": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Min": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "NetworkBandwidthGbps": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "number"
-			//                     },
-			//                     "Min": {
-			//                       "type": "number"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "NetworkInterfaceCount": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Min": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "OnDemandMaxPricePercentageOverLowestPrice": {
-			//                   "type": "integer"
-			//                 },
-			//                 "RequireHibernateSupport": {
-			//                   "type": "boolean"
-			//                 },
-			//                 "SpotMaxPricePercentageOverLowestPrice": {
-			//                   "type": "integer"
-			//                 },
-			//                 "TotalLocalStorageGB": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "number"
-			//                     },
-			//                     "Min": {
-			//                       "type": "number"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "VCpuCount": {
-			//                   "additionalProperties": false,
-			//                   "properties": {
-			//                     "Max": {
-			//                       "type": "integer"
-			//                     },
-			//                     "Min": {
-			//                       "type": "integer"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "InstanceType": {
-			//               "type": "string"
-			//             },
-			//             "MaxPrice": {
-			//               "type": "string"
-			//             },
-			//             "Placement": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Affinity": {
-			//                   "type": "string"
-			//                 },
-			//                 "AvailabilityZone": {
-			//                   "type": "string"
-			//                 },
-			//                 "GroupName": {
-			//                   "type": "string"
-			//                 },
-			//                 "HostId": {
-			//                   "type": "string"
-			//                 },
-			//                 "HostResourceGroupArn": {
-			//                   "type": "string"
-			//                 },
-			//                 "PartitionNumber": {
-			//                   "type": "integer"
-			//                 },
-			//                 "SpreadDomain": {
-			//                   "type": "string"
-			//                 },
-			//                 "Tenancy": {
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Priority": {
-			//               "type": "number"
-			//             },
-			//             "SubnetId": {
-			//               "type": "string"
-			//             },
-			//             "WeightedCapacity": {
-			//               "type": "number"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "LaunchTemplateSpecification": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "LaunchTemplateId": {
+			//	            "type": "string"
+			//	          },
+			//	          "LaunchTemplateName": {
+			//	            "maxLength": 128,
+			//	            "minLength": 3,
+			//	            "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+",
+			//	            "type": "string"
+			//	          },
+			//	          "Version": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Version"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Overrides": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "AvailabilityZone": {
+			//	              "type": "string"
+			//	            },
+			//	            "InstanceRequirements": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "AcceleratorCount": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "AcceleratorManufacturers": {
+			//	                  "items": {
+			//	                    "enum": [
+			//	                      "nvidia",
+			//	                      "amd",
+			//	                      "amazon-web-services",
+			//	                      "xilinx"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "AcceleratorNames": {
+			//	                  "items": {
+			//	                    "enum": [
+			//	                      "a100",
+			//	                      "v100",
+			//	                      "k80",
+			//	                      "t4",
+			//	                      "m60",
+			//	                      "radeon-pro-v520",
+			//	                      "vu9p",
+			//	                      "inferentia",
+			//	                      "k520"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "AcceleratorTotalMemoryMiB": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "AcceleratorTypes": {
+			//	                  "items": {
+			//	                    "enum": [
+			//	                      "gpu",
+			//	                      "fpga",
+			//	                      "inference"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "AllowedInstanceTypes": {
+			//	                  "items": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "pattern": "[a-zA-Z0-9\\.\\*]+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "BareMetal": {
+			//	                  "enum": [
+			//	                    "included",
+			//	                    "required",
+			//	                    "excluded"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "BaselineEbsBandwidthMbps": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "BurstablePerformance": {
+			//	                  "enum": [
+			//	                    "included",
+			//	                    "required",
+			//	                    "excluded"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "CpuManufacturers": {
+			//	                  "items": {
+			//	                    "enum": [
+			//	                      "intel",
+			//	                      "amd",
+			//	                      "amazon-web-services"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "ExcludedInstanceTypes": {
+			//	                  "items": {
+			//	                    "maxLength": 30,
+			//	                    "minLength": 1,
+			//	                    "pattern": "[a-zA-Z0-9\\.\\*]+",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "InstanceGenerations": {
+			//	                  "items": {
+			//	                    "enum": [
+			//	                      "current",
+			//	                      "previous"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "LocalStorage": {
+			//	                  "enum": [
+			//	                    "included",
+			//	                    "required",
+			//	                    "excluded"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "LocalStorageTypes": {
+			//	                  "items": {
+			//	                    "enum": [
+			//	                      "hdd",
+			//	                      "ssd"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array",
+			//	                  "uniqueItems": false
+			//	                },
+			//	                "MemoryGiBPerVCpu": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "number"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "number"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "MemoryMiB": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "NetworkBandwidthGbps": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "number"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "number"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "NetworkInterfaceCount": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "OnDemandMaxPricePercentageOverLowestPrice": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "RequireHibernateSupport": {
+			//	                  "type": "boolean"
+			//	                },
+			//	                "SpotMaxPricePercentageOverLowestPrice": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "TotalLocalStorageGB": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "number"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "number"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "VCpuCount": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Max": {
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "Min": {
+			//	                      "type": "integer"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "InstanceType": {
+			//	              "type": "string"
+			//	            },
+			//	            "MaxPrice": {
+			//	              "type": "string"
+			//	            },
+			//	            "Placement": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Affinity": {
+			//	                  "type": "string"
+			//	                },
+			//	                "AvailabilityZone": {
+			//	                  "type": "string"
+			//	                },
+			//	                "GroupName": {
+			//	                  "type": "string"
+			//	                },
+			//	                "HostId": {
+			//	                  "type": "string"
+			//	                },
+			//	                "HostResourceGroupArn": {
+			//	                  "type": "string"
+			//	                },
+			//	                "PartitionNumber": {
+			//	                  "type": "integer"
+			//	                },
+			//	                "SpreadDomain": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Tenancy": {
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Priority": {
+			//	              "type": "number"
+			//	            },
+			//	            "SubnetId": {
+			//	              "type": "string"
+			//	            },
+			//	            "WeightedCapacity": {
+			//	              "type": "number"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"launch_template_specification": {
@@ -1095,39 +1099,40 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"on_demand_options": {
 			// Property: OnDemandOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllocationStrategy": {
-			//       "type": "string"
-			//     },
-			//     "CapacityReservationOptions": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "UsageStrategy": {
-			//           "enum": [
-			//             "use-capacity-reservations-first"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "MaxTotalPrice": {
-			//       "type": "string"
-			//     },
-			//     "MinTargetCapacity": {
-			//       "type": "integer"
-			//     },
-			//     "SingleAvailabilityZone": {
-			//       "type": "boolean"
-			//     },
-			//     "SingleInstanceType": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllocationStrategy": {
+			//	      "type": "string"
+			//	    },
+			//	    "CapacityReservationOptions": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "UsageStrategy": {
+			//	          "enum": [
+			//	            "use-capacity-reservations-first"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "MaxTotalPrice": {
+			//	      "type": "string"
+			//	    },
+			//	    "MinTargetCapacity": {
+			//	      "type": "integer"
+			//	    },
+			//	    "SingleAvailabilityZone": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SingleInstanceType": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
@@ -1213,9 +1218,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"replace_unhealthy_instances": {
 			// Property: ReplaceUnhealthyInstances
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -1227,71 +1233,72 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"spot_options": {
 			// Property: SpotOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllocationStrategy": {
-			//       "enum": [
-			//         "lowest-price",
-			//         "lowestPrice",
-			//         "diversified",
-			//         "capacityOptimized",
-			//         "capacity-optimized",
-			//         "capacityOptimizedPrioritized",
-			//         "capacity-optimized-prioritized",
-			//         "priceCapacityOptimized",
-			//         "price-capacity-optimized"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "InstanceInterruptionBehavior": {
-			//       "enum": [
-			//         "hibernate",
-			//         "stop",
-			//         "terminate"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "InstancePoolsToUseCount": {
-			//       "type": "integer"
-			//     },
-			//     "MaintenanceStrategies": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CapacityRebalance": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ReplacementStrategy": {
-			//               "enum": [
-			//                 "launch",
-			//                 "launch-before-terminate"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "TerminationDelay": {
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "MaxTotalPrice": {
-			//       "type": "string"
-			//     },
-			//     "MinTargetCapacity": {
-			//       "type": "integer"
-			//     },
-			//     "SingleAvailabilityZone": {
-			//       "type": "boolean"
-			//     },
-			//     "SingleInstanceType": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllocationStrategy": {
+			//	      "enum": [
+			//	        "lowest-price",
+			//	        "lowestPrice",
+			//	        "diversified",
+			//	        "capacityOptimized",
+			//	        "capacity-optimized",
+			//	        "capacityOptimizedPrioritized",
+			//	        "capacity-optimized-prioritized",
+			//	        "priceCapacityOptimized",
+			//	        "price-capacity-optimized"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "InstanceInterruptionBehavior": {
+			//	      "enum": [
+			//	        "hibernate",
+			//	        "stop",
+			//	        "terminate"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "InstancePoolsToUseCount": {
+			//	      "type": "integer"
+			//	    },
+			//	    "MaintenanceStrategies": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CapacityRebalance": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ReplacementStrategy": {
+			//	              "enum": [
+			//	                "launch",
+			//	                "launch-before-terminate"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "TerminationDelay": {
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "MaxTotalPrice": {
+			//	      "type": "string"
+			//	    },
+			//	    "MinTargetCapacity": {
+			//	      "type": "integer"
+			//	    },
+			//	    "SingleAvailabilityZone": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SingleInstanceType": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
@@ -1437,88 +1444,89 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"tag_specifications": {
 			// Property: TagSpecifications
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ResourceType": {
-			//         "enum": [
-			//           "client-vpn-endpoint",
-			//           "customer-gateway",
-			//           "dedicated-host",
-			//           "dhcp-options",
-			//           "egress-only-internet-gateway",
-			//           "elastic-gpu",
-			//           "elastic-ip",
-			//           "export-image-task",
-			//           "export-instance-task",
-			//           "fleet",
-			//           "fpga-image",
-			//           "host-reservation",
-			//           "image",
-			//           "import-image-task",
-			//           "import-snapshot-task",
-			//           "instance",
-			//           "internet-gateway",
-			//           "key-pair",
-			//           "launch-template",
-			//           "local-gateway-route-table-vpc-association",
-			//           "natgateway",
-			//           "network-acl",
-			//           "network-insights-analysis",
-			//           "network-insights-path",
-			//           "network-interface",
-			//           "placement-group",
-			//           "reserved-instances",
-			//           "route-table",
-			//           "security-group",
-			//           "snapshot",
-			//           "spot-fleet-request",
-			//           "spot-instances-request",
-			//           "subnet",
-			//           "traffic-mirror-filter",
-			//           "traffic-mirror-session",
-			//           "traffic-mirror-target",
-			//           "transit-gateway",
-			//           "transit-gateway-attachment",
-			//           "transit-gateway-connect-peer",
-			//           "transit-gateway-multicast-domain",
-			//           "transit-gateway-route-table",
-			//           "volume",
-			//           "vpc",
-			//           "vpc-flow-log",
-			//           "vpc-peering-connection",
-			//           "vpn-connection",
-			//           "vpn-gateway"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Value",
-			//             "Key"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ResourceType": {
+			//	        "enum": [
+			//	          "client-vpn-endpoint",
+			//	          "customer-gateway",
+			//	          "dedicated-host",
+			//	          "dhcp-options",
+			//	          "egress-only-internet-gateway",
+			//	          "elastic-gpu",
+			//	          "elastic-ip",
+			//	          "export-image-task",
+			//	          "export-instance-task",
+			//	          "fleet",
+			//	          "fpga-image",
+			//	          "host-reservation",
+			//	          "image",
+			//	          "import-image-task",
+			//	          "import-snapshot-task",
+			//	          "instance",
+			//	          "internet-gateway",
+			//	          "key-pair",
+			//	          "launch-template",
+			//	          "local-gateway-route-table-vpc-association",
+			//	          "natgateway",
+			//	          "network-acl",
+			//	          "network-insights-analysis",
+			//	          "network-insights-path",
+			//	          "network-interface",
+			//	          "placement-group",
+			//	          "reserved-instances",
+			//	          "route-table",
+			//	          "security-group",
+			//	          "snapshot",
+			//	          "spot-fleet-request",
+			//	          "spot-instances-request",
+			//	          "subnet",
+			//	          "traffic-mirror-filter",
+			//	          "traffic-mirror-session",
+			//	          "traffic-mirror-target",
+			//	          "transit-gateway",
+			//	          "transit-gateway-attachment",
+			//	          "transit-gateway-connect-peer",
+			//	          "transit-gateway-multicast-domain",
+			//	          "transit-gateway-route-table",
+			//	          "volume",
+			//	          "vpc",
+			//	          "vpc-flow-log",
+			//	          "vpc-peering-connection",
+			//	          "vpn-connection",
+			//	          "vpn-gateway"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Value",
+			//	            "Key"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"resource_type": {
@@ -1615,39 +1623,40 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"target_capacity_specification": {
 			// Property: TargetCapacitySpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "DefaultTargetCapacityType": {
-			//       "enum": [
-			//         "on-demand",
-			//         "spot"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "OnDemandTargetCapacity": {
-			//       "type": "integer"
-			//     },
-			//     "SpotTargetCapacity": {
-			//       "type": "integer"
-			//     },
-			//     "TargetCapacityUnitType": {
-			//       "enum": [
-			//         "vcpu",
-			//         "memory-mib",
-			//         "units"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "TotalTargetCapacity": {
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "TotalTargetCapacity"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "DefaultTargetCapacityType": {
+			//	      "enum": [
+			//	        "on-demand",
+			//	        "spot"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "OnDemandTargetCapacity": {
+			//	      "type": "integer"
+			//	    },
+			//	    "SpotTargetCapacity": {
+			//	      "type": "integer"
+			//	    },
+			//	    "TargetCapacityUnitType": {
+			//	      "enum": [
+			//	        "vcpu",
+			//	        "memory-mib",
+			//	        "units"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "TotalTargetCapacity": {
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "TotalTargetCapacity"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"default_target_capacity_type": {
@@ -1711,9 +1720,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"terminate_instances_with_expiration": {
 			// Property: TerminateInstancesWithExpiration
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -1725,14 +1735,15 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "maintain",
-			//     "request",
-			//     "instant"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "maintain",
+			//	    "request",
+			//	    "instant"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -1751,9 +1762,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"valid_from": {
 			// Property: ValidFrom
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -1765,9 +1777,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"valid_until": {
 			// Property: ValidUntil
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

@@ -23,13 +23,14 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"log_destination_configs": {
 			// Property: LogDestinationConfigs
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -37,103 +38,104 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"logging_filter": {
 			// Property: LoggingFilter
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
-			//   "properties": {
-			//     "DefaultBehavior": {
-			//       "description": "Default handling for logs that don't match any of the specified filtering conditions.",
-			//       "enum": [
-			//         "KEEP",
-			//         "DROP"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Filters": {
-			//       "description": "The filters that you want to apply to the logs.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Behavior": {
-			//             "description": "How to handle logs that satisfy the filter's conditions and requirement. ",
-			//             "enum": [
-			//               "KEEP",
-			//               "DROP"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Conditions": {
-			//             "description": "Match conditions for the filter.",
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ActionCondition": {
-			//                   "additionalProperties": false,
-			//                   "description": "A single action condition.",
-			//                   "properties": {
-			//                     "Action": {
-			//                       "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-			//                       "enum": [
-			//                         "ALLOW",
-			//                         "BLOCK",
-			//                         "COUNT",
-			//                         "CAPTCHA",
-			//                         "EXCLUDED_AS_COUNT"
-			//                       ],
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Action"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "LabelNameCondition": {
-			//                   "additionalProperties": false,
-			//                   "description": "A single label name condition.",
-			//                   "properties": {
-			//                     "LabelName": {
-			//                       "description": "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "LabelName"
-			//                   ],
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "minItems": 1,
-			//             "type": "array"
-			//           },
-			//           "Requirement": {
-			//             "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-			//             "enum": [
-			//               "MEETS_ALL",
-			//               "MEETS_ANY"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Behavior",
-			//           "Conditions",
-			//           "Requirement"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "DefaultBehavior",
-			//     "Filters"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
+			//	  "properties": {
+			//	    "DefaultBehavior": {
+			//	      "description": "Default handling for logs that don't match any of the specified filtering conditions.",
+			//	      "enum": [
+			//	        "KEEP",
+			//	        "DROP"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Filters": {
+			//	      "description": "The filters that you want to apply to the logs.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Behavior": {
+			//	            "description": "How to handle logs that satisfy the filter's conditions and requirement. ",
+			//	            "enum": [
+			//	              "KEEP",
+			//	              "DROP"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Conditions": {
+			//	            "description": "Match conditions for the filter.",
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ActionCondition": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A single action condition.",
+			//	                  "properties": {
+			//	                    "Action": {
+			//	                      "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+			//	                      "enum": [
+			//	                        "ALLOW",
+			//	                        "BLOCK",
+			//	                        "COUNT",
+			//	                        "CAPTCHA",
+			//	                        "EXCLUDED_AS_COUNT"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Action"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "LabelNameCondition": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A single label name condition.",
+			//	                  "properties": {
+			//	                    "LabelName": {
+			//	                      "description": "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "LabelName"
+			//	                  ],
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "minItems": 1,
+			//	            "type": "array"
+			//	          },
+			//	          "Requirement": {
+			//	            "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+			//	            "enum": [
+			//	              "MEETS_ALL",
+			//	              "MEETS_ANY"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Behavior",
+			//	          "Conditions",
+			//	          "Requirement"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "DefaultBehavior",
+			//	    "Filters"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -210,10 +212,11 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"managed_by_firewall_manager": {
 			// Property: ManagedByFirewallManager
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -221,93 +224,94 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"redacted_fields": {
 			// Property: RedactedFields
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "JsonBody": {
-			//         "additionalProperties": false,
-			//         "description": "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-			//         "properties": {
-			//           "InvalidFallbackBehavior": {
-			//             "description": "What AWS WAF should do if it fails to completely parse the JSON body.",
-			//             "enum": [
-			//               "MATCH",
-			//               "NO_MATCH",
-			//               "EVALUATE_AS_STRING"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "MatchPattern": {
-			//             "additionalProperties": false,
-			//             "description": "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-			//             "properties": {
-			//               "All": {
-			//                 "description": "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-			//                 "type": "object"
-			//               },
-			//               "IncludedPaths": {
-			//                 "description": "Match only the specified include paths. See also MatchScope in JsonBody.",
-			//                 "items": {
-			//                   "pattern": "",
-			//                   "type": "string"
-			//                 },
-			//                 "minItems": 1,
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "MatchScope": {
-			//             "description": "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
-			//             "enum": [
-			//               "ALL",
-			//               "KEY",
-			//               "VALUE"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "MatchPattern",
-			//           "MatchScope"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Method": {
-			//         "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
-			//         "type": "object"
-			//       },
-			//       "QueryString": {
-			//         "description": "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
-			//         "type": "object"
-			//       },
-			//       "SingleHeader": {
-			//         "additionalProperties": false,
-			//         "description": "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
-			//         "properties": {
-			//           "Name": {
-			//             "description": "The name of the query header to inspect.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Name"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "UriPath": {
-			//         "description": "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "JsonBody": {
+			//	        "additionalProperties": false,
+			//	        "description": "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
+			//	        "properties": {
+			//	          "InvalidFallbackBehavior": {
+			//	            "description": "What AWS WAF should do if it fails to completely parse the JSON body.",
+			//	            "enum": [
+			//	              "MATCH",
+			//	              "NO_MATCH",
+			//	              "EVALUATE_AS_STRING"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "MatchPattern": {
+			//	            "additionalProperties": false,
+			//	            "description": "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
+			//	            "properties": {
+			//	              "All": {
+			//	                "description": "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
+			//	                "type": "object"
+			//	              },
+			//	              "IncludedPaths": {
+			//	                "description": "Match only the specified include paths. See also MatchScope in JsonBody.",
+			//	                "items": {
+			//	                  "pattern": "",
+			//	                  "type": "string"
+			//	                },
+			//	                "minItems": 1,
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "MatchScope": {
+			//	            "description": "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
+			//	            "enum": [
+			//	              "ALL",
+			//	              "KEY",
+			//	              "VALUE"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "MatchPattern",
+			//	          "MatchScope"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Method": {
+			//	        "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
+			//	        "type": "object"
+			//	      },
+			//	      "QueryString": {
+			//	        "description": "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
+			//	        "type": "object"
+			//	      },
+			//	      "SingleHeader": {
+			//	        "additionalProperties": false,
+			//	        "description": "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the query header to inspect.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Name"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "UriPath": {
+			//	        "description": "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -393,10 +397,11 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"resource_arn": {
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
 			Type:        types.StringType,
 			Computed:    true,

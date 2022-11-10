@@ -23,10 +23,11 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the PackagingGroup.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the PackagingGroup.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the PackagingGroup.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,25 +35,26 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"authorization": {
 			// Property: Authorization
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "CDN Authorization",
-			//   "properties": {
-			//     "CdnIdentifierSecret": {
-			//       "description": "The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.",
-			//       "type": "string"
-			//     },
-			//     "SecretsRoleArn": {
-			//       "description": "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "CdnIdentifierSecret",
-			//     "SecretsRoleArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "CDN Authorization",
+			//	  "properties": {
+			//	    "CdnIdentifierSecret": {
+			//	      "description": "The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.",
+			//	      "type": "string"
+			//	    },
+			//	    "SecretsRoleArn": {
+			//	      "description": "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "CdnIdentifierSecret",
+			//	    "SecretsRoleArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "CDN Authorization",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -75,10 +77,11 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The fully qualified domain name for Assets in the PackagingGroup.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The fully qualified domain name for Assets in the PackagingGroup.",
+			//	  "type": "string"
+			//	}
 			Description: "The fully qualified domain name for Assets in the PackagingGroup.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -86,20 +89,21 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"egress_access_logs": {
 			// Property: EgressAccessLogs
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration parameters for egress access logging.",
-			//   "properties": {
-			//     "LogGroupName": {
-			//       "description": "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
-			//       "maxLength": 512,
-			//       "minLength": 1,
-			//       "pattern": "",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration parameters for egress access logging.",
+			//	  "properties": {
+			//	    "LogGroupName": {
+			//	      "description": "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
+			//	      "maxLength": 512,
+			//	      "minLength": 1,
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The configuration parameters for egress access logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -116,13 +120,14 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the PackagingGroup.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the PackagingGroup.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the PackagingGroup.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -130,27 +135,28 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

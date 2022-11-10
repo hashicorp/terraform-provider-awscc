@@ -23,10 +23,11 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the API documentation snapshot.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the API documentation snapshot.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the API documentation snapshot.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,11 +35,12 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"documentation_version": {
 			// Property: DocumentationVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version identifier of the API documentation snapshot.",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version identifier of the API documentation snapshot.",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The version identifier of the API documentation snapshot.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -46,11 +48,12 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the API.",
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the API.",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the API.",
 			Type:        types.StringType,
 			Computed:    true,

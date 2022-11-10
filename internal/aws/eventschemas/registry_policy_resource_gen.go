@@ -23,9 +23,10 @@ func registryPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,27 +36,30 @@ func registryPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"policy": {
 			// Property: Policy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Required: true,
 		},
 		"registry_name": {
 			// Property: RegistryName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"revision_id": {
 			// Property: RevisionId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

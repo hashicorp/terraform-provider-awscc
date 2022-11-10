@@ -23,12 +23,13 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter ARN.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter ARN.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter description.",
-			//   "maxLength": 512,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter description.",
+			//	  "maxLength": 512,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter description.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,14 +51,15 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filter_action": {
 			// Property: FilterAction
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter action.",
-			//   "enum": [
-			//     "NONE",
-			//     "SUPPRESS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter action.",
+			//	  "enum": [
+			//	    "NONE",
+			//	    "SUPPRESS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter action.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -64,970 +67,971 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filter_criteria": {
 			// Property: FilterCriteria
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Findings filter criteria.",
-			//   "properties": {
-			//     "AwsAccountId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "ComponentId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "ComponentType": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Ec2InstanceImageId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Ec2InstanceSubnetId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Ec2InstanceVpcId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "EcrImageArchitecture": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "EcrImageHash": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "EcrImagePushedAt": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "EndInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           },
-			//           "StartInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "EcrImageRegistry": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "EcrImageRepositoryName": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "EcrImageTags": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "FindingArn": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "FindingStatus": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "FindingType": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "FirstObservedAt": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "EndInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           },
-			//           "StartInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "InspectorScore": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "LowerInclusive": {
-			//             "type": "number"
-			//           },
-			//           "UpperInclusive": {
-			//             "type": "number"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "LastObservedAt": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "EndInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           },
-			//           "StartInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "NetworkProtocol": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "PortRange": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "BeginInclusive": {
-			//             "maximum": 65535,
-			//             "minimum": 0,
-			//             "type": "integer"
-			//           },
-			//           "EndInclusive": {
-			//             "maximum": 65535,
-			//             "minimum": 0,
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "RelatedVulnerabilities": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "ResourceId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "ResourceTags": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Key": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "ResourceType": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Severity": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "Title": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "UpdatedAt": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "EndInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           },
-			//           "StartInclusive": {
-			//             "format": "int64",
-			//             "type": "integer"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "VendorSeverity": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "VulnerabilityId": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "VulnerabilitySource": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Comparison": {
-			//             "enum": [
-			//               "EQUALS",
-			//               "PREFIX",
-			//               "NOT_EQUALS"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Comparison",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "VulnerablePackages": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Architecture": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Comparison": {
-			//                 "enum": [
-			//                   "EQUALS",
-			//                   "PREFIX",
-			//                   "NOT_EQUALS"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Comparison",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Epoch": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "LowerInclusive": {
-			//                 "type": "number"
-			//               },
-			//               "UpperInclusive": {
-			//                 "type": "number"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Name": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Comparison": {
-			//                 "enum": [
-			//                   "EQUALS",
-			//                   "PREFIX",
-			//                   "NOT_EQUALS"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Comparison",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Release": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Comparison": {
-			//                 "enum": [
-			//                   "EQUALS",
-			//                   "PREFIX",
-			//                   "NOT_EQUALS"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Comparison",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "SourceLayerHash": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Comparison": {
-			//                 "enum": [
-			//                   "EQUALS",
-			//                   "PREFIX",
-			//                   "NOT_EQUALS"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Comparison",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Version": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Comparison": {
-			//                 "enum": [
-			//                   "EQUALS",
-			//                   "PREFIX",
-			//                   "NOT_EQUALS"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Value": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "Comparison",
-			//               "Value"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Findings filter criteria.",
+			//	  "properties": {
+			//	    "AwsAccountId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "ComponentId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "ComponentType": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Ec2InstanceImageId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Ec2InstanceSubnetId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Ec2InstanceVpcId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "EcrImageArchitecture": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "EcrImageHash": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "EcrImagePushedAt": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "EndInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          },
+			//	          "StartInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "EcrImageRegistry": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "EcrImageRepositoryName": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "EcrImageTags": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "FindingArn": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "FindingStatus": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "FindingType": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "FirstObservedAt": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "EndInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          },
+			//	          "StartInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "InspectorScore": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "LowerInclusive": {
+			//	            "type": "number"
+			//	          },
+			//	          "UpperInclusive": {
+			//	            "type": "number"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "LastObservedAt": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "EndInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          },
+			//	          "StartInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "NetworkProtocol": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "PortRange": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "BeginInclusive": {
+			//	            "maximum": 65535,
+			//	            "minimum": 0,
+			//	            "type": "integer"
+			//	          },
+			//	          "EndInclusive": {
+			//	            "maximum": 65535,
+			//	            "minimum": 0,
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "RelatedVulnerabilities": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "ResourceId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "ResourceTags": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Key": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "ResourceType": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Severity": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "Title": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "UpdatedAt": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "EndInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          },
+			//	          "StartInclusive": {
+			//	            "format": "int64",
+			//	            "type": "integer"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "VendorSeverity": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "VulnerabilityId": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "VulnerabilitySource": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Comparison": {
+			//	            "enum": [
+			//	              "EQUALS",
+			//	              "PREFIX",
+			//	              "NOT_EQUALS"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Comparison",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "VulnerablePackages": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Architecture": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Comparison": {
+			//	                "enum": [
+			//	                  "EQUALS",
+			//	                  "PREFIX",
+			//	                  "NOT_EQUALS"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Comparison",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Epoch": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "LowerInclusive": {
+			//	                "type": "number"
+			//	              },
+			//	              "UpperInclusive": {
+			//	                "type": "number"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Name": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Comparison": {
+			//	                "enum": [
+			//	                  "EQUALS",
+			//	                  "PREFIX",
+			//	                  "NOT_EQUALS"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Comparison",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Release": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Comparison": {
+			//	                "enum": [
+			//	                  "EQUALS",
+			//	                  "PREFIX",
+			//	                  "NOT_EQUALS"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Comparison",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "SourceLayerHash": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Comparison": {
+			//	                "enum": [
+			//	                  "EQUALS",
+			//	                  "PREFIX",
+			//	                  "NOT_EQUALS"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Comparison",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Version": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Comparison": {
+			//	                "enum": [
+			//	                  "EQUALS",
+			//	                  "PREFIX",
+			//	                  "NOT_EQUALS"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Value": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Comparison",
+			//	              "Value"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Findings filter criteria.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1699,12 +1703,13 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Findings filter name.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Findings filter name.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Findings filter name.",
 			Type:        types.StringType,
 			Computed:    true,

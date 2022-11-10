@@ -23,10 +23,11 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,12 +35,13 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		"message_ttl_seconds": {
 			// Property: MessageTtlSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The period of time a signaling channel retains undelivered messages before they are discarded.",
-			//   "maximum": 120,
-			//   "minimum": 5,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The period of time a signaling channel retains undelivered messages before they are discarded.",
+			//	  "maximum": 120,
+			//	  "minimum": 5,
+			//	  "type": "integer"
+			//	}
 			Description: "The period of time a signaling channel retains undelivered messages before they are discarded.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -47,13 +49,14 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the Kinesis Video Signaling Channel.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_.-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the Kinesis Video Signaling Channel.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_.-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the Kinesis Video Signaling Channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,37 +64,38 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.  The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.  The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -114,13 +118,14 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.",
-			//   "enum": [
-			//     "SINGLE_MASTER"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.",
+			//	  "enum": [
+			//	    "SINGLE_MASTER"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.",
 			Type:        types.StringType,
 			Computed:    true,

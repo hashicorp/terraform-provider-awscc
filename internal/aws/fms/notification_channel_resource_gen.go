@@ -25,13 +25,14 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		"sns_role_name": {
 			// Property: SnsRoleName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A resource ARN.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "pattern": "^([^\\s]+)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A resource ARN.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "pattern": "^([^\\s]+)$",
+			//	  "type": "string"
+			//	}
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,13 +44,14 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		"sns_topic_arn": {
 			// Property: SnsTopicArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A resource ARN.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "pattern": "^([^\\s]+)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A resource ARN.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "pattern": "^([^\\s]+)$",
+			//	  "type": "string"
+			//	}
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,

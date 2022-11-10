@@ -24,12 +24,13 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		"resource_set_arn": {
 			// Property: ResourceSetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the resource set.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the resource set.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the resource set.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,10 +41,11 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		"resource_set_name": {
 			// Property: ResourceSetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the resource set to create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the resource set to create.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the resource set to create.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -56,10 +58,11 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		"resource_set_type": {
 			// Property: ResourceSetType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
+			//	  "type": "string"
+			//	}
 			Description: "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
 			Type:        types.StringType,
 			Required:    true,
@@ -70,105 +73,106 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		"resources": {
 			// Property: Resources
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of resource objects in the resource set.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The resource element of a ResourceSet",
-			//     "properties": {
-			//       "ComponentId": {
-			//         "description": "The component identifier of the resource, generated when DNS target resource is used.",
-			//         "type": "string"
-			//       },
-			//       "DnsTargetResource": {
-			//         "additionalProperties": false,
-			//         "description": "A component for DNS/routing control readiness checks.",
-			//         "properties": {
-			//           "DomainName": {
-			//             "description": "The domain name that acts as an ingress point to a portion of the customer application.",
-			//             "type": "string"
-			//           },
-			//           "HostedZoneArn": {
-			//             "description": "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
-			//             "type": "string"
-			//           },
-			//           "RecordSetId": {
-			//             "description": "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
-			//             "type": "string"
-			//           },
-			//           "RecordType": {
-			//             "description": "The type of DNS record of the target resource.",
-			//             "type": "string"
-			//           },
-			//           "TargetResource": {
-			//             "additionalProperties": false,
-			//             "description": "The target resource that the Route 53 record points to.",
-			//             "oneOf": [
-			//               {
-			//                 "required": [
-			//                   "NLBResource"
-			//                 ]
-			//               },
-			//               {
-			//                 "required": [
-			//                   "R53Resource"
-			//                 ]
-			//               }
-			//             ],
-			//             "properties": {
-			//               "NLBResource": {
-			//                 "additionalProperties": false,
-			//                 "description": "The Network Load Balancer resource that a DNS target resource points to.",
-			//                 "properties": {
-			//                   "Arn": {
-			//                     "description": "A Network Load Balancer resource Amazon Resource Name (ARN).",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "R53Resource": {
-			//                 "additionalProperties": false,
-			//                 "description": "The Route 53 resource that a DNS target resource record points to.",
-			//                 "properties": {
-			//                   "DomainName": {
-			//                     "description": "The DNS target domain name.",
-			//                     "type": "string"
-			//                   },
-			//                   "RecordSetId": {
-			//                     "description": "The Resource Record set id.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ReadinessScopes": {
-			//         "description": "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "maxItems": 5,
-			//           "type": "string"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "ResourceArn": {
-			//         "description": "The Amazon Resource Name (ARN) of the AWS resource.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 6,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of resource objects in the resource set.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The resource element of a ResourceSet",
+			//	    "properties": {
+			//	      "ComponentId": {
+			//	        "description": "The component identifier of the resource, generated when DNS target resource is used.",
+			//	        "type": "string"
+			//	      },
+			//	      "DnsTargetResource": {
+			//	        "additionalProperties": false,
+			//	        "description": "A component for DNS/routing control readiness checks.",
+			//	        "properties": {
+			//	          "DomainName": {
+			//	            "description": "The domain name that acts as an ingress point to a portion of the customer application.",
+			//	            "type": "string"
+			//	          },
+			//	          "HostedZoneArn": {
+			//	            "description": "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
+			//	            "type": "string"
+			//	          },
+			//	          "RecordSetId": {
+			//	            "description": "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
+			//	            "type": "string"
+			//	          },
+			//	          "RecordType": {
+			//	            "description": "The type of DNS record of the target resource.",
+			//	            "type": "string"
+			//	          },
+			//	          "TargetResource": {
+			//	            "additionalProperties": false,
+			//	            "description": "The target resource that the Route 53 record points to.",
+			//	            "oneOf": [
+			//	              {
+			//	                "required": [
+			//	                  "NLBResource"
+			//	                ]
+			//	              },
+			//	              {
+			//	                "required": [
+			//	                  "R53Resource"
+			//	                ]
+			//	              }
+			//	            ],
+			//	            "properties": {
+			//	              "NLBResource": {
+			//	                "additionalProperties": false,
+			//	                "description": "The Network Load Balancer resource that a DNS target resource points to.",
+			//	                "properties": {
+			//	                  "Arn": {
+			//	                    "description": "A Network Load Balancer resource Amazon Resource Name (ARN).",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "R53Resource": {
+			//	                "additionalProperties": false,
+			//	                "description": "The Route 53 resource that a DNS target resource record points to.",
+			//	                "properties": {
+			//	                  "DomainName": {
+			//	                    "description": "The DNS target domain name.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "RecordSetId": {
+			//	                    "description": "The Resource Record set id.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ReadinessScopes": {
+			//	        "description": "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "maxItems": 5,
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "ResourceArn": {
+			//	        "description": "The Amazon Resource Name (ARN) of the AWS resource.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 6,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "A list of resource objects in the resource set.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -350,27 +354,28 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A tag to associate with the parameters for a resource set.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A tag to associate with the parameters for a resource set.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A tag to associate with the parameters for a resource set.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

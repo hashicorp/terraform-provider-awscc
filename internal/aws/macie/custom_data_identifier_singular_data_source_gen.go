@@ -23,10 +23,11 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Custom data identifier ARN.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Custom data identifier ARN.",
+			//	  "type": "string"
+			//	}
 			Description: "Custom data identifier ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of custom data identifier.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of custom data identifier.",
+			//	  "type": "string"
+			//	}
 			Description: "Description of custom data identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Custom data identifier ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Custom data identifier ID.",
+			//	  "type": "string"
+			//	}
 			Description: "Custom data identifier ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,13 +59,14 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"ignore_words": {
 			// Property: IgnoreWords
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Words to be ignored.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Words to be ignored.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Words to be ignored.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -70,13 +74,14 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"keywords": {
 			// Property: Keywords
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Keywords to be matched against.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Keywords to be matched against.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Keywords to be matched against.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -84,10 +89,11 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"maximum_match_distance": {
 			// Property: MaximumMatchDistance
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Maximum match distance.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Maximum match distance.",
+			//	  "type": "integer"
+			//	}
 			Description: "Maximum match distance.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -95,10 +101,11 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of custom data identifier.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of custom data identifier.",
+			//	  "type": "string"
+			//	}
 			Description: "Name of custom data identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -106,10 +113,11 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"regex": {
 			// Property: Regex
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Regular expression for custom data identifier.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Regular expression for custom data identifier.",
+			//	  "type": "string"
+			//	}
 			Description: "Regular expression for custom data identifier.",
 			Type:        types.StringType,
 			Computed:    true,

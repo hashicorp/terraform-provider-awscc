@@ -25,10 +25,11 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		"deletion_protection": {
 			// Property: DeletionProtection
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
+			//	  "type": "boolean"
+			//	}
 			Description: "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -40,15 +41,16 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		"engine": {
 			// Property: Engine
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora).\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
-			//   "enum": [
-			//     "aurora",
-			//     "aurora-mysql",
-			//     "aurora-postgresql"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora).\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
+			//	  "enum": [
+			//	    "aurora",
+			//	    "aurora-mysql",
+			//	    "aurora-postgresql"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora).\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -68,10 +70,11 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		"engine_version": {
 			// Property: EngineVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
+			//	  "type": "string"
+			//	}
 			Description: "The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -84,11 +87,12 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		"global_cluster_identifier": {
 			// Property: GlobalClusterIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
-			//   "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
+			//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
+			//	  "type": "string"
+			//	}
 			Description: "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -104,14 +108,15 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		"source_db_cluster_identifier": {
 			// Property: SourceDBClusterIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
-			//   "oneOf": [
-			//     {},
-			//     {}
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
+			//	  "oneOf": [
+			//	    {},
+			//	    {}
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -124,10 +129,11 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		"storage_encrypted": {
 			// Property: StorageEncrypted
 			// CloudFormation resource type schema:
-			// {
-			//   "description": " The storage encryption setting for the new global database cluster.\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": " The storage encryption setting for the new global database cluster.\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
+			//	  "type": "boolean"
+			//	}
 			Description: " The storage encryption setting for the new global database cluster.\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
 			Type:        types.BoolType,
 			Optional:    true,

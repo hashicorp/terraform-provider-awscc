@@ -23,13 +23,14 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"app_image_config_arn": {
 			// Property: AppImageConfigArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the AppImageConfig.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the AppImageConfig.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"app_image_config_name": {
 			// Property: AppImageConfigName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Name of the AppImageConfig.",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Name of the AppImageConfig.",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+			//	  "type": "string"
+			//	}
 			Description: "The Name of the AppImageConfig.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,69 +53,70 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"kernel_gateway_image_config": {
 			// Property: KernelGatewayImageConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The KernelGatewayImageConfig.",
-			//   "properties": {
-			//     "FileSystemConfig": {
-			//       "additionalProperties": false,
-			//       "description": "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
-			//       "properties": {
-			//         "DefaultGid": {
-			//           "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
-			//           "maximum": 65535,
-			//           "minimum": 0,
-			//           "type": "integer"
-			//         },
-			//         "DefaultUid": {
-			//           "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-			//           "maximum": 65535,
-			//           "minimum": 0,
-			//           "type": "integer"
-			//         },
-			//         "MountPath": {
-			//           "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
-			//           "maxLength": 1024,
-			//           "minLength": 1,
-			//           "pattern": "^/.*",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "KernelSpecs": {
-			//       "description": "The specification of the Jupyter kernels in the image.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "DisplayName": {
-			//             "description": "The display name of the kernel.",
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Name": {
-			//             "description": "The name of the kernel.",
-			//             "maxLength": 1024,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Name"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 1,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "KernelSpecs"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The KernelGatewayImageConfig.",
+			//	  "properties": {
+			//	    "FileSystemConfig": {
+			//	      "additionalProperties": false,
+			//	      "description": "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
+			//	      "properties": {
+			//	        "DefaultGid": {
+			//	          "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
+			//	          "maximum": 65535,
+			//	          "minimum": 0,
+			//	          "type": "integer"
+			//	        },
+			//	        "DefaultUid": {
+			//	          "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
+			//	          "maximum": 65535,
+			//	          "minimum": 0,
+			//	          "type": "integer"
+			//	        },
+			//	        "MountPath": {
+			//	          "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
+			//	          "maxLength": 1024,
+			//	          "minLength": 1,
+			//	          "pattern": "^/.*",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "KernelSpecs": {
+			//	      "description": "The specification of the Jupyter kernels in the image.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "DisplayName": {
+			//	            "description": "The display name of the kernel.",
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Name": {
+			//	            "description": "The name of the kernel.",
+			//	            "maxLength": 1024,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Name"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 1,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "KernelSpecs"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The KernelGatewayImageConfig.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -172,33 +175,34 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags to apply to the AppImageConfig.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags to apply to the AppImageConfig.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of tags to apply to the AppImageConfig.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,12 +23,13 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the FSx for Lustre file system.",
-			//   "maxLength": 128,
-			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the FSx for Lustre file system.",
+			//	  "maxLength": 128,
+			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the FSx for Lustre file system.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,12 +37,13 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Lustre file system location that is created.",
-			//   "maxLength": 128,
-			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Lustre file system location that is created.",
+			//	  "maxLength": 128,
+			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Lustre file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,12 +51,13 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The URL of the FSx for Lustre location that was described.",
-			//   "maxLength": 4356,
-			//   "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs|fsxl)://[a-zA-Z0-9.:/\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The URL of the FSx for Lustre location that was described.",
+			//	  "maxLength": 4356,
+			//	  "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs|fsxl)://[a-zA-Z0-9.:/\\-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The URL of the FSx for Lustre location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,18 +65,19 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"security_group_arns": {
 			// Property: SecurityGroupArns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARNs of the security groups that are to use to configure the FSx for Lustre file system.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 128,
-			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The ARNs of the security groups that are to use to configure the FSx for Lustre file system.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 128,
+			//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Lustre file system.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -81,12 +85,13 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A subdirectory in the location's path.",
-			//   "maxLength": 4096,
-			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A subdirectory in the location's path.",
+			//	  "maxLength": 4096,
+			//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
+			//	  "type": "string"
+			//	}
 			Description: "A subdirectory in the location's path.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -94,39 +99,40 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key for an AWS resource tag.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for an AWS resource tag.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 0,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key for an AWS resource tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for an AWS resource tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 0,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

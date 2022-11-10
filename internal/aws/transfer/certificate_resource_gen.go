@@ -25,10 +25,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"active_date": {
 			// Property: ActiveDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the active date for the certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the active date for the certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the active date for the certificate.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -40,13 +41,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
-			//   "maxLength": 1600,
-			//   "minLength": 20,
-			//   "pattern": "arn:.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
+			//	  "maxLength": 1600,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:.*",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,13 +59,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate": {
 			// Property: Certificate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the certificate body to be imported.",
-			//   "maxLength": 16384,
-			//   "minLength": 1,
-			//   "pattern": "^[\t\n\r -ÿ]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the certificate body to be imported.",
+			//	  "maxLength": 16384,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\t\n\r -ÿ]*",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the certificate body to be imported.",
 			Type:        types.StringType,
 			Required:    true,
@@ -78,13 +81,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_chain": {
 			// Property: CertificateChain
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the certificate chain to be imported.",
-			//   "maxLength": 2097152,
-			//   "minLength": 1,
-			//   "pattern": "^[\t\n\r -ÿ]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the certificate chain to be imported.",
+			//	  "maxLength": 2097152,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\t\n\r -ÿ]*",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the certificate chain to be imported.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -101,13 +105,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_id": {
 			// Property: CertificateId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A unique identifier for the certificate.",
-			//   "maxLength": 22,
-			//   "minLength": 22,
-			//   "pattern": "^cert-([0-9a-f]{17})$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A unique identifier for the certificate.",
+			//	  "maxLength": 22,
+			//	  "minLength": 22,
+			//	  "pattern": "^cert-([0-9a-f]{17})$",
+			//	  "type": "string"
+			//	}
 			Description: "A unique identifier for the certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,13 +123,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A textual description for the certificate.",
-			//   "maxLength": 200,
-			//   "minLength": 1,
-			//   "pattern": "^[\\w\\- ]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A textual description for the certificate.",
+			//	  "maxLength": 200,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\w\\- ]*$",
+			//	  "type": "string"
+			//	}
 			Description: "A textual description for the certificate.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -140,10 +146,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"inactive_date": {
 			// Property: InactiveDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the inactive date for the certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the inactive date for the certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the inactive date for the certificate.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -155,10 +162,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"not_after_date": {
 			// Property: NotAfterDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the not after date for the certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the not after date for the certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the not after date for the certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -169,10 +177,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"not_before_date": {
 			// Property: NotBeforeDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the not before date for the certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the not before date for the certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the not before date for the certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -183,13 +192,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"private_key": {
 			// Property: PrivateKey
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the private key for the certificate.",
-			//   "maxLength": 16384,
-			//   "minLength": 1,
-			//   "pattern": "^[\t\n\r -ÿ]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the private key for the certificate.",
+			//	  "maxLength": 16384,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\t\n\r -ÿ]*",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the private key for the certificate.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -207,13 +217,14 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"serial": {
 			// Property: Serial
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies Certificate's serial.",
-			//   "maxLength": 48,
-			//   "minLength": 0,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies Certificate's serial.",
+			//	  "maxLength": 48,
+			//	  "minLength": 0,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies Certificate's serial.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -224,15 +235,16 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A status description for the certificate.",
-			//   "enum": [
-			//     "ACTIVE",
-			//     "PENDING",
-			//     "INACTIVE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A status description for the certificate.",
+			//	  "enum": [
+			//	    "ACTIVE",
+			//	    "PENDING",
+			//	    "INACTIVE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "A status description for the certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -243,36 +255,37 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Key-value pairs that can be used to group and search for certificates. Tags are metadata attached to certificates for any purpose.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Key-value pairs that can be used to group and search for certificates. Tags are metadata attached to certificates for any purpose.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Key-value pairs that can be used to group and search for certificates. Tags are metadata attached to certificates for any purpose.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -308,14 +321,15 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Describing the type of certificate. With or without a private key.",
-			//   "enum": [
-			//     "CERTIFICATE",
-			//     "CERTIFICATE_WITH_PRIVATE_KEY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Describing the type of certificate. With or without a private key.",
+			//	  "enum": [
+			//	    "CERTIFICATE",
+			//	    "CERTIFICATE_WITH_PRIVATE_KEY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Describing the type of certificate. With or without a private key.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -326,14 +340,15 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"usage": {
 			// Property: Usage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the usage type for the certificate.",
-			//   "enum": [
-			//     "SIGNING",
-			//     "ENCRYPTION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the usage type for the certificate.",
+			//	  "enum": [
+			//	    "SIGNING",
+			//	    "ENCRYPTION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the usage type for the certificate.",
 			Type:        types.StringType,
 			Required:    true,

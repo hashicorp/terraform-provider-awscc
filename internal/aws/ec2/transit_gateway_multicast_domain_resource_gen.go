@@ -23,11 +23,12 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time the transit gateway multicast domain was created.",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time the transit gateway multicast domain was created.",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Description: "The time the transit gateway multicast domain was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,25 +39,26 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"options": {
 			// Property: Options
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The options for the transit gateway multicast domain.",
-			//   "properties": {
-			//     "AutoAcceptSharedAssociations": {
-			//       "description": "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
-			//       "type": "string"
-			//     },
-			//     "Igmpv2Support": {
-			//       "description": "Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable",
-			//       "type": "string"
-			//     },
-			//     "StaticSourcesSupport": {
-			//       "description": "Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The options for the transit gateway multicast domain.",
+			//	  "properties": {
+			//	    "AutoAcceptSharedAssociations": {
+			//	      "description": "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
+			//	      "type": "string"
+			//	    },
+			//	    "Igmpv2Support": {
+			//	      "description": "Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable",
+			//	      "type": "string"
+			//	    },
+			//	    "StaticSourcesSupport": {
+			//	      "description": "Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The options for the transit gateway multicast domain.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -101,10 +103,11 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the transit gateway multicast domain.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the transit gateway multicast domain.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,24 +118,25 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the transit gateway multicast domain.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the transit gateway multicast domain.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The tags for the transit gateway multicast domain.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -167,10 +171,11 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"transit_gateway_id": {
 			// Property: TransitGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway.",
 			Type:        types.StringType,
 			Required:    true,
@@ -181,10 +186,11 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"transit_gateway_multicast_domain_arn": {
 			// Property: TransitGatewayMulticastDomainArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -195,10 +201,11 @@ func transitGatewayMulticastDomainResource(ctx context.Context) (resource.Resour
 		"transit_gateway_multicast_domain_id": {
 			// Property: TransitGatewayMulticastDomainId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway multicast domain.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway multicast domain.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,

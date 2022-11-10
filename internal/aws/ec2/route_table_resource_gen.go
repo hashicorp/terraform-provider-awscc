@@ -23,10 +23,11 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		"route_table_id": {
 			// Property: RouteTableId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The route table ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The route table ID.",
+			//	  "type": "string"
+			//	}
 			Description: "The route table ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,28 +38,29 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Any tags assigned to the route table.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Any tags assigned to the route table.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Any tags assigned to the route table.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -84,10 +86,11 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Required:    true,

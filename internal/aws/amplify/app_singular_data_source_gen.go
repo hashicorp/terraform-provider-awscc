@@ -23,142 +23,147 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_token": {
 			// Property: AccessToken
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"app_id": {
 			// Property: AppId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 20,
-			//   "minLength": 1,
-			//   "pattern": "d[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 20,
+			//	  "minLength": 1,
+			//	  "pattern": "d[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"app_name": {
 			// Property: AppName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "(?s).+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "(?s).+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"auto_branch_creation_config": {
 			// Property: AutoBranchCreationConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AutoBranchCreationPatterns": {
-			//       "items": {
-			//         "maxLength": 2048,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "BasicAuthConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "EnableBasicAuth": {
-			//           "type": "boolean"
-			//         },
-			//         "Password": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Username": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "BuildSpec": {
-			//       "maxLength": 25000,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "EnableAutoBranchCreation": {
-			//       "type": "boolean"
-			//     },
-			//     "EnableAutoBuild": {
-			//       "type": "boolean"
-			//     },
-			//     "EnablePerformanceMode": {
-			//       "type": "boolean"
-			//     },
-			//     "EnablePullRequestPreview": {
-			//       "type": "boolean"
-			//     },
-			//     "EnvironmentVariables": {
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Name": {
-			//             "maxLength": 255,
-			//             "pattern": "(?s).*",
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 5500,
-			//             "pattern": "(?s).*",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Name",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "PullRequestEnvironmentName": {
-			//       "maxLength": 20,
-			//       "pattern": "(?s).*",
-			//       "type": "string"
-			//     },
-			//     "Stage": {
-			//       "enum": [
-			//         "EXPERIMENTAL",
-			//         "BETA",
-			//         "PULL_REQUEST",
-			//         "PRODUCTION",
-			//         "DEVELOPMENT"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AutoBranchCreationPatterns": {
+			//	      "items": {
+			//	        "maxLength": 2048,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "BasicAuthConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "EnableBasicAuth": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Password": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Username": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "BuildSpec": {
+			//	      "maxLength": 25000,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "EnableAutoBranchCreation": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "EnableAutoBuild": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "EnablePerformanceMode": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "EnablePullRequestPreview": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "EnvironmentVariables": {
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Name": {
+			//	            "maxLength": 255,
+			//	            "pattern": "(?s).*",
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 5500,
+			//	            "pattern": "(?s).*",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Name",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "PullRequestEnvironmentName": {
+			//	      "maxLength": 20,
+			//	      "pattern": "(?s).*",
+			//	      "type": "string"
+			//	    },
+			//	    "Stage": {
+			//	      "enum": [
+			//	        "EXPERIMENTAL",
+			//	        "BETA",
+			//	        "PULL_REQUEST",
+			//	        "PRODUCTION",
+			//	        "DEVELOPMENT"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"auto_branch_creation_patterns": {
@@ -249,25 +254,26 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"basic_auth_config": {
 			// Property: BasicAuthConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "EnableBasicAuth": {
-			//       "type": "boolean"
-			//     },
-			//     "Password": {
-			//       "maxLength": 255,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Username": {
-			//       "maxLength": 255,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EnableBasicAuth": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "Password": {
+			//	      "maxLength": 255,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Username": {
+			//	      "maxLength": 255,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"enable_basic_auth": {
@@ -292,68 +298,71 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"build_spec": {
 			// Property: BuildSpec
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 25000,
-			//   "minLength": 1,
-			//   "pattern": "(?s).+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 25000,
+			//	  "minLength": 1,
+			//	  "pattern": "(?s).+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"custom_headers": {
 			// Property: CustomHeaders
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 25000,
-			//   "minLength": 0,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 25000,
+			//	  "minLength": 0,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"custom_rules": {
 			// Property: CustomRules
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Condition": {
-			//         "maxLength": 2048,
-			//         "minLength": 0,
-			//         "pattern": "(?s).*",
-			//         "type": "string"
-			//       },
-			//       "Source": {
-			//         "maxLength": 2048,
-			//         "minLength": 1,
-			//         "pattern": "(?s).+",
-			//         "type": "string"
-			//       },
-			//       "Status": {
-			//         "maxLength": 7,
-			//         "minLength": 3,
-			//         "pattern": ".{3,7}",
-			//         "type": "string"
-			//       },
-			//       "Target": {
-			//         "maxLength": 2048,
-			//         "minLength": 1,
-			//         "pattern": "(?s).+",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Target",
-			//       "Source"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Condition": {
+			//	        "maxLength": 2048,
+			//	        "minLength": 0,
+			//	        "pattern": "(?s).*",
+			//	        "type": "string"
+			//	      },
+			//	      "Source": {
+			//	        "maxLength": 2048,
+			//	        "minLength": 1,
+			//	        "pattern": "(?s).+",
+			//	        "type": "string"
+			//	      },
+			//	      "Status": {
+			//	        "maxLength": 7,
+			//	        "minLength": 3,
+			//	        "pattern": ".{3,7}",
+			//	        "type": "string"
+			//	      },
+			//	      "Target": {
+			//	        "maxLength": 2048,
+			//	        "minLength": 1,
+			//	        "pattern": "(?s).+",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Target",
+			//	      "Source"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"condition": {
@@ -383,61 +392,65 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"default_domain": {
 			// Property: DefaultDomain
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"enable_branch_auto_deletion": {
 			// Property: EnableBranchAutoDeletion
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"environment_variables": {
 			// Property: EnvironmentVariables
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Name": {
-			//         "maxLength": 255,
-			//         "pattern": "(?s).*",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 5500,
-			//         "pattern": "(?s).*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Name": {
+			//	        "maxLength": 255,
+			//	        "pattern": "(?s).*",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 5500,
+			//	        "pattern": "(?s).*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -457,77 +470,82 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_service_role": {
 			// Property: IAMServiceRole
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "(?s).+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "(?s).+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"oauth_token": {
 			// Property: OauthToken
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"repository": {
 			// Property: Repository
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "insertionOrder": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "insertionOrder": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

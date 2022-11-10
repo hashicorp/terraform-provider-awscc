@@ -23,24 +23,26 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"apply_only_at_cron_interval": {
 			// Property: ApplyOnlyAtCronInterval
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"association_id": {
 			// Property: AssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique identifier of the association.",
-			//   "examples": [
-			//     "88df7b09-95e8-48c4-a3cb-08c2c20d5110",
-			//     "203dd0ec-0055-4bf0-a872-707f72ef06aa"
-			//   ],
-			//   "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique identifier of the association.",
+			//	  "examples": [
+			//	    "88df7b09-95e8-48c4-a3cb-08c2c20d5110",
+			//	    "203dd0ec-0055-4bf0-a872-707f72ef06aa"
+			//	  ],
+			//	  "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "Unique identifier of the association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,11 +50,12 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"association_name": {
 			// Property: AssociationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the association.",
-			//   "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the association.",
+			//	  "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,59 +63,63 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"automation_target_parameter_name": {
 			// Property: AutomationTargetParameterName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 50,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 50,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"calendar_names": {
 			// Property: CalendarNames
 			// CloudFormation resource type schema:
-			// {
-			//   "examples": [
-			//     [
-			//       "calendar1",
-			//       "calendar2"
-			//     ],
-			//     [
-			//       "calendar3"
-			//     ]
-			//   ],
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "examples": [
+			//	    [
+			//	      "calendar1",
+			//	      "calendar2"
+			//	    ],
+			//	    [
+			//	      "calendar3"
+			//	    ]
+			//	  ],
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"compliance_severity": {
 			// Property: ComplianceSeverity
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "CRITICAL",
-			//     "HIGH",
-			//     "MEDIUM",
-			//     "LOW",
-			//     "UNSPECIFIED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "CRITICAL",
+			//	    "HIGH",
+			//	    "MEDIUM",
+			//	    "LOW",
+			//	    "UNSPECIFIED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"document_version": {
 			// Property: DocumentVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of the SSM document to associate with the target.",
-			//   "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of the SSM document to associate with the target.",
+			//	  "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
+			//	  "type": "string"
+			//	}
 			Description: "The version of the SSM document to associate with the target.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -120,15 +127,16 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_id": {
 			// Property: InstanceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the instance that the SSM document is associated with.",
-			//   "examples": [
-			//     "i-0e60836d21cf313c4",
-			//     "mi-0532c22e49636ee13"
-			//   ],
-			//   "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the instance that the SSM document is associated with.",
+			//	  "examples": [
+			//	    "i-0e60836d21cf313c4",
+			//	    "mi-0532c22e49636ee13"
+			//	  ],
+			//	  "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the instance that the SSM document is associated with.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -136,47 +144,50 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_concurrency": {
 			// Property: MaxConcurrency
 			// CloudFormation resource type schema:
-			// {
-			//   "examples": [
-			//     "1%",
-			//     "10%",
-			//     "50%",
-			//     "1"
-			//   ],
-			//   "pattern": "^([1-9][0-9]{0,6}|[1-9][0-9]%|[1-9]%|100%)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "examples": [
+			//	    "1%",
+			//	    "10%",
+			//	    "50%",
+			//	    "1"
+			//	  ],
+			//	  "pattern": "^([1-9][0-9]{0,6}|[1-9][0-9]%|[1-9]%|100%)$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"max_errors": {
 			// Property: MaxErrors
 			// CloudFormation resource type schema:
-			// {
-			//   "examples": [
-			//     "1%",
-			//     "10%",
-			//     "50%",
-			//     "1"
-			//   ],
-			//   "pattern": "^([1-9][0-9]{0,6}|[0]|[1-9][0-9]%|[0-9]%|100%)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "examples": [
+			//	    "1%",
+			//	    "10%",
+			//	    "50%",
+			//	    "1"
+			//	  ],
+			//	  "pattern": "^([1-9][0-9]{0,6}|[0]|[1-9][0-9]%|[0-9]%|100%)$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the SSM document.",
-			//   "examples": [
-			//     "AWS-GatherSoftwareInventory",
-			//     "MyCustomSSMDocument"
-			//   ],
-			//   "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the SSM document.",
+			//	  "examples": [
+			//	    "AWS-GatherSoftwareInventory",
+			//	    "MyCustomSSMDocument"
+			//	  ],
+			//	  "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the SSM document.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -184,32 +195,33 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_location": {
 			// Property: OutputLocation
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "S3Location": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "OutputS3BucketName": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "type": "string"
-			//         },
-			//         "OutputS3KeyPrefix": {
-			//           "maxLength": 1024,
-			//           "type": "string"
-			//         },
-			//         "OutputS3Region": {
-			//           "maxLength": 20,
-			//           "minLength": 3,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "S3Location": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "OutputS3BucketName": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "type": "string"
+			//	        },
+			//	        "OutputS3KeyPrefix": {
+			//	          "maxLength": 1024,
+			//	          "type": "string"
+			//	        },
+			//	        "OutputS3Region": {
+			//	          "maxLength": 20,
+			//	          "minLength": 3,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"s3_location": {
@@ -242,19 +254,20 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Parameter values that the SSM document uses at runtime.",
-			//   "patternProperties": {
-			//     "": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Parameter values that the SSM document uses at runtime.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Parameter values that the SSM document uses at runtime.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.ListType{ElemType: types.StringType}},
@@ -263,18 +276,19 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schedule_expression": {
 			// Property: ScheduleExpression
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A Cron or Rate expression that specifies when the association is applied to the target.",
-			//   "examples": [
-			//     "cron(0 0 */1 * * ? *)",
-			//     "cron(0 16 ? * TUE *)",
-			//     "rate(30 minutes)",
-			//     "rate(7 days)"
-			//   ],
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A Cron or Rate expression that specifies when the association is applied to the target.",
+			//	  "examples": [
+			//	    "cron(0 0 */1 * * ? *)",
+			//	    "cron(0 16 ? * TUE *)",
+			//	    "rate(30 minutes)",
+			//	    "rate(7 days)"
+			//	  ],
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -282,58 +296,61 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schedule_offset": {
 			// Property: ScheduleOffset
 			// CloudFormation resource type schema:
-			// {
-			//   "maximum": 6,
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "maximum": 6,
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"sync_compliance": {
 			// Property: SyncCompliance
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "AUTO",
-			//     "MANUAL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "AUTO",
+			//	    "MANUAL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"targets": {
 			// Property: Targets
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The targets that the SSM document sends commands to.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]{1,128}$|resource-groups:Name",
-			//         "type": "string"
-			//       },
-			//       "Values": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "maxItems": 50,
-			//         "minItems": 0,
-			//         "type": "array"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Values"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 5,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The targets that the SSM document sends commands to.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]{1,128}$|resource-groups:Name",
+			//	        "type": "string"
+			//	      },
+			//	      "Values": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "maxItems": 50,
+			//	        "minItems": 0,
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Values"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "The targets that the SSM document sends commands to.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -354,11 +371,12 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"wait_for_success_timeout_seconds": {
 			// Property: WaitForSuccessTimeoutSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "maximum": 172800,
-			//   "minimum": 15,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "maximum": 172800,
+			//	  "minimum": 15,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},

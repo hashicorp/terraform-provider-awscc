@@ -25,10 +25,11 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Arn for network analyzer configuration, Returned upon successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Arn for network analyzer configuration, Returned upon successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "Arn for network analyzer configuration, Returned upon successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,11 +40,12 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the new resource",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the new resource",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the new resource",
 			Type:        types.StringType,
 			Optional:    true,
@@ -58,12 +60,13 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the network analyzer configuration",
-			//   "maxLength": 1024,
-			//   "pattern": "^[a-zA-Z0-9-_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the network analyzer configuration",
+			//	  "maxLength": 1024,
+			//	  "pattern": "^[a-zA-Z0-9-_]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the network analyzer configuration",
 			Type:        types.StringType,
 			Required:    true,
@@ -78,36 +81,37 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -144,28 +148,29 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"trace_content": {
 			// Property: TraceContent
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Trace content for your wireless gateway and wireless device resources",
-			//   "properties": {
-			//     "LogLevel": {
-			//       "enum": [
-			//         "INFO",
-			//         "ERROR",
-			//         "DISABLED"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "WirelessDeviceFrameInfo": {
-			//       "enum": [
-			//         "ENABLED",
-			//         "DISABLED"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Trace content for your wireless gateway and wireless device resources",
+			//	  "properties": {
+			//	    "LogLevel": {
+			//	      "enum": [
+			//	        "INFO",
+			//	        "ERROR",
+			//	        "DISABLED"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "WirelessDeviceFrameInfo": {
+			//	      "enum": [
+			//	        "ENABLED",
+			//	        "DISABLED"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Trace content for your wireless gateway and wireless device resources",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -211,15 +216,16 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"wireless_devices": {
 			// Property: WirelessDevices
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of wireless gateway resources that have been added to the network analyzer configuration",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "maxItems": 250,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of wireless gateway resources that have been added to the network analyzer configuration",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 250,
+			//	  "type": "array"
+			//	}
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -235,15 +241,16 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		"wireless_gateways": {
 			// Property: WirelessGateways
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of wireless gateway resources that have been added to the network analyzer configuration",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "maxItems": 250,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of wireless gateway resources that have been added to the network analyzer configuration",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 250,
+			//	  "type": "array"
+			//	}
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,

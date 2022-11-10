@@ -25,13 +25,14 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The sso instance that the permission set is owned.",
-			//   "maxLength": 1224,
-			//   "minLength": 10,
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The sso instance that the permission set is owned.",
+			//	  "maxLength": 1224,
+			//	  "minLength": 10,
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+			//	  "type": "string"
+			//	}
 			Description: "The sso instance that the permission set is owned.",
 			Type:        types.StringType,
 			Required:    true,
@@ -46,13 +47,14 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		"permission_set_arn": {
 			// Property: PermissionSetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The permission set that the assignemt will be assigned",
-			//   "maxLength": 1224,
-			//   "minLength": 10,
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The permission set that the assignemt will be assigned",
+			//	  "maxLength": 1224,
+			//	  "minLength": 10,
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+			//	  "type": "string"
+			//	}
 			Description: "The permission set that the assignemt will be assigned",
 			Type:        types.StringType,
 			Required:    true,
@@ -67,13 +69,14 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		"principal_id": {
 			// Property: PrincipalId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The assignee's identifier, user id/group id",
-			//   "maxLength": 47,
-			//   "minLength": 1,
-			//   "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The assignee's identifier, user id/group id",
+			//	  "maxLength": 47,
+			//	  "minLength": 1,
+			//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The assignee's identifier, user id/group id",
 			Type:        types.StringType,
 			Required:    true,
@@ -88,14 +91,15 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		"principal_type": {
 			// Property: PrincipalType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The assignee's type, user/group",
-			//   "enum": [
-			//     "USER",
-			//     "GROUP"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The assignee's type, user/group",
+			//	  "enum": [
+			//	    "USER",
+			//	    "GROUP"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The assignee's type, user/group",
 			Type:        types.StringType,
 			Required:    true,
@@ -112,11 +116,12 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		"target_id": {
 			// Property: TargetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The account id to be provisioned.",
-			//   "pattern": "\\d{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The account id to be provisioned.",
+			//	  "pattern": "\\d{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The account id to be provisioned.",
 			Type:        types.StringType,
 			Required:    true,
@@ -130,13 +135,14 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		"target_type": {
 			// Property: TargetType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of resource to be provsioned to, only aws account now",
-			//   "enum": [
-			//     "AWS_ACCOUNT"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of resource to be provsioned to, only aws account now",
+			//	  "enum": [
+			//	    "AWS_ACCOUNT"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of resource to be provsioned to, only aws account now",
 			Type:        types.StringType,
 			Required:    true,

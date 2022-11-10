@@ -23,10 +23,11 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The arn of the api destination.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The arn of the api destination.",
+			//	  "type": "string"
+			//	}
 			Description: "The arn of the api destination.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		"connection_arn": {
 			// Property: ConnectionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The arn of the connection.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The arn of the connection.",
+			//	  "type": "string"
+			//	}
 			Description: "The arn of the connection.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,38 +47,41 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 512,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 512,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"http_method": {
 			// Property: HttpMethod
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "GET",
-			//     "HEAD",
-			//     "POST",
-			//     "OPTIONS",
-			//     "PUT",
-			//     "DELETE",
-			//     "PATCH"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "GET",
+			//	    "HEAD",
+			//	    "POST",
+			//	    "OPTIONS",
+			//	    "PUT",
+			//	    "DELETE",
+			//	    "PATCH"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"invocation_endpoint": {
 			// Property: InvocationEndpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Url endpoint to invoke.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Url endpoint to invoke.",
+			//	  "type": "string"
+			//	}
 			Description: "Url endpoint to invoke.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -84,22 +89,24 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		"invocation_rate_limit_per_second": {
 			// Property: InvocationRateLimitPerSecond
 			// CloudFormation resource type schema:
-			// {
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the apiDestination.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the apiDestination.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Name of the apiDestination.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,10 +23,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"airflow_configuration_options": {
 			// Property: AirflowConfigurationOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
+			//	  "type": "object"
+			//	}
 			Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
@@ -34,12 +35,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"airflow_version": {
 			// Property: AirflowVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Version of airflow to deploy to the environment.",
-			//   "maxLength": 32,
-			//   "pattern": "^[0-9a-z.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Version of airflow to deploy to the environment.",
+			//	  "maxLength": 32,
+			//	  "pattern": "^[0-9a-z.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Version of airflow to deploy to the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -47,13 +49,14 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN for the MWAA environment.",
-			//   "maxLength": 1224,
-			//   "minLength": 1,
-			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN for the MWAA environment.",
+			//	  "maxLength": 1224,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+",
+			//	  "type": "string"
+			//	}
 			Description: "ARN for the MWAA environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,12 +64,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dag_s3_path": {
 			// Property: DagS3Path
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
-			//   "maxLength": 1024,
-			//   "pattern": ".*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
+			//	  "maxLength": 1024,
+			//	  "pattern": ".*",
+			//	  "type": "string"
+			//	}
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -74,12 +78,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_class": {
 			// Property: EnvironmentClass
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Templated configuration for airflow processes and backing infrastructure.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Templated configuration for airflow processes and backing infrastructure.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Templated configuration for airflow processes and backing infrastructure.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,12 +92,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "IAM role to be used by tasks.",
-			//   "maxLength": 1224,
-			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "IAM role to be used by tasks.",
+			//	  "maxLength": 1224,
+			//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "IAM role to be used by tasks.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -100,12 +106,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key": {
 			// Property: KmsKey
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
-			//   "maxLength": 1224,
-			//   "pattern": "^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
+			//	  "maxLength": 1224,
+			//	  "pattern": "^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -113,153 +120,154 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"logging_configuration": {
 			// Property: LoggingConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Logging configuration for the environment.",
-			//   "properties": {
-			//     "DagProcessingLogs": {
-			//       "additionalProperties": false,
-			//       "description": "Logging configuration for a specific airflow component.",
-			//       "properties": {
-			//         "CloudWatchLogGroupArn": {
-			//           "description": "",
-			//           "maxLength": 1224,
-			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
-			//           "type": "string"
-			//         },
-			//         "Enabled": {
-			//           "description": "",
-			//           "type": "boolean"
-			//         },
-			//         "LogLevel": {
-			//           "description": "",
-			//           "enum": [
-			//             "CRITICAL",
-			//             "ERROR",
-			//             "WARNING",
-			//             "INFO",
-			//             "DEBUG"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "SchedulerLogs": {
-			//       "additionalProperties": false,
-			//       "description": "Logging configuration for a specific airflow component.",
-			//       "properties": {
-			//         "CloudWatchLogGroupArn": {
-			//           "description": "",
-			//           "maxLength": 1224,
-			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
-			//           "type": "string"
-			//         },
-			//         "Enabled": {
-			//           "description": "",
-			//           "type": "boolean"
-			//         },
-			//         "LogLevel": {
-			//           "description": "",
-			//           "enum": [
-			//             "CRITICAL",
-			//             "ERROR",
-			//             "WARNING",
-			//             "INFO",
-			//             "DEBUG"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "TaskLogs": {
-			//       "additionalProperties": false,
-			//       "description": "Logging configuration for a specific airflow component.",
-			//       "properties": {
-			//         "CloudWatchLogGroupArn": {
-			//           "description": "",
-			//           "maxLength": 1224,
-			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
-			//           "type": "string"
-			//         },
-			//         "Enabled": {
-			//           "description": "",
-			//           "type": "boolean"
-			//         },
-			//         "LogLevel": {
-			//           "description": "",
-			//           "enum": [
-			//             "CRITICAL",
-			//             "ERROR",
-			//             "WARNING",
-			//             "INFO",
-			//             "DEBUG"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "WebserverLogs": {
-			//       "additionalProperties": false,
-			//       "description": "Logging configuration for a specific airflow component.",
-			//       "properties": {
-			//         "CloudWatchLogGroupArn": {
-			//           "description": "",
-			//           "maxLength": 1224,
-			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
-			//           "type": "string"
-			//         },
-			//         "Enabled": {
-			//           "description": "",
-			//           "type": "boolean"
-			//         },
-			//         "LogLevel": {
-			//           "description": "",
-			//           "enum": [
-			//             "CRITICAL",
-			//             "ERROR",
-			//             "WARNING",
-			//             "INFO",
-			//             "DEBUG"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "WorkerLogs": {
-			//       "additionalProperties": false,
-			//       "description": "Logging configuration for a specific airflow component.",
-			//       "properties": {
-			//         "CloudWatchLogGroupArn": {
-			//           "description": "",
-			//           "maxLength": 1224,
-			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
-			//           "type": "string"
-			//         },
-			//         "Enabled": {
-			//           "description": "",
-			//           "type": "boolean"
-			//         },
-			//         "LogLevel": {
-			//           "description": "",
-			//           "enum": [
-			//             "CRITICAL",
-			//             "ERROR",
-			//             "WARNING",
-			//             "INFO",
-			//             "DEBUG"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Logging configuration for the environment.",
+			//	  "properties": {
+			//	    "DagProcessingLogs": {
+			//	      "additionalProperties": false,
+			//	      "description": "Logging configuration for a specific airflow component.",
+			//	      "properties": {
+			//	        "CloudWatchLogGroupArn": {
+			//	          "description": "",
+			//	          "maxLength": 1224,
+			//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
+			//	          "type": "string"
+			//	        },
+			//	        "Enabled": {
+			//	          "description": "",
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogLevel": {
+			//	          "description": "",
+			//	          "enum": [
+			//	            "CRITICAL",
+			//	            "ERROR",
+			//	            "WARNING",
+			//	            "INFO",
+			//	            "DEBUG"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "SchedulerLogs": {
+			//	      "additionalProperties": false,
+			//	      "description": "Logging configuration for a specific airflow component.",
+			//	      "properties": {
+			//	        "CloudWatchLogGroupArn": {
+			//	          "description": "",
+			//	          "maxLength": 1224,
+			//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
+			//	          "type": "string"
+			//	        },
+			//	        "Enabled": {
+			//	          "description": "",
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogLevel": {
+			//	          "description": "",
+			//	          "enum": [
+			//	            "CRITICAL",
+			//	            "ERROR",
+			//	            "WARNING",
+			//	            "INFO",
+			//	            "DEBUG"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "TaskLogs": {
+			//	      "additionalProperties": false,
+			//	      "description": "Logging configuration for a specific airflow component.",
+			//	      "properties": {
+			//	        "CloudWatchLogGroupArn": {
+			//	          "description": "",
+			//	          "maxLength": 1224,
+			//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
+			//	          "type": "string"
+			//	        },
+			//	        "Enabled": {
+			//	          "description": "",
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogLevel": {
+			//	          "description": "",
+			//	          "enum": [
+			//	            "CRITICAL",
+			//	            "ERROR",
+			//	            "WARNING",
+			//	            "INFO",
+			//	            "DEBUG"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "WebserverLogs": {
+			//	      "additionalProperties": false,
+			//	      "description": "Logging configuration for a specific airflow component.",
+			//	      "properties": {
+			//	        "CloudWatchLogGroupArn": {
+			//	          "description": "",
+			//	          "maxLength": 1224,
+			//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
+			//	          "type": "string"
+			//	        },
+			//	        "Enabled": {
+			//	          "description": "",
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogLevel": {
+			//	          "description": "",
+			//	          "enum": [
+			//	            "CRITICAL",
+			//	            "ERROR",
+			//	            "WARNING",
+			//	            "INFO",
+			//	            "DEBUG"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "WorkerLogs": {
+			//	      "additionalProperties": false,
+			//	      "description": "Logging configuration for a specific airflow component.",
+			//	      "properties": {
+			//	        "CloudWatchLogGroupArn": {
+			//	          "description": "",
+			//	          "maxLength": 1224,
+			//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
+			//	          "type": "string"
+			//	        },
+			//	        "Enabled": {
+			//	          "description": "",
+			//	          "type": "boolean"
+			//	        },
+			//	        "LogLevel": {
+			//	          "description": "",
+			//	          "enum": [
+			//	            "CRITICAL",
+			//	            "ERROR",
+			//	            "WARNING",
+			//	            "INFO",
+			//	            "DEBUG"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Logging configuration for the environment.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -405,11 +413,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_workers": {
 			// Property: MaxWorkers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Maximum worker compute units.",
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Maximum worker compute units.",
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "Maximum worker compute units.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -417,11 +426,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_workers": {
 			// Property: MinWorkers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Minimum worker compute units.",
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Minimum worker compute units.",
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "Minimum worker compute units.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -429,13 +439,14 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Customer-defined identifier for the environment, unique per customer region.",
-			//   "maxLength": 80,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z][0-9a-zA-Z\\-_]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Customer-defined identifier for the environment, unique per customer region.",
+			//	  "maxLength": 80,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z][0-9a-zA-Z\\-_]*$",
+			//	  "type": "string"
+			//	}
 			Description: "Customer-defined identifier for the environment, unique per customer region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -443,40 +454,41 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"network_configuration": {
 			// Property: NetworkConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configures the network resources of the environment.",
-			//   "properties": {
-			//     "SecurityGroupIds": {
-			//       "description": "A list of security groups to use for the environment.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "description": "",
-			//         "maxLength": 1024,
-			//         "minLength": 1,
-			//         "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
-			//         "type": "string"
-			//       },
-			//       "maxItems": 5,
-			//       "minItems": 1,
-			//       "type": "array"
-			//     },
-			//     "SubnetIds": {
-			//       "description": "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "description": "",
-			//         "maxLength": 1024,
-			//         "pattern": "^subnet-[a-zA-Z0-9\\-._]+$",
-			//         "type": "string"
-			//       },
-			//       "maxItems": 2,
-			//       "minItems": 2,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configures the network resources of the environment.",
+			//	  "properties": {
+			//	    "SecurityGroupIds": {
+			//	      "description": "A list of security groups to use for the environment.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "description": "",
+			//	        "maxLength": 1024,
+			//	        "minLength": 1,
+			//	        "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 5,
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    },
+			//	    "SubnetIds": {
+			//	      "description": "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "description": "",
+			//	        "maxLength": 1024,
+			//	        "pattern": "^subnet-[a-zA-Z0-9\\-._]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 2,
+			//	      "minItems": 2,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configures the network resources of the environment.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -499,11 +511,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"plugins_s3_object_version": {
 			// Property: PluginsS3ObjectVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents an version ID for an S3 object.",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents an version ID for an S3 object.",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -511,12 +524,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"plugins_s3_path": {
 			// Property: PluginsS3Path
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
-			//   "maxLength": 1024,
-			//   "pattern": ".*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
+			//	  "maxLength": 1024,
+			//	  "pattern": ".*",
+			//	  "type": "string"
+			//	}
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -524,11 +538,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"requirements_s3_object_version": {
 			// Property: RequirementsS3ObjectVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents an version ID for an S3 object.",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents an version ID for an S3 object.",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -536,12 +551,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"requirements_s3_path": {
 			// Property: RequirementsS3Path
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
-			//   "maxLength": 1024,
-			//   "pattern": ".*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
+			//	  "maxLength": 1024,
+			//	  "pattern": ".*",
+			//	  "type": "string"
+			//	}
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -549,11 +565,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schedulers": {
 			// Property: Schedulers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Scheduler compute units.",
-			//   "minimum": 1,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Scheduler compute units.",
+			//	  "minimum": 1,
+			//	  "type": "integer"
+			//	}
 			Description: "Scheduler compute units.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -561,13 +578,14 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_bucket_arn": {
 			// Property: SourceBucketArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
-			//   "maxLength": 1224,
-			//   "minLength": 1,
-			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
+			//	  "maxLength": 1224,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -575,10 +593,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A map of tags for the environment.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "A map of tags for the environment.",
+			//	  "type": "object"
+			//	}
 			Description: "A map of tags for the environment.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
@@ -586,14 +605,15 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"webserver_access_mode": {
 			// Property: WebserverAccessMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
-			//   "enum": [
-			//     "PRIVATE_ONLY",
-			//     "PUBLIC_ONLY"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
+			//	  "enum": [
+			//	    "PRIVATE_ONLY",
+			//	    "PUBLIC_ONLY"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -601,13 +621,14 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"webserver_url": {
 			// Property: WebserverUrl
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Url endpoint for the environment's Airflow UI.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^https://.+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Url endpoint for the environment's Airflow UI.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^https://.+$",
+			//	  "type": "string"
+			//	}
 			Description: "Url endpoint for the environment's Airflow UI.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -615,12 +636,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"weekly_maintenance_window_start": {
 			// Property: WeeklyMaintenanceWindowStart
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Start time for the weekly maintenance window.",
-			//   "maxLength": 9,
-			//   "pattern": "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Start time for the weekly maintenance window.",
+			//	  "maxLength": 9,
+			//	  "pattern": "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)",
+			//	  "type": "string"
+			//	}
 			Description: "Start time for the weekly maintenance window.",
 			Type:        types.StringType,
 			Computed:    true,

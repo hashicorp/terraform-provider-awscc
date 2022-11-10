@@ -25,13 +25,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the workspace.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the workspace.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the workspace.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,11 +43,12 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"creation_date_time": {
 			// Property: CreationDateTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date and time when the workspace was created.",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The date and time when the workspace was created.",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Description: "The date and time when the workspace was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,12 +59,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the workspace.",
-			//   "maxLength": 512,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the workspace.",
+			//	  "maxLength": 512,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the workspace.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -77,13 +80,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"role": {
 			// Property: Role
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the execution role associated with the workspace.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the execution role associated with the workspace.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the execution role associated with the workspace.",
 			Type:        types.StringType,
 			Required:    true,
@@ -95,10 +99,11 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"s3_location": {
 			// Property: S3Location
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the S3 bucket where resources associated with the workspace are stored.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the S3 bucket where resources associated with the workspace are stored.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the S3 bucket where resources associated with the workspace are stored.",
 			Type:        types.StringType,
 			Required:    true,
@@ -106,18 +111,19 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A map of key-value pairs to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A map of key-value pairs to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A map of key-value pairs to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -130,11 +136,12 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"update_date_time": {
 			// Property: UpdateDateTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date and time of the current update.",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The date and time of the current update.",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
 			Description: "The date and time of the current update.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -145,13 +152,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"workspace_id": {
 			// Property: WorkspaceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the workspace.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the workspace.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the workspace.",
 			Type:        types.StringType,
 			Required:    true,

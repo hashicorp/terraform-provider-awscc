@@ -25,9 +25,10 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"alarm_arn": {
 			// Property: AlarmArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,11 +38,12 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"alarm_name": {
 			// Property: AlarmName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-			//   "pattern": "\\w[\\w\\-]*\\w",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
+			//	  "pattern": "\\w[\\w\\-]*\\w",
+			//	  "type": "string"
+			//	}
 			Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
 			Type:        types.StringType,
 			Required:    true,
@@ -55,10 +57,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"comparison_operator": {
 			// Property: ComparisonOperator
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
+			//	  "type": "string"
+			//	}
 			Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
 			Type:        types.StringType,
 			Required:    true,
@@ -66,15 +69,16 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"contact_protocols": {
 			// Property: ContactProtocols
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
@@ -86,10 +90,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"datapoints_to_alarm": {
 			// Property: DatapointsToAlarm
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -101,10 +106,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"evaluation_periods": {
 			// Property: EvaluationPeriods
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
+			//	  "type": "integer"
+			//	}
 			Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
 			Type:        types.Int64Type,
 			Required:    true,
@@ -112,10 +118,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"metric_name": {
 			// Property: MetricName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the metric to associate with the alarm.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the metric to associate with the alarm.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the metric to associate with the alarm.",
 			Type:        types.StringType,
 			Required:    true,
@@ -126,10 +133,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"monitored_resource_name": {
 			// Property: MonitoredResourceName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The validation status of the SSL/TLS certificate.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The validation status of the SSL/TLS certificate.",
+			//	  "type": "string"
+			//	}
 			Description: "The validation status of the SSL/TLS certificate.",
 			Type:        types.StringType,
 			Required:    true,
@@ -140,10 +148,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"notification_enabled": {
 			// Property: NotificationEnabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -155,15 +164,16 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"notification_triggers": {
 			// Property: NotificationTriggers
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The alarm states that trigger a notification.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The alarm states that trigger a notification.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The alarm states that trigger a notification.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
@@ -175,10 +185,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The current state of the alarm.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The current state of the alarm.",
+			//	  "type": "string"
+			//	}
 			Description: "The current state of the alarm.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -189,10 +200,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"threshold": {
 			// Property: Threshold
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The value against which the specified statistic is compared.",
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "The value against which the specified statistic is compared.",
+			//	  "type": "number"
+			//	}
 			Description: "The value against which the specified statistic is compared.",
 			Type:        types.Float64Type,
 			Required:    true,
@@ -200,10 +212,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"treat_missing_data": {
 			// Property: TreatMissingData
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Sets how this alarm will handle missing data points.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Sets how this alarm will handle missing data points.",
+			//	  "type": "string"
+			//	}
 			Description: "Sets how this alarm will handle missing data points.",
 			Type:        types.StringType,
 			Optional:    true,

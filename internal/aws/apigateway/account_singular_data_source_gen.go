@@ -23,10 +23,11 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cloudwatch_role_arn": {
 			// Property: CloudWatchRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Primary identifier which is manually generated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Primary identifier which is manually generated.",
+			//	  "type": "string"
+			//	}
 			Description: "Primary identifier which is manually generated.",
 			Type:        types.StringType,
 			Computed:    true,

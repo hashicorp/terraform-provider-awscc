@@ -23,28 +23,29 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"additional_instance_configuration": {
 			// Property: AdditionalInstanceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specify additional settings and launch scripts for your build instances.",
-			//   "properties": {
-			//     "SystemsManagerAgent": {
-			//       "additionalProperties": false,
-			//       "description": "Contains settings for the SSM agent on your build instance.",
-			//       "properties": {
-			//         "UninstallAfterBuild": {
-			//           "description": "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "UserDataOverride": {
-			//       "description": "Use this property to provide commands or a command script to run when you launch your build instance.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specify additional settings and launch scripts for your build instances.",
+			//	  "properties": {
+			//	    "SystemsManagerAgent": {
+			//	      "additionalProperties": false,
+			//	      "description": "Contains settings for the SSM agent on your build instance.",
+			//	      "properties": {
+			//	        "UninstallAfterBuild": {
+			//	          "description": "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "UserDataOverride": {
+			//	      "description": "Use this property to provide commands or a command script to run when you launch your build instance.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Specify additional settings and launch scripts for your build instances.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -76,10 +77,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the image recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the image recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the image recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,78 +89,79 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"block_device_mappings": {
 			// Property: BlockDeviceMappings
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The block device mappings to apply when creating images from this recipe.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Defines block device mappings for the instance used to configure your image. ",
-			//     "properties": {
-			//       "DeviceName": {
-			//         "description": "The device to which these mappings apply.",
-			//         "type": "string"
-			//       },
-			//       "Ebs": {
-			//         "additionalProperties": false,
-			//         "description": "Use to manage Amazon EBS-specific configuration for this mapping.",
-			//         "properties": {
-			//           "DeleteOnTermination": {
-			//             "description": "Use to configure delete on termination of the associated device.",
-			//             "type": "boolean"
-			//           },
-			//           "Encrypted": {
-			//             "description": "Use to configure device encryption.",
-			//             "type": "boolean"
-			//           },
-			//           "Iops": {
-			//             "description": "Use to configure device IOPS.",
-			//             "type": "integer"
-			//           },
-			//           "KmsKeyId": {
-			//             "description": "Use to configure the KMS key to use when encrypting the device.",
-			//             "type": "string"
-			//           },
-			//           "SnapshotId": {
-			//             "description": "The snapshot that defines the device contents.",
-			//             "type": "string"
-			//           },
-			//           "Throughput": {
-			//             "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
-			//             "type": "integer"
-			//           },
-			//           "VolumeSize": {
-			//             "description": "Use to override the device's volume size.",
-			//             "type": "integer"
-			//           },
-			//           "VolumeType": {
-			//             "description": "Use to override the device's volume type.",
-			//             "enum": [
-			//               "standard",
-			//               "io1",
-			//               "io2",
-			//               "gp2",
-			//               "gp3",
-			//               "sc1",
-			//               "st1"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "NoDevice": {
-			//         "description": "Use to remove a mapping from the parent image.",
-			//         "type": "string"
-			//       },
-			//       "VirtualName": {
-			//         "description": "Use to manage instance ephemeral devices.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The block device mappings to apply when creating images from this recipe.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Defines block device mappings for the instance used to configure your image. ",
+			//	    "properties": {
+			//	      "DeviceName": {
+			//	        "description": "The device to which these mappings apply.",
+			//	        "type": "string"
+			//	      },
+			//	      "Ebs": {
+			//	        "additionalProperties": false,
+			//	        "description": "Use to manage Amazon EBS-specific configuration for this mapping.",
+			//	        "properties": {
+			//	          "DeleteOnTermination": {
+			//	            "description": "Use to configure delete on termination of the associated device.",
+			//	            "type": "boolean"
+			//	          },
+			//	          "Encrypted": {
+			//	            "description": "Use to configure device encryption.",
+			//	            "type": "boolean"
+			//	          },
+			//	          "Iops": {
+			//	            "description": "Use to configure device IOPS.",
+			//	            "type": "integer"
+			//	          },
+			//	          "KmsKeyId": {
+			//	            "description": "Use to configure the KMS key to use when encrypting the device.",
+			//	            "type": "string"
+			//	          },
+			//	          "SnapshotId": {
+			//	            "description": "The snapshot that defines the device contents.",
+			//	            "type": "string"
+			//	          },
+			//	          "Throughput": {
+			//	            "description": "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
+			//	            "type": "integer"
+			//	          },
+			//	          "VolumeSize": {
+			//	            "description": "Use to override the device's volume size.",
+			//	            "type": "integer"
+			//	          },
+			//	          "VolumeType": {
+			//	            "description": "Use to override the device's volume type.",
+			//	            "enum": [
+			//	              "standard",
+			//	              "io1",
+			//	              "io2",
+			//	              "gp2",
+			//	              "gp3",
+			//	              "sc1",
+			//	              "st1"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "NoDevice": {
+			//	        "description": "Use to remove a mapping from the parent image.",
+			//	        "type": "string"
+			//	      },
+			//	      "VirtualName": {
+			//	        "description": "Use to manage instance ephemeral devices.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The block device mappings to apply when creating images from this recipe.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -244,50 +247,51 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"components": {
 			// Property: Components
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The components of the image recipe.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Configuration details of the component.",
-			//     "properties": {
-			//       "ComponentArn": {
-			//         "description": "The Amazon Resource Name (ARN) of the component.",
-			//         "type": "string"
-			//       },
-			//       "Parameters": {
-			//         "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "Contains a key/value pair that sets the named component parameter.",
-			//           "properties": {
-			//             "Name": {
-			//               "description": "The name of the component parameter to set.",
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "description": "Sets the value for the named component parameter.",
-			//               "insertionOrder": true,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             }
-			//           },
-			//           "required": [
-			//             "Name",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The components of the image recipe.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Configuration details of the component.",
+			//	    "properties": {
+			//	      "ComponentArn": {
+			//	        "description": "The Amazon Resource Name (ARN) of the component.",
+			//	        "type": "string"
+			//	      },
+			//	      "Parameters": {
+			//	        "description": "A group of parameter settings that are used to configure the component for a specific recipe.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "Contains a key/value pair that sets the named component parameter.",
+			//	          "properties": {
+			//	            "Name": {
+			//	              "description": "The name of the component parameter to set.",
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "description": "Sets the value for the named component parameter.",
+			//	              "insertionOrder": true,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Name",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The components of the image recipe.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -325,10 +329,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the image recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the image recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the image recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -336,10 +341,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the image recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the image recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the image recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -347,10 +353,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parent_image": {
 			// Property: ParentImage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The parent image of the image recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The parent image of the image recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The parent image of the image recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -358,16 +365,17 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags of the image recipe.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags of the image recipe.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags of the image recipe.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -376,10 +384,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of the image recipe.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of the image recipe.",
+			//	  "type": "string"
+			//	}
 			Description: "The version of the image recipe.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -387,10 +396,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"working_directory": {
 			// Property: WorkingDirectory
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The working directory to be used during build and test workflows.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The working directory to be used during build and test workflows.",
+			//	  "type": "string"
+			//	}
 			Description: "The working directory to be used during build and test workflows.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -1,0 +1,1 @@
+$ terraform import awscc_resourceexplorer2_view.example <resource ID>

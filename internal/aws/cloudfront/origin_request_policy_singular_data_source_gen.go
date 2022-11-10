@@ -23,102 +23,105 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"origin_request_policy_config": {
 			// Property: OriginRequestPolicyConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "CookiesConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CookieBehavior": {
-			//           "pattern": "^(none|whitelist|all)$",
-			//           "type": "string"
-			//         },
-			//         "Cookies": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "required": [
-			//         "CookieBehavior"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "HeadersConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "HeaderBehavior": {
-			//           "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
-			//           "type": "string"
-			//         },
-			//         "Headers": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "required": [
-			//         "HeaderBehavior"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Name": {
-			//       "type": "string"
-			//     },
-			//     "QueryStringsConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "QueryStringBehavior": {
-			//           "pattern": "^(none|whitelist|all)$",
-			//           "type": "string"
-			//         },
-			//         "QueryStrings": {
-			//           "items": {
-			//             "type": "string"
-			//           },
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "required": [
-			//         "QueryStringBehavior"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name",
-			//     "HeadersConfig",
-			//     "CookiesConfig",
-			//     "QueryStringsConfig"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "CookiesConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CookieBehavior": {
+			//	          "pattern": "^(none|whitelist|all)$",
+			//	          "type": "string"
+			//	        },
+			//	        "Cookies": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CookieBehavior"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "HeadersConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "HeaderBehavior": {
+			//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
+			//	          "type": "string"
+			//	        },
+			//	        "Headers": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "HeaderBehavior"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Name": {
+			//	      "type": "string"
+			//	    },
+			//	    "QueryStringsConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "QueryStringBehavior": {
+			//	          "pattern": "^(none|whitelist|all)$",
+			//	          "type": "string"
+			//	        },
+			//	        "QueryStrings": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "QueryStringBehavior"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name",
+			//	    "HeadersConfig",
+			//	    "CookiesConfig",
+			//	    "QueryStringsConfig"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"comment": {

@@ -24,10 +24,11 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the identity provider configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the identity provider configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the identity provider configuration.",
 			Type:        types.StringType,
 			Required:    true,
@@ -38,10 +39,11 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 		"identity_provider_config_arn": {
 			// Property: IdentityProviderConfigArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,10 +54,11 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 		"identity_provider_config_name": {
 			// Property: IdentityProviderConfigName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the OIDC provider configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the OIDC provider configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the OIDC provider configuration.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -68,69 +71,70 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 		"oidc": {
 			// Property: Oidc
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "An object representing an OpenID Connect (OIDC) configuration.",
-			//   "properties": {
-			//     "ClientId": {
-			//       "description": "This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.",
-			//       "type": "string"
-			//     },
-			//     "GroupsClaim": {
-			//       "description": "The JWT claim that the provider uses to return your groups.",
-			//       "type": "string"
-			//     },
-			//     "GroupsPrefix": {
-			//       "description": "The prefix that is prepended to group claims to prevent clashes with existing names (such as system: groups).",
-			//       "type": "string"
-			//     },
-			//     "IssuerUrl": {
-			//       "description": "The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens.",
-			//       "type": "string"
-			//     },
-			//     "RequiredClaims": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value.",
-			//         "properties": {
-			//           "Key": {
-			//             "description": "The key of the requiredClaims.",
-			//             "maxLength": 63,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "description": "The value for the requiredClaims.",
-			//             "maxLength": 253,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Key",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "UsernameClaim": {
-			//       "description": "The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OpenID identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.",
-			//       "type": "string"
-			//     },
-			//     "UsernamePrefix": {
-			//       "description": "The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and username is a value other than email, the prefix defaults to issuerurl#. You can use the value - to disable all prefixing.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ClientId",
-			//     "IssuerUrl"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "An object representing an OpenID Connect (OIDC) configuration.",
+			//	  "properties": {
+			//	    "ClientId": {
+			//	      "description": "This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.",
+			//	      "type": "string"
+			//	    },
+			//	    "GroupsClaim": {
+			//	      "description": "The JWT claim that the provider uses to return your groups.",
+			//	      "type": "string"
+			//	    },
+			//	    "GroupsPrefix": {
+			//	      "description": "The prefix that is prepended to group claims to prevent clashes with existing names (such as system: groups).",
+			//	      "type": "string"
+			//	    },
+			//	    "IssuerUrl": {
+			//	      "description": "The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens.",
+			//	      "type": "string"
+			//	    },
+			//	    "RequiredClaims": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value.",
+			//	        "properties": {
+			//	          "Key": {
+			//	            "description": "The key of the requiredClaims.",
+			//	            "maxLength": 63,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "description": "The value for the requiredClaims.",
+			//	            "maxLength": 253,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Key",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "UsernameClaim": {
+			//	      "description": "The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OpenID identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.",
+			//	      "type": "string"
+			//	    },
+			//	    "UsernamePrefix": {
+			//	      "description": "The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and username is a value other than email, the prefix defaults to issuerurl#. You can use the value - to disable all prefixing.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ClientId",
+			//	    "IssuerUrl"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "An object representing an OpenID Connect (OIDC) configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -228,35 +232,36 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -289,13 +294,14 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the identity provider configuration.",
-			//   "enum": [
-			//     "oidc"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the identity provider configuration.",
+			//	  "enum": [
+			//	    "oidc"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of the identity provider configuration.",
 			Type:        types.StringType,
 			Required:    true,

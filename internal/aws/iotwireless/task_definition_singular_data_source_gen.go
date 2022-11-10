@@ -23,10 +23,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "TaskDefinition arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "TaskDefinition arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "TaskDefinition arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"auto_create_tasks": {
 			// Property: AutoCreateTasks
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -45,11 +47,12 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the new wireless gateway task definition",
-			//   "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the new wireless gateway task definition",
+			//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the new wireless gateway task definition",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,55 +60,56 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"lo_ra_wan_update_gateway_task_entry": {
 			// Property: LoRaWANUpdateGatewayTaskEntry
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The list of task definitions.",
-			//   "properties": {
-			//     "CurrentVersion": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Model": {
-			//           "maxLength": 4096,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "PackageVersion": {
-			//           "maxLength": 32,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Station": {
-			//           "maxLength": 4096,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "UpdateVersion": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Model": {
-			//           "maxLength": 4096,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "PackageVersion": {
-			//           "maxLength": 32,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Station": {
-			//           "maxLength": 4096,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The list of task definitions.",
+			//	  "properties": {
+			//	    "CurrentVersion": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Model": {
+			//	          "maxLength": 4096,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "PackageVersion": {
+			//	          "maxLength": 32,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Station": {
+			//	          "maxLength": 4096,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "UpdateVersion": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Model": {
+			//	          "maxLength": 4096,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "PackageVersion": {
+			//	          "maxLength": 32,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Station": {
+			//	          "maxLength": 4096,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The list of task definitions.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -162,12 +166,13 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the new resource.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the new resource.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the new resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -175,29 +180,30 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the destination.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the destination.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the destination.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -218,13 +224,14 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"task_definition_type": {
 			// Property: TaskDefinitionType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A filter to list only the wireless gateway task definitions that use this task definition type",
-			//   "enum": [
-			//     "UPDATE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A filter to list only the wireless gateway task definitions that use this task definition type",
+			//	  "enum": [
+			//	    "UPDATE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "A filter to list only the wireless gateway task definitions that use this task definition type",
 			Type:        types.StringType,
 			Computed:    true,
@@ -232,80 +239,81 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"update": {
 			// Property: Update
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Information about the gateways to update.",
-			//   "properties": {
-			//     "LoRaWAN": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CurrentVersion": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Model": {
-			//               "maxLength": 4096,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "PackageVersion": {
-			//               "maxLength": 32,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Station": {
-			//               "maxLength": 4096,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "SigKeyCrc": {
-			//           "format": "int64",
-			//           "type": "integer"
-			//         },
-			//         "UpdateSignature": {
-			//           "maxLength": 4096,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "UpdateVersion": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Model": {
-			//               "maxLength": 4096,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "PackageVersion": {
-			//               "maxLength": 32,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Station": {
-			//               "maxLength": 4096,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "UpdateDataRole": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "UpdateDataSource": {
-			//       "maxLength": 4096,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Information about the gateways to update.",
+			//	  "properties": {
+			//	    "LoRaWAN": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CurrentVersion": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Model": {
+			//	              "maxLength": 4096,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "PackageVersion": {
+			//	              "maxLength": 32,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Station": {
+			//	              "maxLength": 4096,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "SigKeyCrc": {
+			//	          "format": "int64",
+			//	          "type": "integer"
+			//	        },
+			//	        "UpdateSignature": {
+			//	          "maxLength": 4096,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "UpdateVersion": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Model": {
+			//	              "maxLength": 4096,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "PackageVersion": {
+			//	              "maxLength": 32,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Station": {
+			//	              "maxLength": 4096,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "UpdateDataRole": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "UpdateDataSource": {
+			//	      "maxLength": 4096,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Information about the gateways to update.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

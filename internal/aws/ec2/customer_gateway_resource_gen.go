@@ -23,11 +23,12 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"bgp_asn": {
 			// Property: BgpAsn
 			// CloudFormation resource type schema:
-			// {
-			//   "default": 65000,
-			//   "description": "For devices that support BGP, the customer gateway's BGP ASN.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "default": 65000,
+			//	  "description": "For devices that support BGP, the customer gateway's BGP ASN.",
+			//	  "type": "integer"
+			//	}
 			Description: "For devices that support BGP, the customer gateway's BGP ASN.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -41,10 +42,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"customer_gateway_id": {
 			// Property: CustomerGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.",
+			//	  "type": "string"
+			//	}
 			Description: "CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -55,10 +57,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"ip_address": {
 			// Property: IpAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The internet-routable IP address for the customer gateway's outside interface. The address must be static.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The internet-routable IP address for the customer gateway's outside interface. The address must be static.",
+			//	  "type": "string"
+			//	}
 			Description: "The internet-routable IP address for the customer gateway's outside interface. The address must be static.",
 			Type:        types.StringType,
 			Required:    true,
@@ -69,28 +72,29 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One or more tags for the customer gateway.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "One or more tags for the customer gateway.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "One or more tags for the customer gateway.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -116,10 +120,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of VPN connection that this customer gateway supports.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of VPN connection that this customer gateway supports.",
+			//	  "type": "string"
+			//	}
 			Description: "The type of VPN connection that this customer gateway supports.",
 			Type:        types.StringType,
 			Required:    true,

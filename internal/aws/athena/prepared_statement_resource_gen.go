@@ -24,12 +24,13 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the prepared statement.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the prepared statement.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the prepared statement.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -44,12 +45,13 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 		"query_statement": {
 			// Property: QueryStatement
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The query string for the prepared statement.",
-			//   "maxLength": 262144,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The query string for the prepared statement.",
+			//	  "maxLength": 262144,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The query string for the prepared statement.",
 			Type:        types.StringType,
 			Required:    true,
@@ -60,12 +62,13 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 		"statement_name": {
 			// Property: StatementName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the prepared statement.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the prepared statement.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the prepared statement.",
 			Type:        types.StringType,
 			Required:    true,
@@ -79,12 +82,13 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 		"work_group": {
 			// Property: WorkGroup
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the workgroup to which the prepared statement belongs.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the workgroup to which the prepared statement belongs.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the workgroup to which the prepared statement belongs.",
 			Type:        types.StringType,
 			Required:    true,

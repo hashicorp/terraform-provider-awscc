@@ -23,12 +23,13 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"catalog_id": {
 			// Property: CatalogId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "type": "string"
+			//	}
 			Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,13 +37,14 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tag_key": {
 			// Property: TagKey
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The key-name for the LF-tag.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The key-name for the LF-tag.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$",
+			//	  "type": "string"
+			//	}
 			Description: "The key-name for the LF-tag.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -50,19 +52,20 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tag_values": {
 			// Property: TagValues
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of possible values an attribute can take.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "maxLength": 256,
-			//     "minLength": 0,
-			//     "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of possible values an attribute can take.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "maxLength": 256,
+			//	    "minLength": 0,
+			//	    "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Description: "A list of possible values an attribute can take.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,

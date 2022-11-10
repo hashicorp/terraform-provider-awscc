@@ -23,10 +23,11 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the detector.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the detector.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the detector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,23 +35,24 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"associated_models": {
 			// Property: AssociatedModels
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The models to associate with this detector.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A model to associate with a detector.",
-			//     "properties": {
-			//       "Arn": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 10,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "The models to associate with this detector.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A model to associate with a detector.",
+			//	    "properties": {
+			//	      "Arn": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 10,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "The models to associate with this detector.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -66,10 +68,11 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time when the detector was created.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time when the detector was created.",
+			//	  "type": "string"
+			//	}
 			Description: "The time when the detector was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -77,12 +80,13 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the detector.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the detector.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the detector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -90,13 +94,14 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"detector_id": {
 			// Property: DetectorId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the detector",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-z_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the detector",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-z_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the detector",
 			Type:        types.StringType,
 			Computed:    true,
@@ -104,10 +109,11 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"detector_version_id": {
 			// Property: DetectorVersionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The active version ID of the detector",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The active version ID of the detector",
+			//	  "type": "string"
+			//	}
 			Description: "The active version ID of the detector",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,14 +121,15 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"detector_version_status": {
 			// Property: DetectorVersionStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The desired detector version status for the detector",
-			//   "enum": [
-			//     "DRAFT",
-			//     "ACTIVE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The desired detector version status for the detector",
+			//	  "enum": [
+			//	    "DRAFT",
+			//	    "ACTIVE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The desired detector version status for the detector",
 			Type:        types.StringType,
 			Computed:    true,
@@ -130,310 +137,311 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"event_type": {
 			// Property: EventType
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The event type to associate this detector with.",
-			//   "properties": {
-			//     "Arn": {
-			//       "description": "The ARN of the event type.",
-			//       "type": "string"
-			//     },
-			//     "CreatedTime": {
-			//       "description": "The time when the event type was created.",
-			//       "type": "string"
-			//     },
-			//     "Description": {
-			//       "description": "The description of the event type.",
-			//       "maxLength": 128,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "EntityTypes": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "CreatedTime": {
-			//             "description": "The time when the entity type was created.",
-			//             "type": "string"
-			//           },
-			//           "Description": {
-			//             "description": "The description.",
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Inline": {
-			//             "type": "boolean"
-			//           },
-			//           "LastUpdatedTime": {
-			//             "description": "The time when the entity type was last updated.",
-			//             "type": "string"
-			//           },
-			//           "Name": {
-			//             "type": "string"
-			//           },
-			//           "Tags": {
-			//             "description": "Tags associated with this entity type.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Key": {
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 200,
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "EventVariables": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "CreatedTime": {
-			//             "description": "The time when the event variable was created.",
-			//             "type": "string"
-			//           },
-			//           "DataSource": {
-			//             "enum": [
-			//               "EVENT"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "DataType": {
-			//             "enum": [
-			//               "STRING",
-			//               "INTEGER",
-			//               "FLOAT",
-			//               "BOOLEAN"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "DefaultValue": {
-			//             "type": "string"
-			//           },
-			//           "Description": {
-			//             "description": "The description.",
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Inline": {
-			//             "type": "boolean"
-			//           },
-			//           "LastUpdatedTime": {
-			//             "description": "The time when the event variable was last updated.",
-			//             "type": "string"
-			//           },
-			//           "Name": {
-			//             "type": "string"
-			//           },
-			//           "Tags": {
-			//             "description": "Tags associated with this event variable.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Key": {
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 200,
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "VariableType": {
-			//             "enum": [
-			//               "AUTH_CODE",
-			//               "AVS",
-			//               "BILLING_ADDRESS_L1",
-			//               "BILLING_ADDRESS_L2",
-			//               "BILLING_CITY",
-			//               "BILLING_COUNTRY",
-			//               "BILLING_NAME",
-			//               "BILLING_PHONE",
-			//               "BILLING_STATE",
-			//               "BILLING_ZIP",
-			//               "CARD_BIN",
-			//               "CATEGORICAL",
-			//               "CURRENCY_CODE",
-			//               "EMAIL_ADDRESS",
-			//               "FINGERPRINT",
-			//               "FRAUD_LABEL",
-			//               "FREE_FORM_TEXT",
-			//               "IP_ADDRESS",
-			//               "NUMERIC",
-			//               "ORDER_ID",
-			//               "PAYMENT_TYPE",
-			//               "PHONE_NUMBER",
-			//               "PRICE",
-			//               "PRODUCT_CATEGORY",
-			//               "SHIPPING_ADDRESS_L1",
-			//               "SHIPPING_ADDRESS_L2",
-			//               "SHIPPING_CITY",
-			//               "SHIPPING_COUNTRY",
-			//               "SHIPPING_NAME",
-			//               "SHIPPING_PHONE",
-			//               "SHIPPING_STATE",
-			//               "SHIPPING_ZIP",
-			//               "USERAGENT"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "Inline": {
-			//       "type": "boolean"
-			//     },
-			//     "Labels": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Arn": {
-			//             "type": "string"
-			//           },
-			//           "CreatedTime": {
-			//             "description": "The time when the label was created.",
-			//             "type": "string"
-			//           },
-			//           "Description": {
-			//             "description": "The description.",
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Inline": {
-			//             "type": "boolean"
-			//           },
-			//           "LastUpdatedTime": {
-			//             "description": "The time when the label was last updated.",
-			//             "type": "string"
-			//           },
-			//           "Name": {
-			//             "type": "string"
-			//           },
-			//           "Tags": {
-			//             "description": "Tags associated with this label.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "Key": {
-			//                   "maxLength": 128,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "maxLength": 256,
-			//                   "minLength": 0,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Key",
-			//                 "Value"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 200,
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "minItems": 2,
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "LastUpdatedTime": {
-			//       "description": "The time when the event type was last updated.",
-			//       "type": "string"
-			//     },
-			//     "Name": {
-			//       "description": "The name for the event type",
-			//       "maxLength": 64,
-			//       "minLength": 1,
-			//       "pattern": "^[0-9a-z_-]+$",
-			//       "type": "string"
-			//     },
-			//     "Tags": {
-			//       "description": "Tags associated with this event type.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Key": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 256,
-			//             "minLength": 0,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Key",
-			//           "Value"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 200,
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The event type to associate this detector with.",
+			//	  "properties": {
+			//	    "Arn": {
+			//	      "description": "The ARN of the event type.",
+			//	      "type": "string"
+			//	    },
+			//	    "CreatedTime": {
+			//	      "description": "The time when the event type was created.",
+			//	      "type": "string"
+			//	    },
+			//	    "Description": {
+			//	      "description": "The description of the event type.",
+			//	      "maxLength": 128,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "EntityTypes": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "CreatedTime": {
+			//	            "description": "The time when the entity type was created.",
+			//	            "type": "string"
+			//	          },
+			//	          "Description": {
+			//	            "description": "The description.",
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Inline": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "LastUpdatedTime": {
+			//	            "description": "The time when the entity type was last updated.",
+			//	            "type": "string"
+			//	          },
+			//	          "Name": {
+			//	            "type": "string"
+			//	          },
+			//	          "Tags": {
+			//	            "description": "Tags associated with this entity type.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Key",
+			//	                "Value"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 200,
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "EventVariables": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "CreatedTime": {
+			//	            "description": "The time when the event variable was created.",
+			//	            "type": "string"
+			//	          },
+			//	          "DataSource": {
+			//	            "enum": [
+			//	              "EVENT"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "DataType": {
+			//	            "enum": [
+			//	              "STRING",
+			//	              "INTEGER",
+			//	              "FLOAT",
+			//	              "BOOLEAN"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "DefaultValue": {
+			//	            "type": "string"
+			//	          },
+			//	          "Description": {
+			//	            "description": "The description.",
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Inline": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "LastUpdatedTime": {
+			//	            "description": "The time when the event variable was last updated.",
+			//	            "type": "string"
+			//	          },
+			//	          "Name": {
+			//	            "type": "string"
+			//	          },
+			//	          "Tags": {
+			//	            "description": "Tags associated with this event variable.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Key",
+			//	                "Value"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 200,
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "VariableType": {
+			//	            "enum": [
+			//	              "AUTH_CODE",
+			//	              "AVS",
+			//	              "BILLING_ADDRESS_L1",
+			//	              "BILLING_ADDRESS_L2",
+			//	              "BILLING_CITY",
+			//	              "BILLING_COUNTRY",
+			//	              "BILLING_NAME",
+			//	              "BILLING_PHONE",
+			//	              "BILLING_STATE",
+			//	              "BILLING_ZIP",
+			//	              "CARD_BIN",
+			//	              "CATEGORICAL",
+			//	              "CURRENCY_CODE",
+			//	              "EMAIL_ADDRESS",
+			//	              "FINGERPRINT",
+			//	              "FRAUD_LABEL",
+			//	              "FREE_FORM_TEXT",
+			//	              "IP_ADDRESS",
+			//	              "NUMERIC",
+			//	              "ORDER_ID",
+			//	              "PAYMENT_TYPE",
+			//	              "PHONE_NUMBER",
+			//	              "PRICE",
+			//	              "PRODUCT_CATEGORY",
+			//	              "SHIPPING_ADDRESS_L1",
+			//	              "SHIPPING_ADDRESS_L2",
+			//	              "SHIPPING_CITY",
+			//	              "SHIPPING_COUNTRY",
+			//	              "SHIPPING_NAME",
+			//	              "SHIPPING_PHONE",
+			//	              "SHIPPING_STATE",
+			//	              "SHIPPING_ZIP",
+			//	              "USERAGENT"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "Inline": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "Labels": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Arn": {
+			//	            "type": "string"
+			//	          },
+			//	          "CreatedTime": {
+			//	            "description": "The time when the label was created.",
+			//	            "type": "string"
+			//	          },
+			//	          "Description": {
+			//	            "description": "The description.",
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Inline": {
+			//	            "type": "boolean"
+			//	          },
+			//	          "LastUpdatedTime": {
+			//	            "description": "The time when the label was last updated.",
+			//	            "type": "string"
+			//	          },
+			//	          "Name": {
+			//	            "type": "string"
+			//	          },
+			//	          "Tags": {
+			//	            "description": "Tags associated with this label.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "maxLength": 128,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "maxLength": 256,
+			//	                  "minLength": 0,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Key",
+			//	                "Value"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 200,
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 2,
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "LastUpdatedTime": {
+			//	      "description": "The time when the event type was last updated.",
+			//	      "type": "string"
+			//	    },
+			//	    "Name": {
+			//	      "description": "The name for the event type",
+			//	      "maxLength": 64,
+			//	      "minLength": 1,
+			//	      "pattern": "^[0-9a-z_-]+$",
+			//	      "type": "string"
+			//	    },
+			//	    "Tags": {
+			//	      "description": "Tags associated with this event type.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Key": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 256,
+			//	            "minLength": 0,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Key",
+			//	          "Value"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 200,
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The event type to associate this detector with.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -698,10 +706,11 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time when the detector was last updated.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time when the detector was last updated.",
+			//	  "type": "string"
+			//	}
 			Description: "The time when the detector was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -709,155 +718,157 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rule_execution_mode": {
 			// Property: RuleExecutionMode
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "FIRST_MATCHED",
-			//     "ALL_MATCHED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "FIRST_MATCHED",
+			//	    "ALL_MATCHED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"rules": {
 			// Property: Rules
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Arn": {
-			//         "type": "string"
-			//       },
-			//       "CreatedTime": {
-			//         "description": "The time when the event type was created.",
-			//         "type": "string"
-			//       },
-			//       "Description": {
-			//         "description": "The description.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "DetectorId": {
-			//         "type": "string"
-			//       },
-			//       "Expression": {
-			//         "type": "string"
-			//       },
-			//       "Language": {
-			//         "enum": [
-			//           "DETECTORPL"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "LastUpdatedTime": {
-			//         "description": "The time when the event type was last updated.",
-			//         "type": "string"
-			//       },
-			//       "Outcomes": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Arn": {
-			//               "type": "string"
-			//             },
-			//             "CreatedTime": {
-			//               "description": "The time when the outcome was created.",
-			//               "type": "string"
-			//             },
-			//             "Description": {
-			//               "description": "The description.",
-			//               "maxLength": 256,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Inline": {
-			//               "type": "boolean"
-			//             },
-			//             "LastUpdatedTime": {
-			//               "description": "The time when the outcome was last updated.",
-			//               "type": "string"
-			//             },
-			//             "Name": {
-			//               "type": "string"
-			//             },
-			//             "Tags": {
-			//               "description": "Tags associated with this outcome.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "properties": {
-			//                   "Key": {
-			//                     "maxLength": 128,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Value": {
-			//                     "maxLength": 256,
-			//                     "minLength": 0,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Key",
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 200,
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       },
-			//       "RuleId": {
-			//         "type": "string"
-			//       },
-			//       "RuleVersion": {
-			//         "type": "string"
-			//       },
-			//       "Tags": {
-			//         "description": "Tags associated with this event type.",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "maxLength": 128,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "maxLength": 256,
-			//               "minLength": 0,
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Key",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 200,
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Arn": {
+			//	        "type": "string"
+			//	      },
+			//	      "CreatedTime": {
+			//	        "description": "The time when the event type was created.",
+			//	        "type": "string"
+			//	      },
+			//	      "Description": {
+			//	        "description": "The description.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "DetectorId": {
+			//	        "type": "string"
+			//	      },
+			//	      "Expression": {
+			//	        "type": "string"
+			//	      },
+			//	      "Language": {
+			//	        "enum": [
+			//	          "DETECTORPL"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "LastUpdatedTime": {
+			//	        "description": "The time when the event type was last updated.",
+			//	        "type": "string"
+			//	      },
+			//	      "Outcomes": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Arn": {
+			//	              "type": "string"
+			//	            },
+			//	            "CreatedTime": {
+			//	              "description": "The time when the outcome was created.",
+			//	              "type": "string"
+			//	            },
+			//	            "Description": {
+			//	              "description": "The description.",
+			//	              "maxLength": 256,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Inline": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "LastUpdatedTime": {
+			//	              "description": "The time when the outcome was last updated.",
+			//	              "type": "string"
+			//	            },
+			//	            "Name": {
+			//	              "type": "string"
+			//	            },
+			//	            "Tags": {
+			//	              "description": "Tags associated with this outcome.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "properties": {
+			//	                  "Key": {
+			//	                    "maxLength": 128,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Value": {
+			//	                    "maxLength": 256,
+			//	                    "minLength": 0,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Key",
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 200,
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      },
+			//	      "RuleId": {
+			//	        "type": "string"
+			//	      },
+			//	      "RuleVersion": {
+			//	        "type": "string"
+			//	      },
+			//	      "Tags": {
+			//	        "description": "Tags associated with this event type.",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "maxLength": 128,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "maxLength": 256,
+			//	              "minLength": 0,
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Key",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 200,
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -994,33 +1005,34 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags associated with this detector.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Tags associated with this detector.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Tags associated with this detector.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

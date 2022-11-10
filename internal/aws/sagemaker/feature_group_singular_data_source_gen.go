@@ -23,11 +23,12 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description about the FeatureGroup.",
-			//   "maxLength": 128,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description about the FeatureGroup.",
+			//	  "maxLength": 128,
+			//	  "type": "string"
+			//	}
 			Description: "Description about the FeatureGroup.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,13 +36,14 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"event_time_feature_name": {
 			// Property: EventTimeFeatureName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Event Time Feature Name.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Event Time Feature Name.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
+			//	  "type": "string"
+			//	}
 			Description: "The Event Time Feature Name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,37 +51,38 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"feature_definitions": {
 			// Property: FeatureDefinitions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An Array of Feature Definition",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "FeatureName": {
-			//         "maxLength": 64,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
-			//         "type": "string"
-			//       },
-			//       "FeatureType": {
-			//         "enum": [
-			//           "Integral",
-			//           "Fractional",
-			//           "String"
-			//         ],
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "FeatureName",
-			//       "FeatureType"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 2500,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An Array of Feature Definition",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "FeatureName": {
+			//	        "maxLength": 64,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
+			//	        "type": "string"
+			//	      },
+			//	      "FeatureType": {
+			//	        "enum": [
+			//	          "Integral",
+			//	          "Fractional",
+			//	          "String"
+			//	        ],
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "FeatureName",
+			//	      "FeatureType"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 2500,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An Array of Feature Definition",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -100,13 +103,14 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"feature_group_name": {
 			// Property: FeatureGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Name of the FeatureGroup.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Name of the FeatureGroup.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
+			//	  "type": "string"
+			//	}
 			Description: "The Name of the FeatureGroup.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -114,65 +118,66 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"offline_store_config": {
 			// Property: OfflineStoreConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "DataCatalogConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Catalog": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "Database": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         },
-			//         "TableName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "pattern": "",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "TableName",
-			//         "Catalog",
-			//         "Database"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "DisableGlueTableCreation": {
-			//       "type": "boolean"
-			//     },
-			//     "S3StorageConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "KmsKeyId": {
-			//           "maxLength": 2048,
-			//           "type": "string"
-			//         },
-			//         "S3Uri": {
-			//           "maxLength": 1024,
-			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "S3Uri"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3StorageConfig"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "DataCatalogConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Catalog": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "Database": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "TableName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "TableName",
+			//	        "Catalog",
+			//	        "Database"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "DisableGlueTableCreation": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "S3StorageConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "KmsKeyId": {
+			//	          "maxLength": 2048,
+			//	          "type": "string"
+			//	        },
+			//	        "S3Uri": {
+			//	          "maxLength": 1024,
+			//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "S3Uri"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3StorageConfig"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"data_catalog_config": {
@@ -228,25 +233,26 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"online_store_config": {
 			// Property: OnlineStoreConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "EnableOnlineStore": {
-			//       "type": "boolean"
-			//     },
-			//     "SecurityConfig": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "KmsKeyId": {
-			//           "maxLength": 2048,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "EnableOnlineStore": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "SecurityConfig": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "KmsKeyId": {
+			//	          "maxLength": 2048,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"enable_online_store": {
@@ -274,13 +280,14 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"record_identifier_feature_name": {
 			// Property: RecordIdentifierFeatureName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Record Identifier Feature Name.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Record Identifier Feature Name.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
+			//	  "type": "string"
+			//	}
 			Description: "The Record Identifier Feature Name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -288,13 +295,14 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Role Arn",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Role Arn",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Role Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -302,29 +310,30 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pair to apply to this resource.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pair to apply to this resource.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of key-value pair to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

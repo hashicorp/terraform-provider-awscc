@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 623 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 634 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -166,8 +166,17 @@ resource_schema "aws_apigatewayv2_api" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_apigatewayv2_authorizer" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::Authorizer"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_apigatewayv2_deployment" {
-  cloudformation_type_name               = "AWS::ApiGatewayV2::Deployment"
+  cloudformation_type_name = "AWS::ApiGatewayV2::Deployment"
 
   # Suppress until given green light by AWS.
   suppress_resource_generation             = true
@@ -176,7 +185,7 @@ resource_schema "aws_apigatewayv2_deployment" {
 }
 
 resource_schema "aws_apigatewayv2_model" {
-  cloudformation_type_name               = "AWS::ApiGatewayV2::Model"
+  cloudformation_type_name = "AWS::ApiGatewayV2::Model"
 
   # Suppress until given green light by AWS.
   suppress_resource_generation             = true
@@ -486,7 +495,7 @@ resource_schema "aws_cloudfront_key_group" {
 }
 
 resource_schema "aws_cloudfront_monitoring_subscription" {
-  cloudformation_type_name               = "AWS::CloudFront::MonitoringSubscription"
+  cloudformation_type_name = "AWS::CloudFront::MonitoringSubscription"
 
   # Suppress until given green light by AWS.
   suppress_resource_generation             = true
@@ -1143,6 +1152,15 @@ resource_schema "aws_elasticbeanstalk_application" {
 
 resource_schema "aws_elasticbeanstalk_application_version" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
+
+  # Suppress until given green light by AWS.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_elasticbeanstalk_environment" {
+  cloudformation_type_name = "AWS::ElasticBeanstalk::Environment"
 
   # Suppress until given green light by AWS.
   suppress_resource_generation             = true
@@ -2180,6 +2198,16 @@ resource_schema "aws_opsworkscm_server" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_organizations_account" {
+  cloudformation_type_name               = "AWS::Organizations::Account"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_organizations_policy" {
+  cloudformation_type_name               = "AWS::Organizations::Policy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_panorama_application_instance" {
   cloudformation_type_name = "AWS::Panorama::ApplicationInstance"
 }
@@ -2412,6 +2440,19 @@ resource_schema "aws_resiliencehub_resiliency_policy" {
   cloudformation_type_name = "AWS::ResilienceHub::ResiliencyPolicy"
 }
 
+resource_schema "aws_resourceexplorer2_default_view_association" {
+  cloudformation_type_name               = "AWS::ResourceExplorer2::DefaultViewAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_resourceexplorer2_index" {
+  cloudformation_type_name = "AWS::ResourceExplorer2::Index"
+}
+
+resource_schema "aws_resourceexplorer2_view" {
+  cloudformation_type_name = "AWS::ResourceExplorer2::View"
+}
+
 resource_schema "aws_resourcegroups_group" {
   cloudformation_type_name = "AWS::ResourceGroups::Group"
 }
@@ -2627,6 +2668,11 @@ resource_schema "aws_ses_template" {
   cloudformation_type_name = "AWS::SES::Template"
 }
 
+resource_schema "aws_ses_vdm_attributes" {
+  cloudformation_type_name               = "AWS::SES::VdmAttributes"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_sns_topic" {
   cloudformation_type_name = "AWS::SNS::Topic"
 
@@ -2763,6 +2809,19 @@ resource_schema "aws_sagemaker_project" {
 
 resource_schema "aws_sagemaker_user_profile" {
   cloudformation_type_name = "AWS::SageMaker::UserProfile"
+}
+
+resource_schema "aws_scheduler_schedule" {
+  cloudformation_type_name = "AWS::Scheduler::Schedule"
+
+  # Target/EcsParameters/Tags is of unsupported type: list of key-value map.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_scheduler_schedule_group" {
+  cloudformation_type_name = "AWS::Scheduler::ScheduleGroup"
 }
 
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
@@ -2941,6 +3000,10 @@ resource_schema "aws_workspaces_connection_alias" {
 resource_schema "aws_xray_group" {
   cloudformation_type_name               = "AWS::XRay::Group"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_xray_resource_policy" {
+  cloudformation_type_name = "AWS::XRay::ResourcePolicy"
 }
 
 resource_schema "aws_xray_sampling_rule" {

@@ -23,10 +23,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_key_required": {
 			// Property: ApiKeyRequired
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Indicates whether the method requires clients to submit a valid API key.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Indicates whether the method requires clients to submit a valid API key.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Indicates whether the method requires clients to submit a valid API key.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -34,13 +35,14 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authorization_scopes": {
 			// Property: AuthorizationScopes
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of authorization scopes configured on the method.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of authorization scopes configured on the method.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of authorization scopes configured on the method.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -48,16 +50,17 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authorization_type": {
 			// Property: AuthorizationType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The method's authorization type.",
-			//   "enum": [
-			//     "NONE",
-			//     "AWS_IAM",
-			//     "CUSTOM",
-			//     "COGNITO_USER_POOLS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The method's authorization type.",
+			//	  "enum": [
+			//	    "NONE",
+			//	    "AWS_IAM",
+			//	    "CUSTOM",
+			//	    "COGNITO_USER_POOLS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The method's authorization type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -65,10 +68,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authorizer_id": {
 			// Property: AuthorizerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the authorizer to use on this method.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the authorizer to use on this method.",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the authorizer to use on this method.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -76,10 +80,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"http_method": {
 			// Property: HttpMethod
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The backend system that the method calls when it receives a request.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The backend system that the method calls when it receives a request.",
+			//	  "type": "string"
+			//	}
 			Description: "The backend system that the method calls when it receives a request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,156 +92,157 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"integration": {
 			// Property: Integration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The backend system that the method calls when it receives a request.",
-			//   "properties": {
-			//     "CacheKeyParameters": {
-			//       "description": "A list of request parameters whose values API Gateway caches.",
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "CacheNamespace": {
-			//       "description": "An API-specific tag group of related cached parameters.",
-			//       "type": "string"
-			//     },
-			//     "ConnectionId": {
-			//       "description": "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
-			//       "type": "string"
-			//     },
-			//     "ConnectionType": {
-			//       "description": "The type of the network connection to the integration endpoint.",
-			//       "enum": [
-			//         "INTERNET",
-			//         "VPC_LINK"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "ContentHandling": {
-			//       "description": "Specifies how to handle request payload content type conversions.",
-			//       "enum": [
-			//         "CONVERT_TO_BINARY",
-			//         "CONVERT_TO_TEXT"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Credentials": {
-			//       "description": "The credentials that are required for the integration.",
-			//       "type": "string"
-			//     },
-			//     "IntegrationHttpMethod": {
-			//       "description": "The integration's HTTP method type.",
-			//       "type": "string"
-			//     },
-			//     "IntegrationResponses": {
-			//       "description": "The response that API Gateway provides after a method's backend completes processing a request.",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "ContentHandling": {
-			//             "description": "Specifies how to handle request payload content type conversions.",
-			//             "enum": [
-			//               "CONVERT_TO_BINARY",
-			//               "CONVERT_TO_TEXT"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "ResponseParameters": {
-			//             "additionalProperties": false,
-			//             "description": "The response parameters from the backend response that API Gateway sends to the method response.",
-			//             "patternProperties": {
-			//               "": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "ResponseTemplates": {
-			//             "additionalProperties": false,
-			//             "description": "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
-			//             "patternProperties": {
-			//               "": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "SelectionPattern": {
-			//             "description": "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
-			//             "type": "string"
-			//           },
-			//           "StatusCode": {
-			//             "description": "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "StatusCode"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "PassthroughBehavior": {
-			//       "description": "Indicates when API Gateway passes requests to the targeted backend.",
-			//       "enum": [
-			//         "WHEN_NO_MATCH",
-			//         "WHEN_NO_TEMPLATES",
-			//         "NEVER"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "RequestParameters": {
-			//       "additionalProperties": false,
-			//       "description": "The request parameters that API Gateway sends with the backend request.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "RequestTemplates": {
-			//       "additionalProperties": false,
-			//       "description": "A map of Apache Velocity templates that are applied on the request payload.",
-			//       "patternProperties": {
-			//         "": {
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "TimeoutInMillis": {
-			//       "description": "Custom timeout between 50 and 29,000 milliseconds.",
-			//       "maximum": 29000,
-			//       "minimum": 50,
-			//       "type": "integer"
-			//     },
-			//     "Type": {
-			//       "description": "The type of backend that your method is running.",
-			//       "enum": [
-			//         "AWS",
-			//         "AWS_PROXY",
-			//         "HTTP",
-			//         "HTTP_PROXY",
-			//         "MOCK"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Uri": {
-			//       "description": "The Uniform Resource Identifier (URI) for the integration.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The backend system that the method calls when it receives a request.",
+			//	  "properties": {
+			//	    "CacheKeyParameters": {
+			//	      "description": "A list of request parameters whose values API Gateway caches.",
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "CacheNamespace": {
+			//	      "description": "An API-specific tag group of related cached parameters.",
+			//	      "type": "string"
+			//	    },
+			//	    "ConnectionId": {
+			//	      "description": "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
+			//	      "type": "string"
+			//	    },
+			//	    "ConnectionType": {
+			//	      "description": "The type of the network connection to the integration endpoint.",
+			//	      "enum": [
+			//	        "INTERNET",
+			//	        "VPC_LINK"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "ContentHandling": {
+			//	      "description": "Specifies how to handle request payload content type conversions.",
+			//	      "enum": [
+			//	        "CONVERT_TO_BINARY",
+			//	        "CONVERT_TO_TEXT"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Credentials": {
+			//	      "description": "The credentials that are required for the integration.",
+			//	      "type": "string"
+			//	    },
+			//	    "IntegrationHttpMethod": {
+			//	      "description": "The integration's HTTP method type.",
+			//	      "type": "string"
+			//	    },
+			//	    "IntegrationResponses": {
+			//	      "description": "The response that API Gateway provides after a method's backend completes processing a request.",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ContentHandling": {
+			//	            "description": "Specifies how to handle request payload content type conversions.",
+			//	            "enum": [
+			//	              "CONVERT_TO_BINARY",
+			//	              "CONVERT_TO_TEXT"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "ResponseParameters": {
+			//	            "additionalProperties": false,
+			//	            "description": "The response parameters from the backend response that API Gateway sends to the method response.",
+			//	            "patternProperties": {
+			//	              "": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "ResponseTemplates": {
+			//	            "additionalProperties": false,
+			//	            "description": "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
+			//	            "patternProperties": {
+			//	              "": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "SelectionPattern": {
+			//	            "description": "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
+			//	            "type": "string"
+			//	          },
+			//	          "StatusCode": {
+			//	            "description": "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "StatusCode"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "PassthroughBehavior": {
+			//	      "description": "Indicates when API Gateway passes requests to the targeted backend.",
+			//	      "enum": [
+			//	        "WHEN_NO_MATCH",
+			//	        "WHEN_NO_TEMPLATES",
+			//	        "NEVER"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "RequestParameters": {
+			//	      "additionalProperties": false,
+			//	      "description": "The request parameters that API Gateway sends with the backend request.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "RequestTemplates": {
+			//	      "additionalProperties": false,
+			//	      "description": "A map of Apache Velocity templates that are applied on the request payload.",
+			//	      "patternProperties": {
+			//	        "": {
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "TimeoutInMillis": {
+			//	      "description": "Custom timeout between 50 and 29,000 milliseconds.",
+			//	      "maximum": 29000,
+			//	      "minimum": 50,
+			//	      "type": "integer"
+			//	    },
+			//	    "Type": {
+			//	      "description": "The type of backend that your method is running.",
+			//	      "enum": [
+			//	        "AWS",
+			//	        "AWS_PROXY",
+			//	        "HTTP",
+			//	        "HTTP_PROXY",
+			//	        "MOCK"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Uri": {
+			//	      "description": "The Uniform Resource Identifier (URI) for the integration.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The backend system that the method calls when it receives a request.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -368,44 +374,45 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"method_responses": {
 			// Property: MethodResponses
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The responses that can be sent to the client who calls the method.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ResponseModels": {
-			//         "additionalProperties": false,
-			//         "description": "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
-			//         "patternProperties": {
-			//           "": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ResponseParameters": {
-			//         "additionalProperties": false,
-			//         "description": "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
-			//         "patternProperties": {
-			//           "": {
-			//             "type": "boolean"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "StatusCode": {
-			//         "description": "The method response's status code, which you map to an IntegrationResponse.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "StatusCode"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The responses that can be sent to the client who calls the method.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ResponseModels": {
+			//	        "additionalProperties": false,
+			//	        "description": "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
+			//	        "patternProperties": {
+			//	          "": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ResponseParameters": {
+			//	        "additionalProperties": false,
+			//	        "description": "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
+			//	        "patternProperties": {
+			//	          "": {
+			//	            "type": "boolean"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "StatusCode": {
+			//	        "description": "The method response's status code, which you map to an IntegrationResponse.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "StatusCode"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The responses that can be sent to the client who calls the method.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -436,10 +443,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"operation_name": {
 			// Property: OperationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A friendly operation name for the method.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A friendly operation name for the method.",
+			//	  "type": "string"
+			//	}
 			Description: "A friendly operation name for the method.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -447,16 +455,17 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"request_models": {
 			// Property: RequestModels
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -465,16 +474,17 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"request_parameters": {
 			// Property: RequestParameters
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.BoolType},
@@ -483,10 +493,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"request_validator_id": {
 			// Property: RequestValidatorId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the associated request validator.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the associated request validator.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the associated request validator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -494,10 +505,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of an API Gateway resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of an API Gateway resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of an API Gateway resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -505,10 +517,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rest_api_id": {
 			// Property: RestApiId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the RestApi resource in which API Gateway creates the method.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the RestApi resource in which API Gateway creates the method.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the RestApi resource in which API Gateway creates the method.",
 			Type:        types.StringType,
 			Computed:    true,

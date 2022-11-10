@@ -23,36 +23,40 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"policy": {
 			// Property: Policy
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"registry_name": {
 			// Property: RegistryName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"revision_id": {
 			// Property: RevisionId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

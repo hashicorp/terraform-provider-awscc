@@ -23,9 +23,10 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,9 +36,10 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -47,29 +49,30 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		"public_key_config": {
 			// Property: PublicKeyConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CallerReference": {
-			//       "type": "string"
-			//     },
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "EncodedKey": {
-			//       "type": "string"
-			//     },
-			//     "Name": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "CallerReference",
-			//     "Name",
-			//     "EncodedKey"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CallerReference": {
+			//	      "type": "string"
+			//	    },
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "EncodedKey": {
+			//	      "type": "string"
+			//	    },
+			//	    "Name": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "CallerReference",
+			//	    "Name",
+			//	    "EncodedKey"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"caller_reference": {

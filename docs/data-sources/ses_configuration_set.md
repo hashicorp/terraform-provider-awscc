@@ -27,6 +27,7 @@ Data Source schema for AWS::SES::ConfigurationSet
 - `sending_options` (Attributes) An object that defines whether or not Amazon SES can send email that you send using the configuration set. (see [below for nested schema](#nestedatt--sending_options))
 - `suppression_options` (Attributes) An object that contains information about the suppression list preferences for your account. (see [below for nested schema](#nestedatt--suppression_options))
 - `tracking_options` (Attributes) An object that defines the open and click tracking options for emails that you send using the configuration set. (see [below for nested schema](#nestedatt--tracking_options))
+- `vdm_options` (Attributes) An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set. (see [below for nested schema](#nestedatt--vdm_options))
 
 <a id="nestedatt--delivery_options"></a>
 ### Nested Schema for `delivery_options`
@@ -67,5 +68,29 @@ Read-Only:
 Read-Only:
 
 - `custom_redirect_domain` (String) The domain to use for tracking open and click events.
+
+
+<a id="nestedatt--vdm_options"></a>
+### Nested Schema for `vdm_options`
+
+Read-Only:
+
+- `dashboard_options` (Attributes) Preferences regarding the Dashboard feature. (see [below for nested schema](#nestedatt--vdm_options--dashboard_options))
+- `guardian_options` (Attributes) Preferences regarding the Guardian feature. (see [below for nested schema](#nestedatt--vdm_options--guardian_options))
+
+<a id="nestedatt--vdm_options--dashboard_options"></a>
+### Nested Schema for `vdm_options.dashboard_options`
+
+Read-Only:
+
+- `engagement_metrics` (String) Whether emails sent with this configuration set have engagement tracking enabled.
+
+
+<a id="nestedatt--vdm_options--guardian_options"></a>
+### Nested Schema for `vdm_options.guardian_options`
+
+Read-Only:
+
+- `optimized_shared_delivery` (String) Whether emails sent with this configuration set have optimized delivery algorithm enabled.
 
 

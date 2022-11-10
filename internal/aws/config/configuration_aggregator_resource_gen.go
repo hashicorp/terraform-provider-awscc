@@ -25,36 +25,37 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 		"account_aggregation_sources": {
 			// Property: AccountAggregationSources
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AccountIds": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       },
-			//       "AllAwsRegions": {
-			//         "type": "boolean"
-			//       },
-			//       "AwsRegions": {
-			//         "items": {
-			//           "type": "string"
-			//         },
-			//         "type": "array",
-			//         "uniqueItems": false
-			//       }
-			//     },
-			//     "required": [
-			//       "AccountIds"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AccountIds": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      },
+			//	      "AllAwsRegions": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "AwsRegions": {
+			//	        "items": {
+			//	          "type": "string"
+			//	        },
+			//	        "type": "array",
+			//	        "uniqueItems": false
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "AccountIds"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"account_ids": {
@@ -91,10 +92,11 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 		"configuration_aggregator_arn": {
 			// Property: ConfigurationAggregatorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the aggregator.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the aggregator.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the aggregator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -105,13 +107,14 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 		"configuration_aggregator_name": {
 			// Property: ConfigurationAggregatorName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the aggregator.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "[\\w\\-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the aggregator.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w\\-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the aggregator.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -128,28 +131,29 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 		"organization_aggregation_source": {
 			// Property: OrganizationAggregationSource
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AllAwsRegions": {
-			//       "type": "boolean"
-			//     },
-			//     "AwsRegions": {
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "RoleArn": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "RoleArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AllAwsRegions": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "AwsRegions": {
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "RoleArn": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "RoleArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"all_aws_regions": {
@@ -186,35 +190,36 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the configuration aggregator.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the configuration aggregator.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The tags for the configuration aggregator.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

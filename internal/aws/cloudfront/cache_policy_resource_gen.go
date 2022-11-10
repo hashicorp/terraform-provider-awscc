@@ -25,115 +25,116 @@ func cachePolicyResource(ctx context.Context) (resource.Resource, error) {
 		"cache_policy_config": {
 			// Property: CachePolicyConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "DefaultTTL": {
-			//       "minimum": 0,
-			//       "type": "number"
-			//     },
-			//     "MaxTTL": {
-			//       "minimum": 0,
-			//       "type": "number"
-			//     },
-			//     "MinTTL": {
-			//       "minimum": 0,
-			//       "type": "number"
-			//     },
-			//     "Name": {
-			//       "type": "string"
-			//     },
-			//     "ParametersInCacheKeyAndForwardedToOrigin": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CookiesConfig": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "CookieBehavior": {
-			//               "pattern": "^(none|whitelist|allExcept|all)$",
-			//               "type": "string"
-			//             },
-			//             "Cookies": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "required": [
-			//             "CookieBehavior"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "EnableAcceptEncodingBrotli": {
-			//           "type": "boolean"
-			//         },
-			//         "EnableAcceptEncodingGzip": {
-			//           "type": "boolean"
-			//         },
-			//         "HeadersConfig": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "HeaderBehavior": {
-			//               "pattern": "^(none|whitelist)$",
-			//               "type": "string"
-			//             },
-			//             "Headers": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "required": [
-			//             "HeaderBehavior"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "QueryStringsConfig": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "QueryStringBehavior": {
-			//               "pattern": "^(none|whitelist|allExcept|all)$",
-			//               "type": "string"
-			//             },
-			//             "QueryStrings": {
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array",
-			//               "uniqueItems": false
-			//             }
-			//           },
-			//           "required": [
-			//             "QueryStringBehavior"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "EnableAcceptEncodingGzip",
-			//         "HeadersConfig",
-			//         "CookiesConfig",
-			//         "QueryStringsConfig"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name",
-			//     "MinTTL",
-			//     "MaxTTL",
-			//     "DefaultTTL",
-			//     "ParametersInCacheKeyAndForwardedToOrigin"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "DefaultTTL": {
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    },
+			//	    "MaxTTL": {
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    },
+			//	    "MinTTL": {
+			//	      "minimum": 0,
+			//	      "type": "number"
+			//	    },
+			//	    "Name": {
+			//	      "type": "string"
+			//	    },
+			//	    "ParametersInCacheKeyAndForwardedToOrigin": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CookiesConfig": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "CookieBehavior": {
+			//	              "pattern": "^(none|whitelist|allExcept|all)$",
+			//	              "type": "string"
+			//	            },
+			//	            "Cookies": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "CookieBehavior"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "EnableAcceptEncodingBrotli": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "EnableAcceptEncodingGzip": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "HeadersConfig": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "HeaderBehavior": {
+			//	              "pattern": "^(none|whitelist)$",
+			//	              "type": "string"
+			//	            },
+			//	            "Headers": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "HeaderBehavior"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "QueryStringsConfig": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "QueryStringBehavior": {
+			//	              "pattern": "^(none|whitelist|allExcept|all)$",
+			//	              "type": "string"
+			//	            },
+			//	            "QueryStrings": {
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array",
+			//	              "uniqueItems": false
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "QueryStringBehavior"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "EnableAcceptEncodingGzip",
+			//	        "HeadersConfig",
+			//	        "CookiesConfig",
+			//	        "QueryStringsConfig"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name",
+			//	    "MinTTL",
+			//	    "MaxTTL",
+			//	    "DefaultTTL",
+			//	    "ParametersInCacheKeyAndForwardedToOrigin"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"comment": {
@@ -278,9 +279,10 @@ func cachePolicyResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -290,9 +292,10 @@ func cachePolicyResource(ctx context.Context) (resource.Resource, error) {
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

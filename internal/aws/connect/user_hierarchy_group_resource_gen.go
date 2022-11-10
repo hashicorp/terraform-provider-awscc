@@ -25,11 +25,12 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The identifier of the Amazon Connect instance.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The identifier of the Amazon Connect instance.",
 			Type:        types.StringType,
 			Required:    true,
@@ -40,12 +41,13 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the user hierarchy group.",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the user hierarchy group.",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the user hierarchy group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -56,11 +58,12 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 		"parent_group_arn": {
 			// Property: ParentGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the parent user hierarchy group.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the parent user hierarchy group.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the parent user hierarchy group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -76,11 +79,12 @@ func userHierarchyGroupResource(ctx context.Context) (resource.Resource, error) 
 		"user_hierarchy_group_arn": {
 			// Property: UserHierarchyGroupArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the user hierarchy group.",
-			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the user hierarchy group.",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the user hierarchy group.",
 			Type:        types.StringType,
 			Computed:    true,

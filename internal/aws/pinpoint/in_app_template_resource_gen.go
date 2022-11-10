@@ -24,9 +24,10 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,234 +37,235 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"content": {
 			// Property: Content
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "BackgroundColor": {
-			//         "type": "string"
-			//       },
-			//       "BodyConfig": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Alignment": {
-			//             "enum": [
-			//               "LEFT",
-			//               "CENTER",
-			//               "RIGHT"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Body": {
-			//             "type": "string"
-			//           },
-			//           "TextColor": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "HeaderConfig": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Alignment": {
-			//             "enum": [
-			//               "LEFT",
-			//               "CENTER",
-			//               "RIGHT"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "Header": {
-			//             "type": "string"
-			//           },
-			//           "TextColor": {
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ImageUrl": {
-			//         "type": "string"
-			//       },
-			//       "PrimaryBtn": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Android": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "DefaultConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BackgroundColor": {
-			//                 "type": "string"
-			//               },
-			//               "BorderRadius": {
-			//                 "type": "integer"
-			//               },
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               },
-			//               "Text": {
-			//                 "type": "string"
-			//               },
-			//               "TextColor": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "IOS": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Web": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "SecondaryBtn": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "Android": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "DefaultConfig": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "BackgroundColor": {
-			//                 "type": "string"
-			//               },
-			//               "BorderRadius": {
-			//                 "type": "integer"
-			//               },
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               },
-			//               "Text": {
-			//                 "type": "string"
-			//               },
-			//               "TextColor": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "IOS": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "Web": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ButtonAction": {
-			//                 "enum": [
-			//                   "LINK",
-			//                   "DEEP_LINK",
-			//                   "CLOSE"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "Link": {
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "BackgroundColor": {
+			//	        "type": "string"
+			//	      },
+			//	      "BodyConfig": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Alignment": {
+			//	            "enum": [
+			//	              "LEFT",
+			//	              "CENTER",
+			//	              "RIGHT"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Body": {
+			//	            "type": "string"
+			//	          },
+			//	          "TextColor": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "HeaderConfig": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Alignment": {
+			//	            "enum": [
+			//	              "LEFT",
+			//	              "CENTER",
+			//	              "RIGHT"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "Header": {
+			//	            "type": "string"
+			//	          },
+			//	          "TextColor": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ImageUrl": {
+			//	        "type": "string"
+			//	      },
+			//	      "PrimaryBtn": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Android": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "DefaultConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BackgroundColor": {
+			//	                "type": "string"
+			//	              },
+			//	              "BorderRadius": {
+			//	                "type": "integer"
+			//	              },
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              },
+			//	              "Text": {
+			//	                "type": "string"
+			//	              },
+			//	              "TextColor": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "IOS": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Web": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "SecondaryBtn": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "Android": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "DefaultConfig": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "BackgroundColor": {
+			//	                "type": "string"
+			//	              },
+			//	              "BorderRadius": {
+			//	                "type": "integer"
+			//	              },
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              },
+			//	              "Text": {
+			//	                "type": "string"
+			//	              },
+			//	              "TextColor": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "IOS": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "Web": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ButtonAction": {
+			//	                "enum": [
+			//	                  "LINK",
+			//	                  "DEEP_LINK",
+			//	                  "CLOSE"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "Link": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"background_color": {
@@ -779,9 +781,10 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"custom_config": {
 			// Property: CustomConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -792,17 +795,18 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"layout": {
 			// Property: Layout
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "BOTTOM_BANNER",
-			//     "TOP_BANNER",
-			//     "OVERLAYS",
-			//     "MOBILE_FEED",
-			//     "MIDDLE_BANNER",
-			//     "CAROUSEL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "BOTTOM_BANNER",
+			//	    "TOP_BANNER",
+			//	    "OVERLAYS",
+			//	    "MOBILE_FEED",
+			//	    "MIDDLE_BANNER",
+			//	    "CAROUSEL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -823,9 +827,10 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -836,9 +841,10 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"template_description": {
 			// Property: TemplateDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -849,9 +855,10 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"template_name": {
 			// Property: TemplateName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

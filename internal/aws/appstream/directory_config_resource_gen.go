@@ -20,12 +20,57 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::AppStream::DirectoryConfig resource.
 func directoryConfigResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"certificate_based_auth_properties": {
+			// Property: CertificateBasedAuthProperties
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CertificateAuthorityArn": {
+			//	      "type": "string"
+			//	    },
+			//	    "Status": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"certificate_authority_arn": {
+						// Property: CertificateAuthorityArn
+						Type:     types.StringType,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"status": {
+						// Property: Status
+						Type:     types.StringType,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"directory_name": {
 			// Property: DirectoryName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -35,35 +80,37 @@ func directoryConfigResource(ctx context.Context) (resource.Resource, error) {
 		"organizational_unit_distinguished_names": {
 			// Property: OrganizationalUnitDistinguishedNames
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 		},
 		"service_account_credentials": {
 			// Property: ServiceAccountCredentials
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "AccountName": {
-			//       "type": "string"
-			//     },
-			//     "AccountPassword": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "AccountName",
-			//     "AccountPassword"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "AccountName": {
+			//	      "type": "string"
+			//	    },
+			//	    "AccountPassword": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "AccountName",
+			//	    "AccountPassword"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"account_name": {
@@ -104,11 +151,14 @@ func directoryConfigResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_name":     "AccountName",
-		"account_password": "AccountPassword",
-		"directory_name":   "DirectoryName",
+		"account_name":                            "AccountName",
+		"account_password":                        "AccountPassword",
+		"certificate_authority_arn":               "CertificateAuthorityArn",
+		"certificate_based_auth_properties":       "CertificateBasedAuthProperties",
+		"directory_name":                          "DirectoryName",
 		"organizational_unit_distinguished_names": "OrganizationalUnitDistinguishedNames",
 		"service_account_credentials":             "ServiceAccountCredentials",
+		"status":                                  "Status",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

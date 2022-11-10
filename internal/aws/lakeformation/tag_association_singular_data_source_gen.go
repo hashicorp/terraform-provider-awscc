@@ -23,43 +23,44 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		"lf_tags": {
 			// Property: LFTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of Lake Formation Tags to associate with the Lake Formation Resource",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "CatalogId": {
-			//         "maxLength": 12,
-			//         "minLength": 12,
-			//         "type": "string"
-			//       },
-			//       "TagKey": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "TagValues": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "maxLength": 256,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         },
-			//         "maxItems": 50,
-			//         "minItems": 1,
-			//         "type": "array"
-			//       }
-			//     },
-			//     "required": [
-			//       "CatalogId",
-			//       "TagKey",
-			//       "TagValues"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of Lake Formation Tags to associate with the Lake Formation Resource",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "CatalogId": {
+			//	        "maxLength": 12,
+			//	        "minLength": 12,
+			//	        "type": "string"
+			//	      },
+			//	      "TagKey": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "TagValues": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "maxLength": 256,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        },
+			//	        "maxItems": 50,
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "CatalogId",
+			//	      "TagKey",
+			//	      "TagValues"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of Lake Formation Tags to associate with the Lake Formation Resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -85,102 +86,103 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		"resource": {
 			// Property: Resource
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Resource to tag with the Lake Formation Tags",
-			//   "properties": {
-			//     "Catalog": {
-			//       "additionalProperties": false,
-			//       "type": "object"
-			//     },
-			//     "Database": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "Name"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "Table": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "DatabaseName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "TableWildcard": {
-			//           "additionalProperties": false,
-			//           "type": "object"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "DatabaseName"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "TableWithColumns": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "CatalogId": {
-			//           "maxLength": 12,
-			//           "minLength": 12,
-			//           "type": "string"
-			//         },
-			//         "ColumnNames": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "maxLength": 255,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "type": "array"
-			//         },
-			//         "DatabaseName": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Name": {
-			//           "maxLength": 255,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CatalogId",
-			//         "DatabaseName",
-			//         "Name",
-			//         "ColumnNames"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Resource to tag with the Lake Formation Tags",
+			//	  "properties": {
+			//	    "Catalog": {
+			//	      "additionalProperties": false,
+			//	      "type": "object"
+			//	    },
+			//	    "Database": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "Name"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "Table": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "DatabaseName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "TableWildcard": {
+			//	          "additionalProperties": false,
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "DatabaseName"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "TableWithColumns": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "CatalogId": {
+			//	          "maxLength": 12,
+			//	          "minLength": 12,
+			//	          "type": "string"
+			//	        },
+			//	        "ColumnNames": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "maxLength": 255,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "DatabaseName": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Name": {
+			//	          "maxLength": 255,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CatalogId",
+			//	        "DatabaseName",
+			//	        "Name",
+			//	        "ColumnNames"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Resource to tag with the Lake Formation Tags",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -270,10 +272,11 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		"resource_identifier": {
 			// Property: ResourceIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
+			//	  "type": "string"
+			//	}
 			Description: "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
 			Type:        types.StringType,
 			Computed:    true,
@@ -281,10 +284,11 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags_identifier": {
 			// Property: TagsIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
+			//	  "type": "string"
+			//	}
 			Description: "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
 			Type:        types.StringType,
 			Computed:    true,

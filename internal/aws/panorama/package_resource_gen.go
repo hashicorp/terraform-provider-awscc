@@ -25,11 +25,12 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -39,9 +40,10 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -51,12 +53,13 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		"package_id": {
 			// Property: PackageId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -66,12 +69,13 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		"package_name": {
 			// Property: PackageName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -85,27 +89,28 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		"storage_location": {
 			// Property: StorageLocation
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BinaryPrefixLocation": {
-			//       "type": "string"
-			//     },
-			//     "Bucket": {
-			//       "type": "string"
-			//     },
-			//     "GeneratedPrefixLocation": {
-			//       "type": "string"
-			//     },
-			//     "ManifestPrefixLocation": {
-			//       "type": "string"
-			//     },
-			//     "RepoPrefixLocation": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BinaryPrefixLocation": {
+			//	      "type": "string"
+			//	    },
+			//	    "Bucket": {
+			//	      "type": "string"
+			//	    },
+			//	    "GeneratedPrefixLocation": {
+			//	      "type": "string"
+			//	    },
+			//	    "ManifestPrefixLocation": {
+			//	      "type": "string"
+			//	    },
+			//	    "RepoPrefixLocation": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"binary_prefix_location": {
@@ -158,33 +163,34 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "^.+$",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "^.+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "^.+$",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "^.+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

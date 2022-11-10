@@ -25,13 +25,14 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 		"account_alias": {
 			// Property: AccountAlias
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An account alias associated with a customer's account.",
-			//   "maxLength": 30,
-			//   "minLength": 1,
-			//   "pattern": "^[\\w\\- ]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "An account alias associated with a customer's account.",
+			//	  "maxLength": 30,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\w\\- ]+$",
+			//	  "type": "string"
+			//	}
 			Description: "An account alias associated with a customer's account.",
 			Type:        types.StringType,
 			Required:    true,
@@ -43,13 +44,14 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 		"account_alias_resource_id": {
 			// Property: AccountAliasResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique identifier representing an alias tied to an account",
-			//   "maxLength": 29,
-			//   "minLength": 29,
-			//   "pattern": "^[\\w\\- ]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique identifier representing an alias tied to an account",
+			//	  "maxLength": 29,
+			//	  "minLength": 29,
+			//	  "pattern": "^[\\w\\- ]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Unique identifier representing an alias tied to an account",
 			Type:        types.StringType,
 			Computed:    true,

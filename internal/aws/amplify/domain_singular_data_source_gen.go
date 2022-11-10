@@ -23,131 +23,141 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_id": {
 			// Property: AppId
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 20,
-			//   "minLength": 1,
-			//   "pattern": "d[a-z0-9]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 20,
+			//	  "minLength": 1,
+			//	  "pattern": "d[a-z0-9]+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "(?s).*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"auto_sub_domain_creation_patterns": {
 			// Property: AutoSubDomainCreationPatterns
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "maxLength": 2048,
-			//     "minLength": 1,
-			//     "pattern": "(?s).+",
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "maxLength": 2048,
+			//	    "minLength": 1,
+			//	    "pattern": "(?s).+",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"auto_sub_domain_iam_role": {
 			// Property: AutoSubDomainIAMRole
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"certificate_record": {
 			// Property: CertificateRecord
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_status": {
 			// Property: DomainStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"enable_auto_sub_domain": {
 			// Property: EnableAutoSubDomain
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"status_reason": {
 			// Property: StatusReason
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"sub_domain_settings": {
 			// Property: SubDomainSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "BranchName": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "pattern": "(?s).+",
-			//         "type": "string"
-			//       },
-			//       "Prefix": {
-			//         "maxLength": 255,
-			//         "pattern": "(?s).*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Prefix",
-			//       "BranchName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 255,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "BranchName": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "pattern": "(?s).+",
+			//	        "type": "string"
+			//	      },
+			//	      "Prefix": {
+			//	        "maxLength": 255,
+			//	        "pattern": "(?s).*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Prefix",
+			//	      "BranchName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 255,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"branch_name": {

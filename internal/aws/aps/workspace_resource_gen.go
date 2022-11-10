@@ -24,10 +24,11 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"alert_manager_definition": {
 			// Property: AlertManagerDefinition
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AMP Workspace alert manager definition data",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AMP Workspace alert manager definition data",
+			//	  "type": "string"
+			//	}
 			Description: "The AMP Workspace alert manager definition data",
 			Type:        types.StringType,
 			Optional:    true,
@@ -39,12 +40,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"alias": {
 			// Property: Alias
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AMP Workspace alias.",
-			//   "maxLength": 100,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AMP Workspace alias.",
+			//	  "maxLength": 100,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "AMP Workspace alias.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -59,13 +61,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Workspace arn.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Workspace arn.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Workspace arn.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -76,19 +79,20 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"logging_configuration": {
 			// Property: LoggingConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Logging configuration",
-			//   "properties": {
-			//     "LogGroupArn": {
-			//       "description": "CloudWatch log group ARN",
-			//       "maxLength": 512,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Logging configuration",
+			//	  "properties": {
+			//	    "LogGroupArn": {
+			//	      "description": "CloudWatch log group ARN",
+			//	      "maxLength": 512,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Logging configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -116,10 +120,11 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"prometheus_endpoint": {
 			// Property: PrometheusEndpoint
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "AMP Workspace prometheus endpoint",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "AMP Workspace prometheus endpoint",
+			//	  "type": "string"
+			//	}
 			Description: "AMP Workspace prometheus endpoint",
 			Type:        types.StringType,
 			Computed:    true,
@@ -130,35 +135,36 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -191,13 +197,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"workspace_id": {
 			// Property: WorkspaceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Required to identify a specific APS Workspace.",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Required to identify a specific APS Workspace.",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}$",
+			//	  "type": "string"
+			//	}
 			Description: "Required to identify a specific APS Workspace.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -15,6 +15,10 @@
             "description": "The ID of the virtual interface group.",
             "type": "string"
         },
+        "NetworkInterfaceId": {
+            "description": "The ID of the network interface.",
+            "type": "string"
+        },
         "State": {
             "description": "The state of the route.",
             "type": "string"
@@ -24,15 +28,25 @@
             "type": "string"
         }
     },
-    "required": [
-        "DestinationCidrBlock",
-        "LocalGatewayRouteTableId",
-        "LocalGatewayVirtualInterfaceGroupId"
+    "oneOf":[
+        {
+            "required": [
+                "DestinationCidrBlock",
+                "LocalGatewayRouteTableId",
+                "LocalGatewayVirtualInterfaceGroupId"
+            ]
+        },
+        {
+            "required": [
+                "DestinationCidrBlock",
+                "LocalGatewayRouteTableId",
+                "NetworkInterfaceId"
+            ]
+        }
     ],
     "createOnlyProperties": [
         "/properties/DestinationCidrBlock",
-        "/properties/LocalGatewayRouteTableId",
-        "/properties/LocalGatewayVirtualInterfaceGroupId"
+        "/properties/LocalGatewayRouteTableId"
     ],
     "readOnlyProperties": [
         "/properties/State",
@@ -69,6 +83,12 @@
         "list": {
             "permissions": [
                 "ec2:DescribeLocalGatewayRouteTables",
+                "ec2:SearchLocalGatewayRoutes"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "ec2:ModifyLocalGatewayRoute",
                 "ec2:SearchLocalGatewayRoutes"
             ]
         }

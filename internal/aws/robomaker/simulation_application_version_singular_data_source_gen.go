@@ -23,42 +23,46 @@ func simulationApplicationVersionDataSource(ctx context.Context) (datasource.Dat
 		"application": {
 			// Property: Application
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"application_version": {
 			// Property: ApplicationVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"current_revision_id": {
 			// Property: CurrentRevisionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The revision ID of robot application.",
-			//   "maxLength": 40,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_.\\-]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The revision ID of robot application.",
+			//	  "maxLength": 40,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_.\\-]*",
+			//	  "type": "string"
+			//	}
 			Description: "The revision ID of robot application.",
 			Type:        types.StringType,
 			Computed:    true,

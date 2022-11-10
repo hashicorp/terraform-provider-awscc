@@ -23,40 +23,41 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_capabilities": {
 			// Property: AlarmCapabilities
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Contains the configuration information of alarm state changes",
-			//   "properties": {
-			//     "AcknowledgeFlow": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies whether to get notified for alarm state changes.",
-			//       "properties": {
-			//         "Enabled": {
-			//           "default": "true",
-			//           "description": "The value must be TRUE or FALSE. If TRUE, you receive a notification when the alarm state changes. You must choose to acknowledge the notification before the alarm state can return to NORMAL. If FALSE, you won't receive notifications. The alarm automatically changes to the NORMAL state when the input property value returns to the specified range.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "InitializationConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.",
-			//       "properties": {
-			//         "DisabledOnInitialization": {
-			//           "default": "true",
-			//           "description": "The value must be TRUE or FALSE. If FALSE, all alarm instances created based on the alarm model are activated. The default value is TRUE.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "DisabledOnInitialization"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Contains the configuration information of alarm state changes",
+			//	  "properties": {
+			//	    "AcknowledgeFlow": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies whether to get notified for alarm state changes.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "default": "true",
+			//	          "description": "The value must be TRUE or FALSE. If TRUE, you receive a notification when the alarm state changes. You must choose to acknowledge the notification before the alarm state can return to NORMAL. If FALSE, you won't receive notifications. The alarm automatically changes to the NORMAL state when the input property value returns to the specified range.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "InitializationConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.",
+			//	      "properties": {
+			//	        "DisabledOnInitialization": {
+			//	          "default": "true",
+			//	          "description": "The value must be TRUE or FALSE. If FALSE, all alarm instances created based on the alarm model are activated. The default value is TRUE.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DisabledOnInitialization"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Contains the configuration information of alarm state changes",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -97,426 +98,427 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_event_actions": {
 			// Property: AlarmEventActions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Contains information about one or more alarm actions.",
-			//   "properties": {
-			//     "AlarmActions": {
-			//       "description": "Specifies one or more supported actions to receive notifications when the alarm state changes.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "The actions to be performed.",
-			//         "properties": {
-			//           "DynamoDB": {
-			//             "additionalProperties": false,
-			//             "description": "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the alarm model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
-			//             "properties": {
-			//               "HashKeyField": {
-			//                 "description": "The name of the hash key (also called the partition key).",
-			//                 "type": "string"
-			//               },
-			//               "HashKeyType": {
-			//                 "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n\n* `STRING` - The hash key is a string.\n\n* `NUMBER` - The hash key is a number.\n\nIf you don't specify `hashKeyType`, the default value is `STRING`.",
-			//                 "type": "string"
-			//               },
-			//               "HashKeyValue": {
-			//                 "description": "The value of the hash key (also called the partition key).",
-			//                 "type": "string"
-			//               },
-			//               "Operation": {
-			//                 "description": "The type of operation to perform. You can specify the following values:\n\n* `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n\n* `UPDATE` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n\n* `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n\nIf you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.",
-			//                 "type": "string"
-			//               },
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "PayloadField": {
-			//                 "description": "The name of the DynamoDB column that receives the action payload.\n\nIf you don't specify this parameter, the name of the DynamoDB column is `payload`.",
-			//                 "type": "string"
-			//               },
-			//               "RangeKeyField": {
-			//                 "description": "The name of the range key (also called the sort key).",
-			//                 "type": "string"
-			//               },
-			//               "RangeKeyType": {
-			//                 "description": "The data type for the range key (also called the sort key), You can specify the following values:\n\n* `STRING` - The range key is a string.\n\n* `NUMBER` - The range key is number.\n\nIf you don't specify `rangeKeyField`, the default value is `STRING`.",
-			//                 "type": "string"
-			//               },
-			//               "RangeKeyValue": {
-			//                 "description": "The value of the range key (also called the sort key).",
-			//                 "type": "string"
-			//               },
-			//               "TableName": {
-			//                 "description": "The name of the DynamoDB table.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "HashKeyField",
-			//               "HashKeyValue",
-			//               "TableName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "DynamoDBv2": {
-			//             "additionalProperties": false,
-			//             "description": "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the alarm model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
-			//             "properties": {
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "TableName": {
-			//                 "description": "The name of the DynamoDB table.",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "TableName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Firehose": {
-			//             "additionalProperties": false,
-			//             "description": "Sends information about the alarm model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-			//             "properties": {
-			//               "DeliveryStreamName": {
-			//                 "description": "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-			//                 "type": "string"
-			//               },
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Separator": {
-			//                 "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-			//                 "pattern": "([\\n\\t])|(\\r\\n)|(,)",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "DeliveryStreamName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "IotEvents": {
-			//             "additionalProperties": false,
-			//             "description": "Sends an AWS IoT Events input, passing in information about the alarm model instance and the event that triggered the action.",
-			//             "properties": {
-			//               "InputName": {
-			//                 "description": "The name of the AWS IoT Events input where the data is sent.",
-			//                 "maxLength": 128,
-			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-			//                 "type": "string"
-			//               },
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "InputName"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "IotSiteWise": {
-			//             "additionalProperties": false,
-			//             "description": "Sends information about the alarm model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
-			//             "properties": {
-			//               "AssetId": {
-			//                 "description": "The ID of the asset that has the specified property. You can specify an expression.",
-			//                 "type": "string"
-			//               },
-			//               "EntryId": {
-			//                 "description": "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.",
-			//                 "type": "string"
-			//               },
-			//               "PropertyAlias": {
-			//                 "description": "The alias of the asset property. You can also specify an expression.",
-			//                 "type": "string"
-			//               },
-			//               "PropertyId": {
-			//                 "description": "The ID of the asset property. You can specify an expression.",
-			//                 "type": "string"
-			//               },
-			//               "PropertyValue": {
-			//                 "additionalProperties": false,
-			//                 "description": "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-			//                 "properties": {
-			//                   "Quality": {
-			//                     "description": "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
-			//                     "type": "string"
-			//                   },
-			//                   "Timestamp": {
-			//                     "additionalProperties": false,
-			//                     "description": "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
-			//                     "properties": {
-			//                       "OffsetInNanos": {
-			//                         "description": "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
-			//                         "type": "string"
-			//                       },
-			//                       "TimeInSeconds": {
-			//                         "description": "The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "TimeInSeconds"
-			//                     ],
-			//                     "type": "object"
-			//                   },
-			//                   "Value": {
-			//                     "additionalProperties": false,
-			//                     "description": "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-			//                     "properties": {
-			//                       "BooleanValue": {
-			//                         "description": "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
-			//                         "type": "string"
-			//                       },
-			//                       "DoubleValue": {
-			//                         "description": "The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.",
-			//                         "type": "string"
-			//                       },
-			//                       "IntegerValue": {
-			//                         "description": "The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.",
-			//                         "type": "string"
-			//                       },
-			//                       "StringValue": {
-			//                         "description": "The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Value"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "IotTopicPublish": {
-			//             "additionalProperties": false,
-			//             "description": "Information required to publish the MQTT message through the AWS IoT message broker.",
-			//             "properties": {
-			//               "MqttTopic": {
-			//                 "description": "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.\u003cvariable-name\u003e`) and input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`) as the topic string.",
-			//                 "maxLength": 128,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "MqttTopic"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Lambda": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "FunctionArn": {
-			//                 "description": "The ARN of the Lambda function that is executed.",
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               },
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "FunctionArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Sns": {
-			//             "additionalProperties": false,
-			//             "description": "Information required to publish the Amazon SNS message.",
-			//             "properties": {
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "TargetArn": {
-			//                 "description": "The ARN of the Amazon SNS target where the message is sent.",
-			//                 "maxLength": 2048,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "TargetArn"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "Sqs": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "Payload": {
-			//                 "additionalProperties": false,
-			//                 "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-			//                 "properties": {
-			//                   "ContentExpression": {
-			//                     "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "Type": {
-			//                     "description": "The value of the payload type can be either `STRING` or `JSON`.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ContentExpression",
-			//                   "Type"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "QueueUrl": {
-			//                 "description": "The URL of the SQS queue where the data is written.",
-			//                 "type": "string"
-			//               },
-			//               "UseBase64": {
-			//                 "description": "Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.",
-			//                 "type": "boolean"
-			//               }
-			//             },
-			//             "required": [
-			//               "QueueUrl"
-			//             ],
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Contains information about one or more alarm actions.",
+			//	  "properties": {
+			//	    "AlarmActions": {
+			//	      "description": "Specifies one or more supported actions to receive notifications when the alarm state changes.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "The actions to be performed.",
+			//	        "properties": {
+			//	          "DynamoDB": {
+			//	            "additionalProperties": false,
+			//	            "description": "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the alarm model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
+			//	            "properties": {
+			//	              "HashKeyField": {
+			//	                "description": "The name of the hash key (also called the partition key).",
+			//	                "type": "string"
+			//	              },
+			//	              "HashKeyType": {
+			//	                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n\n* `STRING` - The hash key is a string.\n\n* `NUMBER` - The hash key is a number.\n\nIf you don't specify `hashKeyType`, the default value is `STRING`.",
+			//	                "type": "string"
+			//	              },
+			//	              "HashKeyValue": {
+			//	                "description": "The value of the hash key (also called the partition key).",
+			//	                "type": "string"
+			//	              },
+			//	              "Operation": {
+			//	                "description": "The type of operation to perform. You can specify the following values:\n\n* `INSERT` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n\n* `UPDATE` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n\n* `DELETE` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n\nIf you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.",
+			//	                "type": "string"
+			//	              },
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "PayloadField": {
+			//	                "description": "The name of the DynamoDB column that receives the action payload.\n\nIf you don't specify this parameter, the name of the DynamoDB column is `payload`.",
+			//	                "type": "string"
+			//	              },
+			//	              "RangeKeyField": {
+			//	                "description": "The name of the range key (also called the sort key).",
+			//	                "type": "string"
+			//	              },
+			//	              "RangeKeyType": {
+			//	                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n\n* `STRING` - The range key is a string.\n\n* `NUMBER` - The range key is number.\n\nIf you don't specify `rangeKeyField`, the default value is `STRING`.",
+			//	                "type": "string"
+			//	              },
+			//	              "RangeKeyValue": {
+			//	                "description": "The value of the range key (also called the sort key).",
+			//	                "type": "string"
+			//	              },
+			//	              "TableName": {
+			//	                "description": "The name of the DynamoDB table.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "HashKeyField",
+			//	              "HashKeyValue",
+			//	              "TableName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "DynamoDBv2": {
+			//	            "additionalProperties": false,
+			//	            "description": "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the alarm model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
+			//	            "properties": {
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "TableName": {
+			//	                "description": "The name of the DynamoDB table.",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "TableName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Firehose": {
+			//	            "additionalProperties": false,
+			//	            "description": "Sends information about the alarm model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+			//	            "properties": {
+			//	              "DeliveryStreamName": {
+			//	                "description": "The name of the Kinesis Data Firehose delivery stream where the data is written.",
+			//	                "type": "string"
+			//	              },
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Separator": {
+			//	                "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
+			//	                "pattern": "([\\n\\t])|(\\r\\n)|(,)",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "DeliveryStreamName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "IotEvents": {
+			//	            "additionalProperties": false,
+			//	            "description": "Sends an AWS IoT Events input, passing in information about the alarm model instance and the event that triggered the action.",
+			//	            "properties": {
+			//	              "InputName": {
+			//	                "description": "The name of the AWS IoT Events input where the data is sent.",
+			//	                "maxLength": 128,
+			//	                "minLength": 1,
+			//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+			//	                "type": "string"
+			//	              },
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "InputName"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "IotSiteWise": {
+			//	            "additionalProperties": false,
+			//	            "description": "Sends information about the alarm model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
+			//	            "properties": {
+			//	              "AssetId": {
+			//	                "description": "The ID of the asset that has the specified property. You can specify an expression.",
+			//	                "type": "string"
+			//	              },
+			//	              "EntryId": {
+			//	                "description": "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.",
+			//	                "type": "string"
+			//	              },
+			//	              "PropertyAlias": {
+			//	                "description": "The alias of the asset property. You can also specify an expression.",
+			//	                "type": "string"
+			//	              },
+			//	              "PropertyId": {
+			//	                "description": "The ID of the asset property. You can specify an expression.",
+			//	                "type": "string"
+			//	              },
+			//	              "PropertyValue": {
+			//	                "additionalProperties": false,
+			//	                "description": "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
+			//	                "properties": {
+			//	                  "Quality": {
+			//	                    "description": "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Timestamp": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
+			//	                    "properties": {
+			//	                      "OffsetInNanos": {
+			//	                        "description": "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "TimeInSeconds": {
+			//	                        "description": "The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "TimeInSeconds"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  },
+			//	                  "Value": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
+			//	                    "properties": {
+			//	                      "BooleanValue": {
+			//	                        "description": "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "DoubleValue": {
+			//	                        "description": "The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "IntegerValue": {
+			//	                        "description": "The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "StringValue": {
+			//	                        "description": "The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Value"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "IotTopicPublish": {
+			//	            "additionalProperties": false,
+			//	            "description": "Information required to publish the MQTT message through the AWS IoT message broker.",
+			//	            "properties": {
+			//	              "MqttTopic": {
+			//	                "description": "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.\u003cvariable-name\u003e`) and input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`) as the topic string.",
+			//	                "maxLength": 128,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "MqttTopic"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Lambda": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "FunctionArn": {
+			//	                "description": "The ARN of the Lambda function that is executed.",
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              },
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "FunctionArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Sns": {
+			//	            "additionalProperties": false,
+			//	            "description": "Information required to publish the Amazon SNS message.",
+			//	            "properties": {
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "TargetArn": {
+			//	                "description": "The ARN of the Amazon SNS target where the message is sent.",
+			//	                "maxLength": 2048,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "TargetArn"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "Sqs": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Payload": {
+			//	                "additionalProperties": false,
+			//	                "description": "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the alarm model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
+			//	                "properties": {
+			//	                  "ContentExpression": {
+			//	                    "description": "The content of the payload. You can use a string expression that includes quoted strings (`'\u003cstring\u003e'`), variables (`$variable.\u003cvariable-name\u003e`), input values (`$input.\u003cinput-name\u003e.\u003cpath-to-datum\u003e`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Type": {
+			//	                    "description": "The value of the payload type can be either `STRING` or `JSON`.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ContentExpression",
+			//	                  "Type"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "QueueUrl": {
+			//	                "description": "The URL of the SQS queue where the data is written.",
+			//	                "type": "string"
+			//	              },
+			//	              "UseBase64": {
+			//	                "description": "Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.",
+			//	                "type": "boolean"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "QueueUrl"
+			//	            ],
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Contains information about one or more alarm actions.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -984,11 +986,12 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_model_description": {
 			// Property: AlarmModelDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A brief description of the alarm model.",
-			//   "maxLength": 128,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A brief description of the alarm model.",
+			//	  "maxLength": 128,
+			//	  "type": "string"
+			//	}
 			Description: "A brief description of the alarm model.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -996,13 +999,14 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_model_name": {
 			// Property: AlarmModelName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the alarm model.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9_-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the alarm model.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9_-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the alarm model.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1010,49 +1014,50 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_rule": {
 			// Property: AlarmRule
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Defines when your alarm is invoked.",
-			//   "properties": {
-			//     "SimpleRule": {
-			//       "additionalProperties": false,
-			//       "description": "A rule that compares an input property value to a threshold value with a comparison operator.",
-			//       "properties": {
-			//         "ComparisonOperator": {
-			//           "description": "The comparison operator.",
-			//           "enum": [
-			//             "GREATER",
-			//             "GREATER_OR_EQUAL",
-			//             "LESS",
-			//             "LESS_OR_EQUAL",
-			//             "EQUAL",
-			//             "NOT_EQUAL"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "InputProperty": {
-			//           "description": "The value on the left side of the comparison operator. You can specify an AWS IoT Events input attribute as an input property.",
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Threshold": {
-			//           "description": "The value on the right side of the comparison operator. You can enter a number or specify an AWS IoT Events input attribute.",
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "InputProperty",
-			//         "ComparisonOperator",
-			//         "Threshold"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Defines when your alarm is invoked.",
+			//	  "properties": {
+			//	    "SimpleRule": {
+			//	      "additionalProperties": false,
+			//	      "description": "A rule that compares an input property value to a threshold value with a comparison operator.",
+			//	      "properties": {
+			//	        "ComparisonOperator": {
+			//	          "description": "The comparison operator.",
+			//	          "enum": [
+			//	            "GREATER",
+			//	            "GREATER_OR_EQUAL",
+			//	            "LESS",
+			//	            "LESS_OR_EQUAL",
+			//	            "EQUAL",
+			//	            "NOT_EQUAL"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "InputProperty": {
+			//	          "description": "The value on the left side of the comparison operator. You can specify an AWS IoT Events input attribute as an input property.",
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Threshold": {
+			//	          "description": "The value on the right side of the comparison operator. You can enter a number or specify an AWS IoT Events input attribute.",
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "InputProperty",
+			//	        "ComparisonOperator",
+			//	        "Threshold"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Defines when your alarm is invoked.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1090,13 +1095,14 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key": {
 			// Property: Key
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The value used to identify a alarm instance. When a device or system sends input, a new alarm instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding alarm instance based on this identifying information.\n\nThis parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct alarm instance, the device must send a message payload that contains the same attribute-value.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The value used to identify a alarm instance. When a device or system sends input, a new alarm instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding alarm instance based on this identifying information.\n\nThis parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct alarm instance, the device must send a message payload that contains the same attribute-value.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$",
+			//	  "type": "string"
+			//	}
 			Description: "The value used to identify a alarm instance. When a device or system sends input, a new alarm instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding alarm instance based on this identifying information.\n\nThis parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct alarm instance, the device must send a message payload that contains the same attribute-value.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1104,12 +1110,13 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the role that grants permission to AWS IoT Events to perform its operations.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the role that grants permission to AWS IoT Events to perform its operations.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the role that grants permission to AWS IoT Events to perform its operations.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1117,12 +1124,13 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"severity": {
 			// Property: Severity
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A non-negative integer that reflects the severity level of the alarm.\n\n",
-			//   "maximum": 2147483647,
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "A non-negative integer that reflects the severity level of the alarm.\n\n",
+			//	  "maximum": 2147483647,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Description: "A non-negative integer that reflects the severity level of the alarm.\n\n",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -1130,31 +1138,32 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Tags to be applied to Input.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "Key of the Tag.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Value of the Tag.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Tags to be applied to Input.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "Key of the Tag.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Value of the Tag.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

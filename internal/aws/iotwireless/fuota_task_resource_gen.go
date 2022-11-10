@@ -24,10 +24,11 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FUOTA task arn. Returned after successful create.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FUOTA task arn. Returned after successful create.",
+			//	  "type": "string"
+			//	}
 			Description: "FUOTA task arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,11 +39,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"associate_multicast_group": {
 			// Property: AssociateMulticastGroup
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Multicast group to associate. Only for update request.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Multicast group to associate. Only for update request.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Multicast group to associate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -57,11 +59,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"associate_wireless_device": {
 			// Property: AssociateWirelessDevice
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device to associate. Only for update request.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device to associate. Only for update request.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device to associate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -76,11 +79,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FUOTA task description",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FUOTA task description",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "FUOTA task description",
 			Type:        types.StringType,
 			Optional:    true,
@@ -95,11 +99,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"disassociate_multicast_group": {
 			// Property: DisassociateMulticastGroup
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Multicast group to disassociate. Only for update request.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Multicast group to disassociate. Only for update request.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Multicast group to disassociate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -114,11 +119,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"disassociate_wireless_device": {
 			// Property: DisassociateWirelessDevice
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Wireless device to disassociate. Only for update request.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Wireless device to disassociate. Only for update request.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Wireless device to disassociate. Only for update request.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -133,12 +139,13 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"firmware_update_image": {
 			// Property: FirmwareUpdateImage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FUOTA task firmware update image binary S3 link",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FUOTA task firmware update image binary S3 link",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "FUOTA task firmware update image binary S3 link",
 			Type:        types.StringType,
 			Required:    true,
@@ -149,12 +156,13 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"firmware_update_role": {
 			// Property: FirmwareUpdateRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FUOTA task firmware IAM role for reading S3",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FUOTA task firmware IAM role for reading S3",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "FUOTA task firmware IAM role for reading S3",
 			Type:        types.StringType,
 			Required:    true,
@@ -165,10 +173,11 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"fuota_task_status": {
 			// Property: FuotaTaskStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FUOTA task status. Returned after successful read.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FUOTA task status. Returned after successful read.",
+			//	  "type": "string"
+			//	}
 			Description: "FUOTA task status. Returned after successful read.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -179,11 +188,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "FUOTA task id. Returned after successful create.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "FUOTA task id. Returned after successful create.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "FUOTA task id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -194,27 +204,28 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "FUOTA task LoRaWAN",
-			//   "properties": {
-			//     "RfRegion": {
-			//       "description": "FUOTA task LoRaWAN RF region",
-			//       "maxLength": 64,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "StartTime": {
-			//       "description": "FUOTA task LoRaWAN start time",
-			//       "maxLength": 64,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "RfRegion"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "FUOTA task LoRaWAN",
+			//	  "properties": {
+			//	    "RfRegion": {
+			//	      "description": "FUOTA task LoRaWAN RF region",
+			//	      "maxLength": 64,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "StartTime": {
+			//	      "description": "FUOTA task LoRaWAN start time",
+			//	      "maxLength": 64,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "RfRegion"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "FUOTA task LoRaWAN",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -243,11 +254,12 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of FUOTA task",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of FUOTA task",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "Name of FUOTA task",
 			Type:        types.StringType,
 			Optional:    true,
@@ -262,29 +274,30 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the FUOTA task.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the FUOTA task.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the FUOTA task.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

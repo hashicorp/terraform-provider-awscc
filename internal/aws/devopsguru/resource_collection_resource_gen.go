@@ -25,60 +25,61 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
-			//   "properties": {
-			//     "CloudFormation": {
-			//       "additionalProperties": false,
-			//       "description": "CloudFormation resource for DevOps Guru to monitor",
-			//       "properties": {
-			//         "StackNames": {
-			//           "description": "An array of CloudFormation stack names.",
-			//           "items": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
-			//             "type": "string"
-			//           },
-			//           "maxItems": 1000,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Tags": {
-			//       "description": "Tagged resources for DevOps Guru to monitor",
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Tagged resource for DevOps Guru to monitor",
-			//         "properties": {
-			//           "AppBoundaryKey": {
-			//             "description": "A Tag key for DevOps Guru app boundary.",
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "TagValues": {
-			//             "description": "Tag values of DevOps Guru app boundary.",
-			//             "items": {
-			//               "maxLength": 256,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "maxItems": 1000,
-			//             "minItems": 1,
-			//             "type": "array"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
+			//	  "properties": {
+			//	    "CloudFormation": {
+			//	      "additionalProperties": false,
+			//	      "description": "CloudFormation resource for DevOps Guru to monitor",
+			//	      "properties": {
+			//	        "StackNames": {
+			//	          "description": "An array of CloudFormation stack names.",
+			//	          "items": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 1000,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Tags": {
+			//	      "description": "Tagged resources for DevOps Guru to monitor",
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Tagged resource for DevOps Guru to monitor",
+			//	        "properties": {
+			//	          "AppBoundaryKey": {
+			//	            "description": "A Tag key for DevOps Guru app boundary.",
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "TagValues": {
+			//	            "description": "Tag values of DevOps Guru app boundary.",
+			//	            "items": {
+			//	              "maxLength": 256,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "maxItems": 1000,
+			//	            "minItems": 1,
+			//	            "type": "array"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -157,14 +158,15 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 		"resource_collection_type": {
 			// Property: ResourceCollectionType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of ResourceCollection",
-			//   "enum": [
-			//     "AWS_CLOUD_FORMATION",
-			//     "AWS_TAGS"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of ResourceCollection",
+			//	  "enum": [
+			//	    "AWS_CLOUD_FORMATION",
+			//	    "AWS_TAGS"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of ResourceCollection",
 			Type:        types.StringType,
 			Computed:    true,

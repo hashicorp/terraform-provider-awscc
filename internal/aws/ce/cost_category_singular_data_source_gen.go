@@ -23,11 +23,12 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Cost category ARN",
-			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Cost category ARN",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Cost category ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,12 +36,13 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"default_value": {
 			// Property: DefaultValue
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The default value for the cost category",
-			//   "maxLength": 50,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The default value for the cost category",
+			//	  "maxLength": 50,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The default value for the cost category",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,13 +50,14 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"effective_start": {
 			// Property: EffectiveStart
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ISO 8601 date time with offset format",
-			//   "maxLength": 25,
-			//   "minLength": 20,
-			//   "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(([+-]\\d\\d:\\d\\d)|Z)$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ISO 8601 date time with offset format",
+			//	  "maxLength": 25,
+			//	  "minLength": 20,
+			//	  "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(([+-]\\d\\d:\\d\\d)|Z)$",
+			//	  "type": "string"
+			//	}
 			Description: "ISO 8601 date time with offset format",
 			Type:        types.StringType,
 			Computed:    true,
@@ -62,33 +65,36 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 50,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 50,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"rule_version": {
 			// Property: RuleVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "CostCategoryExpression.v1"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "CostCategoryExpression.v1"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"rules": {
 			// Property: Rules
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "JSON array format of Expression in Billing and Cost Management API",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "JSON array format of Expression in Billing and Cost Management API",
+			//	  "type": "string"
+			//	}
 			Description: "JSON array format of Expression in Billing and Cost Management API",
 			Type:        types.StringType,
 			Computed:    true,
@@ -96,10 +102,11 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"split_charge_rules": {
 			// Property: SplitChargeRules
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+			//	  "type": "string"
+			//	}
 			Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
 			Type:        types.StringType,
 			Computed:    true,

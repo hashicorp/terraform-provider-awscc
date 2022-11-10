@@ -23,13 +23,14 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"firewall_arn": {
 			// Property: FirewallArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A resource ARN.",
-			//   "maxLength": 256,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws.*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A resource ARN.",
+			//	  "maxLength": 256,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws.*$",
+			//	  "type": "string"
+			//	}
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,70 +38,72 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"firewall_name": {
 			// Property: FirewallName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9-]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"logging_configuration": {
 			// Property: LoggingConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "LogDestinationConfigs": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "LogDestination": {
-			//             "additionalProperties": false,
-			//             "description": "A key-value pair to configure the logDestinations.",
-			//             "patternProperties": {
-			//               "": {
-			//                 "maxLength": 1024,
-			//                 "minLength": 1,
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "LogDestinationType": {
-			//             "enum": [
-			//               "S3",
-			//               "CloudWatchLogs",
-			//               "KinesisDataFirehose"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "LogType": {
-			//             "enum": [
-			//               "ALERT",
-			//               "FLOW"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "LogType",
-			//           "LogDestinationType",
-			//           "LogDestination"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "minItems": 1,
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "LogDestinationConfigs"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "LogDestinationConfigs": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "LogDestination": {
+			//	            "additionalProperties": false,
+			//	            "description": "A key-value pair to configure the logDestinations.",
+			//	            "patternProperties": {
+			//	              "": {
+			//	                "maxLength": 1024,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "LogDestinationType": {
+			//	            "enum": [
+			//	              "S3",
+			//	              "CloudWatchLogs",
+			//	              "KinesisDataFirehose"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "LogType": {
+			//	            "enum": [
+			//	              "ALERT",
+			//	              "FLOW"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "LogType",
+			//	          "LogDestinationType",
+			//	          "LogDestination"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "minItems": 1,
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "LogDestinationConfigs"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"log_destination_configs": {

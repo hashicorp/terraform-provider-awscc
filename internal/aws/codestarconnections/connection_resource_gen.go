@@ -25,13 +25,14 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"connection_arn": {
 			// Property: ConnectionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,12 +43,13 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"connection_name": {
 			// Property: ConnectionName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the connection. Connection names must be unique in an AWS user account.",
-			//   "maxLength": 32,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the connection. Connection names must be unique in an AWS user account.",
+			//	  "maxLength": 32,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the connection. Connection names must be unique in an AWS user account.",
 			Type:        types.StringType,
 			Required:    true,
@@ -61,10 +63,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"connection_status": {
 			// Property: ConnectionStatus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The current status of the connection.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The current status of the connection.",
+			//	  "type": "string"
+			//	}
 			Description: "The current status of the connection.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,13 +78,14 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"host_arn": {
 			// Property: HostArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
-			//   "maxLength": 256,
-			//   "minLength": 0,
-			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
+			//	  "maxLength": 256,
+			//	  "minLength": 0,
+			//	  "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
+			//	  "type": "string"
+			//	}
 			Description: "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -98,13 +102,14 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"owner_account_id": {
 			// Property: OwnerAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "pattern": "[0-9]{12}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "pattern": "[0-9]{12}",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,10 +120,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"provider_type": {
 			// Property: ProviderType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -131,32 +137,33 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the tags applied to a connection.",
-			//   "items": {
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the tags applied to a connection.",
+			//	  "items": {
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Specifies the tags applied to a connection.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -24,10 +24,11 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"beneficiary": {
 			// Property: Beneficiary
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Beneficiary of the license.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Beneficiary of the license.",
+			//	  "type": "string"
+			//	}
 			Description: "Beneficiary of the license.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -39,43 +40,44 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"consumption_configuration": {
 			// Property: ConsumptionConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "BorrowConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AllowEarlyCheckIn": {
-			//           "type": "boolean"
-			//         },
-			//         "MaxTimeToLiveInMinutes": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "MaxTimeToLiveInMinutes",
-			//         "AllowEarlyCheckIn"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ProvisionalConfiguration": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "MaxTimeToLiveInMinutes": {
-			//           "type": "integer"
-			//         }
-			//       },
-			//       "required": [
-			//         "MaxTimeToLiveInMinutes"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "RenewType": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "BorrowConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AllowEarlyCheckIn": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "MaxTimeToLiveInMinutes": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "MaxTimeToLiveInMinutes",
+			//	        "AllowEarlyCheckIn"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ProvisionalConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "MaxTimeToLiveInMinutes": {
+			//	          "type": "integer"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "MaxTimeToLiveInMinutes"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "RenewType": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"borrow_configuration": {
@@ -133,38 +135,39 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"entitlements": {
 			// Property: Entitlements
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "AllowCheckIn": {
-			//         "type": "boolean"
-			//       },
-			//       "MaxCount": {
-			//         "type": "integer"
-			//       },
-			//       "Name": {
-			//         "type": "string"
-			//       },
-			//       "Overage": {
-			//         "type": "boolean"
-			//       },
-			//       "Unit": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name",
-			//       "Unit"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "AllowCheckIn": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "MaxCount": {
+			//	        "type": "integer"
+			//	      },
+			//	      "Name": {
+			//	        "type": "string"
+			//	      },
+			//	      "Overage": {
+			//	        "type": "boolean"
+			//	      },
+			//	      "Unit": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name",
+			//	      "Unit"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"allow_check_in": {
@@ -223,10 +226,11 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"home_region": {
 			// Property: HomeRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Home region for the created license.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Home region for the created license.",
+			//	  "type": "string"
+			//	}
 			Description: "Home region for the created license.",
 			Type:        types.StringType,
 			Required:    true,
@@ -234,21 +238,22 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"issuer": {
 			// Property: Issuer
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Name": {
-			//       "type": "string"
-			//     },
-			//     "SignKey": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Name": {
+			//	      "type": "string"
+			//	    },
+			//	    "SignKey": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -272,11 +277,12 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"license_arn": {
 			// Property: LicenseArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name is a unique name for each resource.",
-			//   "maxLength": 2048,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name is a unique name for each resource.",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name is a unique name for each resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -287,26 +293,27 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"license_metadata": {
 			// Property: LicenseMetadata
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Name": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Name": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -333,10 +340,11 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"license_name": {
 			// Property: LicenseName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name for the created license.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name for the created license.",
+			//	  "type": "string"
+			//	}
 			Description: "Name for the created license.",
 			Type:        types.StringType,
 			Required:    true,
@@ -344,10 +352,11 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"product_name": {
 			// Property: ProductName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Product name for the created license.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Product name for the created license.",
+			//	  "type": "string"
+			//	}
 			Description: "Product name for the created license.",
 			Type:        types.StringType,
 			Required:    true,
@@ -355,12 +364,13 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"product_sku": {
 			// Property: ProductSKU
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ProductSKU of the license.",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ProductSKU of the license.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "ProductSKU of the license.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -375,9 +385,10 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -389,26 +400,27 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"validity": {
 			// Property: Validity
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Begin": {
-			//       "description": "Validity begin date for the license.",
-			//       "format": "date-time",
-			//       "type": "string"
-			//     },
-			//     "End": {
-			//       "description": "Validity begin date for the license.",
-			//       "format": "date-time",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Begin",
-			//     "End"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Begin": {
+			//	      "description": "Validity begin date for the license.",
+			//	      "format": "date-time",
+			//	      "type": "string"
+			//	    },
+			//	    "End": {
+			//	      "description": "Validity begin date for the license.",
+			//	      "format": "date-time",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Begin",
+			//	    "End"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"begin": {
@@ -436,10 +448,11 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of the license.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of the license.",
+			//	  "type": "string"
+			//	}
 			Description: "The version of the license.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -23,14 +23,15 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"actions": {
 			// Property: Actions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -38,10 +39,11 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate_authority_arn": {
 			// Property: CertificateAuthorityArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -49,10 +51,11 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"principal": {
 			// Property: Principal
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.",
+			//	  "type": "string"
+			//	}
 			Description: "The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,10 +63,11 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_account": {
 			// Property: SourceAccount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the calling account.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the calling account.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the calling account.",
 			Type:        types.StringType,
 			Computed:    true,

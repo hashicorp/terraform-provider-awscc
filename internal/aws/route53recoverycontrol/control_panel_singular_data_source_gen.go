@@ -23,10 +23,11 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Cluster to associate with the Control Panel",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Cluster to associate with the Control Panel",
+			//	  "type": "string"
+			//	}
 			Description: "Cluster to associate with the Control Panel",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"control_panel_arn": {
 			// Property: ControlPanelArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the cluster.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the cluster.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"default_control_panel": {
 			// Property: DefaultControlPanel
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.",
+			//	  "type": "boolean"
+			//	}
 			Description: "A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -56,12 +59,13 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the control panel. You can use any non-white space character in the name.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the control panel. You can use any non-white space character in the name.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the control panel. You can use any non-white space character in the name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,10 +73,11 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"routing_control_count": {
 			// Property: RoutingControlCount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Count of associated routing controls",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Count of associated routing controls",
+			//	  "type": "integer"
+			//	}
 			Description: "Count of associated routing controls",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -80,15 +85,16 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-			//   "enum": [
-			//     "PENDING",
-			//     "DEPLOYED",
-			//     "PENDING_DELETION"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+			//	  "enum": [
+			//	    "PENDING",
+			//	    "DEPLOYED",
+			//	    "PENDING_DELETION"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -96,30 +102,31 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

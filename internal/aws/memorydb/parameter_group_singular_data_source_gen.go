@@ -23,10 +23,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: ARN
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the parameter group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the parameter group.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the parameter group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the parameter group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the parameter group.",
+			//	  "type": "string"
+			//	}
 			Description: "A description of the parameter group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"family": {
 			// Property: Family
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the parameter group family that this parameter group is compatible with.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the parameter group family that this parameter group is compatible with.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the parameter group family that this parameter group is compatible with.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"parameter_group_name": {
 			// Property: ParameterGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the parameter group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the parameter group.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the parameter group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +71,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
+			//	  "type": "object"
+			//	}
 			Description: "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
@@ -78,38 +83,39 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this parameter group.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key for the tag. May not be null.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The tag's value. May be null.",
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this parameter group.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key for the tag. May not be null.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The tag's value. May be null.",
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this parameter group.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

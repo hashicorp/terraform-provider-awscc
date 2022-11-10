@@ -23,22 +23,24 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1011,
-			//   "minLength": 1,
-			//   "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1011,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"auto_build_bot_locales": {
 			// Property: AutoBuildBotLocales
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether to build the bot locales after bot creation completes.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether to build the bot locales after bot creation completes.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether to build the bot locales after bot creation completes.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -46,37 +48,38 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_file_s3_location": {
 			// Property: BotFileS3Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
-			//   "properties": {
-			//     "S3Bucket": {
-			//       "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-			//       "maxLength": 63,
-			//       "minLength": 3,
-			//       "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//       "type": "string"
-			//     },
-			//     "S3ObjectKey": {
-			//       "description": "The Amazon S3 key of the deployment package.",
-			//       "maxLength": 1024,
-			//       "minLength": 1,
-			//       "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
-			//       "type": "string"
-			//     },
-			//     "S3ObjectVersion": {
-			//       "description": "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
-			//       "maxLength": 1024,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3Bucket",
-			//     "S3ObjectKey"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
+			//	  "properties": {
+			//	    "S3Bucket": {
+			//	      "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
+			//	      "maxLength": 63,
+			//	      "minLength": 3,
+			//	      "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	      "type": "string"
+			//	    },
+			//	    "S3ObjectKey": {
+			//	      "description": "The Amazon S3 key of the deployment package.",
+			//	      "maxLength": 1024,
+			//	      "minLength": 1,
+			//	      "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
+			//	      "type": "string"
+			//	    },
+			//	    "S3ObjectVersion": {
+			//	      "description": "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
+			//	      "maxLength": 1024,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3Bucket",
+			//	    "S3ObjectKey"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -105,4113 +108,4114 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_locales": {
 			// Property: BotLocales
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of bot locales",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A locale in the bot, which contains the intents and slot types that the bot uses in conversations with users in the specified language and locale.",
-			//     "properties": {
-			//       "CustomVocabulary": {
-			//         "additionalProperties": false,
-			//         "description": "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
-			//         "properties": {
-			//           "CustomVocabularyItems": {
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "A custom vocabulary item that contains the phrase to recognize and a weight to give the boost.",
-			//               "properties": {
-			//                 "Phrase": {
-			//                   "description": "Phrase that should be recognized.",
-			//                   "maxLength": 100,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Weight": {
-			//                   "description": "The degree to which the phrase recognition is boosted.",
-			//                   "maximum": 3,
-			//                   "minimum": 1,
-			//                   "type": "integer"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Phrase"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 500,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           }
-			//         },
-			//         "required": [
-			//           "CustomVocabularyItems"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Description": {
-			//         "description": "A description of the resource",
-			//         "maxLength": 200,
-			//         "type": "string"
-			//       },
-			//       "Intents": {
-			//         "description": "List of intents",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "An intent represents an action that the user wants to perform. You create a bot to support one or more related intents.",
-			//           "properties": {
-			//             "Description": {
-			//               "description": "A description of the resource",
-			//               "maxLength": 200,
-			//               "type": "string"
-			//             },
-			//             "DialogCodeHook": {
-			//               "additionalProperties": false,
-			//               "description": "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
-			//               "properties": {
-			//                 "Enabled": {
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Enabled"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "FulfillmentCodeHook": {
-			//               "additionalProperties": false,
-			//               "description": "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
-			//               "properties": {
-			//                 "Enabled": {
-			//                   "type": "boolean"
-			//                 },
-			//                 "FulfillmentUpdatesSpecification": {
-			//                   "additionalProperties": false,
-			//                   "description": "Provides information for updating the user on the progress of fulfilling an intent.",
-			//                   "properties": {
-			//                     "Active": {
-			//                       "description": "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-			//                       "type": "boolean"
-			//                     },
-			//                     "StartResponse": {
-			//                       "additionalProperties": false,
-			//                       "description": "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
-			//                       "properties": {
-			//                         "AllowInterrupt": {
-			//                           "description": "Determines whether the user can interrupt the start message while it is playing.",
-			//                           "type": "boolean"
-			//                         },
-			//                         "DelayInSeconds": {
-			//                           "description": "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-			//                           "maximum": 900,
-			//                           "minimum": 1,
-			//                           "type": "integer"
-			//                         },
-			//                         "MessageGroups": {
-			//                           "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                           "insertionOrder": false,
-			//                           "items": {
-			//                             "additionalProperties": false,
-			//                             "description": "One or more messages that Amazon Lex can send to the user.",
-			//                             "properties": {
-			//                               "Message": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "The primary message that Amazon Lex should send to the user.",
-			//                                 "properties": {
-			//                                   "CustomPayload": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in a custom format defined by the client application.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The string that is sent to your application.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "ImageResponseCard": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message that defines a response card that the client application can show to the user.",
-			//                                     "properties": {
-			//                                       "Buttons": {
-			//                                         "description": "A list of buttons that should be displayed on the response card.",
-			//                                         "insertionOrder": false,
-			//                                         "items": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                           "properties": {
-			//                                             "Text": {
-			//                                               "description": "The text that appears on the button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Value": {
-			//                                               "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Text",
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "maxItems": 5,
-			//                                         "type": "array"
-			//                                       },
-			//                                       "ImageUrl": {
-			//                                         "description": "The URL of an image to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Subtitle": {
-			//                                         "description": "The subtitle to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Title": {
-			//                                         "description": "The title to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Title"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "PlainTextMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in plain text format.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The message to send to the user.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "SSMLMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The SSML text that defines the prompt.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   }
-			//                                 },
-			//                                 "type": "object"
-			//                               },
-			//                               "Variations": {
-			//                                 "description": "Message variations to send to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "The primary message that Amazon Lex should send to the user.",
-			//                                   "properties": {
-			//                                     "CustomPayload": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in a custom format defined by the client application.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The string that is sent to your application.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "ImageResponseCard": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message that defines a response card that the client application can show to the user.",
-			//                                       "properties": {
-			//                                         "Buttons": {
-			//                                           "description": "A list of buttons that should be displayed on the response card.",
-			//                                           "insertionOrder": false,
-			//                                           "items": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                             "properties": {
-			//                                               "Text": {
-			//                                                 "description": "The text that appears on the button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Value": {
-			//                                                 "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Text",
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "maxItems": 5,
-			//                                           "type": "array"
-			//                                         },
-			//                                         "ImageUrl": {
-			//                                           "description": "The URL of an image to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Subtitle": {
-			//                                           "description": "The subtitle to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Title": {
-			//                                           "description": "The title to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Title"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "PlainTextMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in plain text format.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The message to send to the user.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "SSMLMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The SSML text that defines the prompt.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     }
-			//                                   },
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 2,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "Message"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "maxItems": 5,
-			//                           "minItems": 1,
-			//                           "type": "array"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "DelayInSeconds",
-			//                         "MessageGroups"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "TimeoutInSeconds": {
-			//                       "description": "The length of time that the fulfillment Lambda function should run before it times out.",
-			//                       "maximum": 900,
-			//                       "minimum": 1,
-			//                       "type": "integer"
-			//                     },
-			//                     "UpdateResponse": {
-			//                       "additionalProperties": false,
-			//                       "description": "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
-			//                       "properties": {
-			//                         "AllowInterrupt": {
-			//                           "description": "Determines whether the user can interrupt an update message while it is playing.",
-			//                           "type": "boolean"
-			//                         },
-			//                         "FrequencyInSeconds": {
-			//                           "description": "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-			//                           "maximum": 900,
-			//                           "minimum": 1,
-			//                           "type": "integer"
-			//                         },
-			//                         "MessageGroups": {
-			//                           "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                           "insertionOrder": false,
-			//                           "items": {
-			//                             "additionalProperties": false,
-			//                             "description": "One or more messages that Amazon Lex can send to the user.",
-			//                             "properties": {
-			//                               "Message": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "The primary message that Amazon Lex should send to the user.",
-			//                                 "properties": {
-			//                                   "CustomPayload": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in a custom format defined by the client application.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The string that is sent to your application.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "ImageResponseCard": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message that defines a response card that the client application can show to the user.",
-			//                                     "properties": {
-			//                                       "Buttons": {
-			//                                         "description": "A list of buttons that should be displayed on the response card.",
-			//                                         "insertionOrder": false,
-			//                                         "items": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                           "properties": {
-			//                                             "Text": {
-			//                                               "description": "The text that appears on the button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Value": {
-			//                                               "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Text",
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "maxItems": 5,
-			//                                         "type": "array"
-			//                                       },
-			//                                       "ImageUrl": {
-			//                                         "description": "The URL of an image to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Subtitle": {
-			//                                         "description": "The subtitle to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Title": {
-			//                                         "description": "The title to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Title"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "PlainTextMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in plain text format.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The message to send to the user.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "SSMLMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The SSML text that defines the prompt.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   }
-			//                                 },
-			//                                 "type": "object"
-			//                               },
-			//                               "Variations": {
-			//                                 "description": "Message variations to send to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "The primary message that Amazon Lex should send to the user.",
-			//                                   "properties": {
-			//                                     "CustomPayload": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in a custom format defined by the client application.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The string that is sent to your application.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "ImageResponseCard": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message that defines a response card that the client application can show to the user.",
-			//                                       "properties": {
-			//                                         "Buttons": {
-			//                                           "description": "A list of buttons that should be displayed on the response card.",
-			//                                           "insertionOrder": false,
-			//                                           "items": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                             "properties": {
-			//                                               "Text": {
-			//                                                 "description": "The text that appears on the button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Value": {
-			//                                                 "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Text",
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "maxItems": 5,
-			//                                           "type": "array"
-			//                                         },
-			//                                         "ImageUrl": {
-			//                                           "description": "The URL of an image to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Subtitle": {
-			//                                           "description": "The subtitle to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Title": {
-			//                                           "description": "The title to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Title"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "PlainTextMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in plain text format.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The message to send to the user.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "SSMLMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The SSML text that defines the prompt.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     }
-			//                                   },
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 2,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "Message"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "maxItems": 5,
-			//                           "minItems": 1,
-			//                           "type": "array"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "FrequencyInSeconds",
-			//                         "MessageGroups"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Active"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "PostFulfillmentStatusSpecification": {
-			//                   "additionalProperties": false,
-			//                   "description": "Provides information for updating the user on the progress of fulfilling an intent.",
-			//                   "properties": {
-			//                     "FailureResponse": {
-			//                       "additionalProperties": false,
-			//                       "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//                       "properties": {
-			//                         "AllowInterrupt": {
-			//                           "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                           "type": "boolean"
-			//                         },
-			//                         "MessageGroupsList": {
-			//                           "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                           "insertionOrder": false,
-			//                           "items": {
-			//                             "additionalProperties": false,
-			//                             "description": "One or more messages that Amazon Lex can send to the user.",
-			//                             "properties": {
-			//                               "Message": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "The primary message that Amazon Lex should send to the user.",
-			//                                 "properties": {
-			//                                   "CustomPayload": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in a custom format defined by the client application.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The string that is sent to your application.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "ImageResponseCard": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message that defines a response card that the client application can show to the user.",
-			//                                     "properties": {
-			//                                       "Buttons": {
-			//                                         "description": "A list of buttons that should be displayed on the response card.",
-			//                                         "insertionOrder": false,
-			//                                         "items": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                           "properties": {
-			//                                             "Text": {
-			//                                               "description": "The text that appears on the button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Value": {
-			//                                               "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Text",
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "maxItems": 5,
-			//                                         "type": "array"
-			//                                       },
-			//                                       "ImageUrl": {
-			//                                         "description": "The URL of an image to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Subtitle": {
-			//                                         "description": "The subtitle to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Title": {
-			//                                         "description": "The title to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Title"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "PlainTextMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in plain text format.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The message to send to the user.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "SSMLMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The SSML text that defines the prompt.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   }
-			//                                 },
-			//                                 "type": "object"
-			//                               },
-			//                               "Variations": {
-			//                                 "description": "Message variations to send to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "The primary message that Amazon Lex should send to the user.",
-			//                                   "properties": {
-			//                                     "CustomPayload": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in a custom format defined by the client application.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The string that is sent to your application.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "ImageResponseCard": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message that defines a response card that the client application can show to the user.",
-			//                                       "properties": {
-			//                                         "Buttons": {
-			//                                           "description": "A list of buttons that should be displayed on the response card.",
-			//                                           "insertionOrder": false,
-			//                                           "items": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                             "properties": {
-			//                                               "Text": {
-			//                                                 "description": "The text that appears on the button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Value": {
-			//                                                 "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Text",
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "maxItems": 5,
-			//                                           "type": "array"
-			//                                         },
-			//                                         "ImageUrl": {
-			//                                           "description": "The URL of an image to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Subtitle": {
-			//                                           "description": "The subtitle to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Title": {
-			//                                           "description": "The title to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Title"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "PlainTextMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in plain text format.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The message to send to the user.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "SSMLMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The SSML text that defines the prompt.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     }
-			//                                   },
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 2,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "Message"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "maxItems": 5,
-			//                           "minItems": 1,
-			//                           "type": "array"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "MessageGroupsList"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "SuccessResponse": {
-			//                       "additionalProperties": false,
-			//                       "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//                       "properties": {
-			//                         "AllowInterrupt": {
-			//                           "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                           "type": "boolean"
-			//                         },
-			//                         "MessageGroupsList": {
-			//                           "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                           "insertionOrder": false,
-			//                           "items": {
-			//                             "additionalProperties": false,
-			//                             "description": "One or more messages that Amazon Lex can send to the user.",
-			//                             "properties": {
-			//                               "Message": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "The primary message that Amazon Lex should send to the user.",
-			//                                 "properties": {
-			//                                   "CustomPayload": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in a custom format defined by the client application.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The string that is sent to your application.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "ImageResponseCard": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message that defines a response card that the client application can show to the user.",
-			//                                     "properties": {
-			//                                       "Buttons": {
-			//                                         "description": "A list of buttons that should be displayed on the response card.",
-			//                                         "insertionOrder": false,
-			//                                         "items": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                           "properties": {
-			//                                             "Text": {
-			//                                               "description": "The text that appears on the button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Value": {
-			//                                               "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Text",
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "maxItems": 5,
-			//                                         "type": "array"
-			//                                       },
-			//                                       "ImageUrl": {
-			//                                         "description": "The URL of an image to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Subtitle": {
-			//                                         "description": "The subtitle to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Title": {
-			//                                         "description": "The title to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Title"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "PlainTextMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in plain text format.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The message to send to the user.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "SSMLMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The SSML text that defines the prompt.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   }
-			//                                 },
-			//                                 "type": "object"
-			//                               },
-			//                               "Variations": {
-			//                                 "description": "Message variations to send to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "The primary message that Amazon Lex should send to the user.",
-			//                                   "properties": {
-			//                                     "CustomPayload": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in a custom format defined by the client application.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The string that is sent to your application.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "ImageResponseCard": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message that defines a response card that the client application can show to the user.",
-			//                                       "properties": {
-			//                                         "Buttons": {
-			//                                           "description": "A list of buttons that should be displayed on the response card.",
-			//                                           "insertionOrder": false,
-			//                                           "items": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                             "properties": {
-			//                                               "Text": {
-			//                                                 "description": "The text that appears on the button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Value": {
-			//                                                 "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Text",
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "maxItems": 5,
-			//                                           "type": "array"
-			//                                         },
-			//                                         "ImageUrl": {
-			//                                           "description": "The URL of an image to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Subtitle": {
-			//                                           "description": "The subtitle to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Title": {
-			//                                           "description": "The title to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Title"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "PlainTextMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in plain text format.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The message to send to the user.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "SSMLMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The SSML text that defines the prompt.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     }
-			//                                   },
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 2,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "Message"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "maxItems": 5,
-			//                           "minItems": 1,
-			//                           "type": "array"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "MessageGroupsList"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "TimeoutResponse": {
-			//                       "additionalProperties": false,
-			//                       "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//                       "properties": {
-			//                         "AllowInterrupt": {
-			//                           "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                           "type": "boolean"
-			//                         },
-			//                         "MessageGroupsList": {
-			//                           "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                           "insertionOrder": false,
-			//                           "items": {
-			//                             "additionalProperties": false,
-			//                             "description": "One or more messages that Amazon Lex can send to the user.",
-			//                             "properties": {
-			//                               "Message": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "The primary message that Amazon Lex should send to the user.",
-			//                                 "properties": {
-			//                                   "CustomPayload": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in a custom format defined by the client application.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The string that is sent to your application.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "ImageResponseCard": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message that defines a response card that the client application can show to the user.",
-			//                                     "properties": {
-			//                                       "Buttons": {
-			//                                         "description": "A list of buttons that should be displayed on the response card.",
-			//                                         "insertionOrder": false,
-			//                                         "items": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                           "properties": {
-			//                                             "Text": {
-			//                                               "description": "The text that appears on the button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Value": {
-			//                                               "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                               "maxLength": 50,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Text",
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "maxItems": 5,
-			//                                         "type": "array"
-			//                                       },
-			//                                       "ImageUrl": {
-			//                                         "description": "The URL of an image to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Subtitle": {
-			//                                         "description": "The subtitle to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       },
-			//                                       "Title": {
-			//                                         "description": "The title to display on the response card.",
-			//                                         "maxLength": 250,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Title"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "PlainTextMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in plain text format.",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The message to send to the user.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "SSMLMessage": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                     "properties": {
-			//                                       "Value": {
-			//                                         "description": "The SSML text that defines the prompt.",
-			//                                         "maxLength": 1000,
-			//                                         "minLength": 1,
-			//                                         "type": "string"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "Value"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   }
-			//                                 },
-			//                                 "type": "object"
-			//                               },
-			//                               "Variations": {
-			//                                 "description": "Message variations to send to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "The primary message that Amazon Lex should send to the user.",
-			//                                   "properties": {
-			//                                     "CustomPayload": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in a custom format defined by the client application.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The string that is sent to your application.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "ImageResponseCard": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message that defines a response card that the client application can show to the user.",
-			//                                       "properties": {
-			//                                         "Buttons": {
-			//                                           "description": "A list of buttons that should be displayed on the response card.",
-			//                                           "insertionOrder": false,
-			//                                           "items": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                             "properties": {
-			//                                               "Text": {
-			//                                                 "description": "The text that appears on the button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Value": {
-			//                                                 "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Text",
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "maxItems": 5,
-			//                                           "type": "array"
-			//                                         },
-			//                                         "ImageUrl": {
-			//                                           "description": "The URL of an image to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Subtitle": {
-			//                                           "description": "The subtitle to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Title": {
-			//                                           "description": "The title to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Title"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "PlainTextMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in plain text format.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The message to send to the user.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "SSMLMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The SSML text that defines the prompt.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     }
-			//                                   },
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 2,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "Message"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "maxItems": 5,
-			//                           "minItems": 1,
-			//                           "type": "array"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "MessageGroupsList"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Enabled"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "InputContexts": {
-			//               "description": "The list of input contexts specified for the intent.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "InputContext specified for the intent.",
-			//                 "properties": {
-			//                   "Name": {
-			//                     "description": "The name of the context.",
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Name"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 5,
-			//               "type": "array"
-			//             },
-			//             "IntentClosingSetting": {
-			//               "additionalProperties": false,
-			//               "description": "Response that Amazon Lex sends to the user when the intent is closed.",
-			//               "properties": {
-			//                 "ClosingResponse": {
-			//                   "additionalProperties": false,
-			//                   "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//                   "properties": {
-			//                     "AllowInterrupt": {
-			//                       "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                       "type": "boolean"
-			//                     },
-			//                     "MessageGroupsList": {
-			//                       "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                       "insertionOrder": false,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "One or more messages that Amazon Lex can send to the user.",
-			//                         "properties": {
-			//                           "Message": {
-			//                             "additionalProperties": false,
-			//                             "description": "The primary message that Amazon Lex should send to the user.",
-			//                             "properties": {
-			//                               "CustomPayload": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in a custom format defined by the client application.",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The string that is sent to your application.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "ImageResponseCard": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message that defines a response card that the client application can show to the user.",
-			//                                 "properties": {
-			//                                   "Buttons": {
-			//                                     "description": "A list of buttons that should be displayed on the response card.",
-			//                                     "insertionOrder": false,
-			//                                     "items": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                       "properties": {
-			//                                         "Text": {
-			//                                           "description": "The text that appears on the button.",
-			//                                           "maxLength": 50,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Value": {
-			//                                           "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                           "maxLength": 50,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Text",
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "maxItems": 5,
-			//                                     "type": "array"
-			//                                   },
-			//                                   "ImageUrl": {
-			//                                     "description": "The URL of an image to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   },
-			//                                   "Subtitle": {
-			//                                     "description": "The subtitle to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   },
-			//                                   "Title": {
-			//                                     "description": "The title to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Title"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "PlainTextMessage": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in plain text format.",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The message to send to the user.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "SSMLMessage": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The SSML text that defines the prompt.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               }
-			//                             },
-			//                             "type": "object"
-			//                           },
-			//                           "Variations": {
-			//                             "description": "Message variations to send to the user.",
-			//                             "insertionOrder": false,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "description": "The primary message that Amazon Lex should send to the user.",
-			//                               "properties": {
-			//                                 "CustomPayload": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in a custom format defined by the client application.",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The string that is sent to your application.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "ImageResponseCard": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message that defines a response card that the client application can show to the user.",
-			//                                   "properties": {
-			//                                     "Buttons": {
-			//                                       "description": "A list of buttons that should be displayed on the response card.",
-			//                                       "insertionOrder": false,
-			//                                       "items": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                         "properties": {
-			//                                           "Text": {
-			//                                             "description": "The text that appears on the button.",
-			//                                             "maxLength": 50,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           },
-			//                                           "Value": {
-			//                                             "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                             "maxLength": 50,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Text",
-			//                                           "Value"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "maxItems": 5,
-			//                                       "type": "array"
-			//                                     },
-			//                                     "ImageUrl": {
-			//                                       "description": "The URL of an image to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     },
-			//                                     "Subtitle": {
-			//                                       "description": "The subtitle to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     },
-			//                                     "Title": {
-			//                                       "description": "The title to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Title"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "PlainTextMessage": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in plain text format.",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The message to send to the user.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "SSMLMessage": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The SSML text that defines the prompt.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 }
-			//                               },
-			//                               "type": "object"
-			//                             },
-			//                             "maxItems": 2,
-			//                             "type": "array"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Message"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "maxItems": 5,
-			//                       "minItems": 1,
-			//                       "type": "array"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "MessageGroupsList"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "IsActive": {
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "ClosingResponse"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "IntentConfirmationSetting": {
-			//               "additionalProperties": false,
-			//               "description": "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
-			//               "properties": {
-			//                 "DeclinationResponse": {
-			//                   "additionalProperties": false,
-			//                   "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//                   "properties": {
-			//                     "AllowInterrupt": {
-			//                       "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                       "type": "boolean"
-			//                     },
-			//                     "MessageGroupsList": {
-			//                       "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                       "insertionOrder": false,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "One or more messages that Amazon Lex can send to the user.",
-			//                         "properties": {
-			//                           "Message": {
-			//                             "additionalProperties": false,
-			//                             "description": "The primary message that Amazon Lex should send to the user.",
-			//                             "properties": {
-			//                               "CustomPayload": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in a custom format defined by the client application.",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The string that is sent to your application.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "ImageResponseCard": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message that defines a response card that the client application can show to the user.",
-			//                                 "properties": {
-			//                                   "Buttons": {
-			//                                     "description": "A list of buttons that should be displayed on the response card.",
-			//                                     "insertionOrder": false,
-			//                                     "items": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                       "properties": {
-			//                                         "Text": {
-			//                                           "description": "The text that appears on the button.",
-			//                                           "maxLength": 50,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Value": {
-			//                                           "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                           "maxLength": 50,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Text",
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "maxItems": 5,
-			//                                     "type": "array"
-			//                                   },
-			//                                   "ImageUrl": {
-			//                                     "description": "The URL of an image to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   },
-			//                                   "Subtitle": {
-			//                                     "description": "The subtitle to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   },
-			//                                   "Title": {
-			//                                     "description": "The title to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Title"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "PlainTextMessage": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in plain text format.",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The message to send to the user.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "SSMLMessage": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The SSML text that defines the prompt.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               }
-			//                             },
-			//                             "type": "object"
-			//                           },
-			//                           "Variations": {
-			//                             "description": "Message variations to send to the user.",
-			//                             "insertionOrder": false,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "description": "The primary message that Amazon Lex should send to the user.",
-			//                               "properties": {
-			//                                 "CustomPayload": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in a custom format defined by the client application.",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The string that is sent to your application.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "ImageResponseCard": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message that defines a response card that the client application can show to the user.",
-			//                                   "properties": {
-			//                                     "Buttons": {
-			//                                       "description": "A list of buttons that should be displayed on the response card.",
-			//                                       "insertionOrder": false,
-			//                                       "items": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                         "properties": {
-			//                                           "Text": {
-			//                                             "description": "The text that appears on the button.",
-			//                                             "maxLength": 50,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           },
-			//                                           "Value": {
-			//                                             "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                             "maxLength": 50,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Text",
-			//                                           "Value"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "maxItems": 5,
-			//                                       "type": "array"
-			//                                     },
-			//                                     "ImageUrl": {
-			//                                       "description": "The URL of an image to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     },
-			//                                     "Subtitle": {
-			//                                       "description": "The subtitle to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     },
-			//                                     "Title": {
-			//                                       "description": "The title to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Title"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "PlainTextMessage": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in plain text format.",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The message to send to the user.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "SSMLMessage": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The SSML text that defines the prompt.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 }
-			//                               },
-			//                               "type": "object"
-			//                             },
-			//                             "maxItems": 2,
-			//                             "type": "array"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Message"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "maxItems": 5,
-			//                       "minItems": 1,
-			//                       "type": "array"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "MessageGroupsList"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "IsActive": {
-			//                   "type": "boolean"
-			//                 },
-			//                 "PromptSpecification": {
-			//                   "additionalProperties": false,
-			//                   "description": "Prompts the user to confirm the intent.",
-			//                   "properties": {
-			//                     "AllowInterrupt": {
-			//                       "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                       "type": "boolean"
-			//                     },
-			//                     "MaxRetries": {
-			//                       "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-			//                       "maximum": 5,
-			//                       "minimum": 0,
-			//                       "type": "integer"
-			//                     },
-			//                     "MessageGroupsList": {
-			//                       "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                       "insertionOrder": false,
-			//                       "items": {
-			//                         "additionalProperties": false,
-			//                         "description": "One or more messages that Amazon Lex can send to the user.",
-			//                         "properties": {
-			//                           "Message": {
-			//                             "additionalProperties": false,
-			//                             "description": "The primary message that Amazon Lex should send to the user.",
-			//                             "properties": {
-			//                               "CustomPayload": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in a custom format defined by the client application.",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The string that is sent to your application.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "ImageResponseCard": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message that defines a response card that the client application can show to the user.",
-			//                                 "properties": {
-			//                                   "Buttons": {
-			//                                     "description": "A list of buttons that should be displayed on the response card.",
-			//                                     "insertionOrder": false,
-			//                                     "items": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                       "properties": {
-			//                                         "Text": {
-			//                                           "description": "The text that appears on the button.",
-			//                                           "maxLength": 50,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Value": {
-			//                                           "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                           "maxLength": 50,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Text",
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "maxItems": 5,
-			//                                     "type": "array"
-			//                                   },
-			//                                   "ImageUrl": {
-			//                                     "description": "The URL of an image to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   },
-			//                                   "Subtitle": {
-			//                                     "description": "The subtitle to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   },
-			//                                   "Title": {
-			//                                     "description": "The title to display on the response card.",
-			//                                     "maxLength": 250,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Title"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "PlainTextMessage": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in plain text format.",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The message to send to the user.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               },
-			//                               "SSMLMessage": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                 "properties": {
-			//                                   "Value": {
-			//                                     "description": "The SSML text that defines the prompt.",
-			//                                     "maxLength": 1000,
-			//                                     "minLength": 1,
-			//                                     "type": "string"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "Value"
-			//                                 ],
-			//                                 "type": "object"
-			//                               }
-			//                             },
-			//                             "type": "object"
-			//                           },
-			//                           "Variations": {
-			//                             "description": "Message variations to send to the user.",
-			//                             "insertionOrder": false,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "description": "The primary message that Amazon Lex should send to the user.",
-			//                               "properties": {
-			//                                 "CustomPayload": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in a custom format defined by the client application.",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The string that is sent to your application.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "ImageResponseCard": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message that defines a response card that the client application can show to the user.",
-			//                                   "properties": {
-			//                                     "Buttons": {
-			//                                       "description": "A list of buttons that should be displayed on the response card.",
-			//                                       "insertionOrder": false,
-			//                                       "items": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                         "properties": {
-			//                                           "Text": {
-			//                                             "description": "The text that appears on the button.",
-			//                                             "maxLength": 50,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           },
-			//                                           "Value": {
-			//                                             "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                             "maxLength": 50,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Text",
-			//                                           "Value"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "maxItems": 5,
-			//                                       "type": "array"
-			//                                     },
-			//                                     "ImageUrl": {
-			//                                       "description": "The URL of an image to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     },
-			//                                     "Subtitle": {
-			//                                       "description": "The subtitle to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     },
-			//                                     "Title": {
-			//                                       "description": "The title to display on the response card.",
-			//                                       "maxLength": 250,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Title"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "PlainTextMessage": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in plain text format.",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The message to send to the user.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "SSMLMessage": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                   "properties": {
-			//                                     "Value": {
-			//                                       "description": "The SSML text that defines the prompt.",
-			//                                       "maxLength": 1000,
-			//                                       "minLength": 1,
-			//                                       "type": "string"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Value"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 }
-			//                               },
-			//                               "type": "object"
-			//                             },
-			//                             "maxItems": 2,
-			//                             "type": "array"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "Message"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "maxItems": 5,
-			//                       "minItems": 1,
-			//                       "type": "array"
-			//                     },
-			//                     "MessageSelectionStrategy": {
-			//                       "description": "Indicates how a message is selected from a message group among retries.",
-			//                       "enum": [
-			//                         "Random",
-			//                         "Ordered"
-			//                       ],
-			//                       "type": "string"
-			//                     },
-			//                     "PromptAttemptsSpecification": {
-			//                       "additionalProperties": false,
-			//                       "description": "Specifies the advanced settings on each attempt of the prompt.",
-			//                       "patternProperties": {
-			//                         "": {
-			//                           "additionalProperties": false,
-			//                           "description": "Specifies the settings on a prompt attempt.",
-			//                           "properties": {
-			//                             "AllowInterrupt": {
-			//                               "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-			//                               "type": "boolean"
-			//                             },
-			//                             "AllowedInputTypes": {
-			//                               "additionalProperties": false,
-			//                               "description": "Specifies the allowed input types.",
-			//                               "properties": {
-			//                                 "AllowAudioInput": {
-			//                                   "description": "Indicates whether audio input is allowed.",
-			//                                   "type": "boolean"
-			//                                 },
-			//                                 "AllowDTMFInput": {
-			//                                   "description": "Indicates whether DTMF input is allowed.",
-			//                                   "type": "boolean"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "AllowAudioInput",
-			//                                 "AllowDTMFInput"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "AudioAndDTMFInputSpecification": {
-			//                               "additionalProperties": false,
-			//                               "description": "Specifies the audio and DTMF input specification.",
-			//                               "properties": {
-			//                                 "AudioSpecification": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "Specifies the audio input specifications.",
-			//                                   "properties": {
-			//                                     "EndTimeoutMs": {
-			//                                       "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-			//                                       "minimum": 1,
-			//                                       "type": "integer"
-			//                                     },
-			//                                     "MaxLengthMs": {
-			//                                       "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-			//                                       "minimum": 1,
-			//                                       "type": "integer"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "EndTimeoutMs",
-			//                                     "MaxLengthMs"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "DTMFSpecification": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "Specifies the settings on DTMF input.",
-			//                                   "properties": {
-			//                                     "DeletionCharacter": {
-			//                                       "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-			//                                       "pattern": "^[A-D0-9#*]{1}$",
-			//                                       "type": "string"
-			//                                     },
-			//                                     "EndCharacter": {
-			//                                       "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-			//                                       "pattern": "^[A-D0-9#*]{1}$",
-			//                                       "type": "string"
-			//                                     },
-			//                                     "EndTimeoutMs": {
-			//                                       "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-			//                                       "minimum": 1,
-			//                                       "type": "integer"
-			//                                     },
-			//                                     "MaxLength": {
-			//                                       "description": "The maximum number of DTMF digits allowed in an utterance.",
-			//                                       "maximum": 1024,
-			//                                       "minimum": 1,
-			//                                       "type": "integer"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "DeletionCharacter",
-			//                                     "EndCharacter",
-			//                                     "EndTimeoutMs",
-			//                                     "MaxLength"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "StartTimeoutMs": {
-			//                                   "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-			//                                   "minimum": 1,
-			//                                   "type": "integer"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "StartTimeoutMs"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "TextInputSpecification": {
-			//                               "additionalProperties": false,
-			//                               "description": "Specifies the text input specifications.",
-			//                               "properties": {
-			//                                 "StartTimeoutMs": {
-			//                                   "description": "Time for which a bot waits before re-prompting a customer for text input.",
-			//                                   "minimum": 1,
-			//                                   "type": "integer"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "StartTimeoutMs"
-			//                               ],
-			//                               "type": "object"
-			//                             }
-			//                           },
-			//                           "required": [
-			//                             "AllowedInputTypes"
-			//                           ],
-			//                           "type": "object"
-			//                         }
-			//                       },
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "MessageGroupsList",
-			//                     "MaxRetries"
-			//                   ],
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "PromptSpecification",
-			//                 "DeclinationResponse"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "KendraConfiguration": {
-			//               "additionalProperties": false,
-			//               "description": "Configuration for searching a Amazon Kendra index specified for the intent.",
-			//               "properties": {
-			//                 "KendraIndex": {
-			//                   "description": "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-			//                   "maxLength": 2048,
-			//                   "minLength": 32,
-			//                   "pattern": "^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-			//                   "type": "string"
-			//                 },
-			//                 "QueryFilterString": {
-			//                   "description": "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
-			//                   "maxLength": 5000,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "QueryFilterStringEnabled": {
-			//                   "description": "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
-			//                   "type": "boolean"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "KendraIndex"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "Name": {
-			//               "description": "Unique name for a resource.",
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//               "type": "string"
-			//             },
-			//             "OutputContexts": {
-			//               "description": "A list of contexts that the intent activates when it is fulfilled.",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "A session context that is activated when an intent is fulfilled.",
-			//                 "properties": {
-			//                   "Name": {
-			//                     "description": "Unique name for a resource.",
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//                     "type": "string"
-			//                   },
-			//                   "TimeToLiveInSeconds": {
-			//                     "description": "The amount of time, in seconds, that the output context should remain active.",
-			//                     "maximum": 86400,
-			//                     "minimum": 5,
-			//                     "type": "integer"
-			//                   },
-			//                   "TurnsToLive": {
-			//                     "description": "The number of conversation turns that the output context should remain active.",
-			//                     "maximum": 20,
-			//                     "minimum": 1,
-			//                     "type": "integer"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Name",
-			//                   "TimeToLiveInSeconds",
-			//                   "TurnsToLive"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 10,
-			//               "type": "array"
-			//             },
-			//             "ParentIntentSignature": {
-			//               "description": "A unique identifier for the built-in intent to base this intent on.",
-			//               "type": "string"
-			//             },
-			//             "SampleUtterances": {
-			//               "description": "An array of sample utterances",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
-			//                 "properties": {
-			//                   "Utterance": {
-			//                     "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Utterance"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "SlotPriorities": {
-			//               "description": "List for slot priorities",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "The priority that Amazon Lex should use when eliciting slot values from a user.",
-			//                 "properties": {
-			//                   "Priority": {
-			//                     "description": "The priority that a slot should be elicited.",
-			//                     "maximum": 100,
-			//                     "minimum": 0,
-			//                     "type": "integer"
-			//                   },
-			//                   "SlotName": {
-			//                     "description": "The name of the slot.",
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "SlotName",
-			//                   "Priority"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "Slots": {
-			//               "description": "List of slots",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "A slot is a variable needed to fulfill an intent, where an intent can require zero or more slots.",
-			//                 "properties": {
-			//                   "Description": {
-			//                     "description": "A description of the resource",
-			//                     "maxLength": 200,
-			//                     "type": "string"
-			//                   },
-			//                   "MultipleValuesSetting": {
-			//                     "additionalProperties": false,
-			//                     "description": "Indicates whether a slot can return multiple values.",
-			//                     "properties": {
-			//                       "AllowMultipleValues": {
-			//                         "type": "boolean"
-			//                       }
-			//                     },
-			//                     "type": "object"
-			//                   },
-			//                   "Name": {
-			//                     "description": "Unique name for a resource.",
-			//                     "maxLength": 100,
-			//                     "minLength": 1,
-			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//                     "type": "string"
-			//                   },
-			//                   "ObfuscationSetting": {
-			//                     "additionalProperties": false,
-			//                     "description": "Determines whether Amazon Lex obscures slot values in conversation logs.",
-			//                     "properties": {
-			//                       "ObfuscationSettingType": {
-			//                         "description": "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-			//                         "enum": [
-			//                           "None",
-			//                           "DefaultObfuscation"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "ObfuscationSettingType"
-			//                     ],
-			//                     "type": "object"
-			//                   },
-			//                   "SlotTypeName": {
-			//                     "description": "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-			//                     "type": "string"
-			//                   },
-			//                   "ValueElicitationSetting": {
-			//                     "additionalProperties": false,
-			//                     "description": "Settings that you can use for eliciting a slot value.",
-			//                     "properties": {
-			//                       "DefaultValueSpecification": {
-			//                         "additionalProperties": false,
-			//                         "description": "A list of default values for a slot.",
-			//                         "properties": {
-			//                           "DefaultValueList": {
-			//                             "description": "A list of slot default values",
-			//                             "insertionOrder": false,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "description": "The default value to use when a user doesn't provide a value for a slot.",
-			//                               "properties": {
-			//                                 "DefaultValue": {
-			//                                   "description": "The default value to use when a user doesn't provide a value for a slot.",
-			//                                   "maxLength": 202,
-			//                                   "minLength": 1,
-			//                                   "type": "string"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "DefaultValue"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "maxItems": 10,
-			//                             "type": "array"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "DefaultValueList"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "PromptSpecification": {
-			//                         "additionalProperties": false,
-			//                         "description": "The prompt that Amazon Lex uses to elicit the slot value from the user.",
-			//                         "properties": {
-			//                           "AllowInterrupt": {
-			//                             "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                             "type": "boolean"
-			//                           },
-			//                           "MaxRetries": {
-			//                             "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-			//                             "maximum": 5,
-			//                             "minimum": 0,
-			//                             "type": "integer"
-			//                           },
-			//                           "MessageGroupsList": {
-			//                             "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                             "insertionOrder": false,
-			//                             "items": {
-			//                               "additionalProperties": false,
-			//                               "description": "One or more messages that Amazon Lex can send to the user.",
-			//                               "properties": {
-			//                                 "Message": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "The primary message that Amazon Lex should send to the user.",
-			//                                   "properties": {
-			//                                     "CustomPayload": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in a custom format defined by the client application.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The string that is sent to your application.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "ImageResponseCard": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message that defines a response card that the client application can show to the user.",
-			//                                       "properties": {
-			//                                         "Buttons": {
-			//                                           "description": "A list of buttons that should be displayed on the response card.",
-			//                                           "insertionOrder": false,
-			//                                           "items": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                             "properties": {
-			//                                               "Text": {
-			//                                                 "description": "The text that appears on the button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Value": {
-			//                                                 "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                 "maxLength": 50,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Text",
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "maxItems": 5,
-			//                                           "type": "array"
-			//                                         },
-			//                                         "ImageUrl": {
-			//                                           "description": "The URL of an image to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Subtitle": {
-			//                                           "description": "The subtitle to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         },
-			//                                         "Title": {
-			//                                           "description": "The title to display on the response card.",
-			//                                           "maxLength": 250,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Title"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "PlainTextMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in plain text format.",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The message to send to the user.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     },
-			//                                     "SSMLMessage": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                       "properties": {
-			//                                         "Value": {
-			//                                           "description": "The SSML text that defines the prompt.",
-			//                                           "maxLength": 1000,
-			//                                           "minLength": 1,
-			//                                           "type": "string"
-			//                                         }
-			//                                       },
-			//                                       "required": [
-			//                                         "Value"
-			//                                       ],
-			//                                       "type": "object"
-			//                                     }
-			//                                   },
-			//                                   "type": "object"
-			//                                 },
-			//                                 "Variations": {
-			//                                   "description": "Message variations to send to the user.",
-			//                                   "insertionOrder": false,
-			//                                   "items": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "The primary message that Amazon Lex should send to the user.",
-			//                                     "properties": {
-			//                                       "CustomPayload": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A message in a custom format defined by the client application.",
-			//                                         "properties": {
-			//                                           "Value": {
-			//                                             "description": "The string that is sent to your application.",
-			//                                             "maxLength": 1000,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Value"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "ImageResponseCard": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A message that defines a response card that the client application can show to the user.",
-			//                                         "properties": {
-			//                                           "Buttons": {
-			//                                             "description": "A list of buttons that should be displayed on the response card.",
-			//                                             "insertionOrder": false,
-			//                                             "items": {
-			//                                               "additionalProperties": false,
-			//                                               "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                               "properties": {
-			//                                                 "Text": {
-			//                                                   "description": "The text that appears on the button.",
-			//                                                   "maxLength": 50,
-			//                                                   "minLength": 1,
-			//                                                   "type": "string"
-			//                                                 },
-			//                                                 "Value": {
-			//                                                   "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                   "maxLength": 50,
-			//                                                   "minLength": 1,
-			//                                                   "type": "string"
-			//                                                 }
-			//                                               },
-			//                                               "required": [
-			//                                                 "Text",
-			//                                                 "Value"
-			//                                               ],
-			//                                               "type": "object"
-			//                                             },
-			//                                             "maxItems": 5,
-			//                                             "type": "array"
-			//                                           },
-			//                                           "ImageUrl": {
-			//                                             "description": "The URL of an image to display on the response card.",
-			//                                             "maxLength": 250,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           },
-			//                                           "Subtitle": {
-			//                                             "description": "The subtitle to display on the response card.",
-			//                                             "maxLength": 250,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           },
-			//                                           "Title": {
-			//                                             "description": "The title to display on the response card.",
-			//                                             "maxLength": 250,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Title"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "PlainTextMessage": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A message in plain text format.",
-			//                                         "properties": {
-			//                                           "Value": {
-			//                                             "description": "The message to send to the user.",
-			//                                             "maxLength": 1000,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Value"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "SSMLMessage": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                         "properties": {
-			//                                           "Value": {
-			//                                             "description": "The SSML text that defines the prompt.",
-			//                                             "maxLength": 1000,
-			//                                             "minLength": 1,
-			//                                             "type": "string"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "Value"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       }
-			//                                     },
-			//                                     "type": "object"
-			//                                   },
-			//                                   "maxItems": 2,
-			//                                   "type": "array"
-			//                                 }
-			//                               },
-			//                               "required": [
-			//                                 "Message"
-			//                               ],
-			//                               "type": "object"
-			//                             },
-			//                             "maxItems": 5,
-			//                             "minItems": 1,
-			//                             "type": "array"
-			//                           },
-			//                           "MessageSelectionStrategy": {
-			//                             "description": "Indicates how a message is selected from a message group among retries.",
-			//                             "enum": [
-			//                               "Random",
-			//                               "Ordered"
-			//                             ],
-			//                             "type": "string"
-			//                           },
-			//                           "PromptAttemptsSpecification": {
-			//                             "additionalProperties": false,
-			//                             "description": "Specifies the advanced settings on each attempt of the prompt.",
-			//                             "patternProperties": {
-			//                               "": {
-			//                                 "additionalProperties": false,
-			//                                 "description": "Specifies the settings on a prompt attempt.",
-			//                                 "properties": {
-			//                                   "AllowInterrupt": {
-			//                                     "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-			//                                     "type": "boolean"
-			//                                   },
-			//                                   "AllowedInputTypes": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "Specifies the allowed input types.",
-			//                                     "properties": {
-			//                                       "AllowAudioInput": {
-			//                                         "description": "Indicates whether audio input is allowed.",
-			//                                         "type": "boolean"
-			//                                       },
-			//                                       "AllowDTMFInput": {
-			//                                         "description": "Indicates whether DTMF input is allowed.",
-			//                                         "type": "boolean"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "AllowAudioInput",
-			//                                       "AllowDTMFInput"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "AudioAndDTMFInputSpecification": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "Specifies the audio and DTMF input specification.",
-			//                                     "properties": {
-			//                                       "AudioSpecification": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "Specifies the audio input specifications.",
-			//                                         "properties": {
-			//                                           "EndTimeoutMs": {
-			//                                             "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-			//                                             "minimum": 1,
-			//                                             "type": "integer"
-			//                                           },
-			//                                           "MaxLengthMs": {
-			//                                             "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-			//                                             "minimum": 1,
-			//                                             "type": "integer"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "EndTimeoutMs",
-			//                                           "MaxLengthMs"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "DTMFSpecification": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "Specifies the settings on DTMF input.",
-			//                                         "properties": {
-			//                                           "DeletionCharacter": {
-			//                                             "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-			//                                             "pattern": "^[A-D0-9#*]{1}$",
-			//                                             "type": "string"
-			//                                           },
-			//                                           "EndCharacter": {
-			//                                             "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-			//                                             "pattern": "^[A-D0-9#*]{1}$",
-			//                                             "type": "string"
-			//                                           },
-			//                                           "EndTimeoutMs": {
-			//                                             "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-			//                                             "minimum": 1,
-			//                                             "type": "integer"
-			//                                           },
-			//                                           "MaxLength": {
-			//                                             "description": "The maximum number of DTMF digits allowed in an utterance.",
-			//                                             "maximum": 1024,
-			//                                             "minimum": 1,
-			//                                             "type": "integer"
-			//                                           }
-			//                                         },
-			//                                         "required": [
-			//                                           "DeletionCharacter",
-			//                                           "EndCharacter",
-			//                                           "EndTimeoutMs",
-			//                                           "MaxLength"
-			//                                         ],
-			//                                         "type": "object"
-			//                                       },
-			//                                       "StartTimeoutMs": {
-			//                                         "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-			//                                         "minimum": 1,
-			//                                         "type": "integer"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "StartTimeoutMs"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   },
-			//                                   "TextInputSpecification": {
-			//                                     "additionalProperties": false,
-			//                                     "description": "Specifies the text input specifications.",
-			//                                     "properties": {
-			//                                       "StartTimeoutMs": {
-			//                                         "description": "Time for which a bot waits before re-prompting a customer for text input.",
-			//                                         "minimum": 1,
-			//                                         "type": "integer"
-			//                                       }
-			//                                     },
-			//                                     "required": [
-			//                                       "StartTimeoutMs"
-			//                                     ],
-			//                                     "type": "object"
-			//                                   }
-			//                                 },
-			//                                 "required": [
-			//                                   "AllowedInputTypes"
-			//                                 ],
-			//                                 "type": "object"
-			//                               }
-			//                             },
-			//                             "type": "object"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "MessageGroupsList",
-			//                           "MaxRetries"
-			//                         ],
-			//                         "type": "object"
-			//                       },
-			//                       "SampleUtterances": {
-			//                         "description": "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
-			//                         "insertionOrder": false,
-			//                         "items": {
-			//                           "additionalProperties": false,
-			//                           "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
-			//                           "properties": {
-			//                             "Utterance": {
-			//                               "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-			//                               "type": "string"
-			//                             }
-			//                           },
-			//                           "required": [
-			//                             "Utterance"
-			//                           ],
-			//                           "type": "object"
-			//                         },
-			//                         "type": "array"
-			//                       },
-			//                       "SlotConstraint": {
-			//                         "description": "Specifies whether the slot is required or optional.",
-			//                         "enum": [
-			//                           "Required",
-			//                           "Optional"
-			//                         ],
-			//                         "type": "string"
-			//                       },
-			//                       "WaitAndContinueSpecification": {
-			//                         "additionalProperties": false,
-			//                         "description": "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
-			//                         "properties": {
-			//                           "ContinueResponse": {
-			//                             "additionalProperties": false,
-			//                             "description": "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-			//                             "properties": {
-			//                               "AllowInterrupt": {
-			//                                 "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                                 "type": "boolean"
-			//                               },
-			//                               "MessageGroupsList": {
-			//                                 "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "One or more messages that Amazon Lex can send to the user.",
-			//                                   "properties": {
-			//                                     "Message": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "The primary message that Amazon Lex should send to the user.",
-			//                                       "properties": {
-			//                                         "CustomPayload": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in a custom format defined by the client application.",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The string that is sent to your application.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "ImageResponseCard": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message that defines a response card that the client application can show to the user.",
-			//                                           "properties": {
-			//                                             "Buttons": {
-			//                                               "description": "A list of buttons that should be displayed on the response card.",
-			//                                               "insertionOrder": false,
-			//                                               "items": {
-			//                                                 "additionalProperties": false,
-			//                                                 "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                                 "properties": {
-			//                                                   "Text": {
-			//                                                     "description": "The text that appears on the button.",
-			//                                                     "maxLength": 50,
-			//                                                     "minLength": 1,
-			//                                                     "type": "string"
-			//                                                   },
-			//                                                   "Value": {
-			//                                                     "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                     "maxLength": 50,
-			//                                                     "minLength": 1,
-			//                                                     "type": "string"
-			//                                                   }
-			//                                                 },
-			//                                                 "required": [
-			//                                                   "Text",
-			//                                                   "Value"
-			//                                                 ],
-			//                                                 "type": "object"
-			//                                               },
-			//                                               "maxItems": 5,
-			//                                               "type": "array"
-			//                                             },
-			//                                             "ImageUrl": {
-			//                                               "description": "The URL of an image to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Subtitle": {
-			//                                               "description": "The subtitle to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Title": {
-			//                                               "description": "The title to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Title"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "PlainTextMessage": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in plain text format.",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The message to send to the user.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "SSMLMessage": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The SSML text that defines the prompt.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         }
-			//                                       },
-			//                                       "type": "object"
-			//                                     },
-			//                                     "Variations": {
-			//                                       "description": "Message variations to send to the user.",
-			//                                       "insertionOrder": false,
-			//                                       "items": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "The primary message that Amazon Lex should send to the user.",
-			//                                         "properties": {
-			//                                           "CustomPayload": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in a custom format defined by the client application.",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The string that is sent to your application.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "ImageResponseCard": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message that defines a response card that the client application can show to the user.",
-			//                                             "properties": {
-			//                                               "Buttons": {
-			//                                                 "description": "A list of buttons that should be displayed on the response card.",
-			//                                                 "insertionOrder": false,
-			//                                                 "items": {
-			//                                                   "additionalProperties": false,
-			//                                                   "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                                   "properties": {
-			//                                                     "Text": {
-			//                                                       "description": "The text that appears on the button.",
-			//                                                       "maxLength": 50,
-			//                                                       "minLength": 1,
-			//                                                       "type": "string"
-			//                                                     },
-			//                                                     "Value": {
-			//                                                       "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                       "maxLength": 50,
-			//                                                       "minLength": 1,
-			//                                                       "type": "string"
-			//                                                     }
-			//                                                   },
-			//                                                   "required": [
-			//                                                     "Text",
-			//                                                     "Value"
-			//                                                   ],
-			//                                                   "type": "object"
-			//                                                 },
-			//                                                 "maxItems": 5,
-			//                                                 "type": "array"
-			//                                               },
-			//                                               "ImageUrl": {
-			//                                                 "description": "The URL of an image to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Subtitle": {
-			//                                                 "description": "The subtitle to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Title": {
-			//                                                 "description": "The title to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Title"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "PlainTextMessage": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in plain text format.",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The message to send to the user.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "SSMLMessage": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The SSML text that defines the prompt.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           }
-			//                                         },
-			//                                         "type": "object"
-			//                                       },
-			//                                       "maxItems": 2,
-			//                                       "type": "array"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Message"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 5,
-			//                                 "minItems": 1,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "MessageGroupsList"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "IsActive": {
-			//                             "description": "Specifies whether the bot will wait for a user to respond.",
-			//                             "type": "boolean"
-			//                           },
-			//                           "StillWaitingResponse": {
-			//                             "additionalProperties": false,
-			//                             "description": "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
-			//                             "properties": {
-			//                               "AllowInterrupt": {
-			//                                 "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                                 "type": "boolean"
-			//                               },
-			//                               "FrequencyInSeconds": {
-			//                                 "description": "How often a message should be sent to the user in seconds.",
-			//                                 "maximum": 300,
-			//                                 "minimum": 1,
-			//                                 "type": "integer"
-			//                               },
-			//                               "MessageGroupsList": {
-			//                                 "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "One or more messages that Amazon Lex can send to the user.",
-			//                                   "properties": {
-			//                                     "Message": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "The primary message that Amazon Lex should send to the user.",
-			//                                       "properties": {
-			//                                         "CustomPayload": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in a custom format defined by the client application.",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The string that is sent to your application.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "ImageResponseCard": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message that defines a response card that the client application can show to the user.",
-			//                                           "properties": {
-			//                                             "Buttons": {
-			//                                               "description": "A list of buttons that should be displayed on the response card.",
-			//                                               "insertionOrder": false,
-			//                                               "items": {
-			//                                                 "additionalProperties": false,
-			//                                                 "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                                 "properties": {
-			//                                                   "Text": {
-			//                                                     "description": "The text that appears on the button.",
-			//                                                     "maxLength": 50,
-			//                                                     "minLength": 1,
-			//                                                     "type": "string"
-			//                                                   },
-			//                                                   "Value": {
-			//                                                     "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                     "maxLength": 50,
-			//                                                     "minLength": 1,
-			//                                                     "type": "string"
-			//                                                   }
-			//                                                 },
-			//                                                 "required": [
-			//                                                   "Text",
-			//                                                   "Value"
-			//                                                 ],
-			//                                                 "type": "object"
-			//                                               },
-			//                                               "maxItems": 5,
-			//                                               "type": "array"
-			//                                             },
-			//                                             "ImageUrl": {
-			//                                               "description": "The URL of an image to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Subtitle": {
-			//                                               "description": "The subtitle to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Title": {
-			//                                               "description": "The title to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Title"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "PlainTextMessage": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in plain text format.",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The message to send to the user.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "SSMLMessage": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The SSML text that defines the prompt.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         }
-			//                                       },
-			//                                       "type": "object"
-			//                                     },
-			//                                     "Variations": {
-			//                                       "description": "Message variations to send to the user.",
-			//                                       "insertionOrder": false,
-			//                                       "items": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "The primary message that Amazon Lex should send to the user.",
-			//                                         "properties": {
-			//                                           "CustomPayload": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in a custom format defined by the client application.",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The string that is sent to your application.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "ImageResponseCard": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message that defines a response card that the client application can show to the user.",
-			//                                             "properties": {
-			//                                               "Buttons": {
-			//                                                 "description": "A list of buttons that should be displayed on the response card.",
-			//                                                 "insertionOrder": false,
-			//                                                 "items": {
-			//                                                   "additionalProperties": false,
-			//                                                   "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                                   "properties": {
-			//                                                     "Text": {
-			//                                                       "description": "The text that appears on the button.",
-			//                                                       "maxLength": 50,
-			//                                                       "minLength": 1,
-			//                                                       "type": "string"
-			//                                                     },
-			//                                                     "Value": {
-			//                                                       "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                       "maxLength": 50,
-			//                                                       "minLength": 1,
-			//                                                       "type": "string"
-			//                                                     }
-			//                                                   },
-			//                                                   "required": [
-			//                                                     "Text",
-			//                                                     "Value"
-			//                                                   ],
-			//                                                   "type": "object"
-			//                                                 },
-			//                                                 "maxItems": 5,
-			//                                                 "type": "array"
-			//                                               },
-			//                                               "ImageUrl": {
-			//                                                 "description": "The URL of an image to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Subtitle": {
-			//                                                 "description": "The subtitle to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Title": {
-			//                                                 "description": "The title to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Title"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "PlainTextMessage": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in plain text format.",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The message to send to the user.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "SSMLMessage": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The SSML text that defines the prompt.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           }
-			//                                         },
-			//                                         "type": "object"
-			//                                       },
-			//                                       "maxItems": 2,
-			//                                       "type": "array"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Message"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 5,
-			//                                 "minItems": 1,
-			//                                 "type": "array"
-			//                               },
-			//                               "TimeoutInSeconds": {
-			//                                 "description": "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-			//                                 "maximum": 900,
-			//                                 "minimum": 1,
-			//                                 "type": "integer"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "MessageGroupsList",
-			//                               "FrequencyInSeconds",
-			//                               "TimeoutInSeconds"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "WaitingResponse": {
-			//                             "additionalProperties": false,
-			//                             "description": "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-			//                             "properties": {
-			//                               "AllowInterrupt": {
-			//                                 "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//                                 "type": "boolean"
-			//                               },
-			//                               "MessageGroupsList": {
-			//                                 "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//                                 "insertionOrder": false,
-			//                                 "items": {
-			//                                   "additionalProperties": false,
-			//                                   "description": "One or more messages that Amazon Lex can send to the user.",
-			//                                   "properties": {
-			//                                     "Message": {
-			//                                       "additionalProperties": false,
-			//                                       "description": "The primary message that Amazon Lex should send to the user.",
-			//                                       "properties": {
-			//                                         "CustomPayload": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in a custom format defined by the client application.",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The string that is sent to your application.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "ImageResponseCard": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message that defines a response card that the client application can show to the user.",
-			//                                           "properties": {
-			//                                             "Buttons": {
-			//                                               "description": "A list of buttons that should be displayed on the response card.",
-			//                                               "insertionOrder": false,
-			//                                               "items": {
-			//                                                 "additionalProperties": false,
-			//                                                 "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                                 "properties": {
-			//                                                   "Text": {
-			//                                                     "description": "The text that appears on the button.",
-			//                                                     "maxLength": 50,
-			//                                                     "minLength": 1,
-			//                                                     "type": "string"
-			//                                                   },
-			//                                                   "Value": {
-			//                                                     "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                     "maxLength": 50,
-			//                                                     "minLength": 1,
-			//                                                     "type": "string"
-			//                                                   }
-			//                                                 },
-			//                                                 "required": [
-			//                                                   "Text",
-			//                                                   "Value"
-			//                                                 ],
-			//                                                 "type": "object"
-			//                                               },
-			//                                               "maxItems": 5,
-			//                                               "type": "array"
-			//                                             },
-			//                                             "ImageUrl": {
-			//                                               "description": "The URL of an image to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Subtitle": {
-			//                                               "description": "The subtitle to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             },
-			//                                             "Title": {
-			//                                               "description": "The title to display on the response card.",
-			//                                               "maxLength": 250,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Title"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "PlainTextMessage": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in plain text format.",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The message to send to the user.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         },
-			//                                         "SSMLMessage": {
-			//                                           "additionalProperties": false,
-			//                                           "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                           "properties": {
-			//                                             "Value": {
-			//                                               "description": "The SSML text that defines the prompt.",
-			//                                               "maxLength": 1000,
-			//                                               "minLength": 1,
-			//                                               "type": "string"
-			//                                             }
-			//                                           },
-			//                                           "required": [
-			//                                             "Value"
-			//                                           ],
-			//                                           "type": "object"
-			//                                         }
-			//                                       },
-			//                                       "type": "object"
-			//                                     },
-			//                                     "Variations": {
-			//                                       "description": "Message variations to send to the user.",
-			//                                       "insertionOrder": false,
-			//                                       "items": {
-			//                                         "additionalProperties": false,
-			//                                         "description": "The primary message that Amazon Lex should send to the user.",
-			//                                         "properties": {
-			//                                           "CustomPayload": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in a custom format defined by the client application.",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The string that is sent to your application.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "ImageResponseCard": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message that defines a response card that the client application can show to the user.",
-			//                                             "properties": {
-			//                                               "Buttons": {
-			//                                                 "description": "A list of buttons that should be displayed on the response card.",
-			//                                                 "insertionOrder": false,
-			//                                                 "items": {
-			//                                                   "additionalProperties": false,
-			//                                                   "description": "A button to use on a response card used to gather slot values from a user.",
-			//                                                   "properties": {
-			//                                                     "Text": {
-			//                                                       "description": "The text that appears on the button.",
-			//                                                       "maxLength": 50,
-			//                                                       "minLength": 1,
-			//                                                       "type": "string"
-			//                                                     },
-			//                                                     "Value": {
-			//                                                       "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//                                                       "maxLength": 50,
-			//                                                       "minLength": 1,
-			//                                                       "type": "string"
-			//                                                     }
-			//                                                   },
-			//                                                   "required": [
-			//                                                     "Text",
-			//                                                     "Value"
-			//                                                   ],
-			//                                                   "type": "object"
-			//                                                 },
-			//                                                 "maxItems": 5,
-			//                                                 "type": "array"
-			//                                               },
-			//                                               "ImageUrl": {
-			//                                                 "description": "The URL of an image to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Subtitle": {
-			//                                                 "description": "The subtitle to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               },
-			//                                               "Title": {
-			//                                                 "description": "The title to display on the response card.",
-			//                                                 "maxLength": 250,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Title"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "PlainTextMessage": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in plain text format.",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The message to send to the user.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           },
-			//                                           "SSMLMessage": {
-			//                                             "additionalProperties": false,
-			//                                             "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//                                             "properties": {
-			//                                               "Value": {
-			//                                                 "description": "The SSML text that defines the prompt.",
-			//                                                 "maxLength": 1000,
-			//                                                 "minLength": 1,
-			//                                                 "type": "string"
-			//                                               }
-			//                                             },
-			//                                             "required": [
-			//                                               "Value"
-			//                                             ],
-			//                                             "type": "object"
-			//                                           }
-			//                                         },
-			//                                         "type": "object"
-			//                                       },
-			//                                       "maxItems": 2,
-			//                                       "type": "array"
-			//                                     }
-			//                                   },
-			//                                   "required": [
-			//                                     "Message"
-			//                                   ],
-			//                                   "type": "object"
-			//                                 },
-			//                                 "maxItems": 5,
-			//                                 "minItems": 1,
-			//                                 "type": "array"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "MessageGroupsList"
-			//                             ],
-			//                             "type": "object"
-			//                           }
-			//                         },
-			//                         "required": [
-			//                           "WaitingResponse",
-			//                           "ContinueResponse"
-			//                         ],
-			//                         "type": "object"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "SlotConstraint"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "Name",
-			//                   "SlotTypeName",
-			//                   "ValueElicitationSetting"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 100,
-			//               "type": "array",
-			//               "uniqueItems": true
-			//             }
-			//           },
-			//           "required": [
-			//             "Name"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 1000,
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "LocaleId": {
-			//         "description": "The identifier of the language and locale that the bot will be used in.",
-			//         "type": "string"
-			//       },
-			//       "NluConfidenceThreshold": {
-			//         "description": "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-			//         "maximum": 1,
-			//         "minimum": 0,
-			//         "type": "number"
-			//       },
-			//       "SlotTypes": {
-			//         "description": "List of SlotTypes",
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "description": "A custom, extended built-in or a grammar slot type.",
-			//           "properties": {
-			//             "Description": {
-			//               "description": "A description of the resource",
-			//               "maxLength": 200,
-			//               "type": "string"
-			//             },
-			//             "ExternalSourceSetting": {
-			//               "additionalProperties": false,
-			//               "description": "Provides information about the external source of the slot type's definition.",
-			//               "properties": {
-			//                 "GrammarSlotTypeSetting": {
-			//                   "additionalProperties": false,
-			//                   "description": "Settings required for a slot type based on a grammar that you provide.",
-			//                   "properties": {
-			//                     "Source": {
-			//                       "additionalProperties": false,
-			//                       "description": "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
-			//                       "properties": {
-			//                         "KmsKeyArn": {
-			//                           "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
-			//                           "maxLength": 2048,
-			//                           "minLength": 20,
-			//                           "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
-			//                           "type": "string"
-			//                         },
-			//                         "S3BucketName": {
-			//                           "description": "The name of the S3 bucket that contains the grammar source.",
-			//                           "maxLength": 63,
-			//                           "minLength": 3,
-			//                           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//                           "type": "string"
-			//                         },
-			//                         "S3ObjectKey": {
-			//                           "description": "The path to the grammar in the S3 bucket.",
-			//                           "maxLength": 1024,
-			//                           "minLength": 1,
-			//                           "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "S3BucketName",
-			//                         "S3ObjectKey"
-			//                       ],
-			//                       "type": "object"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             },
-			//             "Name": {
-			//               "description": "Unique name for a resource.",
-			//               "maxLength": 100,
-			//               "minLength": 1,
-			//               "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//               "type": "string"
-			//             },
-			//             "ParentSlotTypeSignature": {
-			//               "description": "The built-in slot type used as a parent of this slot type.",
-			//               "type": "string"
-			//             },
-			//             "SlotTypeValues": {
-			//               "description": "A List of slot type values",
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "additionalProperties": false,
-			//                 "description": "Value that the slot type can take.",
-			//                 "properties": {
-			//                   "SampleValue": {
-			//                     "additionalProperties": false,
-			//                     "description": "Defines one of the values for a slot type.",
-			//                     "properties": {
-			//                       "Value": {
-			//                         "description": "The value that can be used for a slot type.",
-			//                         "maxLength": 140,
-			//                         "minLength": 1,
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "Value"
-			//                     ],
-			//                     "type": "object"
-			//                   },
-			//                   "Synonyms": {
-			//                     "description": "Additional values related to the slot type entry.",
-			//                     "insertionOrder": false,
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "description": "Defines one of the values for a slot type.",
-			//                       "properties": {
-			//                         "Value": {
-			//                           "description": "The value that can be used for a slot type.",
-			//                           "maxLength": 140,
-			//                           "minLength": 1,
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "Value"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "maxItems": 10000,
-			//                     "type": "array"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "SampleValue"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "maxItems": 10000,
-			//               "type": "array"
-			//             },
-			//             "ValueSelectionSetting": {
-			//               "additionalProperties": false,
-			//               "description": "Contains settings used by Amazon Lex to select a slot value.",
-			//               "properties": {
-			//                 "AdvancedRecognitionSetting": {
-			//                   "additionalProperties": false,
-			//                   "description": "Provides settings that enable advanced recognition settings for slot values.",
-			//                   "properties": {
-			//                     "AudioRecognitionStrategy": {
-			//                       "description": "Enables using slot values as a custom vocabulary when recognizing user utterances.",
-			//                       "enum": [
-			//                         "UseSlotValuesAsCustomVocabulary"
-			//                       ],
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 },
-			//                 "RegexFilter": {
-			//                   "additionalProperties": false,
-			//                   "description": "A regular expression used to validate the value of a slot.",
-			//                   "properties": {
-			//                     "Pattern": {
-			//                       "description": "Regex pattern",
-			//                       "maxLength": 300,
-			//                       "minLength": 1,
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "required": [
-			//                     "Pattern"
-			//                   ],
-			//                   "type": "object"
-			//                 },
-			//                 "ResolutionStrategy": {
-			//                   "enum": [
-			//                     "ORIGINAL_VALUE",
-			//                     "TOP_RESOLUTION"
-			//                   ],
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "ResolutionStrategy"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "required": [
-			//             "Name"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "maxItems": 100,
-			//         "type": "array",
-			//         "uniqueItems": true
-			//       },
-			//       "VoiceSettings": {
-			//         "additionalProperties": false,
-			//         "description": "Settings for using an Amazon Polly voice to communicate with a user.",
-			//         "properties": {
-			//           "Engine": {
-			//             "description": "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
-			//             "enum": [
-			//               "standard",
-			//               "neural"
-			//             ],
-			//             "type": "string"
-			//           },
-			//           "VoiceId": {
-			//             "description": "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "VoiceId"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "required": [
-			//       "LocaleId",
-			//       "NluConfidenceThreshold"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "List of bot locales",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A locale in the bot, which contains the intents and slot types that the bot uses in conversations with users in the specified language and locale.",
+			//	    "properties": {
+			//	      "CustomVocabulary": {
+			//	        "additionalProperties": false,
+			//	        "description": "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
+			//	        "properties": {
+			//	          "CustomVocabularyItems": {
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "A custom vocabulary item that contains the phrase to recognize and a weight to give the boost.",
+			//	              "properties": {
+			//	                "Phrase": {
+			//	                  "description": "Phrase that should be recognized.",
+			//	                  "maxLength": 100,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Weight": {
+			//	                  "description": "The degree to which the phrase recognition is boosted.",
+			//	                  "maximum": 3,
+			//	                  "minimum": 1,
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Phrase"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 500,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "CustomVocabularyItems"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Description": {
+			//	        "description": "A description of the resource",
+			//	        "maxLength": 200,
+			//	        "type": "string"
+			//	      },
+			//	      "Intents": {
+			//	        "description": "List of intents",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "An intent represents an action that the user wants to perform. You create a bot to support one or more related intents.",
+			//	          "properties": {
+			//	            "Description": {
+			//	              "description": "A description of the resource",
+			//	              "maxLength": 200,
+			//	              "type": "string"
+			//	            },
+			//	            "DialogCodeHook": {
+			//	              "additionalProperties": false,
+			//	              "description": "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
+			//	              "properties": {
+			//	                "Enabled": {
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Enabled"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "FulfillmentCodeHook": {
+			//	              "additionalProperties": false,
+			//	              "description": "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
+			//	              "properties": {
+			//	                "Enabled": {
+			//	                  "type": "boolean"
+			//	                },
+			//	                "FulfillmentUpdatesSpecification": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Provides information for updating the user on the progress of fulfilling an intent.",
+			//	                  "properties": {
+			//	                    "Active": {
+			//	                      "description": "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "StartResponse": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
+			//	                      "properties": {
+			//	                        "AllowInterrupt": {
+			//	                          "description": "Determines whether the user can interrupt the start message while it is playing.",
+			//	                          "type": "boolean"
+			//	                        },
+			//	                        "DelayInSeconds": {
+			//	                          "description": "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
+			//	                          "maximum": 900,
+			//	                          "minimum": 1,
+			//	                          "type": "integer"
+			//	                        },
+			//	                        "MessageGroups": {
+			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                          "insertionOrder": false,
+			//	                          "items": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                            "properties": {
+			//	                              "Message": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                "properties": {
+			//	                                  "CustomPayload": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in a custom format defined by the client application.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The string that is sent to your application.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "ImageResponseCard": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                    "properties": {
+			//	                                      "Buttons": {
+			//	                                        "description": "A list of buttons that should be displayed on the response card.",
+			//	                                        "insertionOrder": false,
+			//	                                        "items": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                          "properties": {
+			//	                                            "Text": {
+			//	                                              "description": "The text that appears on the button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Value": {
+			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Text",
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "maxItems": 5,
+			//	                                        "type": "array"
+			//	                                      },
+			//	                                      "ImageUrl": {
+			//	                                        "description": "The URL of an image to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Subtitle": {
+			//	                                        "description": "The subtitle to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Title": {
+			//	                                        "description": "The title to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Title"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "PlainTextMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in plain text format.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The message to send to the user.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "SSMLMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The SSML text that defines the prompt.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  }
+			//	                                },
+			//	                                "type": "object"
+			//	                              },
+			//	                              "Variations": {
+			//	                                "description": "Message variations to send to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                  "properties": {
+			//	                                    "CustomPayload": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in a custom format defined by the client application.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The string that is sent to your application.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "ImageResponseCard": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                      "properties": {
+			//	                                        "Buttons": {
+			//	                                          "description": "A list of buttons that should be displayed on the response card.",
+			//	                                          "insertionOrder": false,
+			//	                                          "items": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                            "properties": {
+			//	                                              "Text": {
+			//	                                                "description": "The text that appears on the button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Value": {
+			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Text",
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "maxItems": 5,
+			//	                                          "type": "array"
+			//	                                        },
+			//	                                        "ImageUrl": {
+			//	                                          "description": "The URL of an image to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Subtitle": {
+			//	                                          "description": "The subtitle to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Title": {
+			//	                                          "description": "The title to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Title"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "PlainTextMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in plain text format.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The message to send to the user.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "SSMLMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The SSML text that defines the prompt.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    }
+			//	                                  },
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 2,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "Message"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "maxItems": 5,
+			//	                          "minItems": 1,
+			//	                          "type": "array"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "DelayInSeconds",
+			//	                        "MessageGroups"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "TimeoutInSeconds": {
+			//	                      "description": "The length of time that the fulfillment Lambda function should run before it times out.",
+			//	                      "maximum": 900,
+			//	                      "minimum": 1,
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "UpdateResponse": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
+			//	                      "properties": {
+			//	                        "AllowInterrupt": {
+			//	                          "description": "Determines whether the user can interrupt an update message while it is playing.",
+			//	                          "type": "boolean"
+			//	                        },
+			//	                        "FrequencyInSeconds": {
+			//	                          "description": "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
+			//	                          "maximum": 900,
+			//	                          "minimum": 1,
+			//	                          "type": "integer"
+			//	                        },
+			//	                        "MessageGroups": {
+			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                          "insertionOrder": false,
+			//	                          "items": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                            "properties": {
+			//	                              "Message": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                "properties": {
+			//	                                  "CustomPayload": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in a custom format defined by the client application.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The string that is sent to your application.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "ImageResponseCard": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                    "properties": {
+			//	                                      "Buttons": {
+			//	                                        "description": "A list of buttons that should be displayed on the response card.",
+			//	                                        "insertionOrder": false,
+			//	                                        "items": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                          "properties": {
+			//	                                            "Text": {
+			//	                                              "description": "The text that appears on the button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Value": {
+			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Text",
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "maxItems": 5,
+			//	                                        "type": "array"
+			//	                                      },
+			//	                                      "ImageUrl": {
+			//	                                        "description": "The URL of an image to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Subtitle": {
+			//	                                        "description": "The subtitle to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Title": {
+			//	                                        "description": "The title to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Title"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "PlainTextMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in plain text format.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The message to send to the user.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "SSMLMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The SSML text that defines the prompt.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  }
+			//	                                },
+			//	                                "type": "object"
+			//	                              },
+			//	                              "Variations": {
+			//	                                "description": "Message variations to send to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                  "properties": {
+			//	                                    "CustomPayload": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in a custom format defined by the client application.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The string that is sent to your application.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "ImageResponseCard": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                      "properties": {
+			//	                                        "Buttons": {
+			//	                                          "description": "A list of buttons that should be displayed on the response card.",
+			//	                                          "insertionOrder": false,
+			//	                                          "items": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                            "properties": {
+			//	                                              "Text": {
+			//	                                                "description": "The text that appears on the button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Value": {
+			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Text",
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "maxItems": 5,
+			//	                                          "type": "array"
+			//	                                        },
+			//	                                        "ImageUrl": {
+			//	                                          "description": "The URL of an image to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Subtitle": {
+			//	                                          "description": "The subtitle to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Title": {
+			//	                                          "description": "The title to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Title"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "PlainTextMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in plain text format.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The message to send to the user.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "SSMLMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The SSML text that defines the prompt.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    }
+			//	                                  },
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 2,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "Message"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "maxItems": 5,
+			//	                          "minItems": 1,
+			//	                          "type": "array"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "FrequencyInSeconds",
+			//	                        "MessageGroups"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Active"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "PostFulfillmentStatusSpecification": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Provides information for updating the user on the progress of fulfilling an intent.",
+			//	                  "properties": {
+			//	                    "FailureResponse": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+			//	                      "properties": {
+			//	                        "AllowInterrupt": {
+			//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                          "type": "boolean"
+			//	                        },
+			//	                        "MessageGroupsList": {
+			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                          "insertionOrder": false,
+			//	                          "items": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                            "properties": {
+			//	                              "Message": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                "properties": {
+			//	                                  "CustomPayload": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in a custom format defined by the client application.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The string that is sent to your application.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "ImageResponseCard": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                    "properties": {
+			//	                                      "Buttons": {
+			//	                                        "description": "A list of buttons that should be displayed on the response card.",
+			//	                                        "insertionOrder": false,
+			//	                                        "items": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                          "properties": {
+			//	                                            "Text": {
+			//	                                              "description": "The text that appears on the button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Value": {
+			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Text",
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "maxItems": 5,
+			//	                                        "type": "array"
+			//	                                      },
+			//	                                      "ImageUrl": {
+			//	                                        "description": "The URL of an image to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Subtitle": {
+			//	                                        "description": "The subtitle to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Title": {
+			//	                                        "description": "The title to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Title"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "PlainTextMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in plain text format.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The message to send to the user.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "SSMLMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The SSML text that defines the prompt.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  }
+			//	                                },
+			//	                                "type": "object"
+			//	                              },
+			//	                              "Variations": {
+			//	                                "description": "Message variations to send to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                  "properties": {
+			//	                                    "CustomPayload": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in a custom format defined by the client application.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The string that is sent to your application.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "ImageResponseCard": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                      "properties": {
+			//	                                        "Buttons": {
+			//	                                          "description": "A list of buttons that should be displayed on the response card.",
+			//	                                          "insertionOrder": false,
+			//	                                          "items": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                            "properties": {
+			//	                                              "Text": {
+			//	                                                "description": "The text that appears on the button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Value": {
+			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Text",
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "maxItems": 5,
+			//	                                          "type": "array"
+			//	                                        },
+			//	                                        "ImageUrl": {
+			//	                                          "description": "The URL of an image to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Subtitle": {
+			//	                                          "description": "The subtitle to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Title": {
+			//	                                          "description": "The title to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Title"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "PlainTextMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in plain text format.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The message to send to the user.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "SSMLMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The SSML text that defines the prompt.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    }
+			//	                                  },
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 2,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "Message"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "maxItems": 5,
+			//	                          "minItems": 1,
+			//	                          "type": "array"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "MessageGroupsList"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "SuccessResponse": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+			//	                      "properties": {
+			//	                        "AllowInterrupt": {
+			//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                          "type": "boolean"
+			//	                        },
+			//	                        "MessageGroupsList": {
+			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                          "insertionOrder": false,
+			//	                          "items": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                            "properties": {
+			//	                              "Message": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                "properties": {
+			//	                                  "CustomPayload": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in a custom format defined by the client application.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The string that is sent to your application.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "ImageResponseCard": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                    "properties": {
+			//	                                      "Buttons": {
+			//	                                        "description": "A list of buttons that should be displayed on the response card.",
+			//	                                        "insertionOrder": false,
+			//	                                        "items": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                          "properties": {
+			//	                                            "Text": {
+			//	                                              "description": "The text that appears on the button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Value": {
+			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Text",
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "maxItems": 5,
+			//	                                        "type": "array"
+			//	                                      },
+			//	                                      "ImageUrl": {
+			//	                                        "description": "The URL of an image to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Subtitle": {
+			//	                                        "description": "The subtitle to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Title": {
+			//	                                        "description": "The title to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Title"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "PlainTextMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in plain text format.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The message to send to the user.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "SSMLMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The SSML text that defines the prompt.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  }
+			//	                                },
+			//	                                "type": "object"
+			//	                              },
+			//	                              "Variations": {
+			//	                                "description": "Message variations to send to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                  "properties": {
+			//	                                    "CustomPayload": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in a custom format defined by the client application.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The string that is sent to your application.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "ImageResponseCard": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                      "properties": {
+			//	                                        "Buttons": {
+			//	                                          "description": "A list of buttons that should be displayed on the response card.",
+			//	                                          "insertionOrder": false,
+			//	                                          "items": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                            "properties": {
+			//	                                              "Text": {
+			//	                                                "description": "The text that appears on the button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Value": {
+			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Text",
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "maxItems": 5,
+			//	                                          "type": "array"
+			//	                                        },
+			//	                                        "ImageUrl": {
+			//	                                          "description": "The URL of an image to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Subtitle": {
+			//	                                          "description": "The subtitle to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Title": {
+			//	                                          "description": "The title to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Title"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "PlainTextMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in plain text format.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The message to send to the user.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "SSMLMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The SSML text that defines the prompt.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    }
+			//	                                  },
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 2,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "Message"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "maxItems": 5,
+			//	                          "minItems": 1,
+			//	                          "type": "array"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "MessageGroupsList"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "TimeoutResponse": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+			//	                      "properties": {
+			//	                        "AllowInterrupt": {
+			//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                          "type": "boolean"
+			//	                        },
+			//	                        "MessageGroupsList": {
+			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                          "insertionOrder": false,
+			//	                          "items": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                            "properties": {
+			//	                              "Message": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                "properties": {
+			//	                                  "CustomPayload": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in a custom format defined by the client application.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The string that is sent to your application.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "ImageResponseCard": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                    "properties": {
+			//	                                      "Buttons": {
+			//	                                        "description": "A list of buttons that should be displayed on the response card.",
+			//	                                        "insertionOrder": false,
+			//	                                        "items": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                          "properties": {
+			//	                                            "Text": {
+			//	                                              "description": "The text that appears on the button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Value": {
+			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                              "maxLength": 50,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Text",
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "maxItems": 5,
+			//	                                        "type": "array"
+			//	                                      },
+			//	                                      "ImageUrl": {
+			//	                                        "description": "The URL of an image to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Subtitle": {
+			//	                                        "description": "The subtitle to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      },
+			//	                                      "Title": {
+			//	                                        "description": "The title to display on the response card.",
+			//	                                        "maxLength": 250,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Title"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "PlainTextMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in plain text format.",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The message to send to the user.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "SSMLMessage": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                    "properties": {
+			//	                                      "Value": {
+			//	                                        "description": "The SSML text that defines the prompt.",
+			//	                                        "maxLength": 1000,
+			//	                                        "minLength": 1,
+			//	                                        "type": "string"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "Value"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  }
+			//	                                },
+			//	                                "type": "object"
+			//	                              },
+			//	                              "Variations": {
+			//	                                "description": "Message variations to send to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                  "properties": {
+			//	                                    "CustomPayload": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in a custom format defined by the client application.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The string that is sent to your application.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "ImageResponseCard": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                      "properties": {
+			//	                                        "Buttons": {
+			//	                                          "description": "A list of buttons that should be displayed on the response card.",
+			//	                                          "insertionOrder": false,
+			//	                                          "items": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                            "properties": {
+			//	                                              "Text": {
+			//	                                                "description": "The text that appears on the button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Value": {
+			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Text",
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "maxItems": 5,
+			//	                                          "type": "array"
+			//	                                        },
+			//	                                        "ImageUrl": {
+			//	                                          "description": "The URL of an image to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Subtitle": {
+			//	                                          "description": "The subtitle to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Title": {
+			//	                                          "description": "The title to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Title"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "PlainTextMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in plain text format.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The message to send to the user.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "SSMLMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The SSML text that defines the prompt.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    }
+			//	                                  },
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 2,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "Message"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "maxItems": 5,
+			//	                          "minItems": 1,
+			//	                          "type": "array"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "MessageGroupsList"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Enabled"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "InputContexts": {
+			//	              "description": "The list of input contexts specified for the intent.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "InputContext specified for the intent.",
+			//	                "properties": {
+			//	                  "Name": {
+			//	                    "description": "The name of the context.",
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Name"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 5,
+			//	              "type": "array"
+			//	            },
+			//	            "IntentClosingSetting": {
+			//	              "additionalProperties": false,
+			//	              "description": "Response that Amazon Lex sends to the user when the intent is closed.",
+			//	              "properties": {
+			//	                "ClosingResponse": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+			//	                  "properties": {
+			//	                    "AllowInterrupt": {
+			//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "MessageGroupsList": {
+			//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                      "insertionOrder": false,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                        "properties": {
+			//	                          "Message": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The primary message that Amazon Lex should send to the user.",
+			//	                            "properties": {
+			//	                              "CustomPayload": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in a custom format defined by the client application.",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The string that is sent to your application.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "ImageResponseCard": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                "properties": {
+			//	                                  "Buttons": {
+			//	                                    "description": "A list of buttons that should be displayed on the response card.",
+			//	                                    "insertionOrder": false,
+			//	                                    "items": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                      "properties": {
+			//	                                        "Text": {
+			//	                                          "description": "The text that appears on the button.",
+			//	                                          "maxLength": 50,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Value": {
+			//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                          "maxLength": 50,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Text",
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "maxItems": 5,
+			//	                                    "type": "array"
+			//	                                  },
+			//	                                  "ImageUrl": {
+			//	                                    "description": "The URL of an image to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "Subtitle": {
+			//	                                    "description": "The subtitle to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "Title": {
+			//	                                    "description": "The title to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Title"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "PlainTextMessage": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in plain text format.",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The message to send to the user.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "SSMLMessage": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The SSML text that defines the prompt.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              }
+			//	                            },
+			//	                            "type": "object"
+			//	                          },
+			//	                          "Variations": {
+			//	                            "description": "Message variations to send to the user.",
+			//	                            "insertionOrder": false,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "The primary message that Amazon Lex should send to the user.",
+			//	                              "properties": {
+			//	                                "CustomPayload": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in a custom format defined by the client application.",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The string that is sent to your application.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "ImageResponseCard": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                  "properties": {
+			//	                                    "Buttons": {
+			//	                                      "description": "A list of buttons that should be displayed on the response card.",
+			//	                                      "insertionOrder": false,
+			//	                                      "items": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                        "properties": {
+			//	                                          "Text": {
+			//	                                            "description": "The text that appears on the button.",
+			//	                                            "maxLength": 50,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "Value": {
+			//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                            "maxLength": 50,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Text",
+			//	                                          "Value"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "maxItems": 5,
+			//	                                      "type": "array"
+			//	                                    },
+			//	                                    "ImageUrl": {
+			//	                                      "description": "The URL of an image to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "Subtitle": {
+			//	                                      "description": "The subtitle to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "Title": {
+			//	                                      "description": "The title to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Title"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "PlainTextMessage": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in plain text format.",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The message to send to the user.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "SSMLMessage": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The SSML text that defines the prompt.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                }
+			//	                              },
+			//	                              "type": "object"
+			//	                            },
+			//	                            "maxItems": 2,
+			//	                            "type": "array"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Message"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "maxItems": 5,
+			//	                      "minItems": 1,
+			//	                      "type": "array"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "MessageGroupsList"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "IsActive": {
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "ClosingResponse"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "IntentConfirmationSetting": {
+			//	              "additionalProperties": false,
+			//	              "description": "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
+			//	              "properties": {
+			//	                "DeclinationResponse": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+			//	                  "properties": {
+			//	                    "AllowInterrupt": {
+			//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "MessageGroupsList": {
+			//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                      "insertionOrder": false,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                        "properties": {
+			//	                          "Message": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The primary message that Amazon Lex should send to the user.",
+			//	                            "properties": {
+			//	                              "CustomPayload": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in a custom format defined by the client application.",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The string that is sent to your application.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "ImageResponseCard": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                "properties": {
+			//	                                  "Buttons": {
+			//	                                    "description": "A list of buttons that should be displayed on the response card.",
+			//	                                    "insertionOrder": false,
+			//	                                    "items": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                      "properties": {
+			//	                                        "Text": {
+			//	                                          "description": "The text that appears on the button.",
+			//	                                          "maxLength": 50,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Value": {
+			//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                          "maxLength": 50,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Text",
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "maxItems": 5,
+			//	                                    "type": "array"
+			//	                                  },
+			//	                                  "ImageUrl": {
+			//	                                    "description": "The URL of an image to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "Subtitle": {
+			//	                                    "description": "The subtitle to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "Title": {
+			//	                                    "description": "The title to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Title"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "PlainTextMessage": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in plain text format.",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The message to send to the user.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "SSMLMessage": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The SSML text that defines the prompt.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              }
+			//	                            },
+			//	                            "type": "object"
+			//	                          },
+			//	                          "Variations": {
+			//	                            "description": "Message variations to send to the user.",
+			//	                            "insertionOrder": false,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "The primary message that Amazon Lex should send to the user.",
+			//	                              "properties": {
+			//	                                "CustomPayload": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in a custom format defined by the client application.",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The string that is sent to your application.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "ImageResponseCard": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                  "properties": {
+			//	                                    "Buttons": {
+			//	                                      "description": "A list of buttons that should be displayed on the response card.",
+			//	                                      "insertionOrder": false,
+			//	                                      "items": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                        "properties": {
+			//	                                          "Text": {
+			//	                                            "description": "The text that appears on the button.",
+			//	                                            "maxLength": 50,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "Value": {
+			//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                            "maxLength": 50,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Text",
+			//	                                          "Value"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "maxItems": 5,
+			//	                                      "type": "array"
+			//	                                    },
+			//	                                    "ImageUrl": {
+			//	                                      "description": "The URL of an image to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "Subtitle": {
+			//	                                      "description": "The subtitle to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "Title": {
+			//	                                      "description": "The title to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Title"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "PlainTextMessage": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in plain text format.",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The message to send to the user.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "SSMLMessage": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The SSML text that defines the prompt.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                }
+			//	                              },
+			//	                              "type": "object"
+			//	                            },
+			//	                            "maxItems": 2,
+			//	                            "type": "array"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Message"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "maxItems": 5,
+			//	                      "minItems": 1,
+			//	                      "type": "array"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "MessageGroupsList"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "IsActive": {
+			//	                  "type": "boolean"
+			//	                },
+			//	                "PromptSpecification": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Prompts the user to confirm the intent.",
+			//	                  "properties": {
+			//	                    "AllowInterrupt": {
+			//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                      "type": "boolean"
+			//	                    },
+			//	                    "MaxRetries": {
+			//	                      "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+			//	                      "maximum": 5,
+			//	                      "minimum": 0,
+			//	                      "type": "integer"
+			//	                    },
+			//	                    "MessageGroupsList": {
+			//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                      "insertionOrder": false,
+			//	                      "items": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                        "properties": {
+			//	                          "Message": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The primary message that Amazon Lex should send to the user.",
+			//	                            "properties": {
+			//	                              "CustomPayload": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in a custom format defined by the client application.",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The string that is sent to your application.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "ImageResponseCard": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                "properties": {
+			//	                                  "Buttons": {
+			//	                                    "description": "A list of buttons that should be displayed on the response card.",
+			//	                                    "insertionOrder": false,
+			//	                                    "items": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                      "properties": {
+			//	                                        "Text": {
+			//	                                          "description": "The text that appears on the button.",
+			//	                                          "maxLength": 50,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Value": {
+			//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                          "maxLength": 50,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Text",
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "maxItems": 5,
+			//	                                    "type": "array"
+			//	                                  },
+			//	                                  "ImageUrl": {
+			//	                                    "description": "The URL of an image to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "Subtitle": {
+			//	                                    "description": "The subtitle to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  },
+			//	                                  "Title": {
+			//	                                    "description": "The title to display on the response card.",
+			//	                                    "maxLength": 250,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Title"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "PlainTextMessage": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in plain text format.",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The message to send to the user.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              },
+			//	                              "SSMLMessage": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                "properties": {
+			//	                                  "Value": {
+			//	                                    "description": "The SSML text that defines the prompt.",
+			//	                                    "maxLength": 1000,
+			//	                                    "minLength": 1,
+			//	                                    "type": "string"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "Value"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              }
+			//	                            },
+			//	                            "type": "object"
+			//	                          },
+			//	                          "Variations": {
+			//	                            "description": "Message variations to send to the user.",
+			//	                            "insertionOrder": false,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "The primary message that Amazon Lex should send to the user.",
+			//	                              "properties": {
+			//	                                "CustomPayload": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in a custom format defined by the client application.",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The string that is sent to your application.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "ImageResponseCard": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                  "properties": {
+			//	                                    "Buttons": {
+			//	                                      "description": "A list of buttons that should be displayed on the response card.",
+			//	                                      "insertionOrder": false,
+			//	                                      "items": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                        "properties": {
+			//	                                          "Text": {
+			//	                                            "description": "The text that appears on the button.",
+			//	                                            "maxLength": 50,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "Value": {
+			//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                            "maxLength": 50,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Text",
+			//	                                          "Value"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "maxItems": 5,
+			//	                                      "type": "array"
+			//	                                    },
+			//	                                    "ImageUrl": {
+			//	                                      "description": "The URL of an image to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "Subtitle": {
+			//	                                      "description": "The subtitle to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "Title": {
+			//	                                      "description": "The title to display on the response card.",
+			//	                                      "maxLength": 250,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Title"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "PlainTextMessage": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in plain text format.",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The message to send to the user.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "SSMLMessage": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                  "properties": {
+			//	                                    "Value": {
+			//	                                      "description": "The SSML text that defines the prompt.",
+			//	                                      "maxLength": 1000,
+			//	                                      "minLength": 1,
+			//	                                      "type": "string"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Value"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                }
+			//	                              },
+			//	                              "type": "object"
+			//	                            },
+			//	                            "maxItems": 2,
+			//	                            "type": "array"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "Message"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "maxItems": 5,
+			//	                      "minItems": 1,
+			//	                      "type": "array"
+			//	                    },
+			//	                    "MessageSelectionStrategy": {
+			//	                      "description": "Indicates how a message is selected from a message group among retries.",
+			//	                      "enum": [
+			//	                        "Random",
+			//	                        "Ordered"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    },
+			//	                    "PromptAttemptsSpecification": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Specifies the advanced settings on each attempt of the prompt.",
+			//	                      "patternProperties": {
+			//	                        "": {
+			//	                          "additionalProperties": false,
+			//	                          "description": "Specifies the settings on a prompt attempt.",
+			//	                          "properties": {
+			//	                            "AllowInterrupt": {
+			//	                              "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+			//	                              "type": "boolean"
+			//	                            },
+			//	                            "AllowedInputTypes": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "Specifies the allowed input types.",
+			//	                              "properties": {
+			//	                                "AllowAudioInput": {
+			//	                                  "description": "Indicates whether audio input is allowed.",
+			//	                                  "type": "boolean"
+			//	                                },
+			//	                                "AllowDTMFInput": {
+			//	                                  "description": "Indicates whether DTMF input is allowed.",
+			//	                                  "type": "boolean"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "AllowAudioInput",
+			//	                                "AllowDTMFInput"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "AudioAndDTMFInputSpecification": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "Specifies the audio and DTMF input specification.",
+			//	                              "properties": {
+			//	                                "AudioSpecification": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "Specifies the audio input specifications.",
+			//	                                  "properties": {
+			//	                                    "EndTimeoutMs": {
+			//	                                      "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+			//	                                      "minimum": 1,
+			//	                                      "type": "integer"
+			//	                                    },
+			//	                                    "MaxLengthMs": {
+			//	                                      "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+			//	                                      "minimum": 1,
+			//	                                      "type": "integer"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "EndTimeoutMs",
+			//	                                    "MaxLengthMs"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "DTMFSpecification": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "Specifies the settings on DTMF input.",
+			//	                                  "properties": {
+			//	                                    "DeletionCharacter": {
+			//	                                      "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+			//	                                      "pattern": "^[A-D0-9#*]{1}$",
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "EndCharacter": {
+			//	                                      "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+			//	                                      "pattern": "^[A-D0-9#*]{1}$",
+			//	                                      "type": "string"
+			//	                                    },
+			//	                                    "EndTimeoutMs": {
+			//	                                      "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+			//	                                      "minimum": 1,
+			//	                                      "type": "integer"
+			//	                                    },
+			//	                                    "MaxLength": {
+			//	                                      "description": "The maximum number of DTMF digits allowed in an utterance.",
+			//	                                      "maximum": 1024,
+			//	                                      "minimum": 1,
+			//	                                      "type": "integer"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "DeletionCharacter",
+			//	                                    "EndCharacter",
+			//	                                    "EndTimeoutMs",
+			//	                                    "MaxLength"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "StartTimeoutMs": {
+			//	                                  "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+			//	                                  "minimum": 1,
+			//	                                  "type": "integer"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "StartTimeoutMs"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "TextInputSpecification": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "Specifies the text input specifications.",
+			//	                              "properties": {
+			//	                                "StartTimeoutMs": {
+			//	                                  "description": "Time for which a bot waits before re-prompting a customer for text input.",
+			//	                                  "minimum": 1,
+			//	                                  "type": "integer"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "StartTimeoutMs"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            }
+			//	                          },
+			//	                          "required": [
+			//	                            "AllowedInputTypes"
+			//	                          ],
+			//	                          "type": "object"
+			//	                        }
+			//	                      },
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "MessageGroupsList",
+			//	                    "MaxRetries"
+			//	                  ],
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "PromptSpecification",
+			//	                "DeclinationResponse"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "KendraConfiguration": {
+			//	              "additionalProperties": false,
+			//	              "description": "Configuration for searching a Amazon Kendra index specified for the intent.",
+			//	              "properties": {
+			//	                "KendraIndex": {
+			//	                  "description": "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 32,
+			//	                  "pattern": "^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+			//	                  "type": "string"
+			//	                },
+			//	                "QueryFilterString": {
+			//	                  "description": "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
+			//	                  "maxLength": 5000,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "QueryFilterStringEnabled": {
+			//	                  "description": "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "KendraIndex"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "Name": {
+			//	              "description": "Unique name for a resource.",
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	              "type": "string"
+			//	            },
+			//	            "OutputContexts": {
+			//	              "description": "A list of contexts that the intent activates when it is fulfilled.",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "A session context that is activated when an intent is fulfilled.",
+			//	                "properties": {
+			//	                  "Name": {
+			//	                    "description": "Unique name for a resource.",
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "TimeToLiveInSeconds": {
+			//	                    "description": "The amount of time, in seconds, that the output context should remain active.",
+			//	                    "maximum": 86400,
+			//	                    "minimum": 5,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "TurnsToLive": {
+			//	                    "description": "The number of conversation turns that the output context should remain active.",
+			//	                    "maximum": 20,
+			//	                    "minimum": 1,
+			//	                    "type": "integer"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Name",
+			//	                  "TimeToLiveInSeconds",
+			//	                  "TurnsToLive"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 10,
+			//	              "type": "array"
+			//	            },
+			//	            "ParentIntentSignature": {
+			//	              "description": "A unique identifier for the built-in intent to base this intent on.",
+			//	              "type": "string"
+			//	            },
+			//	            "SampleUtterances": {
+			//	              "description": "An array of sample utterances",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
+			//	                "properties": {
+			//	                  "Utterance": {
+			//	                    "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Utterance"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "SlotPriorities": {
+			//	              "description": "List for slot priorities",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "The priority that Amazon Lex should use when eliciting slot values from a user.",
+			//	                "properties": {
+			//	                  "Priority": {
+			//	                    "description": "The priority that a slot should be elicited.",
+			//	                    "maximum": 100,
+			//	                    "minimum": 0,
+			//	                    "type": "integer"
+			//	                  },
+			//	                  "SlotName": {
+			//	                    "description": "The name of the slot.",
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "SlotName",
+			//	                  "Priority"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "Slots": {
+			//	              "description": "List of slots",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "A slot is a variable needed to fulfill an intent, where an intent can require zero or more slots.",
+			//	                "properties": {
+			//	                  "Description": {
+			//	                    "description": "A description of the resource",
+			//	                    "maxLength": 200,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "MultipleValuesSetting": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Indicates whether a slot can return multiple values.",
+			//	                    "properties": {
+			//	                      "AllowMultipleValues": {
+			//	                        "type": "boolean"
+			//	                      }
+			//	                    },
+			//	                    "type": "object"
+			//	                  },
+			//	                  "Name": {
+			//	                    "description": "Unique name for a resource.",
+			//	                    "maxLength": 100,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "ObfuscationSetting": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Determines whether Amazon Lex obscures slot values in conversation logs.",
+			//	                    "properties": {
+			//	                      "ObfuscationSettingType": {
+			//	                        "description": "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
+			//	                        "enum": [
+			//	                          "None",
+			//	                          "DefaultObfuscation"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "ObfuscationSettingType"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  },
+			//	                  "SlotTypeName": {
+			//	                    "description": "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "ValueElicitationSetting": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Settings that you can use for eliciting a slot value.",
+			//	                    "properties": {
+			//	                      "DefaultValueSpecification": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "A list of default values for a slot.",
+			//	                        "properties": {
+			//	                          "DefaultValueList": {
+			//	                            "description": "A list of slot default values",
+			//	                            "insertionOrder": false,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "The default value to use when a user doesn't provide a value for a slot.",
+			//	                              "properties": {
+			//	                                "DefaultValue": {
+			//	                                  "description": "The default value to use when a user doesn't provide a value for a slot.",
+			//	                                  "maxLength": 202,
+			//	                                  "minLength": 1,
+			//	                                  "type": "string"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "DefaultValue"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "maxItems": 10,
+			//	                            "type": "array"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "DefaultValueList"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "PromptSpecification": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "The prompt that Amazon Lex uses to elicit the slot value from the user.",
+			//	                        "properties": {
+			//	                          "AllowInterrupt": {
+			//	                            "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                            "type": "boolean"
+			//	                          },
+			//	                          "MaxRetries": {
+			//	                            "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+			//	                            "maximum": 5,
+			//	                            "minimum": 0,
+			//	                            "type": "integer"
+			//	                          },
+			//	                          "MessageGroupsList": {
+			//	                            "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                            "insertionOrder": false,
+			//	                            "items": {
+			//	                              "additionalProperties": false,
+			//	                              "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                              "properties": {
+			//	                                "Message": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                  "properties": {
+			//	                                    "CustomPayload": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in a custom format defined by the client application.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The string that is sent to your application.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "ImageResponseCard": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                      "properties": {
+			//	                                        "Buttons": {
+			//	                                          "description": "A list of buttons that should be displayed on the response card.",
+			//	                                          "insertionOrder": false,
+			//	                                          "items": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                            "properties": {
+			//	                                              "Text": {
+			//	                                                "description": "The text that appears on the button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Value": {
+			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                "maxLength": 50,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Text",
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "maxItems": 5,
+			//	                                          "type": "array"
+			//	                                        },
+			//	                                        "ImageUrl": {
+			//	                                          "description": "The URL of an image to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Subtitle": {
+			//	                                          "description": "The subtitle to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        },
+			//	                                        "Title": {
+			//	                                          "description": "The title to display on the response card.",
+			//	                                          "maxLength": 250,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Title"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "PlainTextMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in plain text format.",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The message to send to the user.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "SSMLMessage": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                      "properties": {
+			//	                                        "Value": {
+			//	                                          "description": "The SSML text that defines the prompt.",
+			//	                                          "maxLength": 1000,
+			//	                                          "minLength": 1,
+			//	                                          "type": "string"
+			//	                                        }
+			//	                                      },
+			//	                                      "required": [
+			//	                                        "Value"
+			//	                                      ],
+			//	                                      "type": "object"
+			//	                                    }
+			//	                                  },
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "Variations": {
+			//	                                  "description": "Message variations to send to the user.",
+			//	                                  "insertionOrder": false,
+			//	                                  "items": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                    "properties": {
+			//	                                      "CustomPayload": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A message in a custom format defined by the client application.",
+			//	                                        "properties": {
+			//	                                          "Value": {
+			//	                                            "description": "The string that is sent to your application.",
+			//	                                            "maxLength": 1000,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Value"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "ImageResponseCard": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                        "properties": {
+			//	                                          "Buttons": {
+			//	                                            "description": "A list of buttons that should be displayed on the response card.",
+			//	                                            "insertionOrder": false,
+			//	                                            "items": {
+			//	                                              "additionalProperties": false,
+			//	                                              "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                              "properties": {
+			//	                                                "Text": {
+			//	                                                  "description": "The text that appears on the button.",
+			//	                                                  "maxLength": 50,
+			//	                                                  "minLength": 1,
+			//	                                                  "type": "string"
+			//	                                                },
+			//	                                                "Value": {
+			//	                                                  "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                  "maxLength": 50,
+			//	                                                  "minLength": 1,
+			//	                                                  "type": "string"
+			//	                                                }
+			//	                                              },
+			//	                                              "required": [
+			//	                                                "Text",
+			//	                                                "Value"
+			//	                                              ],
+			//	                                              "type": "object"
+			//	                                            },
+			//	                                            "maxItems": 5,
+			//	                                            "type": "array"
+			//	                                          },
+			//	                                          "ImageUrl": {
+			//	                                            "description": "The URL of an image to display on the response card.",
+			//	                                            "maxLength": 250,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "Subtitle": {
+			//	                                            "description": "The subtitle to display on the response card.",
+			//	                                            "maxLength": 250,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "Title": {
+			//	                                            "description": "The title to display on the response card.",
+			//	                                            "maxLength": 250,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Title"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "PlainTextMessage": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A message in plain text format.",
+			//	                                        "properties": {
+			//	                                          "Value": {
+			//	                                            "description": "The message to send to the user.",
+			//	                                            "maxLength": 1000,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Value"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "SSMLMessage": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                        "properties": {
+			//	                                          "Value": {
+			//	                                            "description": "The SSML text that defines the prompt.",
+			//	                                            "maxLength": 1000,
+			//	                                            "minLength": 1,
+			//	                                            "type": "string"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "Value"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      }
+			//	                                    },
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "maxItems": 2,
+			//	                                  "type": "array"
+			//	                                }
+			//	                              },
+			//	                              "required": [
+			//	                                "Message"
+			//	                              ],
+			//	                              "type": "object"
+			//	                            },
+			//	                            "maxItems": 5,
+			//	                            "minItems": 1,
+			//	                            "type": "array"
+			//	                          },
+			//	                          "MessageSelectionStrategy": {
+			//	                            "description": "Indicates how a message is selected from a message group among retries.",
+			//	                            "enum": [
+			//	                              "Random",
+			//	                              "Ordered"
+			//	                            ],
+			//	                            "type": "string"
+			//	                          },
+			//	                          "PromptAttemptsSpecification": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "Specifies the advanced settings on each attempt of the prompt.",
+			//	                            "patternProperties": {
+			//	                              "": {
+			//	                                "additionalProperties": false,
+			//	                                "description": "Specifies the settings on a prompt attempt.",
+			//	                                "properties": {
+			//	                                  "AllowInterrupt": {
+			//	                                    "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+			//	                                    "type": "boolean"
+			//	                                  },
+			//	                                  "AllowedInputTypes": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "Specifies the allowed input types.",
+			//	                                    "properties": {
+			//	                                      "AllowAudioInput": {
+			//	                                        "description": "Indicates whether audio input is allowed.",
+			//	                                        "type": "boolean"
+			//	                                      },
+			//	                                      "AllowDTMFInput": {
+			//	                                        "description": "Indicates whether DTMF input is allowed.",
+			//	                                        "type": "boolean"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "AllowAudioInput",
+			//	                                      "AllowDTMFInput"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "AudioAndDTMFInputSpecification": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "Specifies the audio and DTMF input specification.",
+			//	                                    "properties": {
+			//	                                      "AudioSpecification": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "Specifies the audio input specifications.",
+			//	                                        "properties": {
+			//	                                          "EndTimeoutMs": {
+			//	                                            "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+			//	                                            "minimum": 1,
+			//	                                            "type": "integer"
+			//	                                          },
+			//	                                          "MaxLengthMs": {
+			//	                                            "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+			//	                                            "minimum": 1,
+			//	                                            "type": "integer"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "EndTimeoutMs",
+			//	                                          "MaxLengthMs"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "DTMFSpecification": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "Specifies the settings on DTMF input.",
+			//	                                        "properties": {
+			//	                                          "DeletionCharacter": {
+			//	                                            "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+			//	                                            "pattern": "^[A-D0-9#*]{1}$",
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "EndCharacter": {
+			//	                                            "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+			//	                                            "pattern": "^[A-D0-9#*]{1}$",
+			//	                                            "type": "string"
+			//	                                          },
+			//	                                          "EndTimeoutMs": {
+			//	                                            "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+			//	                                            "minimum": 1,
+			//	                                            "type": "integer"
+			//	                                          },
+			//	                                          "MaxLength": {
+			//	                                            "description": "The maximum number of DTMF digits allowed in an utterance.",
+			//	                                            "maximum": 1024,
+			//	                                            "minimum": 1,
+			//	                                            "type": "integer"
+			//	                                          }
+			//	                                        },
+			//	                                        "required": [
+			//	                                          "DeletionCharacter",
+			//	                                          "EndCharacter",
+			//	                                          "EndTimeoutMs",
+			//	                                          "MaxLength"
+			//	                                        ],
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "StartTimeoutMs": {
+			//	                                        "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+			//	                                        "minimum": 1,
+			//	                                        "type": "integer"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "StartTimeoutMs"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  },
+			//	                                  "TextInputSpecification": {
+			//	                                    "additionalProperties": false,
+			//	                                    "description": "Specifies the text input specifications.",
+			//	                                    "properties": {
+			//	                                      "StartTimeoutMs": {
+			//	                                        "description": "Time for which a bot waits before re-prompting a customer for text input.",
+			//	                                        "minimum": 1,
+			//	                                        "type": "integer"
+			//	                                      }
+			//	                                    },
+			//	                                    "required": [
+			//	                                      "StartTimeoutMs"
+			//	                                    ],
+			//	                                    "type": "object"
+			//	                                  }
+			//	                                },
+			//	                                "required": [
+			//	                                  "AllowedInputTypes"
+			//	                                ],
+			//	                                "type": "object"
+			//	                              }
+			//	                            },
+			//	                            "type": "object"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "MessageGroupsList",
+			//	                          "MaxRetries"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      },
+			//	                      "SampleUtterances": {
+			//	                        "description": "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
+			//	                        "insertionOrder": false,
+			//	                        "items": {
+			//	                          "additionalProperties": false,
+			//	                          "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
+			//	                          "properties": {
+			//	                            "Utterance": {
+			//	                              "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+			//	                              "type": "string"
+			//	                            }
+			//	                          },
+			//	                          "required": [
+			//	                            "Utterance"
+			//	                          ],
+			//	                          "type": "object"
+			//	                        },
+			//	                        "type": "array"
+			//	                      },
+			//	                      "SlotConstraint": {
+			//	                        "description": "Specifies whether the slot is required or optional.",
+			//	                        "enum": [
+			//	                          "Required",
+			//	                          "Optional"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      },
+			//	                      "WaitAndContinueSpecification": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
+			//	                        "properties": {
+			//	                          "ContinueResponse": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
+			//	                            "properties": {
+			//	                              "AllowInterrupt": {
+			//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                                "type": "boolean"
+			//	                              },
+			//	                              "MessageGroupsList": {
+			//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                                  "properties": {
+			//	                                    "Message": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                      "properties": {
+			//	                                        "CustomPayload": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in a custom format defined by the client application.",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The string that is sent to your application.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "ImageResponseCard": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                          "properties": {
+			//	                                            "Buttons": {
+			//	                                              "description": "A list of buttons that should be displayed on the response card.",
+			//	                                              "insertionOrder": false,
+			//	                                              "items": {
+			//	                                                "additionalProperties": false,
+			//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                                "properties": {
+			//	                                                  "Text": {
+			//	                                                    "description": "The text that appears on the button.",
+			//	                                                    "maxLength": 50,
+			//	                                                    "minLength": 1,
+			//	                                                    "type": "string"
+			//	                                                  },
+			//	                                                  "Value": {
+			//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                    "maxLength": 50,
+			//	                                                    "minLength": 1,
+			//	                                                    "type": "string"
+			//	                                                  }
+			//	                                                },
+			//	                                                "required": [
+			//	                                                  "Text",
+			//	                                                  "Value"
+			//	                                                ],
+			//	                                                "type": "object"
+			//	                                              },
+			//	                                              "maxItems": 5,
+			//	                                              "type": "array"
+			//	                                            },
+			//	                                            "ImageUrl": {
+			//	                                              "description": "The URL of an image to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Subtitle": {
+			//	                                              "description": "The subtitle to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Title": {
+			//	                                              "description": "The title to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Title"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "PlainTextMessage": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in plain text format.",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The message to send to the user.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "SSMLMessage": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The SSML text that defines the prompt.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        }
+			//	                                      },
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "Variations": {
+			//	                                      "description": "Message variations to send to the user.",
+			//	                                      "insertionOrder": false,
+			//	                                      "items": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                        "properties": {
+			//	                                          "CustomPayload": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in a custom format defined by the client application.",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The string that is sent to your application.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "ImageResponseCard": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                            "properties": {
+			//	                                              "Buttons": {
+			//	                                                "description": "A list of buttons that should be displayed on the response card.",
+			//	                                                "insertionOrder": false,
+			//	                                                "items": {
+			//	                                                  "additionalProperties": false,
+			//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                                  "properties": {
+			//	                                                    "Text": {
+			//	                                                      "description": "The text that appears on the button.",
+			//	                                                      "maxLength": 50,
+			//	                                                      "minLength": 1,
+			//	                                                      "type": "string"
+			//	                                                    },
+			//	                                                    "Value": {
+			//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                      "maxLength": 50,
+			//	                                                      "minLength": 1,
+			//	                                                      "type": "string"
+			//	                                                    }
+			//	                                                  },
+			//	                                                  "required": [
+			//	                                                    "Text",
+			//	                                                    "Value"
+			//	                                                  ],
+			//	                                                  "type": "object"
+			//	                                                },
+			//	                                                "maxItems": 5,
+			//	                                                "type": "array"
+			//	                                              },
+			//	                                              "ImageUrl": {
+			//	                                                "description": "The URL of an image to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Subtitle": {
+			//	                                                "description": "The subtitle to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Title": {
+			//	                                                "description": "The title to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Title"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "PlainTextMessage": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in plain text format.",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The message to send to the user.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "SSMLMessage": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The SSML text that defines the prompt.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          }
+			//	                                        },
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "maxItems": 2,
+			//	                                      "type": "array"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Message"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 5,
+			//	                                "minItems": 1,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "MessageGroupsList"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "IsActive": {
+			//	                            "description": "Specifies whether the bot will wait for a user to respond.",
+			//	                            "type": "boolean"
+			//	                          },
+			//	                          "StillWaitingResponse": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
+			//	                            "properties": {
+			//	                              "AllowInterrupt": {
+			//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                                "type": "boolean"
+			//	                              },
+			//	                              "FrequencyInSeconds": {
+			//	                                "description": "How often a message should be sent to the user in seconds.",
+			//	                                "maximum": 300,
+			//	                                "minimum": 1,
+			//	                                "type": "integer"
+			//	                              },
+			//	                              "MessageGroupsList": {
+			//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                                  "properties": {
+			//	                                    "Message": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                      "properties": {
+			//	                                        "CustomPayload": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in a custom format defined by the client application.",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The string that is sent to your application.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "ImageResponseCard": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                          "properties": {
+			//	                                            "Buttons": {
+			//	                                              "description": "A list of buttons that should be displayed on the response card.",
+			//	                                              "insertionOrder": false,
+			//	                                              "items": {
+			//	                                                "additionalProperties": false,
+			//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                                "properties": {
+			//	                                                  "Text": {
+			//	                                                    "description": "The text that appears on the button.",
+			//	                                                    "maxLength": 50,
+			//	                                                    "minLength": 1,
+			//	                                                    "type": "string"
+			//	                                                  },
+			//	                                                  "Value": {
+			//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                    "maxLength": 50,
+			//	                                                    "minLength": 1,
+			//	                                                    "type": "string"
+			//	                                                  }
+			//	                                                },
+			//	                                                "required": [
+			//	                                                  "Text",
+			//	                                                  "Value"
+			//	                                                ],
+			//	                                                "type": "object"
+			//	                                              },
+			//	                                              "maxItems": 5,
+			//	                                              "type": "array"
+			//	                                            },
+			//	                                            "ImageUrl": {
+			//	                                              "description": "The URL of an image to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Subtitle": {
+			//	                                              "description": "The subtitle to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Title": {
+			//	                                              "description": "The title to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Title"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "PlainTextMessage": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in plain text format.",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The message to send to the user.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "SSMLMessage": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The SSML text that defines the prompt.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        }
+			//	                                      },
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "Variations": {
+			//	                                      "description": "Message variations to send to the user.",
+			//	                                      "insertionOrder": false,
+			//	                                      "items": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                        "properties": {
+			//	                                          "CustomPayload": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in a custom format defined by the client application.",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The string that is sent to your application.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "ImageResponseCard": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                            "properties": {
+			//	                                              "Buttons": {
+			//	                                                "description": "A list of buttons that should be displayed on the response card.",
+			//	                                                "insertionOrder": false,
+			//	                                                "items": {
+			//	                                                  "additionalProperties": false,
+			//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                                  "properties": {
+			//	                                                    "Text": {
+			//	                                                      "description": "The text that appears on the button.",
+			//	                                                      "maxLength": 50,
+			//	                                                      "minLength": 1,
+			//	                                                      "type": "string"
+			//	                                                    },
+			//	                                                    "Value": {
+			//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                      "maxLength": 50,
+			//	                                                      "minLength": 1,
+			//	                                                      "type": "string"
+			//	                                                    }
+			//	                                                  },
+			//	                                                  "required": [
+			//	                                                    "Text",
+			//	                                                    "Value"
+			//	                                                  ],
+			//	                                                  "type": "object"
+			//	                                                },
+			//	                                                "maxItems": 5,
+			//	                                                "type": "array"
+			//	                                              },
+			//	                                              "ImageUrl": {
+			//	                                                "description": "The URL of an image to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Subtitle": {
+			//	                                                "description": "The subtitle to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Title": {
+			//	                                                "description": "The title to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Title"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "PlainTextMessage": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in plain text format.",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The message to send to the user.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "SSMLMessage": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The SSML text that defines the prompt.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          }
+			//	                                        },
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "maxItems": 2,
+			//	                                      "type": "array"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Message"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 5,
+			//	                                "minItems": 1,
+			//	                                "type": "array"
+			//	                              },
+			//	                              "TimeoutInSeconds": {
+			//	                                "description": "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
+			//	                                "maximum": 900,
+			//	                                "minimum": 1,
+			//	                                "type": "integer"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "MessageGroupsList",
+			//	                              "FrequencyInSeconds",
+			//	                              "TimeoutInSeconds"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "WaitingResponse": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
+			//	                            "properties": {
+			//	                              "AllowInterrupt": {
+			//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+			//	                                "type": "boolean"
+			//	                              },
+			//	                              "MessageGroupsList": {
+			//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+			//	                                "insertionOrder": false,
+			//	                                "items": {
+			//	                                  "additionalProperties": false,
+			//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
+			//	                                  "properties": {
+			//	                                    "Message": {
+			//	                                      "additionalProperties": false,
+			//	                                      "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                      "properties": {
+			//	                                        "CustomPayload": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in a custom format defined by the client application.",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The string that is sent to your application.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "ImageResponseCard": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                          "properties": {
+			//	                                            "Buttons": {
+			//	                                              "description": "A list of buttons that should be displayed on the response card.",
+			//	                                              "insertionOrder": false,
+			//	                                              "items": {
+			//	                                                "additionalProperties": false,
+			//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                                "properties": {
+			//	                                                  "Text": {
+			//	                                                    "description": "The text that appears on the button.",
+			//	                                                    "maxLength": 50,
+			//	                                                    "minLength": 1,
+			//	                                                    "type": "string"
+			//	                                                  },
+			//	                                                  "Value": {
+			//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                    "maxLength": 50,
+			//	                                                    "minLength": 1,
+			//	                                                    "type": "string"
+			//	                                                  }
+			//	                                                },
+			//	                                                "required": [
+			//	                                                  "Text",
+			//	                                                  "Value"
+			//	                                                ],
+			//	                                                "type": "object"
+			//	                                              },
+			//	                                              "maxItems": 5,
+			//	                                              "type": "array"
+			//	                                            },
+			//	                                            "ImageUrl": {
+			//	                                              "description": "The URL of an image to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Subtitle": {
+			//	                                              "description": "The subtitle to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            },
+			//	                                            "Title": {
+			//	                                              "description": "The title to display on the response card.",
+			//	                                              "maxLength": 250,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Title"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "PlainTextMessage": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in plain text format.",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The message to send to the user.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        },
+			//	                                        "SSMLMessage": {
+			//	                                          "additionalProperties": false,
+			//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                          "properties": {
+			//	                                            "Value": {
+			//	                                              "description": "The SSML text that defines the prompt.",
+			//	                                              "maxLength": 1000,
+			//	                                              "minLength": 1,
+			//	                                              "type": "string"
+			//	                                            }
+			//	                                          },
+			//	                                          "required": [
+			//	                                            "Value"
+			//	                                          ],
+			//	                                          "type": "object"
+			//	                                        }
+			//	                                      },
+			//	                                      "type": "object"
+			//	                                    },
+			//	                                    "Variations": {
+			//	                                      "description": "Message variations to send to the user.",
+			//	                                      "insertionOrder": false,
+			//	                                      "items": {
+			//	                                        "additionalProperties": false,
+			//	                                        "description": "The primary message that Amazon Lex should send to the user.",
+			//	                                        "properties": {
+			//	                                          "CustomPayload": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in a custom format defined by the client application.",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The string that is sent to your application.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "ImageResponseCard": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message that defines a response card that the client application can show to the user.",
+			//	                                            "properties": {
+			//	                                              "Buttons": {
+			//	                                                "description": "A list of buttons that should be displayed on the response card.",
+			//	                                                "insertionOrder": false,
+			//	                                                "items": {
+			//	                                                  "additionalProperties": false,
+			//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
+			//	                                                  "properties": {
+			//	                                                    "Text": {
+			//	                                                      "description": "The text that appears on the button.",
+			//	                                                      "maxLength": 50,
+			//	                                                      "minLength": 1,
+			//	                                                      "type": "string"
+			//	                                                    },
+			//	                                                    "Value": {
+			//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
+			//	                                                      "maxLength": 50,
+			//	                                                      "minLength": 1,
+			//	                                                      "type": "string"
+			//	                                                    }
+			//	                                                  },
+			//	                                                  "required": [
+			//	                                                    "Text",
+			//	                                                    "Value"
+			//	                                                  ],
+			//	                                                  "type": "object"
+			//	                                                },
+			//	                                                "maxItems": 5,
+			//	                                                "type": "array"
+			//	                                              },
+			//	                                              "ImageUrl": {
+			//	                                                "description": "The URL of an image to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Subtitle": {
+			//	                                                "description": "The subtitle to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              },
+			//	                                              "Title": {
+			//	                                                "description": "The title to display on the response card.",
+			//	                                                "maxLength": 250,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Title"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "PlainTextMessage": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in plain text format.",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The message to send to the user.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          },
+			//	                                          "SSMLMessage": {
+			//	                                            "additionalProperties": false,
+			//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
+			//	                                            "properties": {
+			//	                                              "Value": {
+			//	                                                "description": "The SSML text that defines the prompt.",
+			//	                                                "maxLength": 1000,
+			//	                                                "minLength": 1,
+			//	                                                "type": "string"
+			//	                                              }
+			//	                                            },
+			//	                                            "required": [
+			//	                                              "Value"
+			//	                                            ],
+			//	                                            "type": "object"
+			//	                                          }
+			//	                                        },
+			//	                                        "type": "object"
+			//	                                      },
+			//	                                      "maxItems": 2,
+			//	                                      "type": "array"
+			//	                                    }
+			//	                                  },
+			//	                                  "required": [
+			//	                                    "Message"
+			//	                                  ],
+			//	                                  "type": "object"
+			//	                                },
+			//	                                "maxItems": 5,
+			//	                                "minItems": 1,
+			//	                                "type": "array"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "MessageGroupsList"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          }
+			//	                        },
+			//	                        "required": [
+			//	                          "WaitingResponse",
+			//	                          "ContinueResponse"
+			//	                        ],
+			//	                        "type": "object"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "SlotConstraint"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "Name",
+			//	                  "SlotTypeName",
+			//	                  "ValueElicitationSetting"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 100,
+			//	              "type": "array",
+			//	              "uniqueItems": true
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Name"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 1000,
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "LocaleId": {
+			//	        "description": "The identifier of the language and locale that the bot will be used in.",
+			//	        "type": "string"
+			//	      },
+			//	      "NluConfidenceThreshold": {
+			//	        "description": "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
+			//	        "maximum": 1,
+			//	        "minimum": 0,
+			//	        "type": "number"
+			//	      },
+			//	      "SlotTypes": {
+			//	        "description": "List of SlotTypes",
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "description": "A custom, extended built-in or a grammar slot type.",
+			//	          "properties": {
+			//	            "Description": {
+			//	              "description": "A description of the resource",
+			//	              "maxLength": 200,
+			//	              "type": "string"
+			//	            },
+			//	            "ExternalSourceSetting": {
+			//	              "additionalProperties": false,
+			//	              "description": "Provides information about the external source of the slot type's definition.",
+			//	              "properties": {
+			//	                "GrammarSlotTypeSetting": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Settings required for a slot type based on a grammar that you provide.",
+			//	                  "properties": {
+			//	                    "Source": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
+			//	                      "properties": {
+			//	                        "KmsKeyArn": {
+			//	                          "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
+			//	                          "maxLength": 2048,
+			//	                          "minLength": 20,
+			//	                          "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "S3BucketName": {
+			//	                          "description": "The name of the S3 bucket that contains the grammar source.",
+			//	                          "maxLength": 63,
+			//	                          "minLength": 3,
+			//	                          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "S3ObjectKey": {
+			//	                          "description": "The path to the grammar in the S3 bucket.",
+			//	                          "maxLength": 1024,
+			//	                          "minLength": 1,
+			//	                          "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "S3BucketName",
+			//	                        "S3ObjectKey"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "Name": {
+			//	              "description": "Unique name for a resource.",
+			//	              "maxLength": 100,
+			//	              "minLength": 1,
+			//	              "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	              "type": "string"
+			//	            },
+			//	            "ParentSlotTypeSignature": {
+			//	              "description": "The built-in slot type used as a parent of this slot type.",
+			//	              "type": "string"
+			//	            },
+			//	            "SlotTypeValues": {
+			//	              "description": "A List of slot type values",
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "additionalProperties": false,
+			//	                "description": "Value that the slot type can take.",
+			//	                "properties": {
+			//	                  "SampleValue": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Defines one of the values for a slot type.",
+			//	                    "properties": {
+			//	                      "Value": {
+			//	                        "description": "The value that can be used for a slot type.",
+			//	                        "maxLength": 140,
+			//	                        "minLength": 1,
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "Value"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  },
+			//	                  "Synonyms": {
+			//	                    "description": "Additional values related to the slot type entry.",
+			//	                    "insertionOrder": false,
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "Defines one of the values for a slot type.",
+			//	                      "properties": {
+			//	                        "Value": {
+			//	                          "description": "The value that can be used for a slot type.",
+			//	                          "maxLength": 140,
+			//	                          "minLength": 1,
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Value"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "maxItems": 10000,
+			//	                    "type": "array"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "SampleValue"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "maxItems": 10000,
+			//	              "type": "array"
+			//	            },
+			//	            "ValueSelectionSetting": {
+			//	              "additionalProperties": false,
+			//	              "description": "Contains settings used by Amazon Lex to select a slot value.",
+			//	              "properties": {
+			//	                "AdvancedRecognitionSetting": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Provides settings that enable advanced recognition settings for slot values.",
+			//	                  "properties": {
+			//	                    "AudioRecognitionStrategy": {
+			//	                      "description": "Enables using slot values as a custom vocabulary when recognizing user utterances.",
+			//	                      "enum": [
+			//	                        "UseSlotValuesAsCustomVocabulary"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "RegexFilter": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "A regular expression used to validate the value of a slot.",
+			//	                  "properties": {
+			//	                    "Pattern": {
+			//	                      "description": "Regex pattern",
+			//	                      "maxLength": 300,
+			//	                      "minLength": 1,
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Pattern"
+			//	                  ],
+			//	                  "type": "object"
+			//	                },
+			//	                "ResolutionStrategy": {
+			//	                  "enum": [
+			//	                    "ORIGINAL_VALUE",
+			//	                    "TOP_RESOLUTION"
+			//	                  ],
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "ResolutionStrategy"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Name"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "maxItems": 100,
+			//	        "type": "array",
+			//	        "uniqueItems": true
+			//	      },
+			//	      "VoiceSettings": {
+			//	        "additionalProperties": false,
+			//	        "description": "Settings for using an Amazon Polly voice to communicate with a user.",
+			//	        "properties": {
+			//	          "Engine": {
+			//	            "description": "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+			//	            "enum": [
+			//	              "standard",
+			//	              "neural"
+			//	            ],
+			//	            "type": "string"
+			//	          },
+			//	          "VoiceId": {
+			//	            "description": "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "VoiceId"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "LocaleId",
+			//	      "NluConfidenceThreshold"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "List of bot locales",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -7814,36 +7818,37 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_tags": {
 			// Property: BotTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags to add to the bot, which can only be added at bot creation.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair for tagging Lex resources",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags to add to the bot, which can only be added at bot creation.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair for tagging Lex resources",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of tags to add to the bot, which can only be added at bot creation.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -7866,20 +7871,21 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_privacy": {
 			// Property: DataPrivacy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Data privacy setting of the Bot.",
-			//   "properties": {
-			//     "ChildDirected": {
-			//       "description": "",
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "required": [
-			//     "ChildDirected"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Data privacy setting of the Bot.",
+			//	  "properties": {
+			//	    "ChildDirected": {
+			//	      "description": "",
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ChildDirected"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Data privacy setting of the Bot.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -7896,11 +7902,12 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the resource",
-			//   "maxLength": 200,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the resource",
+			//	  "maxLength": 200,
+			//	  "type": "string"
+			//	}
 			Description: "A description of the resource",
 			Type:        types.StringType,
 			Computed:    true,
@@ -7908,13 +7915,14 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique ID of resource",
-			//   "maxLength": 10,
-			//   "minLength": 10,
-			//   "pattern": "^[0-9a-zA-Z]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique ID of resource",
+			//	  "maxLength": 10,
+			//	  "minLength": 10,
+			//	  "pattern": "^[0-9a-zA-Z]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Unique ID of resource",
 			Type:        types.StringType,
 			Computed:    true,
@@ -7922,12 +7930,13 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"idle_session_ttl_in_seconds": {
 			// Property: IdleSessionTTLInSeconds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "IdleSessionTTLInSeconds of the resource",
-			//   "maximum": 86400,
-			//   "minimum": 60,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "IdleSessionTTLInSeconds of the resource",
+			//	  "maximum": 86400,
+			//	  "minimum": 60,
+			//	  "type": "integer"
+			//	}
 			Description: "IdleSessionTTLInSeconds of the resource",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -7935,13 +7944,14 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Unique name for a resource.",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Unique name for a resource.",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "^([0-9a-zA-Z][_-]?)+$",
+			//	  "type": "string"
+			//	}
 			Description: "Unique name for a resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -7949,13 +7959,14 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
-			//   "maxLength": 2048,
-			//   "minLength": 32,
-			//   "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 32,
+			//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -7963,227 +7974,228 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"test_bot_alias_settings": {
 			// Property: TestBotAliasSettings
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuring the test bot alias settings for a given bot",
-			//   "properties": {
-			//     "BotAliasLocaleSettings": {
-			//       "description": "A list of bot alias locale settings to add to the bot alias.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "A locale setting in alias",
-			//         "properties": {
-			//           "BotAliasLocaleSetting": {
-			//             "additionalProperties": false,
-			//             "description": "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-			//             "properties": {
-			//               "CodeHookSpecification": {
-			//                 "additionalProperties": false,
-			//                 "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//                 "properties": {
-			//                   "LambdaCodeHook": {
-			//                     "additionalProperties": false,
-			//                     "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//                     "properties": {
-			//                       "CodeHookInterfaceVersion": {
-			//                         "description": "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-			//                         "maxLength": 5,
-			//                         "minLength": 1,
-			//                         "type": "string"
-			//                       },
-			//                       "LambdaArn": {
-			//                         "description": "The Amazon Resource Name (ARN) of the Lambda function.",
-			//                         "maxLength": 2048,
-			//                         "minLength": 20,
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "CodeHookInterfaceVersion",
-			//                       "LambdaArn"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "LambdaCodeHook"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Enabled": {
-			//                 "description": "Whether the Lambda code hook is enabled",
-			//                 "type": "boolean"
-			//               }
-			//             },
-			//             "required": [
-			//               "Enabled"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "LocaleId": {
-			//             "description": "A string used to identify the locale",
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "LocaleId",
-			//           "BotAliasLocaleSetting"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 50,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "ConversationLogSettings": {
-			//       "additionalProperties": false,
-			//       "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//       "properties": {
-			//         "AudioLogSettings": {
-			//           "description": "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Settings for logging audio of conversations between Amazon Lex and a user. You specify whether to log audio and the Amazon S3 bucket where the audio file is stored.",
-			//             "properties": {
-			//               "Destination": {
-			//                 "additionalProperties": false,
-			//                 "description": "The location of audio log files collected when conversation logging is enabled for a bot.",
-			//                 "properties": {
-			//                   "S3Bucket": {
-			//                     "additionalProperties": false,
-			//                     "description": "Specifies an Amazon S3 bucket for logging audio conversations",
-			//                     "properties": {
-			//                       "KmsKeyArn": {
-			//                         "description": "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-			//                         "maxLength": 2048,
-			//                         "minLength": 20,
-			//                         "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
-			//                         "type": "string"
-			//                       },
-			//                       "LogPrefix": {
-			//                         "description": "The Amazon S3 key of the deployment package.",
-			//                         "maxLength": 1024,
-			//                         "minLength": 0,
-			//                         "type": "string"
-			//                       },
-			//                       "S3BucketArn": {
-			//                         "description": "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-			//                         "maxLength": 2048,
-			//                         "minLength": 1,
-			//                         "pattern": "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "LogPrefix",
-			//                       "S3BucketArn"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "S3Bucket"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Enabled": {
-			//                 "description": "",
-			//                 "type": "boolean"
-			//               }
-			//             },
-			//             "required": [
-			//               "Destination",
-			//               "Enabled"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         },
-			//         "TextLogSettings": {
-			//           "description": "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//             "properties": {
-			//               "Destination": {
-			//                 "additionalProperties": false,
-			//                 "description": "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-			//                 "properties": {
-			//                   "CloudWatch": {
-			//                     "additionalProperties": false,
-			//                     "properties": {
-			//                       "CloudWatchLogGroupArn": {
-			//                         "description": "A string used to identify the groupArn for the Cloudwatch Log Group",
-			//                         "maxLength": 2048,
-			//                         "minLength": 1,
-			//                         "type": "string"
-			//                       },
-			//                       "LogPrefix": {
-			//                         "description": "A string containing the value for the Log Prefix",
-			//                         "maxLength": 1024,
-			//                         "minLength": 0,
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "CloudWatchLogGroupArn",
-			//                       "LogPrefix"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "CloudWatch"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "Enabled": {
-			//                 "description": "",
-			//                 "type": "boolean"
-			//               }
-			//             },
-			//             "required": [
-			//               "Destination",
-			//               "Enabled"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": true
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Description": {
-			//       "description": "A description of the resource",
-			//       "maxLength": 200,
-			//       "type": "string"
-			//     },
-			//     "SentimentAnalysisSettings": {
-			//       "additionalProperties": false,
-			//       "description": "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
-			//       "properties": {
-			//         "DetectSentiment": {
-			//           "description": "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "DetectSentiment"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuring the test bot alias settings for a given bot",
+			//	  "properties": {
+			//	    "BotAliasLocaleSettings": {
+			//	      "description": "A list of bot alias locale settings to add to the bot alias.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "A locale setting in alias",
+			//	        "properties": {
+			//	          "BotAliasLocaleSetting": {
+			//	            "additionalProperties": false,
+			//	            "description": "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
+			//	            "properties": {
+			//	              "CodeHookSpecification": {
+			//	                "additionalProperties": false,
+			//	                "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+			//	                "properties": {
+			//	                  "LambdaCodeHook": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+			//	                    "properties": {
+			//	                      "CodeHookInterfaceVersion": {
+			//	                        "description": "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
+			//	                        "maxLength": 5,
+			//	                        "minLength": 1,
+			//	                        "type": "string"
+			//	                      },
+			//	                      "LambdaArn": {
+			//	                        "description": "The Amazon Resource Name (ARN) of the Lambda function.",
+			//	                        "maxLength": 2048,
+			//	                        "minLength": 20,
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "CodeHookInterfaceVersion",
+			//	                      "LambdaArn"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "LambdaCodeHook"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Enabled": {
+			//	                "description": "Whether the Lambda code hook is enabled",
+			//	                "type": "boolean"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Enabled"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "LocaleId": {
+			//	            "description": "A string used to identify the locale",
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "LocaleId",
+			//	          "BotAliasLocaleSetting"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 50,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "ConversationLogSettings": {
+			//	      "additionalProperties": false,
+			//	      "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+			//	      "properties": {
+			//	        "AudioLogSettings": {
+			//	          "description": "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Settings for logging audio of conversations between Amazon Lex and a user. You specify whether to log audio and the Amazon S3 bucket where the audio file is stored.",
+			//	            "properties": {
+			//	              "Destination": {
+			//	                "additionalProperties": false,
+			//	                "description": "The location of audio log files collected when conversation logging is enabled for a bot.",
+			//	                "properties": {
+			//	                  "S3Bucket": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Specifies an Amazon S3 bucket for logging audio conversations",
+			//	                    "properties": {
+			//	                      "KmsKeyArn": {
+			//	                        "description": "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+			//	                        "maxLength": 2048,
+			//	                        "minLength": 20,
+			//	                        "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
+			//	                        "type": "string"
+			//	                      },
+			//	                      "LogPrefix": {
+			//	                        "description": "The Amazon S3 key of the deployment package.",
+			//	                        "maxLength": 1024,
+			//	                        "minLength": 0,
+			//	                        "type": "string"
+			//	                      },
+			//	                      "S3BucketArn": {
+			//	                        "description": "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+			//	                        "maxLength": 2048,
+			//	                        "minLength": 1,
+			//	                        "pattern": "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "LogPrefix",
+			//	                      "S3BucketArn"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "S3Bucket"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Enabled": {
+			//	                "description": "",
+			//	                "type": "boolean"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Destination",
+			//	              "Enabled"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        },
+			//	        "TextLogSettings": {
+			//	          "description": "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+			//	            "properties": {
+			//	              "Destination": {
+			//	                "additionalProperties": false,
+			//	                "description": "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
+			//	                "properties": {
+			//	                  "CloudWatch": {
+			//	                    "additionalProperties": false,
+			//	                    "properties": {
+			//	                      "CloudWatchLogGroupArn": {
+			//	                        "description": "A string used to identify the groupArn for the Cloudwatch Log Group",
+			//	                        "maxLength": 2048,
+			//	                        "minLength": 1,
+			//	                        "type": "string"
+			//	                      },
+			//	                      "LogPrefix": {
+			//	                        "description": "A string containing the value for the Log Prefix",
+			//	                        "maxLength": 1024,
+			//	                        "minLength": 0,
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "CloudWatchLogGroupArn",
+			//	                      "LogPrefix"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "CloudWatch"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "Enabled": {
+			//	                "description": "",
+			//	                "type": "boolean"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Destination",
+			//	              "Enabled"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": true
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Description": {
+			//	      "description": "A description of the resource",
+			//	      "maxLength": 200,
+			//	      "type": "string"
+			//	    },
+			//	    "SentimentAnalysisSettings": {
+			//	      "additionalProperties": false,
+			//	      "description": "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
+			//	      "properties": {
+			//	        "DetectSentiment": {
+			//	          "description": "Enable to call Amazon Comprehend for Sentiment natively within Lex",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "DetectSentiment"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configuring the test bot alias settings for a given bot",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -8379,36 +8391,37 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"test_bot_alias_tags": {
 			// Property: TestBotAliasTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair for tagging Lex resources",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair for tagging Lex resources",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

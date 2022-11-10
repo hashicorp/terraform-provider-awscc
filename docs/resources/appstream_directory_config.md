@@ -21,6 +21,10 @@ Resource Type definition for AWS::AppStream::DirectoryConfig
 - `organizational_unit_distinguished_names` (List of String)
 - `service_account_credentials` (Attributes) (see [below for nested schema](#nestedatt--service_account_credentials))
 
+### Optional
+
+- `certificate_based_auth_properties` (Attributes) (see [below for nested schema](#nestedatt--certificate_based_auth_properties))
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
@@ -32,6 +36,15 @@ Required:
 
 - `account_name` (String)
 - `account_password` (String)
+
+
+<a id="nestedatt--certificate_based_auth_properties"></a>
+### Nested Schema for `certificate_based_auth_properties`
+
+Optional:
+
+- `certificate_authority_arn` (String)
+- `status` (String)
 
 ## Import
 

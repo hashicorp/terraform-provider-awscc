@@ -23,10 +23,11 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"access_policy_arn": {
 			// Property: AccessPolicyArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the access policy.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the access policy.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the access policy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,10 +38,11 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"access_policy_id": {
 			// Property: AccessPolicyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the access policy.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the access policy.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the access policy.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,46 +53,47 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"access_policy_identity": {
 			// Property: AccessPolicyIdentity
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The identity for this access policy. Choose either a user or a group but not both.",
-			//   "properties": {
-			//     "IamRole": {
-			//       "additionalProperties": false,
-			//       "description": "Contains information for an IAM role identity in an access policy.",
-			//       "properties": {
-			//         "arn": {
-			//           "description": "The ARN of the IAM role.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "IamUser": {
-			//       "additionalProperties": false,
-			//       "description": "Contains information for an IAM user identity in an access policy.",
-			//       "properties": {
-			//         "arn": {
-			//           "description": "The ARN of the IAM user.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "User": {
-			//       "additionalProperties": false,
-			//       "description": "Contains information for a user identity in an access policy.",
-			//       "properties": {
-			//         "id": {
-			//           "description": "The AWS SSO ID of the user.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The identity for this access policy. Choose either a user or a group but not both.",
+			//	  "properties": {
+			//	    "IamRole": {
+			//	      "additionalProperties": false,
+			//	      "description": "Contains information for an IAM role identity in an access policy.",
+			//	      "properties": {
+			//	        "arn": {
+			//	          "description": "The ARN of the IAM role.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "IamUser": {
+			//	      "additionalProperties": false,
+			//	      "description": "Contains information for an IAM user identity in an access policy.",
+			//	      "properties": {
+			//	        "arn": {
+			//	          "description": "The ARN of the IAM user.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "User": {
+			//	      "additionalProperties": false,
+			//	      "description": "Contains information for a user identity in an access policy.",
+			//	      "properties": {
+			//	        "id": {
+			//	          "description": "The AWS SSO ID of the user.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The identity for this access policy. Choose either a user or a group but not both.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -170,10 +173,11 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"access_policy_permission": {
 			// Property: AccessPolicyPermission
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
+			//	  "type": "string"
+			//	}
 			Description: "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
 			Type:        types.StringType,
 			Required:    true,
@@ -181,35 +185,36 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"access_policy_resource": {
 			// Property: AccessPolicyResource
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
-			//   "properties": {
-			//     "Portal": {
-			//       "additionalProperties": false,
-			//       "description": "A portal resource.",
-			//       "properties": {
-			//         "id": {
-			//           "description": "The ID of the portal.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "Project": {
-			//       "additionalProperties": false,
-			//       "description": "A project resource.",
-			//       "properties": {
-			//         "id": {
-			//           "description": "The ID of the project.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
+			//	  "properties": {
+			//	    "Portal": {
+			//	      "additionalProperties": false,
+			//	      "description": "A portal resource.",
+			//	      "properties": {
+			//	        "id": {
+			//	          "description": "The ID of the portal.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Project": {
+			//	      "additionalProperties": false,
+			//	      "description": "A project resource.",
+			//	      "properties": {
+			//	        "id": {
+			//	          "description": "The ID of the project.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

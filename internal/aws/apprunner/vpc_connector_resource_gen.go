@@ -25,15 +25,16 @@ func vpcConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"security_groups": {
 			// Property: SecurityGroups
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
@@ -46,16 +47,17 @@ func vpcConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"subnets": {
 			// Property: Subnets
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Required:    true,
@@ -69,22 +71,23 @@ func vpcConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -119,13 +122,14 @@ func vpcConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_connector_arn": {
 			// Property: VpcConnectorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of this VPC connector.",
-			//   "maxLength": 1011,
-			//   "minLength": 44,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of this VPC connector.",
+			//	  "maxLength": 1011,
+			//	  "minLength": 44,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of this VPC connector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -136,13 +140,14 @@ func vpcConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_connector_name": {
 			// Property: VpcConnectorName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
-			//   "maxLength": 40,
-			//   "minLength": 4,
-			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9-\\\\_]{3,39}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
+			//	  "maxLength": 40,
+			//	  "minLength": 4,
+			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9-\\\\_]{3,39}$",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -159,10 +164,11 @@ func vpcConnectorResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_connector_revision": {
 			// Property: VpcConnectorRevision
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The revision of this VPC connector. It's unique among all the active connectors (\"Status\": \"ACTIVE\") that share the same Name.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The revision of this VPC connector. It's unique among all the active connectors (\"Status\": \"ACTIVE\") that share the same Name.",
+			//	  "type": "integer"
+			//	}
 			Description: "The revision of this VPC connector. It's unique among all the active connectors (\"Status\": \"ACTIVE\") that share the same Name.",
 			Type:        types.Int64Type,
 			Computed:    true,

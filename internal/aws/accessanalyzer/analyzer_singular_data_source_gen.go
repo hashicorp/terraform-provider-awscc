@@ -23,12 +23,13 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"analyzer_name": {
 			// Property: AnalyzerName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Analyzer name",
-			//   "maxLength": 1024,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Analyzer name",
+			//	  "maxLength": 1024,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Analyzer name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,64 +37,65 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"archive_rules": {
 			// Property: ArchiveRules
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "An Access Analyzer archive rule. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.",
-			//     "properties": {
-			//       "Filter": {
-			//         "insertionOrder": false,
-			//         "items": {
-			//           "properties": {
-			//             "Contains": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "Eq": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "Exists": {
-			//               "type": "boolean"
-			//             },
-			//             "Neq": {
-			//               "insertionOrder": false,
-			//               "items": {
-			//                 "type": "string"
-			//               },
-			//               "type": "array"
-			//             },
-			//             "Property": {
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Property"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "minItems": 1,
-			//         "type": "array"
-			//       },
-			//       "RuleName": {
-			//         "description": "The archive rule name",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Filter",
-			//       "RuleName"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "An Access Analyzer archive rule. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.",
+			//	    "properties": {
+			//	      "Filter": {
+			//	        "insertionOrder": false,
+			//	        "items": {
+			//	          "properties": {
+			//	            "Contains": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "Eq": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "Exists": {
+			//	              "type": "boolean"
+			//	            },
+			//	            "Neq": {
+			//	              "insertionOrder": false,
+			//	              "items": {
+			//	                "type": "string"
+			//	              },
+			//	              "type": "array"
+			//	            },
+			//	            "Property": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Property"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "minItems": 1,
+			//	        "type": "array"
+			//	      },
+			//	      "RuleName": {
+			//	        "description": "The archive rule name",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Filter",
+			//	      "RuleName"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"filter": {
@@ -142,12 +144,13 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Amazon Resource Name (ARN) of the analyzer",
-			//   "maxLength": 1600,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Amazon Resource Name (ARN) of the analyzer",
+			//	  "maxLength": 1600,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "Amazon Resource Name (ARN) of the analyzer",
 			Type:        types.StringType,
 			Computed:    true,
@@ -155,35 +158,36 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -206,12 +210,13 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
 			Type:        types.StringType,
 			Computed:    true,

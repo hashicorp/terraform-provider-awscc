@@ -23,9 +23,10 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"auto_publish": {
 			// Property: AutoPublish
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "type": "boolean"
+			//	}
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -37,9 +38,10 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"function_arn": {
 			// Property: FunctionARN
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -49,9 +51,10 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"function_code": {
 			// Property: FunctionCode
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -63,22 +66,23 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"function_config": {
 			// Property: FunctionConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "Comment": {
-			//       "type": "string"
-			//     },
-			//     "Runtime": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Comment",
-			//     "Runtime"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "type": "string"
+			//	    },
+			//	    "Runtime": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Comment",
+			//	    "Runtime"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"comment": {
@@ -102,15 +106,16 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"function_metadata": {
 			// Property: FunctionMetadata
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "FunctionARN": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "FunctionARN": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"function_arn": {
@@ -132,18 +137,20 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 		},
 		"stage": {
 			// Property: Stage
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

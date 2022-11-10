@@ -23,10 +23,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the device.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the device.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the device.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -38,10 +39,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"device_arn": {
 			// Property: DeviceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the device.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the device.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the device.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,10 +54,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"device_id": {
 			// Property: DeviceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the device.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the device.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the device.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -66,10 +69,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the global network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the global network.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
@@ -80,25 +84,26 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"location": {
 			// Property: Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The site location.",
-			//   "properties": {
-			//     "Address": {
-			//       "description": "The physical address.",
-			//       "type": "string"
-			//     },
-			//     "Latitude": {
-			//       "description": "The latitude.",
-			//       "type": "string"
-			//     },
-			//     "Longitude": {
-			//       "description": "The longitude.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The site location.",
+			//	  "properties": {
+			//	    "Address": {
+			//	      "description": "The physical address.",
+			//	      "type": "string"
+			//	    },
+			//	    "Latitude": {
+			//	      "description": "The latitude.",
+			//	      "type": "string"
+			//	    },
+			//	    "Longitude": {
+			//	      "description": "The longitude.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The site location.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -143,10 +148,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"model": {
 			// Property: Model
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The device model",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The device model",
+			//	  "type": "string"
+			//	}
 			Description: "The device model",
 			Type:        types.StringType,
 			Optional:    true,
@@ -158,10 +164,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"serial_number": {
 			// Property: SerialNumber
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The device serial number.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The device serial number.",
+			//	  "type": "string"
+			//	}
 			Description: "The device serial number.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -173,10 +180,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"site_id": {
 			// Property: SiteId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The site ID.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The site ID.",
+			//	  "type": "string"
+			//	}
 			Description: "The site ID.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -188,23 +196,24 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the device.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a device resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the device.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a device resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The tags for the device.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -237,10 +246,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The device type.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The device type.",
+			//	  "type": "string"
+			//	}
 			Description: "The device type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -252,10 +262,11 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"vendor": {
 			// Property: Vendor
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The device vendor.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The device vendor.",
+			//	  "type": "string"
+			//	}
 			Description: "The device vendor.",
 			Type:        types.StringType,
 			Optional:    true,

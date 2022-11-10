@@ -25,16 +25,17 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"addresses": {
 			// Property: Addresses
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "List of IPAddresses.",
-			//   "items": {
-			//     "description": "IP address",
-			//     "maxLength": 50,
-			//     "minLength": 1,
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "List of IPAddresses.",
+			//	  "items": {
+			//	    "description": "IP address",
+			//	    "maxLength": 50,
+			//	    "minLength": 1,
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "List of IPAddresses.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
@@ -45,10 +46,11 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN of the WAF entity.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN of the WAF entity.",
+			//	  "type": "string"
+			//	}
 			Description: "ARN of the WAF entity.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -59,11 +61,12 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Description of the entity.",
-			//   "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Description of the entity.",
+			//	  "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
+			//	  "type": "string"
+			//	}
 			Description: "Description of the entity.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -78,14 +81,15 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"ip_address_version": {
 			// Property: IPAddressVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.",
-			//   "enum": [
-			//     "IPV4",
-			//     "IPV6"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.",
+			//	  "enum": [
+			//	    "IPV4",
+			//	    "IPV6"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.",
 			Type:        types.StringType,
 			Required:    true,
@@ -99,11 +103,12 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Id of the IPSet",
-			//   "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Id of the IPSet",
+			//	  "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "Id of the IPSet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -114,11 +119,12 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Name of the IPSet.",
-			//   "pattern": "^[0-9A-Za-z_-]{1,128}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Name of the IPSet.",
+			//	  "pattern": "^[0-9A-Za-z_-]{1,128}$",
+			//	  "type": "string"
+			//	}
 			Description: "Name of the IPSet.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -134,14 +140,15 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"scope": {
 			// Property: Scope
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.",
-			//   "enum": [
-			//     "CLOUDFRONT",
-			//     "REGIONAL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.",
+			//	  "enum": [
+			//	    "CLOUDFRONT",
+			//	    "REGIONAL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.",
 			Type:        types.StringType,
 			Required:    true,
@@ -158,26 +165,27 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 1,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 1,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

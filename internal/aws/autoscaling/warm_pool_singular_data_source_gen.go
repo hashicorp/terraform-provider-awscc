@@ -23,24 +23,26 @@ func warmPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_reuse_policy": {
 			// Property: InstanceReusePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ReuseOnScaleIn": {
-			//       "type": "boolean"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ReuseOnScaleIn": {
+			//	      "type": "boolean"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"reuse_on_scale_in": {
@@ -55,27 +57,30 @@ func warmPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_group_prepared_capacity": {
 			// Property: MaxGroupPreparedCapacity
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"min_size": {
 			// Property: MinSize
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"pool_state": {
 			// Property: PoolState
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},

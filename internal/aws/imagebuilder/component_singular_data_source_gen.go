@@ -23,10 +23,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"change_description": {
 			// Property: ChangeDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The change description of the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The change description of the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The change description of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,12 +47,13 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data": {
 			// Property: Data
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The data of the component.",
-			//   "maxLength": 16000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The data of the component.",
+			//	  "maxLength": 16000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The data of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,10 +61,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,10 +73,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encrypted": {
 			// Property: Encrypted
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The encryption status of the component.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "The encryption status of the component.",
+			//	  "type": "boolean"
+			//	}
 			Description: "The encryption status of the component.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -80,10 +85,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The KMS key identifier used to encrypt the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The KMS key identifier used to encrypt the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The KMS key identifier used to encrypt the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -91,10 +97,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -102,14 +109,15 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"platform": {
 			// Property: Platform
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The platform of the component.",
-			//   "enum": [
-			//     "Windows",
-			//     "Linux"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The platform of the component.",
+			//	  "enum": [
+			//	    "Windows",
+			//	    "Linux"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The platform of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -117,14 +125,15 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"supported_os_versions": {
 			// Property: SupportedOsVersions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The operating system (OS) version supported by the component.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The operating system (OS) version supported by the component.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The operating system (OS) version supported by the component.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -132,16 +141,17 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags associated with the component.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags associated with the component.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags associated with the component.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -150,14 +160,15 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of the component denotes whether the component is used to build the image or only to test it. ",
-			//   "enum": [
-			//     "BUILD",
-			//     "TEST"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of the component denotes whether the component is used to build the image or only to test it. ",
+			//	  "enum": [
+			//	    "BUILD",
+			//	    "TEST"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The type of the component denotes whether the component is used to build the image or only to test it. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -165,10 +176,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"uri": {
 			// Property: Uri
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The uri of the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The uri of the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The uri of the component.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -176,10 +188,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of the component.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of the component.",
+			//	  "type": "string"
+			//	}
 			Description: "The version of the component.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -25,12 +25,13 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the ReplicationSet.",
-			//   "maxLength": 1000,
-			//   "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the ReplicationSet.",
+			//	  "maxLength": 1000,
+			//	  "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the ReplicationSet.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,11 +42,12 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 		"deletion_protected": {
 			// Property: DeletionProtected
 			// CloudFormation resource type schema:
-			// {
-			//   "default": false,
-			//   "description": "Configures the ReplicationSet deletion protection.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": false,
+			//	  "description": "Configures the ReplicationSet deletion protection.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Configures the ReplicationSet deletion protection.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -58,42 +60,43 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 		"regions": {
 			// Property: Regions
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ReplicationSet configuration.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The ReplicationSet regional configuration.",
-			//     "properties": {
-			//       "RegionConfiguration": {
-			//         "additionalProperties": false,
-			//         "description": "The ReplicationSet regional configuration.",
-			//         "properties": {
-			//           "SseKmsKeyId": {
-			//             "description": "The ARN of the ReplicationSet.",
-			//             "maxLength": 1000,
-			//             "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "SseKmsKeyId"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "RegionName": {
-			//         "description": "The AWS region name.",
-			//         "maxLength": 20,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 3,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The ReplicationSet configuration.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The ReplicationSet regional configuration.",
+			//	    "properties": {
+			//	      "RegionConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "description": "The ReplicationSet regional configuration.",
+			//	        "properties": {
+			//	          "SseKmsKeyId": {
+			//	            "description": "The ARN of the ReplicationSet.",
+			//	            "maxLength": 1000,
+			//	            "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "SseKmsKeyId"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "RegionName": {
+			//	        "description": "The AWS region name.",
+			//	        "maxLength": 20,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 3,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The ReplicationSet configuration.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

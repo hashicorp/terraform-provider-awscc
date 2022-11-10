@@ -23,10 +23,11 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) for the role.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) for the role.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) for the role.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"assume_role_policy_document": {
 			// Property: AssumeRolePolicyDocument
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The trust policy that is associated with this role.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The trust policy that is associated with this role.",
+			//	  "type": "string"
+			//	}
 			Description: "The trust policy that is associated with this role.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,11 +47,12 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the role that you provide.",
-			//   "maxLength": 1000,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the role that you provide.",
+			//	  "maxLength": 1000,
+			//	  "type": "string"
+			//	}
 			Description: "A description of the role that you provide.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -57,15 +60,16 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"managed_policy_arns": {
 			// Property: ManagedPolicyArns
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role. ",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role. ",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role. ",
 			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
@@ -73,12 +77,13 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_session_duration": {
 			// Property: MaxSessionDuration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. ",
-			//   "maximum": 43200,
-			//   "minimum": 3600,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. ",
+			//	  "maximum": 43200,
+			//	  "minimum": 3600,
+			//	  "type": "integer"
+			//	}
 			Description: "The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. ",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -86,10 +91,11 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"path": {
 			// Property: Path
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The path to the role.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The path to the role.",
+			//	  "type": "string"
+			//	}
 			Description: "The path to the role.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -97,10 +103,11 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"permissions_boundary": {
 			// Property: PermissionsBoundary
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the policy used to set the permissions boundary for the role.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the policy used to set the permissions boundary for the role.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the policy used to set the permissions boundary for the role.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -108,33 +115,34 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policies": {
 			// Property: Policies
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Adds or updates an inline policy document that is embedded in the specified IAM role. ",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The inline policy document that is embedded in the specified IAM role.",
-			//     "properties": {
-			//       "PolicyDocument": {
-			//         "description": "The policy document.",
-			//         "type": "string"
-			//       },
-			//       "PolicyName": {
-			//         "description": "The friendly name (not ARN) identifying the policy.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "PolicyName",
-			//       "PolicyDocument"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "Adds or updates an inline policy document that is embedded in the specified IAM role. ",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The inline policy document that is embedded in the specified IAM role.",
+			//	    "properties": {
+			//	      "PolicyDocument": {
+			//	        "description": "The policy document.",
+			//	        "type": "string"
+			//	      },
+			//	      "PolicyName": {
+			//	        "description": "The friendly name (not ARN) identifying the policy.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "PolicyName",
+			//	      "PolicyDocument"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "Adds or updates an inline policy document that is embedded in the specified IAM role. ",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -157,10 +165,11 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_id": {
 			// Property: RoleId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The stable and unique string identifying the role.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The stable and unique string identifying the role.",
+			//	  "type": "string"
+			//	}
 			Description: "The stable and unique string identifying the role.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -168,11 +177,12 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_name": {
 			// Property: RoleName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the IAM role, up to 64 characters in length.",
-			//   "maxLength": 64,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the IAM role, up to 64 characters in length.",
+			//	  "maxLength": 64,
+			//	  "type": "string"
+			//	}
 			Description: "A name for the IAM role, up to 64 characters in length.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -180,35 +190,36 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of tags that are attached to the role.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of tags that are attached to the role.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of tags that are attached to the role.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

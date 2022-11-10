@@ -24,9 +24,10 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"created_date": {
 			// Property: CreatedDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,216 +37,217 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"exclude_paths": {
 			// Property: ExcludePaths
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Destination": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "PacketHeaderStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DestinationAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Protocols": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "enum": [
-			//                     "tcp",
-			//                     "udp"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourceAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "ResourceStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ResourceTypes": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Resources": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Source": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "PacketHeaderStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DestinationAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Protocols": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "enum": [
-			//                     "tcp",
-			//                     "udp"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourceAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "ResourceStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ResourceTypes": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Resources": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ThroughResources": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ResourceStatement": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ResourceTypes": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "Resources": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Destination": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "PacketHeaderStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DestinationAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Protocols": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "enum": [
+			//	                    "tcp",
+			//	                    "udp"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourceAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "ResourceStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ResourceTypes": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Resources": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Source": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "PacketHeaderStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DestinationAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Protocols": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "enum": [
+			//	                    "tcp",
+			//	                    "udp"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourceAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "ResourceStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ResourceTypes": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Resources": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ThroughResources": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ResourceStatement": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ResourceTypes": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "Resources": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"destination": {
@@ -549,216 +551,217 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"match_paths": {
 			// Property: MatchPaths
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Destination": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "PacketHeaderStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DestinationAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Protocols": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "enum": [
-			//                     "tcp",
-			//                     "udp"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourceAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "ResourceStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ResourceTypes": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Resources": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "Source": {
-			//         "additionalProperties": false,
-			//         "properties": {
-			//           "PacketHeaderStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "DestinationAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "DestinationPrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Protocols": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "enum": [
-			//                     "tcp",
-			//                     "udp"
-			//                   ],
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourceAddresses": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePorts": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "SourcePrefixLists": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "ResourceStatement": {
-			//             "additionalProperties": false,
-			//             "properties": {
-			//               "ResourceTypes": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               },
-			//               "Resources": {
-			//                 "insertionOrder": true,
-			//                 "items": {
-			//                   "type": "string"
-			//                 },
-			//                 "type": "array"
-			//               }
-			//             },
-			//             "type": "object"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "ThroughResources": {
-			//         "insertionOrder": true,
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "ResourceStatement": {
-			//               "additionalProperties": false,
-			//               "properties": {
-			//                 "ResourceTypes": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 },
-			//                 "Resources": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "type": "string"
-			//                   },
-			//                   "type": "array"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Destination": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "PacketHeaderStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DestinationAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Protocols": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "enum": [
+			//	                    "tcp",
+			//	                    "udp"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourceAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "ResourceStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ResourceTypes": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Resources": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "Source": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "PacketHeaderStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "DestinationAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "DestinationPrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Protocols": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "enum": [
+			//	                    "tcp",
+			//	                    "udp"
+			//	                  ],
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourceAddresses": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePorts": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "SourcePrefixLists": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "ResourceStatement": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "ResourceTypes": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              },
+			//	              "Resources": {
+			//	                "insertionOrder": true,
+			//	                "items": {
+			//	                  "type": "string"
+			//	                },
+			//	                "type": "array"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "ThroughResources": {
+			//	        "insertionOrder": true,
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ResourceStatement": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "ResourceTypes": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                },
+			//	                "Resources": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "type": "string"
+			//	                  },
+			//	                  "type": "array"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"destination": {
@@ -1062,9 +1065,10 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"network_insights_access_scope_arn": {
 			// Property: NetworkInsightsAccessScopeArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1074,9 +1078,10 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"network_insights_access_scope_id": {
 			// Property: NetworkInsightsAccessScopeId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1086,25 +1091,26 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -1133,9 +1139,10 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"updated_date": {
 			// Property: UpdatedDate
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

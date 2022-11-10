@@ -25,13 +25,14 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Domain name associated with the VPC Ingress Connection.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "[A-Za-z0-9*.-]{1,255}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Domain name associated with the VPC Ingress Connection.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "[A-Za-z0-9*.-]{1,255}",
+			//	  "type": "string"
+			//	}
 			Description: "The Domain name associated with the VPC Ingress Connection.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,25 +43,26 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"ingress_vpc_configuration": {
 			// Property: IngressVpcConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The configuration of customer?s VPC and related VPC endpoint",
-			//   "properties": {
-			//     "VpcEndpointId": {
-			//       "description": "The ID of the VPC endpoint that your App Runner service connects to.",
-			//       "type": "string"
-			//     },
-			//     "VpcId": {
-			//       "description": "The ID of the VPC that the VPC endpoint is used in.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "VpcId",
-			//     "VpcEndpointId"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The configuration of customer?s VPC and related VPC endpoint",
+			//	  "properties": {
+			//	    "VpcEndpointId": {
+			//	      "description": "The ID of the VPC endpoint that your App Runner service connects to.",
+			//	      "type": "string"
+			//	    },
+			//	    "VpcId": {
+			//	      "description": "The ID of the VPC that the VPC endpoint is used in.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "VpcId",
+			//	    "VpcEndpointId"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The configuration of customer?s VPC and related VPC endpoint",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -83,13 +85,14 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the service.",
-			//   "maxLength": 1011,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the service.",
+			//	  "maxLength": 1011,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the service.",
 			Type:        types.StringType,
 			Required:    true,
@@ -103,20 +106,21 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The current status of the VpcIngressConnection.",
-			//   "enum": [
-			//     "AVAILABLE",
-			//     "PENDING_CREATION",
-			//     "PENDING_UPDATE",
-			//     "PENDING_DELETION",
-			//     "FAILED_CREATION",
-			//     "FAILED_UPDATE",
-			//     "FAILED_DELETION",
-			//     "DELETED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The current status of the VpcIngressConnection.",
+			//	  "enum": [
+			//	    "AVAILABLE",
+			//	    "PENDING_CREATION",
+			//	    "PENDING_UPDATE",
+			//	    "PENDING_DELETION",
+			//	    "FAILED_CREATION",
+			//	    "FAILED_UPDATE",
+			//	    "FAILED_DELETION",
+			//	    "DELETED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The current status of the VpcIngressConnection.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -127,21 +131,22 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -175,13 +180,14 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"vpc_ingress_connection_arn": {
 			// Property: VpcIngressConnectionArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
-			//   "maxLength": 1011,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
+			//	  "maxLength": 1011,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -192,13 +198,14 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		"vpc_ingress_connection_name": {
 			// Property: VpcIngressConnectionName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The customer-provided Vpc Ingress Connection name.",
-			//   "maxLength": 40,
-			//   "minLength": 4,
-			//   "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The customer-provided Vpc Ingress Connection name.",
+			//	  "maxLength": 40,
+			//	  "minLength": 4,
+			//	  "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}",
+			//	  "type": "string"
+			//	}
 			Description: "The customer-provided Vpc Ingress Connection name.",
 			Type:        types.StringType,
 			Optional:    true,

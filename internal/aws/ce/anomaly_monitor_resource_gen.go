@@ -25,13 +25,14 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"creation_date": {
 			// Property: CreationDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date when the monitor was created. ",
-			//   "maxLength": 40,
-			//   "minLength": 0,
-			//   "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The date when the monitor was created. ",
+			//	  "maxLength": 40,
+			//	  "minLength": 0,
+			//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
+			//	  "type": "string"
+			//	}
 			Description: "The date when the monitor was created. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,11 +43,12 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"dimensional_value_count": {
 			// Property: DimensionalValueCount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The value for evaluated dimensions.",
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The value for evaluated dimensions.",
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Description: "The value for evaluated dimensions.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -57,13 +59,14 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"last_evaluated_date": {
 			// Property: LastEvaluatedDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date when the monitor last evaluated for anomalies.",
-			//   "maxLength": 40,
-			//   "minLength": 0,
-			//   "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The date when the monitor last evaluated for anomalies.",
+			//	  "maxLength": 40,
+			//	  "minLength": 0,
+			//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
+			//	  "type": "string"
+			//	}
 			Description: "The date when the monitor last evaluated for anomalies.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -74,13 +77,14 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"last_updated_date": {
 			// Property: LastUpdatedDate
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The date when the monitor was last updated.",
-			//   "maxLength": 40,
-			//   "minLength": 0,
-			//   "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The date when the monitor was last updated.",
+			//	  "maxLength": 40,
+			//	  "minLength": 0,
+			//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
+			//	  "type": "string"
+			//	}
 			Description: "The date when the monitor was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -91,11 +95,12 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"monitor_arn": {
 			// Property: MonitorArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Monitor ARN",
-			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Monitor ARN",
+			//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+			//	  "type": "string"
+			//	}
 			Description: "Monitor ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -106,13 +111,14 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"monitor_dimension": {
 			// Property: MonitorDimension
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The dimensions to evaluate",
-			//   "enum": [
-			//     "SERVICE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The dimensions to evaluate",
+			//	  "enum": [
+			//	    "SERVICE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The dimensions to evaluate",
 			Type:        types.StringType,
 			Optional:    true,
@@ -130,13 +136,14 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"monitor_name": {
 			// Property: MonitorName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the monitor.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "pattern": "[\\S\\s]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the monitor.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "pattern": "[\\S\\s]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the monitor.",
 			Type:        types.StringType,
 			Required:    true,
@@ -148,9 +155,10 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"monitor_specification": {
 			// Property: MonitorSpecification
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -162,13 +170,14 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"monitor_type": {
 			// Property: MonitorType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DIMENSIONAL",
-			//     "CUSTOM"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DIMENSIONAL",
+			//	    "CUSTOM"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -184,37 +193,38 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"resource_tags": {
 			// Property: ResourceTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Tags to assign to monitor.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name for the tag.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Tags to assign to monitor.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name for the tag.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "Tags to assign to monitor.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

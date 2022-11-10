@@ -25,11 +25,12 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -44,10 +45,11 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_base_arn": {
 			// Property: KnowledgeBaseArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -57,10 +59,11 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_base_id": {
 			// Property: KnowledgeBaseId
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -70,13 +73,14 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_base_type": {
 			// Property: KnowledgeBaseType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "EXTERNAL",
-			//     "CUSTOM"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "EXTERNAL",
+			//	    "CUSTOM"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -92,11 +96,12 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -109,17 +114,18 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"rendering_configuration": {
 			// Property: RenderingConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "TemplateUri": {
-			//       "maxLength": 4096,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "TemplateUri": {
+			//	      "maxLength": 4096,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"template_uri": {
@@ -145,17 +151,18 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"server_side_encryption_configuration": {
 			// Property: ServerSideEncryptionConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "KmsKeyId": {
-			//       "maxLength": 4096,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "KmsKeyId": {
+			//	      "maxLength": 4096,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"kms_key_id": {
@@ -182,46 +189,47 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"source_configuration": {
 			// Property: SourceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "AppIntegrations"
-			//       ]
-			//     }
-			//   ],
-			//   "properties": {
-			//     "AppIntegrations": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "AppIntegrationArn": {
-			//           "maxLength": 2048,
-			//           "minLength": 1,
-			//           "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$",
-			//           "type": "string"
-			//         },
-			//         "ObjectFields": {
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "maxLength": 4096,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           },
-			//           "maxItems": 100,
-			//           "minItems": 1,
-			//           "type": "array"
-			//         }
-			//       },
-			//       "required": [
-			//         "AppIntegrationArn",
-			//         "ObjectFields"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "oneOf": [
+			//	    {
+			//	      "required": [
+			//	        "AppIntegrations"
+			//	      ]
+			//	    }
+			//	  ],
+			//	  "properties": {
+			//	    "AppIntegrations": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AppIntegrationArn": {
+			//	          "maxLength": 2048,
+			//	          "minLength": 1,
+			//	          "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$",
+			//	          "type": "string"
+			//	        },
+			//	        "ObjectFields": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "maxLength": 4096,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "maxItems": 100,
+			//	          "minItems": 1,
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "AppIntegrationArn",
+			//	        "ObjectFields"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"app_integrations": {
@@ -278,32 +286,33 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -26,131 +26,132 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"actions": {
 			// Property: Actions
 			// CloudFormation resource type schema:
-			// {
-			//   "default": [],
-			//   "description": "The list of actions.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The automation configuration to launch.",
-			//     "properties": {
-			//       "SsmAutomation": {
-			//         "additionalProperties": false,
-			//         "description": "The configuration to use when starting the SSM automation document.",
-			//         "properties": {
-			//           "DocumentName": {
-			//             "description": "The document name to use when starting the SSM automation document.",
-			//             "maxLength": 128,
-			//             "type": "string"
-			//           },
-			//           "DocumentVersion": {
-			//             "description": "The version of the document to use when starting the SSM automation document.",
-			//             "maxLength": 128,
-			//             "type": "string"
-			//           },
-			//           "DynamicParameters": {
-			//             "default": [],
-			//             "description": "The parameters with dynamic values to set when starting the SSM automation document.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "A parameter with a dynamic value to set when starting the SSM automation document.",
-			//               "properties": {
-			//                 "Key": {
-			//                   "maxLength": 50,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Value": {
-			//                   "additionalProperties": false,
-			//                   "description": "Value of the dynamic parameter to set when starting the SSM automation document.",
-			//                   "properties": {
-			//                     "Variable": {
-			//                       "description": "The variable types used as dynamic parameter value when starting the SSM automation document.",
-			//                       "enum": [
-			//                         "INCIDENT_RECORD_ARN",
-			//                         "INVOLVED_RESOURCES"
-			//                       ],
-			//                       "type": "string"
-			//                     }
-			//                   },
-			//                   "type": "object"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Value",
-			//                 "Key"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 200,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           },
-			//           "Parameters": {
-			//             "default": [],
-			//             "description": "The parameters to set when starting the SSM automation document.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "additionalProperties": false,
-			//               "description": "A parameter to set when starting the SSM automation document.",
-			//               "properties": {
-			//                 "Key": {
-			//                   "maxLength": 50,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "Values": {
-			//                   "insertionOrder": true,
-			//                   "items": {
-			//                     "description": "A value of the parameter to set when starting the SSM automation document.",
-			//                     "maxLength": 10000,
-			//                     "type": "string"
-			//                   },
-			//                   "maxItems": 10,
-			//                   "type": "array",
-			//                   "uniqueItems": true
-			//                 }
-			//               },
-			//               "required": [
-			//                 "Values",
-			//                 "Key"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "maxItems": 200,
-			//             "minItems": 1,
-			//             "type": "array",
-			//             "uniqueItems": true
-			//           },
-			//           "RoleArn": {
-			//             "description": "The role ARN to use when starting the SSM automation document.",
-			//             "maxLength": 1000,
-			//             "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//             "type": "string"
-			//           },
-			//           "TargetAccount": {
-			//             "description": "The account type to use when starting the SSM automation document.",
-			//             "enum": [
-			//               "IMPACTED_ACCOUNT",
-			//               "RESPONSE_PLAN_OWNER_ACCOUNT"
-			//             ],
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "RoleArn",
-			//           "DocumentName"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "maxItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "default": [],
+			//	  "description": "The list of actions.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The automation configuration to launch.",
+			//	    "properties": {
+			//	      "SsmAutomation": {
+			//	        "additionalProperties": false,
+			//	        "description": "The configuration to use when starting the SSM automation document.",
+			//	        "properties": {
+			//	          "DocumentName": {
+			//	            "description": "The document name to use when starting the SSM automation document.",
+			//	            "maxLength": 128,
+			//	            "type": "string"
+			//	          },
+			//	          "DocumentVersion": {
+			//	            "description": "The version of the document to use when starting the SSM automation document.",
+			//	            "maxLength": 128,
+			//	            "type": "string"
+			//	          },
+			//	          "DynamicParameters": {
+			//	            "default": [],
+			//	            "description": "The parameters with dynamic values to set when starting the SSM automation document.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "A parameter with a dynamic value to set when starting the SSM automation document.",
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "maxLength": 50,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Value": {
+			//	                  "additionalProperties": false,
+			//	                  "description": "Value of the dynamic parameter to set when starting the SSM automation document.",
+			//	                  "properties": {
+			//	                    "Variable": {
+			//	                      "description": "The variable types used as dynamic parameter value when starting the SSM automation document.",
+			//	                      "enum": [
+			//	                        "INCIDENT_RECORD_ARN",
+			//	                        "INVOLVED_RESOURCES"
+			//	                      ],
+			//	                      "type": "string"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Value",
+			//	                "Key"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 200,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          },
+			//	          "Parameters": {
+			//	            "default": [],
+			//	            "description": "The parameters to set when starting the SSM automation document.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "description": "A parameter to set when starting the SSM automation document.",
+			//	              "properties": {
+			//	                "Key": {
+			//	                  "maxLength": 50,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "Values": {
+			//	                  "insertionOrder": true,
+			//	                  "items": {
+			//	                    "description": "A value of the parameter to set when starting the SSM automation document.",
+			//	                    "maxLength": 10000,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "maxItems": 10,
+			//	                  "type": "array",
+			//	                  "uniqueItems": true
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Values",
+			//	                "Key"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "maxItems": 200,
+			//	            "minItems": 1,
+			//	            "type": "array",
+			//	            "uniqueItems": true
+			//	          },
+			//	          "RoleArn": {
+			//	            "description": "The role ARN to use when starting the SSM automation document.",
+			//	            "maxLength": 1000,
+			//	            "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	            "type": "string"
+			//	          },
+			//	          "TargetAccount": {
+			//	            "description": "The account type to use when starting the SSM automation document.",
+			//	            "enum": [
+			//	              "IMPACTED_ACCOUNT",
+			//	              "RESPONSE_PLAN_OWNER_ACCOUNT"
+			//	            ],
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "RoleArn",
+			//	          "DocumentName"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The list of actions.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -316,12 +317,13 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the response plan.",
-			//   "maxLength": 1000,
-			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the response plan.",
+			//	  "maxLength": 1000,
+			//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the response plan.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -332,25 +334,26 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"chat_channel": {
 			// Property: ChatChannel
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The chat channel configuration.",
-			//   "properties": {
-			//     "ChatbotSns": {
-			//       "default": [],
-			//       "insertionOrder": true,
-			//       "items": {
-			//         "description": "The ARN of the Chatbot SNS topic.",
-			//         "maxLength": 1000,
-			//         "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//         "type": "string"
-			//       },
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The chat channel configuration.",
+			//	  "properties": {
+			//	    "ChatbotSns": {
+			//	      "default": [],
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "description": "The ARN of the Chatbot SNS topic.",
+			//	        "maxLength": 1000,
+			//	        "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The chat channel configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -380,12 +383,13 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The display name of the response plan.",
-			//   "maxLength": 200,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The display name of the response plan.",
+			//	  "maxLength": 200,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The display name of the response plan.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -400,20 +404,21 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"engagements": {
 			// Property: Engagements
 			// CloudFormation resource type schema:
-			// {
-			//   "default": [],
-			//   "description": "The list of engagements to use.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "The ARN of the contact.",
-			//     "maxLength": 1000,
-			//     "pattern": "^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "default": [],
+			//	  "description": "The list of engagements to use.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "The ARN of the contact.",
+			//	    "maxLength": 1000,
+			//	    "pattern": "^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The list of engagements to use.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
@@ -431,90 +436,91 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"incident_template": {
 			// Property: IncidentTemplate
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The incident template configuration.",
-			//   "properties": {
-			//     "DedupeString": {
-			//       "description": "The deduplication string.",
-			//       "maxLength": 1000,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Impact": {
-			//       "description": "The impact value.",
-			//       "maximum": 5,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "IncidentTags": {
-			//       "default": [],
-			//       "description": "Tags that get applied to incidents created by the StartIncident API action.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "A key-value pair to tag a resource.",
-			//         "properties": {
-			//           "Key": {
-			//             "maxLength": 128,
-			//             "minLength": 1,
-			//             "pattern": "",
-			//             "type": "string"
-			//           },
-			//           "Value": {
-			//             "maxLength": 256,
-			//             "minLength": 1,
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "Value",
-			//           "Key"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 50,
-			//       "type": "array",
-			//       "uniqueItems": true
-			//     },
-			//     "NotificationTargets": {
-			//       "default": [],
-			//       "description": "The list of notification targets.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "A notification target.",
-			//         "properties": {
-			//           "SnsTopicArn": {
-			//             "description": "The ARN of the Chatbot SNS topic.",
-			//             "maxLength": 1000,
-			//             "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "maxItems": 10,
-			//       "type": "array"
-			//     },
-			//     "Summary": {
-			//       "description": "The summary string.",
-			//       "maxLength": 4000,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "Title": {
-			//       "description": "The title string.",
-			//       "maxLength": 200,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Title",
-			//     "Impact"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The incident template configuration.",
+			//	  "properties": {
+			//	    "DedupeString": {
+			//	      "description": "The deduplication string.",
+			//	      "maxLength": 1000,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Impact": {
+			//	      "description": "The impact value.",
+			//	      "maximum": 5,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "IncidentTags": {
+			//	      "default": [],
+			//	      "description": "Tags that get applied to incidents created by the StartIncident API action.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "A key-value pair to tag a resource.",
+			//	        "properties": {
+			//	          "Key": {
+			//	            "maxLength": 128,
+			//	            "minLength": 1,
+			//	            "pattern": "",
+			//	            "type": "string"
+			//	          },
+			//	          "Value": {
+			//	            "maxLength": 256,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Value",
+			//	          "Key"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 50,
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "NotificationTargets": {
+			//	      "default": [],
+			//	      "description": "The list of notification targets.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "A notification target.",
+			//	        "properties": {
+			//	          "SnsTopicArn": {
+			//	            "description": "The ARN of the Chatbot SNS topic.",
+			//	            "maxLength": 1000,
+			//	            "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 10,
+			//	      "type": "array"
+			//	    },
+			//	    "Summary": {
+			//	      "description": "The summary string.",
+			//	      "maxLength": 4000,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "Title": {
+			//	      "description": "The title string.",
+			//	      "maxLength": 200,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Title",
+			//	    "Impact"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The incident template configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -634,13 +640,14 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the response plan.",
-			//   "maxLength": 200,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9_-]*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the response plan.",
+			//	  "maxLength": 200,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9_-]*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the response plan.",
 			Type:        types.StringType,
 			Required:    true,
@@ -655,36 +662,37 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "default": [],
-			//   "description": "The tags to apply to the response plan.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to tag a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "default": [],
+			//	  "description": "The tags to apply to the response plan.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to tag a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The tags to apply to the response plan.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,13 +23,14 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the specified AccessPoint.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/accesspoint\\/[^:]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the specified AccessPoint.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/accesspoint\\/[^:]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the specified AccessPoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,13 +38,14 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket": {
 			// Property: Bucket
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,13 +53,14 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A name for the AccessPoint.",
-			//   "maxLength": 50,
-			//   "minLength": 3,
-			//   "pattern": "^[a-z0-9]([a-z0-9\\\\-]*[a-z0-9])?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A name for the AccessPoint.",
+			//	  "maxLength": 50,
+			//	  "minLength": 3,
+			//	  "pattern": "^[a-z0-9]([a-z0-9\\\\-]*[a-z0-9])?$",
+			//	  "type": "string"
+			//	}
 			Description: "A name for the AccessPoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -65,10 +68,11 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policy": {
 			// Property: Policy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The access point policy associated with this access point.",
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "description": "The access point policy associated with this access point.",
+			//	  "type": "object"
+			//	}
 			Description: "The access point policy associated with this access point.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
@@ -76,19 +80,20 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_configuration": {
 			// Property: VpcConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint.",
-			//   "properties": {
-			//     "VpcId": {
-			//       "description": "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
-			//       "maxLength": 1024,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint.",
+			//	  "properties": {
+			//	    "VpcId": {
+			//	      "description": "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
+			//	      "maxLength": 1024,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

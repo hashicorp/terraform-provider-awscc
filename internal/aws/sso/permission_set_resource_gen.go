@@ -26,33 +26,34 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"customer_managed_policy_references": {
 			// Property: CustomerManagedPolicyReferences
 			// CloudFormation resource type schema:
-			// {
-			//   "default": [],
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Name": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "[\\w+=,.@-]+",
-			//         "type": "string"
-			//       },
-			//       "Path": {
-			//         "maxLength": 512,
-			//         "minLength": 1,
-			//         "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Name"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 20,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "default": [],
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Name": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "[\\w+=,.@-]+",
+			//	        "type": "string"
+			//	      },
+			//	      "Path": {
+			//	        "maxLength": 512,
+			//	        "minLength": 1,
+			//	        "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Name"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 20,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -93,13 +94,14 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The permission set description.",
-			//   "maxLength": 700,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The permission set description.",
+			//	  "maxLength": 700,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The permission set description.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -114,10 +116,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"inline_policy": {
 			// Property: InlinePolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The inline policy to put in permission set.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The inline policy to put in permission set.",
+			//	  "type": "string"
+			//	}
 			Description: "The inline policy to put in permission set.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -129,13 +132,14 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The sso instance arn that the permission set is owned.",
-			//   "maxLength": 1224,
-			//   "minLength": 10,
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The sso instance arn that the permission set is owned.",
+			//	  "maxLength": 1224,
+			//	  "minLength": 10,
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+			//	  "type": "string"
+			//	}
 			Description: "The sso instance arn that the permission set is owned.",
 			Type:        types.StringType,
 			Required:    true,
@@ -150,18 +154,19 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"managed_policies": {
 			// Property: ManagedPolicies
 			// CloudFormation resource type schema:
-			// {
-			//   "default": [],
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "The managed policy to attach.",
-			//     "maxLength": 2048,
-			//     "minLength": 20,
-			//     "type": "string"
-			//   },
-			//   "maxItems": 20,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "default": [],
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "The managed policy to attach.",
+			//	    "maxLength": 2048,
+			//	    "minLength": 20,
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 20,
+			//	  "type": "array"
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -178,13 +183,14 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name you want to assign to this permission set.",
-			//   "maxLength": 32,
-			//   "minLength": 1,
-			//   "pattern": "[\\w+=,.@-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name you want to assign to this permission set.",
+			//	  "maxLength": 32,
+			//	  "minLength": 1,
+			//	  "pattern": "[\\w+=,.@-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name you want to assign to this permission set.",
 			Type:        types.StringType,
 			Required:    true,
@@ -199,13 +205,14 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"permission_set_arn": {
 			// Property: PermissionSetArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The permission set that the policy will be attached to",
-			//   "maxLength": 1224,
-			//   "minLength": 10,
-			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The permission set that the policy will be attached to",
+			//	  "maxLength": 1224,
+			//	  "minLength": 10,
+			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+			//	  "type": "string"
+			//	}
 			Description: "The permission set that the policy will be attached to",
 			Type:        types.StringType,
 			Computed:    true,
@@ -216,39 +223,40 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"permissions_boundary": {
 			// Property: PermissionsBoundary
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "CustomerManagedPolicyReference": {
-			//       "additionalProperties": false,
-			//       "properties": {
-			//         "Name": {
-			//           "maxLength": 128,
-			//           "minLength": 1,
-			//           "pattern": "[\\w+=,.@-]+",
-			//           "type": "string"
-			//         },
-			//         "Path": {
-			//           "maxLength": 512,
-			//           "minLength": 1,
-			//           "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Name"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ManagedPolicyArn": {
-			//       "description": "The managed policy to attach.",
-			//       "maxLength": 2048,
-			//       "minLength": 20,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "CustomerManagedPolicyReference": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "Name": {
+			//	          "maxLength": 128,
+			//	          "minLength": 1,
+			//	          "pattern": "[\\w+=,.@-]+",
+			//	          "type": "string"
+			//	        },
+			//	        "Path": {
+			//	          "maxLength": 512,
+			//	          "minLength": 1,
+			//	          "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Name"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ManagedPolicyArn": {
+			//	      "description": "The managed policy to attach.",
+			//	      "maxLength": 2048,
+			//	      "minLength": 20,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"customer_managed_policy_reference": {
@@ -309,13 +317,14 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"relay_state_type": {
 			// Property: RelayStateType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
-			//   "maxLength": 240,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9\u0026amp;$@#\\/%?=~\\-_'\u0026quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
+			//	  "maxLength": 240,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9\u0026amp;$@#\\/%?=~\\-_'\u0026quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
+			//	  "type": "string"
+			//	}
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -331,13 +340,14 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"session_duration": {
 			// Property: SessionDuration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The length of time that a user can be signed in to an AWS account.",
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The length of time that a user can be signed in to an AWS account.",
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The length of time that a user can be signed in to an AWS account.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -352,34 +362,35 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The metadata that you apply to the permission set to help you categorize and organize them.",
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "[\\w+=,.@-]+",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "[\\w+=,.@-]+",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The metadata that you apply to the permission set to help you categorize and organize them.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "[\\w+=,.@-]+",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "[\\w+=,.@-]+",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array"
+			//	}
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

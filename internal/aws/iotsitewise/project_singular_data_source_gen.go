@@ -23,15 +23,16 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_ids": {
 			// Property: AssetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IDs of the assets to be associated to the project.",
-			//   "items": {
-			//     "description": "The ID of the asset",
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The IDs of the assets to be associated to the project.",
+			//	  "items": {
+			//	    "description": "The ID of the asset",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The IDs of the assets to be associated to the project.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -39,10 +40,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"portal_id": {
 			// Property: PortalId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the portal in which to create the project.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the portal in which to create the project.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the portal in which to create the project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -50,10 +52,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"project_arn": {
 			// Property: ProjectArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the project.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the project.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -61,10 +64,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"project_description": {
 			// Property: ProjectDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description for the project.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description for the project.",
+			//	  "type": "string"
+			//	}
 			Description: "A description for the project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -72,10 +76,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"project_id": {
 			// Property: ProjectId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the project.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the project.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -83,10 +88,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"project_name": {
 			// Property: ProjectName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A friendly name for the project.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A friendly name for the project.",
+			//	  "type": "string"
+			//	}
 			Description: "A friendly name for the project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -94,29 +100,30 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of key-value pairs that contain metadata for the project.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of key-value pairs that contain metadata for the project.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of key-value pairs that contain metadata for the project.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

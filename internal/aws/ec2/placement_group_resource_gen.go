@@ -23,10 +23,11 @@ func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 		"group_name": {
 			// Property: GroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Group Name of Placement Group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Group Name of Placement Group.",
+			//	  "type": "string"
+			//	}
 			Description: "The Group Name of Placement Group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -37,10 +38,11 @@ func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 		"spread_level": {
 			// Property: SpreadLevel
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+			//	  "type": "string"
+			//	}
 			Description: "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,10 +55,11 @@ func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 		"strategy": {
 			// Property: Strategy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The placement strategy.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The placement strategy.",
+			//	  "type": "string"
+			//	}
 			Description: "The placement strategy.",
 			Type:        types.StringType,
 			Optional:    true,

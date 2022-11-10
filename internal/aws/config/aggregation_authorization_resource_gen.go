@@ -25,10 +25,11 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 		"aggregation_authorization_arn": {
 			// Property: AggregationAuthorizationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the AggregationAuthorization.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the AggregationAuthorization.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the AggregationAuthorization.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,11 +40,12 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 		"authorized_account_id": {
 			// Property: AuthorizedAccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The 12-digit account ID of the account authorized to aggregate data.",
-			//   "pattern": "^\\d{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The 12-digit account ID of the account authorized to aggregate data.",
+			//	  "pattern": "^\\d{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "The 12-digit account ID of the account authorized to aggregate data.",
 			Type:        types.StringType,
 			Required:    true,
@@ -57,12 +59,13 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 		"authorized_aws_region": {
 			// Property: AuthorizedAwsRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The region authorized to collect aggregated data.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The region authorized to collect aggregated data.",
+			//	  "maxLength": 64,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The region authorized to collect aggregated data.",
 			Type:        types.StringType,
 			Required:    true,
@@ -76,35 +79,36 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the AggregationAuthorization.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the AggregationAuthorization.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The tags for the AggregationAuthorization.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

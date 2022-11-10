@@ -25,125 +25,126 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 		"health_check_config": {
 			// Property: HealthCheckConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A complex type that contains information about the health check.",
-			//   "properties": {
-			//     "AlarmIdentifier": {
-			//       "additionalProperties": false,
-			//       "description": "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
-			//       "properties": {
-			//         "Name": {
-			//           "description": "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
-			//           "maxLength": 256,
-			//           "minLength": 1,
-			//           "type": "string"
-			//         },
-			//         "Region": {
-			//           "description": "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Name",
-			//         "Region"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ChildHealthChecks": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "maxItems": 256,
-			//       "type": "array"
-			//     },
-			//     "EnableSNI": {
-			//       "type": "boolean"
-			//     },
-			//     "FailureThreshold": {
-			//       "maximum": 10,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "FullyQualifiedDomainName": {
-			//       "maxLength": 255,
-			//       "type": "string"
-			//     },
-			//     "HealthThreshold": {
-			//       "maximum": 256,
-			//       "minimum": 0,
-			//       "type": "integer"
-			//     },
-			//     "IPAddress": {
-			//       "maxLength": 45,
-			//       "pattern": "^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$|^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
-			//       "type": "string"
-			//     },
-			//     "InsufficientDataHealthStatus": {
-			//       "enum": [
-			//         "Healthy",
-			//         "LastKnownStatus",
-			//         "Unhealthy"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Inverted": {
-			//       "type": "boolean"
-			//     },
-			//     "MeasureLatency": {
-			//       "type": "boolean"
-			//     },
-			//     "Port": {
-			//       "maximum": 65535,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     },
-			//     "Regions": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "maxItems": 64,
-			//       "type": "array"
-			//     },
-			//     "RequestInterval": {
-			//       "maximum": 30,
-			//       "minimum": 10,
-			//       "type": "integer"
-			//     },
-			//     "ResourcePath": {
-			//       "maxLength": 255,
-			//       "type": "string"
-			//     },
-			//     "RoutingControlArn": {
-			//       "maxLength": 255,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "SearchString": {
-			//       "maxLength": 255,
-			//       "type": "string"
-			//     },
-			//     "Type": {
-			//       "enum": [
-			//         "CALCULATED",
-			//         "CLOUDWATCH_METRIC",
-			//         "HTTP",
-			//         "HTTP_STR_MATCH",
-			//         "HTTPS",
-			//         "HTTPS_STR_MATCH",
-			//         "TCP",
-			//         "RECOVERY_CONTROL"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Type"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A complex type that contains information about the health check.",
+			//	  "properties": {
+			//	    "AlarmIdentifier": {
+			//	      "additionalProperties": false,
+			//	      "description": "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
+			//	      "properties": {
+			//	        "Name": {
+			//	          "description": "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
+			//	          "maxLength": 256,
+			//	          "minLength": 1,
+			//	          "type": "string"
+			//	        },
+			//	        "Region": {
+			//	          "description": "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Name",
+			//	        "Region"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ChildHealthChecks": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 256,
+			//	      "type": "array"
+			//	    },
+			//	    "EnableSNI": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "FailureThreshold": {
+			//	      "maximum": 10,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "FullyQualifiedDomainName": {
+			//	      "maxLength": 255,
+			//	      "type": "string"
+			//	    },
+			//	    "HealthThreshold": {
+			//	      "maximum": 256,
+			//	      "minimum": 0,
+			//	      "type": "integer"
+			//	    },
+			//	    "IPAddress": {
+			//	      "maxLength": 45,
+			//	      "pattern": "^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$|^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+			//	      "type": "string"
+			//	    },
+			//	    "InsufficientDataHealthStatus": {
+			//	      "enum": [
+			//	        "Healthy",
+			//	        "LastKnownStatus",
+			//	        "Unhealthy"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Inverted": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "MeasureLatency": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "Port": {
+			//	      "maximum": 65535,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    },
+			//	    "Regions": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "maxItems": 64,
+			//	      "type": "array"
+			//	    },
+			//	    "RequestInterval": {
+			//	      "maximum": 30,
+			//	      "minimum": 10,
+			//	      "type": "integer"
+			//	    },
+			//	    "ResourcePath": {
+			//	      "maxLength": 255,
+			//	      "type": "string"
+			//	    },
+			//	    "RoutingControlArn": {
+			//	      "maxLength": 255,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "SearchString": {
+			//	      "maxLength": 255,
+			//	      "type": "string"
+			//	    },
+			//	    "Type": {
+			//	      "enum": [
+			//	        "CALCULATED",
+			//	        "CLOUDWATCH_METRIC",
+			//	        "HTTP",
+			//	        "HTTP_STR_MATCH",
+			//	        "HTTPS",
+			//	        "HTTPS_STR_MATCH",
+			//	        "TCP",
+			//	        "RECOVERY_CONTROL"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "A complex type that contains information about the health check.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -382,9 +383,10 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 		"health_check_id": {
 			// Property: HealthCheckId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -394,33 +396,34 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 		"health_check_tags": {
 			// Property: HealthCheckTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag.",
-			//         "maxLength": 128,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag.",
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag.",
+			//	        "maxLength": 128,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag.",
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

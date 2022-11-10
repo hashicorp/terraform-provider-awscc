@@ -23,13 +23,14 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cidr_allow_list": {
 			// Property: CidrAllowList
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -37,10 +38,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the output.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the output.",
+			//	  "type": "string"
+			//	}
 			Description: "A description of the output.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -48,10 +50,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"destination": {
 			// Property: Destination
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The address where you want to send the output.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The address where you want to send the output.",
+			//	  "type": "string"
+			//	}
 			Description: "The address where you want to send the output.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -59,43 +62,44 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption": {
 			// Property: Encryption
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			//   "properties": {
-			//     "Algorithm": {
-			//       "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-			//       "enum": [
-			//         "aes128",
-			//         "aes192",
-			//         "aes256"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "KeyType": {
-			//       "default": "static-key",
-			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			//       "enum": [
-			//         "static-key",
-			//         "srt-password"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "RoleArn": {
-			//       "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-			//       "type": "string"
-			//     },
-			//     "SecretArn": {
-			//       "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "RoleArn",
-			//     "SecretArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+			//	  "properties": {
+			//	    "Algorithm": {
+			//	      "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+			//	      "enum": [
+			//	        "aes128",
+			//	        "aes192",
+			//	        "aes256"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "KeyType": {
+			//	      "default": "static-key",
+			//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+			//	      "enum": [
+			//	        "static-key",
+			//	        "srt-password"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "RoleArn": {
+			//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+			//	      "type": "string"
+			//	    },
+			//	    "SecretArn": {
+			//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "RoleArn",
+			//	    "SecretArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -130,10 +134,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"flow_arn": {
 			// Property: FlowArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -141,10 +146,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_latency": {
 			// Property: MaxLatency
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+			//	  "type": "integer"
+			//	}
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -152,10 +158,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_latency": {
 			// Property: MinLatency
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The minimum latency in milliseconds.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The minimum latency in milliseconds.",
+			//	  "type": "integer"
+			//	}
 			Description: "The minimum latency in milliseconds.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -163,10 +170,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the output. This value must be unique within the current flow.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the output. This value must be unique within the current flow.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the output. This value must be unique within the current flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -174,10 +182,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_arn": {
 			// Property: OutputArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the output.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the output.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the output.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -185,10 +194,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"port": {
 			// Property: Port
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The port to use when content is distributed to this output.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The port to use when content is distributed to this output.",
+			//	  "type": "integer"
+			//	}
 			Description: "The port to use when content is distributed to this output.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -196,18 +206,19 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The protocol that is used by the source or output.",
-			//   "enum": [
-			//     "zixi-push",
-			//     "rtp-fec",
-			//     "rtp",
-			//     "zixi-pull",
-			//     "rist",
-			//     "srt-listener"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The protocol that is used by the source or output.",
+			//	  "enum": [
+			//	    "zixi-push",
+			//	    "rtp-fec",
+			//	    "rtp",
+			//	    "zixi-pull",
+			//	    "rist",
+			//	    "srt-listener"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The protocol that is used by the source or output.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -215,10 +226,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"remote_id": {
 			// Property: RemoteId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The remote ID for the Zixi-pull stream.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The remote ID for the Zixi-pull stream.",
+			//	  "type": "string"
+			//	}
 			Description: "The remote ID for the Zixi-pull stream.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -226,10 +238,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"smoothing_latency": {
 			// Property: SmoothingLatency
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
+			//	  "type": "integer"
+			//	}
 			Description: "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -237,10 +250,11 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stream_id": {
 			// Property: StreamId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+			//	  "type": "string"
+			//	}
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -248,17 +262,18 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_interface_attachment": {
 			// Property: VpcInterfaceAttachment
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The name of the VPC interface attachment to use for this output.",
-			//   "properties": {
-			//     "VpcInterfaceName": {
-			//       "description": "The name of the VPC interface to use for this output.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The name of the VPC interface attachment to use for this output.",
+			//	  "properties": {
+			//	    "VpcInterfaceName": {
+			//	      "description": "The name of the VPC interface to use for this output.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The name of the VPC interface attachment to use for this output.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -23,10 +23,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the Asset.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the Asset.",
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the Asset.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The time the Asset was initially submitted for Ingest.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The time the Asset was initially submitted for Ingest.",
+			//	  "type": "string"
+			//	}
 			Description: "The time the Asset was initially submitted for Ingest.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,29 +47,30 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"egress_endpoints": {
 			// Property: EgressEndpoints
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The list of egress endpoints available for the Asset.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "The endpoint URL used to access an Asset using one PackagingConfiguration.",
-			//     "properties": {
-			//       "PackagingConfigurationId": {
-			//         "description": "The ID of the PackagingConfiguration being applied to the Asset.",
-			//         "type": "string"
-			//       },
-			//       "Url": {
-			//         "description": "The URL of the parent manifest for the repackaged Asset.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "PackagingConfigurationId",
-			//       "Url"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The list of egress endpoints available for the Asset.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "The endpoint URL used to access an Asset using one PackagingConfiguration.",
+			//	    "properties": {
+			//	      "PackagingConfigurationId": {
+			//	        "description": "The ID of the PackagingConfiguration being applied to the Asset.",
+			//	        "type": "string"
+			//	      },
+			//	      "Url": {
+			//	        "description": "The URL of the parent manifest for the repackaged Asset.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "PackagingConfigurationId",
+			//	      "Url"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The list of egress endpoints available for the Asset.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -90,10 +93,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique identifier for the Asset.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique identifier for the Asset.",
+			//	  "type": "string"
+			//	}
 			Description: "The unique identifier for the Asset.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -101,10 +105,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"packaging_group_id": {
 			// Property: PackagingGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the PackagingGroup for the Asset.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the PackagingGroup for the Asset.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the PackagingGroup for the Asset.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -112,10 +117,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The resource ID to include in SPEKE key requests.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The resource ID to include in SPEKE key requests.",
+			//	  "type": "string"
+			//	}
 			Description: "The resource ID to include in SPEKE key requests.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -123,10 +129,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_arn": {
 			// Property: SourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN of the source object in S3.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN of the source object in S3.",
+			//	  "type": "string"
+			//	}
 			Description: "ARN of the source object in S3.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -134,10 +141,11 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_role_arn": {
 			// Property: SourceRoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IAM role_arn used to access the source S3 bucket.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IAM role_arn used to access the source S3 bucket.",
+			//	  "type": "string"
+			//	}
 			Description: "The IAM role_arn used to access the source S3 bucket.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -145,27 +153,28 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

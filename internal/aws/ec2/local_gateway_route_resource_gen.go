@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -23,52 +24,77 @@ func localGatewayRouteResource(ctx context.Context) (resource.Resource, error) {
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The CIDR block used for destination matches.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The CIDR block used for destination matches.",
+			//	  "type": "string"
+			//	}
 			Description: "The CIDR block used for destination matches.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
 		"local_gateway_route_table_id": {
 			// Property: LocalGatewayRouteTableId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the local gateway route table.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the local gateway route table.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the local gateway route table.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
 		"local_gateway_virtual_interface_group_id": {
 			// Property: LocalGatewayVirtualInterfaceGroupId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the virtual interface group.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the virtual interface group.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the virtual interface group.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
+				resource.UseStateForUnknown(),
+			},
+		},
+		"network_interface_id": {
+			// Property: NetworkInterfaceId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The ID of the network interface.",
+			//	  "type": "string"
+			//	}
+			Description: "The ID of the network interface.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the route.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the route.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the route.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -79,10 +105,11 @@ func localGatewayRouteResource(ctx context.Context) (resource.Resource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The route type.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The route type.",
+			//	  "type": "string"
+			//	}
 			Description: "The route type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -116,13 +143,28 @@ func localGatewayRouteResource(ctx context.Context) (resource.Resource, error) {
 		"destination_cidr_block":                   "DestinationCidrBlock",
 		"local_gateway_route_table_id":             "LocalGatewayRouteTableId",
 		"local_gateway_virtual_interface_group_id": "LocalGatewayVirtualInterfaceGroupId",
-		"state": "State",
-		"type":  "Type",
+		"network_interface_id":                     "NetworkInterfaceId",
+		"state":                                    "State",
+		"type":                                     "Type",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"destination_cidr_block",
+			"local_gateway_route_table_id",
+			"local_gateway_virtual_interface_group_id",
+		),
+		validate.Required(
+			"destination_cidr_block",
+			"local_gateway_route_table_id",
+			"network_interface_id",
+		),
+	),
+	)
 
 	v, err := NewResource(ctx, opts...)
 

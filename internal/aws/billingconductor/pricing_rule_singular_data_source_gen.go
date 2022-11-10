@@ -23,11 +23,12 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Pricing rule ARN",
-			//   "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Pricing rule ARN",
+			//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}",
+			//	  "type": "string"
+			//	}
 			Description: "Pricing rule ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -35,11 +36,12 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"associated_pricing_plan_count": {
 			// Property: AssociatedPricingPlanCount
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The number of pricing plans associated with pricing rule",
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "The number of pricing plans associated with pricing rule",
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Description: "The number of pricing plans associated with pricing rule",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -47,10 +49,11 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Creation timestamp in UNIX epoch time format",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Creation timestamp in UNIX epoch time format",
+			//	  "type": "integer"
+			//	}
 			Description: "Creation timestamp in UNIX epoch time format",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -58,11 +61,12 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Pricing rule description",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Pricing rule description",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "Pricing rule description",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,10 +74,11 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Latest modified timestamp in UNIX epoch time format",
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Latest modified timestamp in UNIX epoch time format",
+			//	  "type": "integer"
+			//	}
 			Description: "Latest modified timestamp in UNIX epoch time format",
 			Type:        types.Int64Type,
 			Computed:    true,
@@ -81,11 +86,12 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"modifier_percentage": {
 			// Property: ModifierPercentage
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Pricing rule modifier percentage",
-			//   "minimum": 0,
-			//   "type": "number"
-			// }
+			//
+			//	{
+			//	  "description": "Pricing rule modifier percentage",
+			//	  "minimum": 0,
+			//	  "type": "number"
+			//	}
 			Description: "Pricing rule modifier percentage",
 			Type:        types.Float64Type,
 			Computed:    true,
@@ -93,13 +99,14 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Pricing rule name",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Pricing rule name",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
+			//	  "type": "string"
+			//	}
 			Description: "Pricing rule name",
 			Type:        types.StringType,
 			Computed:    true,
@@ -107,14 +114,15 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"scope": {
 			// Property: Scope
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A term used to categorize the granularity of a Pricing Rule.",
-			//   "enum": [
-			//     "GLOBAL",
-			//     "SERVICE"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A term used to categorize the granularity of a Pricing Rule.",
+			//	  "enum": [
+			//	    "GLOBAL",
+			//	    "SERVICE"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "A term used to categorize the granularity of a Pricing Rule.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -122,13 +130,14 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service": {
 			// Property: Service
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The service which a pricing rule is applied on",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9\\.\\-]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The service which a pricing rule is applied on",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9\\.\\-]+",
+			//	  "type": "string"
+			//	}
 			Description: "The service which a pricing rule is applied on",
 			Type:        types.StringType,
 			Computed:    true,
@@ -136,31 +145,32 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 256,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -180,14 +190,15 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.",
-			//   "enum": [
-			//     "MARKUP",
-			//     "DISCOUNT"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.",
+			//	  "enum": [
+			//	    "MARKUP",
+			//	    "DISCOUNT"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.",
 			Type:        types.StringType,
 			Computed:    true,

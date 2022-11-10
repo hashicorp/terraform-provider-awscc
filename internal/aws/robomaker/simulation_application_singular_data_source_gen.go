@@ -23,20 +23,22 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"current_revision_id": {
 			// Property: CurrentRevisionId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The current revision id.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The current revision id.",
+			//	  "type": "string"
+			//	}
 			Description: "The current revision id.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -44,10 +46,11 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"environment": {
 			// Property: Environment
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The URI of the Docker image for the robot application.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The URI of the Docker image for the robot application.",
+			//	  "type": "string"
+			//	}
 			Description: "The URI of the Docker image for the robot application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -55,13 +58,14 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the simulation application.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "[a-zA-Z0-9_\\-]*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the simulation application.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "[a-zA-Z0-9_\\-]*",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the simulation application.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,29 +73,30 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"rendering_engine": {
 			// Property: RenderingEngine
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The rendering engine for the simulation application.",
-			//   "properties": {
-			//     "Name": {
-			//       "description": "The name of the rendering engine.",
-			//       "enum": [
-			//         "OGRE"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Version": {
-			//       "description": "The version of the rendering engine.",
-			//       "pattern": "1.x",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name",
-			//     "Version"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The rendering engine for the simulation application.",
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "The name of the rendering engine.",
+			//	      "enum": [
+			//	        "OGRE"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Version": {
+			//	      "description": "The version of the rendering engine.",
+			//	      "pattern": "1.x",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name",
+			//	    "Version"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The rendering engine for the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -114,35 +119,36 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"robot_software_suite": {
 			// Property: RobotSoftwareSuite
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The robot software suite used by the simulation application.",
-			//   "properties": {
-			//     "Name": {
-			//       "description": "The name of the robot software suite.",
-			//       "enum": [
-			//         "ROS",
-			//         "ROS2",
-			//         "General"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Version": {
-			//       "description": "The version of the robot software suite.",
-			//       "enum": [
-			//         "Kinetic",
-			//         "Melodic",
-			//         "Dashing",
-			//         "Foxy"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The robot software suite used by the simulation application.",
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "The name of the robot software suite.",
+			//	      "enum": [
+			//	        "ROS",
+			//	        "ROS2",
+			//	        "General"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Version": {
+			//	      "description": "The version of the robot software suite.",
+			//	      "enum": [
+			//	        "Kinetic",
+			//	        "Melodic",
+			//	        "Dashing",
+			//	        "Foxy"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The robot software suite used by the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -165,38 +171,39 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"simulation_software_suite": {
 			// Property: SimulationSoftwareSuite
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The simulation software suite used by the simulation application.",
-			//   "properties": {
-			//     "Name": {
-			//       "description": "The name of the simulation software suite.",
-			//       "enum": [
-			//         "Gazebo",
-			//         "RosbagPlay",
-			//         "SimulationRuntime"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "Version": {
-			//       "description": "The version of the simulation software suite.",
-			//       "enum": [
-			//         "7",
-			//         "9",
-			//         "11",
-			//         "Kinetic",
-			//         "Melodic",
-			//         "Dashing",
-			//         "Foxy"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Name"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The simulation software suite used by the simulation application.",
+			//	  "properties": {
+			//	    "Name": {
+			//	      "description": "The name of the simulation software suite.",
+			//	      "enum": [
+			//	        "Gazebo",
+			//	        "RosbagPlay",
+			//	        "SimulationRuntime"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "Version": {
+			//	      "description": "The version of the simulation software suite.",
+			//	      "enum": [
+			//	        "7",
+			//	        "9",
+			//	        "11",
+			//	        "Kinetic",
+			//	        "Melodic",
+			//	        "Dashing",
+			//	        "Foxy"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Name"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The simulation software suite used by the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -219,43 +226,44 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"sources": {
 			// Property: Sources
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The sources of the simulation application.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "Information about a source configuration.",
-			//     "properties": {
-			//       "Architecture": {
-			//         "description": "The target processor architecture for the application.",
-			//         "enum": [
-			//           "X86_64",
-			//           "ARM64",
-			//           "ARMHF"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "S3Bucket": {
-			//         "description": "The Amazon S3 bucket name.",
-			//         "pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]",
-			//         "type": "string"
-			//       },
-			//       "S3Key": {
-			//         "description": "The s3 object key.",
-			//         "maxLength": 1024,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "S3Bucket",
-			//       "S3Key",
-			//       "Architecture"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The sources of the simulation application.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "Information about a source configuration.",
+			//	    "properties": {
+			//	      "Architecture": {
+			//	        "description": "The target processor architecture for the application.",
+			//	        "enum": [
+			//	          "X86_64",
+			//	          "ARM64",
+			//	          "ARMHF"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "S3Bucket": {
+			//	        "description": "The Amazon S3 bucket name.",
+			//	        "pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]",
+			//	        "type": "string"
+			//	      },
+			//	      "S3Key": {
+			//	        "description": "The s3 object key.",
+			//	        "maxLength": 1024,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "S3Bucket",
+			//	      "S3Key",
+			//	      "Architecture"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The sources of the simulation application.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -284,19 +292,20 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A key-value pair to associate with a resource.",
-			//   "patternProperties": {
-			//     "": {
-			//       "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A key-value pair to associate with a resource.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A key-value pair to associate with a resource.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

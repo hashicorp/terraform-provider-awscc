@@ -23,16 +23,17 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bgp_options": {
 			// Property: BgpOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Bgp options for connect peer.",
-			//   "properties": {
-			//     "PeerAsn": {
-			//       "type": "number"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Bgp options for connect peer.",
+			//	  "properties": {
+			//	    "PeerAsn": {
+			//	      "type": "number"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Bgp options for connect peer.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -48,53 +49,54 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Configuration of the connect peer.",
-			//   "properties": {
-			//     "BgpConfigurations": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Bgp configuration for connect peer",
-			//         "properties": {
-			//           "CoreNetworkAddress": {
-			//             "type": "string"
-			//           },
-			//           "CoreNetworkAsn": {
-			//             "type": "number"
-			//           },
-			//           "PeerAddress": {
-			//             "type": "string"
-			//           },
-			//           "PeerAsn": {
-			//             "type": "number"
-			//           }
-			//         },
-			//         "type": "object"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "CoreNetworkAddress": {
-			//       "type": "string"
-			//     },
-			//     "InsideCidrBlocks": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "PeerAddress": {
-			//       "type": "string"
-			//     },
-			//     "Protocol": {
-			//       "description": "Tunnel protocol type (Only support GRE for now)",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration of the connect peer.",
+			//	  "properties": {
+			//	    "BgpConfigurations": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Bgp configuration for connect peer",
+			//	        "properties": {
+			//	          "CoreNetworkAddress": {
+			//	            "type": "string"
+			//	          },
+			//	          "CoreNetworkAsn": {
+			//	            "type": "number"
+			//	          },
+			//	          "PeerAddress": {
+			//	            "type": "string"
+			//	          },
+			//	          "PeerAsn": {
+			//	            "type": "number"
+			//	          }
+			//	        },
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "CoreNetworkAddress": {
+			//	      "type": "string"
+			//	    },
+			//	    "InsideCidrBlocks": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "PeerAddress": {
+			//	      "type": "string"
+			//	    },
+			//	    "Protocol": {
+			//	      "description": "Tunnel protocol type (Only support GRE for now)",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Configuration of the connect peer.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -154,10 +156,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connect_attachment_id": {
 			// Property: ConnectAttachmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the attachment to connect.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the attachment to connect.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the attachment to connect.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -165,10 +168,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connect_peer_id": {
 			// Property: ConnectPeerId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the Connect peer.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the Connect peer.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the Connect peer.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -176,10 +180,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"core_network_address": {
 			// Property: CoreNetworkAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IP address of a core network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IP address of a core network.",
+			//	  "type": "string"
+			//	}
 			Description: "The IP address of a core network.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -187,10 +192,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"core_network_id": {
 			// Property: CoreNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the core network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the core network.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the core network.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -198,10 +204,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Connect peer creation time.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Connect peer creation time.",
+			//	  "type": "string"
+			//	}
 			Description: "Connect peer creation time.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -209,10 +216,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"edge_location": {
 			// Property: EdgeLocation
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Connect peer Regions where edges are located.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Connect peer Regions where edges are located.",
+			//	  "type": "string"
+			//	}
 			Description: "The Connect peer Regions where edges are located.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -220,14 +228,15 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"inside_cidr_blocks": {
 			// Property: InsideCidrBlocks
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The inside IP addresses used for a Connect peer configuration.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The inside IP addresses used for a Connect peer configuration.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The inside IP addresses used for a Connect peer configuration.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -235,10 +244,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"peer_address": {
 			// Property: PeerAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IP address of the Connect peer.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IP address of the Connect peer.",
+			//	  "type": "string"
+			//	}
 			Description: "The IP address of the Connect peer.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -246,10 +256,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "State of the connect peer.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "State of the connect peer.",
+			//	  "type": "string"
+			//	}
 			Description: "State of the connect peer.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -257,30 +268,31 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

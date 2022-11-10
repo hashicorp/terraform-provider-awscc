@@ -25,11 +25,12 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		"cell_arn": {
 			// Property: CellArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the cell.",
-			//   "maxLength": 256,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the cell.",
+			//	  "maxLength": 256,
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the cell.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,12 +41,13 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		"cell_name": {
 			// Property: CellName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the cell to create.",
-			//   "maxLength": 64,
-			//   "pattern": "[a-zA-Z0-9_]+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the cell to create.",
+			//	  "maxLength": 64,
+			//	  "pattern": "[a-zA-Z0-9_]+",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the cell to create.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -62,15 +64,16 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		"cells": {
 			// Property: Cells
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "type": "array"
+			//	}
 			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -86,15 +89,16 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		"parent_readiness_scopes": {
 			// Property: ParentReadinessScopes
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "maxItems": 5,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "maxItems": 5,
+			//	  "type": "array"
+			//	}
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -106,27 +110,28 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A collection of tags associated with a resource",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "A collection of tags associated with a resource",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "A collection of tags associated with a resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

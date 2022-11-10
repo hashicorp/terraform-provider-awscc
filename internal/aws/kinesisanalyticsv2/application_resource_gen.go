@@ -25,676 +25,677 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_configuration": {
 			// Property: ApplicationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Use this parameter to configure the application.",
-			//   "properties": {
-			//     "ApplicationCodeConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "The code location and type parameters for a Flink-based Kinesis Data Analytics application.",
-			//       "properties": {
-			//         "CodeContent": {
-			//           "additionalProperties": false,
-			//           "description": "The location and type of the application code.",
-			//           "properties": {
-			//             "S3ContentLocation": {
-			//               "additionalProperties": false,
-			//               "description": "Information about the Amazon S3 bucket that contains the application code.",
-			//               "properties": {
-			//                 "BucketARN": {
-			//                   "description": "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
-			//                   "maxLength": 2048,
-			//                   "minLength": 1,
-			//                   "pattern": "^arn:.*$",
-			//                   "type": "string"
-			//                 },
-			//                 "FileKey": {
-			//                   "description": "The file key for the object containing the application code.",
-			//                   "maxLength": 1024,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 },
-			//                 "ObjectVersion": {
-			//                   "description": "The version of the object containing the application code.",
-			//                   "maxLength": 1024,
-			//                   "minLength": 1,
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "BucketARN",
-			//                 "FileKey"
-			//               ],
-			//               "type": "object"
-			//             },
-			//             "TextContent": {
-			//               "description": "The text-format code for a Flink-based Kinesis Data Analytics application.",
-			//               "maxLength": 102400,
-			//               "minLength": 1,
-			//               "type": "string"
-			//             },
-			//             "ZipFileContent": {
-			//               "description": "The zip-format code for a Flink-based Kinesis Data Analytics application.",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CodeContentType": {
-			//           "description": "Specifies whether the code content is in text or zip format.",
-			//           "enum": [
-			//             "PLAINTEXT",
-			//             "ZIPFILE"
-			//           ],
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "CodeContentType",
-			//         "CodeContent"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "ApplicationSnapshotConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
-			//       "properties": {
-			//         "SnapshotsEnabled": {
-			//           "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "required": [
-			//         "SnapshotsEnabled"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "EnvironmentProperties": {
-			//       "additionalProperties": false,
-			//       "description": "Describes execution properties for a Flink-based Kinesis Data Analytics application.",
-			//       "properties": {
-			//         "PropertyGroups": {
-			//           "description": "Describes the execution property groups.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "Property key-value pairs passed into an application.",
-			//             "properties": {
-			//               "PropertyGroupId": {
-			//                 "description": "Describes the key of an application execution property key-value pair.",
-			//                 "maxLength": 50,
-			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z0-9_.-]+$",
-			//                 "type": "string"
-			//               },
-			//               "PropertyMap": {
-			//                 "additionalProperties": false,
-			//                 "description": "Describes the value of an application execution property key-value pair.",
-			//                 "patternProperties": {
-			//                   "": {
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "type": "object"
-			//           },
-			//           "maxItems": 50,
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "FlinkApplicationConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "The creation and update parameters for a Flink-based Kinesis Data Analytics application.",
-			//       "properties": {
-			//         "CheckpointConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see Checkpoints for Fault Tolerance in the Apache Flink Documentation.",
-			//           "properties": {
-			//             "CheckpointInterval": {
-			//               "description": "Describes the interval in milliseconds between checkpoint operations.",
-			//               "format": "int64",
-			//               "maximum": 9223372036854775807,
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             },
-			//             "CheckpointingEnabled": {
-			//               "description": "Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.",
-			//               "type": "boolean"
-			//             },
-			//             "ConfigurationType": {
-			//               "description": "Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to `CUSTOM` in order to set the `CheckpointingEnabled`, `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.",
-			//               "enum": [
-			//                 "DEFAULT",
-			//                 "CUSTOM"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "MinPauseBetweenCheckpoints": {
-			//               "description": "Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see Tuning Checkpointing in the Apache Flink Documentation.",
-			//               "format": "int64",
-			//               "maximum": 9223372036854775807,
-			//               "minimum": 0,
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "ConfigurationType"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "MonitoringConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "Describes configuration parameters for Amazon CloudWatch logging for an application.",
-			//           "properties": {
-			//             "ConfigurationType": {
-			//               "description": "Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.",
-			//               "enum": [
-			//                 "DEFAULT",
-			//                 "CUSTOM"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "LogLevel": {
-			//               "description": "Describes the verbosity of the CloudWatch Logs for an application.",
-			//               "enum": [
-			//                 "DEBUG",
-			//                 "INFO",
-			//                 "WARN",
-			//                 "ERROR"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "MetricsLevel": {
-			//               "description": "Describes the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.",
-			//               "enum": [
-			//                 "APPLICATION",
-			//                 "OPERATOR",
-			//                 "PARALLELISM",
-			//                 "TASK"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "ConfigurationType"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "ParallelismConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "Describes parameters for how an application executes multiple tasks simultaneously.",
-			//           "properties": {
-			//             "AutoScalingEnabled": {
-			//               "description": "Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.",
-			//               "type": "boolean"
-			//             },
-			//             "ConfigurationType": {
-			//               "description": "Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to `CUSTOM` in order to change your application's `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU` properties.",
-			//               "enum": [
-			//                 "CUSTOM",
-			//                 "DEFAULT"
-			//               ],
-			//               "type": "string"
-			//             },
-			//             "Parallelism": {
-			//               "description": "Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration:AutoScalingEnabled is set to true.",
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             },
-			//             "ParallelismPerKPU": {
-			//               "description": "Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.",
-			//               "minimum": 1,
-			//               "type": "integer"
-			//             }
-			//           },
-			//           "required": [
-			//             "ConfigurationType"
-			//           ],
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "SqlApplicationConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "The creation and update parameters for a SQL-based Kinesis Data Analytics application.",
-			//       "properties": {
-			//         "Inputs": {
-			//           "description": "The array of Input objects describing the input streams used by the application.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "When you configure the application input for a SQL-based Kinesis Data Analytics application, you specify the streaming source, the in-application stream name that is created, and the mapping between the two.",
-			//             "properties": {
-			//               "InputParallelism": {
-			//                 "additionalProperties": false,
-			//                 "description": "Describes the number of in-application streams to create.",
-			//                 "properties": {
-			//                   "Count": {
-			//                     "description": "The number of in-application streams to create.",
-			//                     "maximum": 64,
-			//                     "minimum": 1,
-			//                     "type": "integer"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "InputProcessingConfiguration": {
-			//                 "additionalProperties": false,
-			//                 "description": "The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.",
-			//                 "properties": {
-			//                   "InputLambdaProcessor": {
-			//                     "additionalProperties": false,
-			//                     "description": "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
-			//                     "properties": {
-			//                       "ResourceARN": {
-			//                         "description": "The ARN of the Amazon Lambda function that operates on records in the stream.",
-			//                         "maxLength": 2048,
-			//                         "minLength": 1,
-			//                         "pattern": "^arn:.*$",
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "ResourceARN"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "type": "object"
-			//               },
-			//               "InputSchema": {
-			//                 "additionalProperties": false,
-			//                 "description": "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
-			//                 "properties": {
-			//                   "RecordColumns": {
-			//                     "description": "A list of `RecordColumn` objects.",
-			//                     "insertionOrder": false,
-			//                     "items": {
-			//                       "additionalProperties": false,
-			//                       "description": "For a SQL-based Kinesis Data Analytics application, describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.\nAlso used to describe the format of the reference data source.",
-			//                       "properties": {
-			//                         "Mapping": {
-			//                           "description": "A reference to the data element in the streaming input or the reference data source.",
-			//                           "maxLength": 65535,
-			//                           "minLength": 1,
-			//                           "type": "string"
-			//                         },
-			//                         "Name": {
-			//                           "description": "The name of the column that is created in the in-application input stream or reference table.",
-			//                           "maxLength": 256,
-			//                           "minLength": 1,
-			//                           "pattern": "^[^-\\s\u003c\u003e\u0026]*$",
-			//                           "type": "string"
-			//                         },
-			//                         "SqlType": {
-			//                           "description": "The type of column created in the in-application input stream or reference table.",
-			//                           "maxLength": 100,
-			//                           "minLength": 1,
-			//                           "type": "string"
-			//                         }
-			//                       },
-			//                       "required": [
-			//                         "SqlType",
-			//                         "Name"
-			//                       ],
-			//                       "type": "object"
-			//                     },
-			//                     "maxItems": 1000,
-			//                     "type": "array",
-			//                     "uniqueItems": false
-			//                   },
-			//                   "RecordEncoding": {
-			//                     "description": "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
-			//                     "enum": [
-			//                       "UTF-8"
-			//                     ],
-			//                     "type": "string"
-			//                   },
-			//                   "RecordFormat": {
-			//                     "additionalProperties": false,
-			//                     "description": "Specifies the format of the records on the streaming source.",
-			//                     "properties": {
-			//                       "MappingParameters": {
-			//                         "additionalProperties": false,
-			//                         "description": "When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.",
-			//                         "properties": {
-			//                           "CSVMappingParameters": {
-			//                             "additionalProperties": false,
-			//                             "description": "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
-			//                             "properties": {
-			//                               "RecordColumnDelimiter": {
-			//                                 "description": "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
-			//                                 "maxLength": 1024,
-			//                                 "minLength": 1,
-			//                                 "type": "string"
-			//                               },
-			//                               "RecordRowDelimiter": {
-			//                                 "description": "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
-			//                                 "maxLength": 1024,
-			//                                 "minLength": 1,
-			//                                 "type": "string"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "RecordRowDelimiter",
-			//                               "RecordColumnDelimiter"
-			//                             ],
-			//                             "type": "object"
-			//                           },
-			//                           "JSONMappingParameters": {
-			//                             "additionalProperties": false,
-			//                             "description": "Provides additional mapping information when JSON is the record format on the streaming source.",
-			//                             "properties": {
-			//                               "RecordRowPath": {
-			//                                 "description": "The path to the top-level parent that contains the records.",
-			//                                 "maxLength": 65535,
-			//                                 "minLength": 1,
-			//                                 "pattern": "",
-			//                                 "type": "string"
-			//                               }
-			//                             },
-			//                             "required": [
-			//                               "RecordRowPath"
-			//                             ],
-			//                             "type": "object"
-			//                           }
-			//                         },
-			//                         "type": "object"
-			//                       },
-			//                       "RecordFormatType": {
-			//                         "description": "The type of record format.",
-			//                         "enum": [
-			//                           "CSV",
-			//                           "JSON"
-			//                         ],
-			//                         "type": "string"
-			//                       }
-			//                     },
-			//                     "required": [
-			//                       "RecordFormatType"
-			//                     ],
-			//                     "type": "object"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "RecordColumns",
-			//                   "RecordFormat"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "KinesisFirehoseInput": {
-			//                 "additionalProperties": false,
-			//                 "description": "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
-			//                 "properties": {
-			//                   "ResourceARN": {
-			//                     "description": "The Amazon Resource Name (ARN) of the delivery stream.",
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "pattern": "^arn:.*$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ResourceARN"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "KinesisStreamsInput": {
-			//                 "additionalProperties": false,
-			//                 "description": "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
-			//                 "properties": {
-			//                   "ResourceARN": {
-			//                     "description": "The ARN of the input Kinesis data stream to read.",
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "pattern": "^arn:.*$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ResourceARN"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "NamePrefix": {
-			//                 "description": "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
-			//                 "maxLength": 32,
-			//                 "minLength": 1,
-			//                 "pattern": "^[^-\\s\u003c\u003e\u0026]*$",
-			//                 "type": "string"
-			//               }
-			//             },
-			//             "required": [
-			//               "NamePrefix",
-			//               "InputSchema"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 1,
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "VpcConfigurations": {
-			//       "description": "The array of descriptions of VPC configurations available to the application.",
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "additionalProperties": false,
-			//         "description": "Describes the parameters of a VPC used by the application.",
-			//         "properties": {
-			//           "SecurityGroupIds": {
-			//             "description": "The array of SecurityGroup IDs used by the VPC configuration.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "maxItems": 5,
-			//             "minItems": 1,
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           },
-			//           "SubnetIds": {
-			//             "description": "The array of Subnet IDs used by the VPC configuration.",
-			//             "insertionOrder": false,
-			//             "items": {
-			//               "type": "string"
-			//             },
-			//             "maxItems": 16,
-			//             "minItems": 1,
-			//             "type": "array",
-			//             "uniqueItems": false
-			//           }
-			//         },
-			//         "required": [
-			//           "SecurityGroupIds",
-			//           "SubnetIds"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "maxItems": 1,
-			//       "type": "array",
-			//       "uniqueItems": false
-			//     },
-			//     "ZeppelinApplicationConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "The configuration parameters for a Kinesis Data Analytics Studio notebook.",
-			//       "properties": {
-			//         "CatalogConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.",
-			//           "properties": {
-			//             "GlueDataCatalogConfiguration": {
-			//               "additionalProperties": false,
-			//               "description": "The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.",
-			//               "properties": {
-			//                 "DatabaseARN": {
-			//                   "description": "The Amazon Resource Name (ARN) of the database.",
-			//                   "maxLength": 2048,
-			//                   "minLength": 1,
-			//                   "pattern": "^arn:.*$",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "type": "object"
-			//             }
-			//           },
-			//           "type": "object"
-			//         },
-			//         "CustomArtifactsConfiguration": {
-			//           "description": "A list of CustomArtifactConfiguration objects.",
-			//           "insertionOrder": false,
-			//           "items": {
-			//             "additionalProperties": false,
-			//             "description": "The configuration of connectors and user-defined functions.",
-			//             "properties": {
-			//               "ArtifactType": {
-			//                 "description": "Set this to either `UDF` or `DEPENDENCY_JAR`. `UDF` stands for user-defined functions. This type of artifact must be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an S3 bucket.",
-			//                 "enum": [
-			//                   "DEPENDENCY_JAR",
-			//                   "UDF"
-			//                 ],
-			//                 "type": "string"
-			//               },
-			//               "MavenReference": {
-			//                 "additionalProperties": false,
-			//                 "description": "The parameters required to fully specify a Maven reference.",
-			//                 "properties": {
-			//                   "ArtifactId": {
-			//                     "description": "The artifact ID of the Maven reference.",
-			//                     "maxLength": 256,
-			//                     "minLength": 1,
-			//                     "pattern": "^[a-zA-Z0-9_.-]+$",
-			//                     "type": "string"
-			//                   },
-			//                   "GroupId": {
-			//                     "description": "The group ID of the Maven reference.",
-			//                     "maxLength": 256,
-			//                     "minLength": 1,
-			//                     "pattern": "^[a-zA-Z0-9_.-]+$",
-			//                     "type": "string"
-			//                   },
-			//                   "Version": {
-			//                     "description": "The version of the Maven reference.",
-			//                     "maxLength": 256,
-			//                     "minLength": 1,
-			//                     "pattern": "^[a-zA-Z0-9_.-]+$",
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "ArtifactId",
-			//                   "GroupId",
-			//                   "Version"
-			//                 ],
-			//                 "type": "object"
-			//               },
-			//               "S3ContentLocation": {
-			//                 "additionalProperties": false,
-			//                 "description": "The location of the custom artifacts.",
-			//                 "properties": {
-			//                   "BucketARN": {
-			//                     "description": "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
-			//                     "maxLength": 2048,
-			//                     "minLength": 1,
-			//                     "pattern": "^arn:.*$",
-			//                     "type": "string"
-			//                   },
-			//                   "FileKey": {
-			//                     "description": "The file key for the object containing the application code.",
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   },
-			//                   "ObjectVersion": {
-			//                     "description": "The version of the object containing the application code.",
-			//                     "maxLength": 1024,
-			//                     "minLength": 1,
-			//                     "type": "string"
-			//                   }
-			//                 },
-			//                 "required": [
-			//                   "BucketARN",
-			//                   "FileKey"
-			//                 ],
-			//                 "type": "object"
-			//               }
-			//             },
-			//             "required": [
-			//               "ArtifactType"
-			//             ],
-			//             "type": "object"
-			//           },
-			//           "maxItems": 50,
-			//           "type": "array",
-			//           "uniqueItems": false
-			//         },
-			//         "DeployAsApplicationConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.",
-			//           "properties": {
-			//             "S3ContentLocation": {
-			//               "additionalProperties": false,
-			//               "description": "The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.",
-			//               "properties": {
-			//                 "BasePath": {
-			//                   "description": "The base path for the S3 bucket.",
-			//                   "maxLength": 1024,
-			//                   "minLength": 1,
-			//                   "pattern": "^[a-zA-Z0-9/!-_.*'()]+$",
-			//                   "type": "string"
-			//                 },
-			//                 "BucketARN": {
-			//                   "description": "The Amazon Resource Name (ARN) of the S3 bucket.",
-			//                   "maxLength": 2048,
-			//                   "minLength": 1,
-			//                   "pattern": "^arn:.*$",
-			//                   "type": "string"
-			//                 }
-			//               },
-			//               "required": [
-			//                 "BucketARN"
-			//               ],
-			//               "type": "object"
-			//             }
-			//           },
-			//           "required": [
-			//             "S3ContentLocation"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "MonitoringConfiguration": {
-			//           "additionalProperties": false,
-			//           "description": "The monitoring configuration of a Kinesis Data Analytics Studio notebook.",
-			//           "properties": {
-			//             "LogLevel": {
-			//               "description": "The verbosity of the CloudWatch Logs for an application. You can set it to `INFO`, `WARN`, `ERROR`, or `DEBUG`.",
-			//               "enum": [
-			//                 "DEBUG",
-			//                 "INFO",
-			//                 "WARN",
-			//                 "ERROR"
-			//               ],
-			//               "type": "string"
-			//             }
-			//           },
-			//           "type": "object"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Use this parameter to configure the application.",
+			//	  "properties": {
+			//	    "ApplicationCodeConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "The code location and type parameters for a Flink-based Kinesis Data Analytics application.",
+			//	      "properties": {
+			//	        "CodeContent": {
+			//	          "additionalProperties": false,
+			//	          "description": "The location and type of the application code.",
+			//	          "properties": {
+			//	            "S3ContentLocation": {
+			//	              "additionalProperties": false,
+			//	              "description": "Information about the Amazon S3 bucket that contains the application code.",
+			//	              "properties": {
+			//	                "BucketARN": {
+			//	                  "description": "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 1,
+			//	                  "pattern": "^arn:.*$",
+			//	                  "type": "string"
+			//	                },
+			//	                "FileKey": {
+			//	                  "description": "The file key for the object containing the application code.",
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                },
+			//	                "ObjectVersion": {
+			//	                  "description": "The version of the object containing the application code.",
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 1,
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "BucketARN",
+			//	                "FileKey"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "TextContent": {
+			//	              "description": "The text-format code for a Flink-based Kinesis Data Analytics application.",
+			//	              "maxLength": 102400,
+			//	              "minLength": 1,
+			//	              "type": "string"
+			//	            },
+			//	            "ZipFileContent": {
+			//	              "description": "The zip-format code for a Flink-based Kinesis Data Analytics application.",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CodeContentType": {
+			//	          "description": "Specifies whether the code content is in text or zip format.",
+			//	          "enum": [
+			//	            "PLAINTEXT",
+			//	            "ZIPFILE"
+			//	          ],
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "CodeContentType",
+			//	        "CodeContent"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "ApplicationSnapshotConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
+			//	      "properties": {
+			//	        "SnapshotsEnabled": {
+			//	          "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "SnapshotsEnabled"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "EnvironmentProperties": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes execution properties for a Flink-based Kinesis Data Analytics application.",
+			//	      "properties": {
+			//	        "PropertyGroups": {
+			//	          "description": "Describes the execution property groups.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "Property key-value pairs passed into an application.",
+			//	            "properties": {
+			//	              "PropertyGroupId": {
+			//	                "description": "Describes the key of an application execution property key-value pair.",
+			//	                "maxLength": 50,
+			//	                "minLength": 1,
+			//	                "pattern": "^[a-zA-Z0-9_.-]+$",
+			//	                "type": "string"
+			//	              },
+			//	              "PropertyMap": {
+			//	                "additionalProperties": false,
+			//	                "description": "Describes the value of an application execution property key-value pair.",
+			//	                "patternProperties": {
+			//	                  "": {
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 50,
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "FlinkApplicationConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "The creation and update parameters for a Flink-based Kinesis Data Analytics application.",
+			//	      "properties": {
+			//	        "CheckpointConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see Checkpoints for Fault Tolerance in the Apache Flink Documentation.",
+			//	          "properties": {
+			//	            "CheckpointInterval": {
+			//	              "description": "Describes the interval in milliseconds between checkpoint operations.",
+			//	              "format": "int64",
+			//	              "maximum": 9223372036854775807,
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            },
+			//	            "CheckpointingEnabled": {
+			//	              "description": "Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.",
+			//	              "type": "boolean"
+			//	            },
+			//	            "ConfigurationType": {
+			//	              "description": "Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to `CUSTOM` in order to set the `CheckpointingEnabled`, `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.",
+			//	              "enum": [
+			//	                "DEFAULT",
+			//	                "CUSTOM"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "MinPauseBetweenCheckpoints": {
+			//	              "description": "Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see Tuning Checkpointing in the Apache Flink Documentation.",
+			//	              "format": "int64",
+			//	              "maximum": 9223372036854775807,
+			//	              "minimum": 0,
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ConfigurationType"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "MonitoringConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "Describes configuration parameters for Amazon CloudWatch logging for an application.",
+			//	          "properties": {
+			//	            "ConfigurationType": {
+			//	              "description": "Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.",
+			//	              "enum": [
+			//	                "DEFAULT",
+			//	                "CUSTOM"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "LogLevel": {
+			//	              "description": "Describes the verbosity of the CloudWatch Logs for an application.",
+			//	              "enum": [
+			//	                "DEBUG",
+			//	                "INFO",
+			//	                "WARN",
+			//	                "ERROR"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "MetricsLevel": {
+			//	              "description": "Describes the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.",
+			//	              "enum": [
+			//	                "APPLICATION",
+			//	                "OPERATOR",
+			//	                "PARALLELISM",
+			//	                "TASK"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ConfigurationType"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "ParallelismConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "Describes parameters for how an application executes multiple tasks simultaneously.",
+			//	          "properties": {
+			//	            "AutoScalingEnabled": {
+			//	              "description": "Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.",
+			//	              "type": "boolean"
+			//	            },
+			//	            "ConfigurationType": {
+			//	              "description": "Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to `CUSTOM` in order to change your application's `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU` properties.",
+			//	              "enum": [
+			//	                "CUSTOM",
+			//	                "DEFAULT"
+			//	              ],
+			//	              "type": "string"
+			//	            },
+			//	            "Parallelism": {
+			//	              "description": "Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration:AutoScalingEnabled is set to true.",
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            },
+			//	            "ParallelismPerKPU": {
+			//	              "description": "Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.",
+			//	              "minimum": 1,
+			//	              "type": "integer"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "ConfigurationType"
+			//	          ],
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "SqlApplicationConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "The creation and update parameters for a SQL-based Kinesis Data Analytics application.",
+			//	      "properties": {
+			//	        "Inputs": {
+			//	          "description": "The array of Input objects describing the input streams used by the application.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "When you configure the application input for a SQL-based Kinesis Data Analytics application, you specify the streaming source, the in-application stream name that is created, and the mapping between the two.",
+			//	            "properties": {
+			//	              "InputParallelism": {
+			//	                "additionalProperties": false,
+			//	                "description": "Describes the number of in-application streams to create.",
+			//	                "properties": {
+			//	                  "Count": {
+			//	                    "description": "The number of in-application streams to create.",
+			//	                    "maximum": 64,
+			//	                    "minimum": 1,
+			//	                    "type": "integer"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "InputProcessingConfiguration": {
+			//	                "additionalProperties": false,
+			//	                "description": "The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.",
+			//	                "properties": {
+			//	                  "InputLambdaProcessor": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
+			//	                    "properties": {
+			//	                      "ResourceARN": {
+			//	                        "description": "The ARN of the Amazon Lambda function that operates on records in the stream.",
+			//	                        "maxLength": 2048,
+			//	                        "minLength": 1,
+			//	                        "pattern": "^arn:.*$",
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "ResourceARN"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "type": "object"
+			//	              },
+			//	              "InputSchema": {
+			//	                "additionalProperties": false,
+			//	                "description": "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
+			//	                "properties": {
+			//	                  "RecordColumns": {
+			//	                    "description": "A list of `RecordColumn` objects.",
+			//	                    "insertionOrder": false,
+			//	                    "items": {
+			//	                      "additionalProperties": false,
+			//	                      "description": "For a SQL-based Kinesis Data Analytics application, describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.\nAlso used to describe the format of the reference data source.",
+			//	                      "properties": {
+			//	                        "Mapping": {
+			//	                          "description": "A reference to the data element in the streaming input or the reference data source.",
+			//	                          "maxLength": 65535,
+			//	                          "minLength": 1,
+			//	                          "type": "string"
+			//	                        },
+			//	                        "Name": {
+			//	                          "description": "The name of the column that is created in the in-application input stream or reference table.",
+			//	                          "maxLength": 256,
+			//	                          "minLength": 1,
+			//	                          "pattern": "^[^-\\s\u003c\u003e\u0026]*$",
+			//	                          "type": "string"
+			//	                        },
+			//	                        "SqlType": {
+			//	                          "description": "The type of column created in the in-application input stream or reference table.",
+			//	                          "maxLength": 100,
+			//	                          "minLength": 1,
+			//	                          "type": "string"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "SqlType",
+			//	                        "Name"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "maxItems": 1000,
+			//	                    "type": "array",
+			//	                    "uniqueItems": false
+			//	                  },
+			//	                  "RecordEncoding": {
+			//	                    "description": "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
+			//	                    "enum": [
+			//	                      "UTF-8"
+			//	                    ],
+			//	                    "type": "string"
+			//	                  },
+			//	                  "RecordFormat": {
+			//	                    "additionalProperties": false,
+			//	                    "description": "Specifies the format of the records on the streaming source.",
+			//	                    "properties": {
+			//	                      "MappingParameters": {
+			//	                        "additionalProperties": false,
+			//	                        "description": "When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.",
+			//	                        "properties": {
+			//	                          "CSVMappingParameters": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
+			//	                            "properties": {
+			//	                              "RecordColumnDelimiter": {
+			//	                                "description": "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
+			//	                                "maxLength": 1024,
+			//	                                "minLength": 1,
+			//	                                "type": "string"
+			//	                              },
+			//	                              "RecordRowDelimiter": {
+			//	                                "description": "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
+			//	                                "maxLength": 1024,
+			//	                                "minLength": 1,
+			//	                                "type": "string"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "RecordRowDelimiter",
+			//	                              "RecordColumnDelimiter"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          },
+			//	                          "JSONMappingParameters": {
+			//	                            "additionalProperties": false,
+			//	                            "description": "Provides additional mapping information when JSON is the record format on the streaming source.",
+			//	                            "properties": {
+			//	                              "RecordRowPath": {
+			//	                                "description": "The path to the top-level parent that contains the records.",
+			//	                                "maxLength": 65535,
+			//	                                "minLength": 1,
+			//	                                "pattern": "",
+			//	                                "type": "string"
+			//	                              }
+			//	                            },
+			//	                            "required": [
+			//	                              "RecordRowPath"
+			//	                            ],
+			//	                            "type": "object"
+			//	                          }
+			//	                        },
+			//	                        "type": "object"
+			//	                      },
+			//	                      "RecordFormatType": {
+			//	                        "description": "The type of record format.",
+			//	                        "enum": [
+			//	                          "CSV",
+			//	                          "JSON"
+			//	                        ],
+			//	                        "type": "string"
+			//	                      }
+			//	                    },
+			//	                    "required": [
+			//	                      "RecordFormatType"
+			//	                    ],
+			//	                    "type": "object"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "RecordColumns",
+			//	                  "RecordFormat"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "KinesisFirehoseInput": {
+			//	                "additionalProperties": false,
+			//	                "description": "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
+			//	                "properties": {
+			//	                  "ResourceARN": {
+			//	                    "description": "The Amazon Resource Name (ARN) of the delivery stream.",
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^arn:.*$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ResourceARN"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "KinesisStreamsInput": {
+			//	                "additionalProperties": false,
+			//	                "description": "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
+			//	                "properties": {
+			//	                  "ResourceARN": {
+			//	                    "description": "The ARN of the input Kinesis data stream to read.",
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^arn:.*$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ResourceARN"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "NamePrefix": {
+			//	                "description": "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
+			//	                "maxLength": 32,
+			//	                "minLength": 1,
+			//	                "pattern": "^[^-\\s\u003c\u003e\u0026]*$",
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "NamePrefix",
+			//	              "InputSchema"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 1,
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "VpcConfigurations": {
+			//	      "description": "The array of descriptions of VPC configurations available to the application.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "description": "Describes the parameters of a VPC used by the application.",
+			//	        "properties": {
+			//	          "SecurityGroupIds": {
+			//	            "description": "The array of SecurityGroup IDs used by the VPC configuration.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "maxItems": 5,
+			//	            "minItems": 1,
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          },
+			//	          "SubnetIds": {
+			//	            "description": "The array of Subnet IDs used by the VPC configuration.",
+			//	            "insertionOrder": false,
+			//	            "items": {
+			//	              "type": "string"
+			//	            },
+			//	            "maxItems": 16,
+			//	            "minItems": 1,
+			//	            "type": "array",
+			//	            "uniqueItems": false
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "SecurityGroupIds",
+			//	          "SubnetIds"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "maxItems": 1,
+			//	      "type": "array",
+			//	      "uniqueItems": false
+			//	    },
+			//	    "ZeppelinApplicationConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration parameters for a Kinesis Data Analytics Studio notebook.",
+			//	      "properties": {
+			//	        "CatalogConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.",
+			//	          "properties": {
+			//	            "GlueDataCatalogConfiguration": {
+			//	              "additionalProperties": false,
+			//	              "description": "The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.",
+			//	              "properties": {
+			//	                "DatabaseARN": {
+			//	                  "description": "The Amazon Resource Name (ARN) of the database.",
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 1,
+			//	                  "pattern": "^arn:.*$",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "CustomArtifactsConfiguration": {
+			//	          "description": "A list of CustomArtifactConfiguration objects.",
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "description": "The configuration of connectors and user-defined functions.",
+			//	            "properties": {
+			//	              "ArtifactType": {
+			//	                "description": "Set this to either `UDF` or `DEPENDENCY_JAR`. `UDF` stands for user-defined functions. This type of artifact must be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an S3 bucket.",
+			//	                "enum": [
+			//	                  "DEPENDENCY_JAR",
+			//	                  "UDF"
+			//	                ],
+			//	                "type": "string"
+			//	              },
+			//	              "MavenReference": {
+			//	                "additionalProperties": false,
+			//	                "description": "The parameters required to fully specify a Maven reference.",
+			//	                "properties": {
+			//	                  "ArtifactId": {
+			//	                    "description": "The artifact ID of the Maven reference.",
+			//	                    "maxLength": 256,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^[a-zA-Z0-9_.-]+$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "GroupId": {
+			//	                    "description": "The group ID of the Maven reference.",
+			//	                    "maxLength": 256,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^[a-zA-Z0-9_.-]+$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "Version": {
+			//	                    "description": "The version of the Maven reference.",
+			//	                    "maxLength": 256,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^[a-zA-Z0-9_.-]+$",
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "ArtifactId",
+			//	                  "GroupId",
+			//	                  "Version"
+			//	                ],
+			//	                "type": "object"
+			//	              },
+			//	              "S3ContentLocation": {
+			//	                "additionalProperties": false,
+			//	                "description": "The location of the custom artifacts.",
+			//	                "properties": {
+			//	                  "BucketARN": {
+			//	                    "description": "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
+			//	                    "maxLength": 2048,
+			//	                    "minLength": 1,
+			//	                    "pattern": "^arn:.*$",
+			//	                    "type": "string"
+			//	                  },
+			//	                  "FileKey": {
+			//	                    "description": "The file key for the object containing the application code.",
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  },
+			//	                  "ObjectVersion": {
+			//	                    "description": "The version of the object containing the application code.",
+			//	                    "maxLength": 1024,
+			//	                    "minLength": 1,
+			//	                    "type": "string"
+			//	                  }
+			//	                },
+			//	                "required": [
+			//	                  "BucketARN",
+			//	                  "FileKey"
+			//	                ],
+			//	                "type": "object"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ArtifactType"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "maxItems": 50,
+			//	          "type": "array",
+			//	          "uniqueItems": false
+			//	        },
+			//	        "DeployAsApplicationConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.",
+			//	          "properties": {
+			//	            "S3ContentLocation": {
+			//	              "additionalProperties": false,
+			//	              "description": "The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.",
+			//	              "properties": {
+			//	                "BasePath": {
+			//	                  "description": "The base path for the S3 bucket.",
+			//	                  "maxLength": 1024,
+			//	                  "minLength": 1,
+			//	                  "pattern": "^[a-zA-Z0-9/!-_.*'()]+$",
+			//	                  "type": "string"
+			//	                },
+			//	                "BucketARN": {
+			//	                  "description": "The Amazon Resource Name (ARN) of the S3 bucket.",
+			//	                  "maxLength": 2048,
+			//	                  "minLength": 1,
+			//	                  "pattern": "^arn:.*$",
+			//	                  "type": "string"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "BucketARN"
+			//	              ],
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "S3ContentLocation"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "MonitoringConfiguration": {
+			//	          "additionalProperties": false,
+			//	          "description": "The monitoring configuration of a Kinesis Data Analytics Studio notebook.",
+			//	          "properties": {
+			//	            "LogLevel": {
+			//	              "description": "The verbosity of the CloudWatch Logs for an application. You can set it to `INFO`, `WARN`, `ERROR`, or `DEBUG`.",
+			//	              "enum": [
+			//	                "DEBUG",
+			//	                "INFO",
+			//	                "WARN",
+			//	                "ERROR"
+			//	              ],
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Use this parameter to configure the application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1677,13 +1678,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_description": {
 			// Property: ApplicationDescription
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "",
-			//   "description": "The description of the application.",
-			//   "maxLength": 1024,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "",
+			//	  "description": "The description of the application.",
+			//	  "maxLength": 1024,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the application.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1699,21 +1701,22 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_maintenance_configuration": {
 			// Property: ApplicationMaintenanceConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Used to configure start of maintenance window.",
-			//   "properties": {
-			//     "ApplicationMaintenanceWindowStartTime": {
-			//       "description": "The start time for the maintenance window.",
-			//       "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ApplicationMaintenanceWindowStartTime"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Used to configure start of maintenance window.",
+			//	  "properties": {
+			//	    "ApplicationMaintenanceWindowStartTime": {
+			//	      "description": "The start time for the maintenance window.",
+			//	      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ApplicationMaintenanceWindowStartTime"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Used to configure start of maintenance window.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1737,14 +1740,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_mode": {
 			// Property: ApplicationMode
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.",
-			//   "enum": [
-			//     "INTERACTIVE",
-			//     "STREAMING"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.",
+			//	  "enum": [
+			//	    "INTERACTIVE",
+			//	    "STREAMING"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1763,13 +1767,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_name": {
 			// Property: ApplicationName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the application.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9_.-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the application.",
+			//	  "maxLength": 128,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9_.-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the application.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1786,50 +1791,51 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"run_configuration": {
 			// Property: RunConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
-			//   "properties": {
-			//     "ApplicationRestoreConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Describes the restore behavior of a restarting application.",
-			//       "properties": {
-			//         "ApplicationRestoreType": {
-			//           "description": "Specifies how the application should be restored.",
-			//           "enum": [
-			//             "SKIP_RESTORE_FROM_SNAPSHOT",
-			//             "RESTORE_FROM_LATEST_SNAPSHOT",
-			//             "RESTORE_FROM_CUSTOM_SNAPSHOT"
-			//           ],
-			//           "type": "string"
-			//         },
-			//         "SnapshotName": {
-			//           "description": "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
-			//           "maxLength": 256,
-			//           "minLength": 1,
-			//           "pattern": "^[a-zA-Z0-9_.-]+$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "ApplicationRestoreType"
-			//       ],
-			//       "type": "object"
-			//     },
-			//     "FlinkRunConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
-			//       "properties": {
-			//         "AllowNonRestoredState": {
-			//           "description": "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
-			//           "type": "boolean"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
+			//	  "properties": {
+			//	    "ApplicationRestoreConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes the restore behavior of a restarting application.",
+			//	      "properties": {
+			//	        "ApplicationRestoreType": {
+			//	          "description": "Specifies how the application should be restored.",
+			//	          "enum": [
+			//	            "SKIP_RESTORE_FROM_SNAPSHOT",
+			//	            "RESTORE_FROM_LATEST_SNAPSHOT",
+			//	            "RESTORE_FROM_CUSTOM_SNAPSHOT"
+			//	          ],
+			//	          "type": "string"
+			//	        },
+			//	        "SnapshotName": {
+			//	          "description": "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
+			//	          "maxLength": 256,
+			//	          "minLength": 1,
+			//	          "pattern": "^[a-zA-Z0-9_.-]+$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "ApplicationRestoreType"
+			//	      ],
+			//	      "type": "object"
+			//	    },
+			//	    "FlinkRunConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
+			//	      "properties": {
+			//	        "AllowNonRestoredState": {
+			//	          "description": "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -1908,10 +1914,11 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"runtime_environment": {
 			// Property: RuntimeEnvironment
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The runtime environment for the application.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The runtime environment for the application.",
+			//	  "type": "string"
+			//	}
 			Description: "The runtime environment for the application.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1922,13 +1929,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"service_execution_role": {
 			// Property: ServiceExecutionRole
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the IAM role that the application uses to access external resources.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "^arn:.*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the IAM role that the application uses to access external resources.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "^arn:.*$",
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the IAM role that the application uses to access external resources.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1940,37 +1948,38 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair that identifies an application.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that's 0 to 256 characters in length.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "minItems": 1,
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "description": "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair that identifies an application.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that's 0 to 256 characters in length.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "minItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Description: "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

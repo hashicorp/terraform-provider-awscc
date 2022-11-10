@@ -23,46 +23,49 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_identifier": {
 			// Property: ApplicationIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^app-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^app-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"default_route": {
 			// Property: DefaultRoute
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ActivationState": {
-			//       "enum": [
-			//         "INACTIVE",
-			//         "ACTIVE"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ActivationState"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ActivationState": {
+			//	      "enum": [
+			//	        "INACTIVE",
+			//	        "ACTIVE"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ActivationState"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"activation_state": {
@@ -77,93 +80,99 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_identifier": {
 			// Property: EnvironmentIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^env-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^env-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"path_resource_to_id": {
 			// Property: PathResourceToId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"route_identifier": {
 			// Property: RouteIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^rte-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^rte-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"route_type": {
 			// Property: RouteType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "DEFAULT",
-			//     "URI_PATH"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "DEFAULT",
+			//	    "URI_PATH"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"service_identifier": {
 			// Property: ServiceIdentifier
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 14,
-			//   "minLength": 14,
-			//   "pattern": "^svc-([0-9A-Za-z]{10}$)",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 14,
+			//	  "minLength": 14,
+			//	  "pattern": "^svc-([0-9A-Za-z]{10}$)",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A label for tagging Environment resource",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A string used to identify this tag",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "A string containing the value for the tag",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A label for tagging Environment resource",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A string used to identify this tag",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "A string containing the value for the tag",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -186,47 +195,48 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"uri_path_route": {
 			// Property: UriPathRoute
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "properties": {
-			//     "ActivationState": {
-			//       "enum": [
-			//         "INACTIVE",
-			//         "ACTIVE"
-			//       ],
-			//       "type": "string"
-			//     },
-			//     "IncludeChildPaths": {
-			//       "type": "boolean"
-			//     },
-			//     "Methods": {
-			//       "insertionOrder": false,
-			//       "items": {
-			//         "enum": [
-			//           "DELETE",
-			//           "GET",
-			//           "HEAD",
-			//           "OPTIONS",
-			//           "PATCH",
-			//           "POST",
-			//           "PUT"
-			//         ],
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     },
-			//     "SourcePath": {
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "^(/[a-zA-Z0-9._-]+)+$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "ActivationState"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "ActivationState": {
+			//	      "enum": [
+			//	        "INACTIVE",
+			//	        "ACTIVE"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "IncludeChildPaths": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "Methods": {
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "enum": [
+			//	          "DELETE",
+			//	          "GET",
+			//	          "HEAD",
+			//	          "OPTIONS",
+			//	          "PATCH",
+			//	          "POST",
+			//	          "PUT"
+			//	        ],
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    },
+			//	    "SourcePath": {
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "^(/[a-zA-Z0-9._-]+)+$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ActivationState"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"activation_state": {

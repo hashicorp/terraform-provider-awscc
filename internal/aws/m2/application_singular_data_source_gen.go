@@ -23,40 +23,43 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"application_id": {
 			// Property: ApplicationId
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^\\S{1,80}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^\\S{1,80}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"definition": {
 			// Property: Definition
 			// CloudFormation resource type schema:
-			// {
-			//   "properties": {
-			//     "Content": {
-			//       "maxLength": 65000,
-			//       "minLength": 1,
-			//       "type": "string"
-			//     },
-			//     "S3Location": {
-			//       "pattern": "",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "properties": {
+			//	    "Content": {
+			//	      "maxLength": 65000,
+			//	      "minLength": 1,
+			//	      "type": "string"
+			//	    },
+			//	    "S3Location": {
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"content": {
@@ -76,51 +79,56 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 500,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 500,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"engine_type": {
 			// Property: EngineType
 			// CloudFormation resource type schema:
-			// {
-			//   "enum": [
-			//     "microfocus",
-			//     "bluage"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "enum": [
+			//	    "microfocus",
+			//	    "bluage"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			//
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,

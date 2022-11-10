@@ -23,10 +23,11 @@ func siteResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the site.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the site.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the site.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -38,10 +39,11 @@ func siteResource(ctx context.Context) (resource.Resource, error) {
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the global network.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the global network.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
@@ -52,25 +54,26 @@ func siteResource(ctx context.Context) (resource.Resource, error) {
 		"location": {
 			// Property: Location
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The location of the site.",
-			//   "properties": {
-			//     "Address": {
-			//       "description": "The physical address.",
-			//       "type": "string"
-			//     },
-			//     "Latitude": {
-			//       "description": "The latitude.",
-			//       "type": "string"
-			//     },
-			//     "Longitude": {
-			//       "description": "The longitude.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The location of the site.",
+			//	  "properties": {
+			//	    "Address": {
+			//	      "description": "The physical address.",
+			//	      "type": "string"
+			//	    },
+			//	    "Latitude": {
+			//	      "description": "The latitude.",
+			//	      "type": "string"
+			//	    },
+			//	    "Longitude": {
+			//	      "description": "The longitude.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The location of the site.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -115,10 +118,11 @@ func siteResource(ctx context.Context) (resource.Resource, error) {
 		"site_arn": {
 			// Property: SiteArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the site.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the site.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the site.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -129,10 +133,11 @@ func siteResource(ctx context.Context) (resource.Resource, error) {
 		"site_id": {
 			// Property: SiteId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the site.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the site.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the site.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -143,23 +148,24 @@ func siteResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the site.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a site resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the site.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a site resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The tags for the site.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

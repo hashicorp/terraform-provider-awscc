@@ -23,10 +23,11 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the resource.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the resource.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of resource, for example a VPC attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of resource, for example a VPC attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The type of resource, for example a VPC attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the subnet association.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the subnet association.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the subnet association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The IDs of the subnets to associate with the transit gateway multicast domain.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The IDs of the subnets to associate with the transit gateway multicast domain.",
+			//	  "type": "string"
+			//	}
 			Description: "The IDs of the subnets to associate with the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,10 +71,11 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"transit_gateway_attachment_id": {
 			// Property: TransitGatewayAttachmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway attachment.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway attachment.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -78,10 +83,11 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"transit_gateway_multicast_domain_id": {
 			// Property: TransitGatewayMulticastDomainId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the transit gateway multicast domain.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the transit gateway multicast domain.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,

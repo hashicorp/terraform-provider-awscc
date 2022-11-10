@@ -24,18 +24,19 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"hosted_zone_config": {
 			// Property: HostedZoneConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
-			//   "properties": {
-			//     "Comment": {
-			//       "description": "Any comments that you want to include about the hosted zone.",
-			//       "maxLength": 256,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
+			//	  "properties": {
+			//	    "Comment": {
+			//	      "description": "Any comments that you want to include about the hosted zone.",
+			//	      "maxLength": 256,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -63,33 +64,34 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"hosted_zone_tags": {
 			// Property: HostedZoneTags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag.",
-			//         "maxLength": 128,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag.",
-			//         "maxLength": 256,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag.",
+			//	        "maxLength": 128,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag.",
+			//	        "maxLength": 256,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -122,9 +124,10 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -134,11 +137,12 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.\n\nIf you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.",
-			//   "maxLength": 1024,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.\n\nIf you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.",
+			//	  "maxLength": 1024,
+			//	  "type": "string"
+			//	}
 			Description: "The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.\n\nIf you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -154,13 +158,14 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"name_servers": {
 			// Property: NameServers
 			// CloudFormation resource type schema:
-			// {
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": false
-			// }
+			//
+			//	{
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": false
+			//	}
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -170,20 +175,21 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"query_logging_config": {
 			// Property: QueryLoggingConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "A complex type that contains information about a configuration for DNS query logging.",
-			//   "properties": {
-			//     "CloudWatchLogsLogGroupArn": {
-			//       "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "CloudWatchLogsLogGroupArn"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "A complex type that contains information about a configuration for DNS query logging.",
+			//	  "properties": {
+			//	    "CloudWatchLogsLogGroupArn": {
+			//	      "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "CloudWatchLogsLogGroupArn"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "A complex type that contains information about a configuration for DNS query logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -204,31 +210,32 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		"vp_cs": {
 			// Property: VPCs
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A complex type that contains information about the VPCs that are associated with the specified hosted zone.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A complex type that contains information about an Amazon VPC. Route 53 Resolver uses the records in the private hosted zone to route traffic in that VPC.",
-			//     "properties": {
-			//       "VPCId": {
-			//         "description": "The ID of an Amazon VPC.",
-			//         "type": "string"
-			//       },
-			//       "VPCRegion": {
-			//         "description": "The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "VPCId",
-			//       "VPCRegion"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "A complex type that contains information about the VPCs that are associated with the specified hosted zone.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A complex type that contains information about an Amazon VPC. Route 53 Resolver uses the records in the private hosted zone to route traffic in that VPC.",
+			//	    "properties": {
+			//	      "VPCId": {
+			//	        "description": "The ID of an Amazon VPC.",
+			//	        "type": "string"
+			//	      },
+			//	      "VPCRegion": {
+			//	        "description": "The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "VPCId",
+			//	      "VPCRegion"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "A complex type that contains information about the VPCs that are associated with the specified hosted zone.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

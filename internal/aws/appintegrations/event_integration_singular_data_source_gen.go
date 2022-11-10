@@ -23,70 +23,71 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"associations": {
 			// Property: Associations
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The associations with the event integration.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "ClientAssociationMetadata": {
-			//         "description": "The metadata associated with the client.",
-			//         "items": {
-			//           "additionalProperties": false,
-			//           "properties": {
-			//             "Key": {
-			//               "description": "A key to identify the metadata.",
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "pattern": ".*\\S.*",
-			//               "type": "string"
-			//             },
-			//             "Value": {
-			//               "description": "Corresponding metadata value for the key.",
-			//               "maxLength": 255,
-			//               "minLength": 1,
-			//               "pattern": ".*\\S.*",
-			//               "type": "string"
-			//             }
-			//           },
-			//           "required": [
-			//             "Key",
-			//             "Value"
-			//           ],
-			//           "type": "object"
-			//         },
-			//         "type": "array"
-			//       },
-			//       "ClientId": {
-			//         "description": "The identifier for the client that is associated with the event integration.",
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "EventBridgeRuleName": {
-			//         "description": "The name of the Eventbridge rule.",
-			//         "maxLength": 2048,
-			//         "minLength": 1,
-			//         "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
-			//         "type": "string"
-			//       },
-			//       "EventIntegrationAssociationArn": {
-			//         "description": "The Amazon Resource Name (ARN) for the event integration association.",
-			//         "maxLength": 2048,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "EventIntegrationAssociationId": {
-			//         "description": "The identifier for the event integration association.",
-			//         "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The associations with the event integration.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "ClientAssociationMetadata": {
+			//	        "description": "The metadata associated with the client.",
+			//	        "items": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "Key": {
+			//	              "description": "A key to identify the metadata.",
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "pattern": ".*\\S.*",
+			//	              "type": "string"
+			//	            },
+			//	            "Value": {
+			//	              "description": "Corresponding metadata value for the key.",
+			//	              "maxLength": 255,
+			//	              "minLength": 1,
+			//	              "pattern": ".*\\S.*",
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "required": [
+			//	            "Key",
+			//	            "Value"
+			//	          ],
+			//	          "type": "object"
+			//	        },
+			//	        "type": "array"
+			//	      },
+			//	      "ClientId": {
+			//	        "description": "The identifier for the client that is associated with the event integration.",
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "EventBridgeRuleName": {
+			//	        "description": "The name of the Eventbridge rule.",
+			//	        "maxLength": 2048,
+			//	        "minLength": 1,
+			//	        "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "EventIntegrationAssociationArn": {
+			//	        "description": "The Amazon Resource Name (ARN) for the event integration association.",
+			//	        "maxLength": 2048,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "EventIntegrationAssociationId": {
+			//	        "description": "The identifier for the event integration association.",
+			//	        "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "The associations with the event integration.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -142,12 +143,13 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The event integration description.",
-			//   "maxLength": 1000,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The event integration description.",
+			//	  "maxLength": 1000,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Description: "The event integration description.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -155,13 +157,14 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"event_bridge_bus": {
 			// Property: EventBridgeBus
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Eventbridge bus for the event integration.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Eventbridge bus for the event integration.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Eventbridge bus for the event integration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -169,23 +172,24 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"event_filter": {
 			// Property: EventFilter
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The EventFilter (source) associated with the event integration.",
-			//   "properties": {
-			//     "Source": {
-			//       "description": "The source of the events.",
-			//       "maxLength": 256,
-			//       "minLength": 1,
-			//       "pattern": "^aws\\.partner\\/.*$",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "Source"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The EventFilter (source) associated with the event integration.",
+			//	  "properties": {
+			//	    "Source": {
+			//	      "description": "The source of the events.",
+			//	      "maxLength": 256,
+			//	      "minLength": 1,
+			//	      "pattern": "^aws\\.partner\\/.*$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Source"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The EventFilter (source) associated with the event integration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -202,13 +206,14 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"event_integration_arn": {
 			// Property: EventIntegrationArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the event integration.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the event integration.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the event integration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -216,13 +221,14 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the event integration.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the event integration.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the event integration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -230,35 +236,36 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags (keys and values) associated with the event integration.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "A key to identify the tag.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "Corresponding tag value for the key.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "minItems": 0,
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The tags (keys and values) associated with the event integration.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "A key to identify the tag.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "Corresponding tag value for the key.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "minItems": 0,
+			//	  "type": "array"
+			//	}
 			Description: "The tags (keys and values) associated with the event integration.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -25,9 +25,10 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -37,35 +38,36 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		"template": {
 			// Property: Template
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The content of the email, composed of a subject line, an HTML part, and a text-only part",
-			//   "properties": {
-			//     "HtmlPart": {
-			//       "description": "The HTML body of the email.",
-			//       "type": "string"
-			//     },
-			//     "SubjectPart": {
-			//       "description": "The subject line of the email.",
-			//       "type": "string"
-			//     },
-			//     "TemplateName": {
-			//       "description": "The name of the template.",
-			//       "maxLength": 64,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//       "type": "string"
-			//     },
-			//     "TextPart": {
-			//       "description": "The email body that is visible to recipients whose email clients do not display HTML content.",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "SubjectPart"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The content of the email, composed of a subject line, an HTML part, and a text-only part",
+			//	  "properties": {
+			//	    "HtmlPart": {
+			//	      "description": "The HTML body of the email.",
+			//	      "type": "string"
+			//	    },
+			//	    "SubjectPart": {
+			//	      "description": "The subject line of the email.",
+			//	      "type": "string"
+			//	    },
+			//	    "TemplateName": {
+			//	      "description": "The name of the template.",
+			//	      "maxLength": 64,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+			//	      "type": "string"
+			//	    },
+			//	    "TextPart": {
+			//	      "description": "The email body that is visible to recipients whose email clients do not display HTML content.",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "SubjectPart"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The content of the email, composed of a subject line, an HTML part, and a text-only part",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{

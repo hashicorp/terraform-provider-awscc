@@ -23,11 +23,12 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 		"archive_name": {
 			// Property: ArchiveName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 48,
-			//   "minLength": 1,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 48,
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -38,9 +39,10 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -50,9 +52,10 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -63,9 +66,10 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 		"event_pattern": {
 			// Property: EventPattern
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "type": "object"
+			//	}
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -76,9 +80,10 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 		"retention_days": {
 			// Property: RetentionDays
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "type": "integer"
+			//	}
 			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
@@ -89,9 +94,10 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 		"source_arn": {
 			// Property: SourceArn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

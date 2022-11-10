@@ -23,12 +23,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the environment.",
-			//   "maxLength": 500,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the environment.",
+			//	  "maxLength": 500,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "The description of the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -36,14 +37,15 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine_type": {
 			// Property: EngineType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The target platform for the environment.",
-			//   "enum": [
-			//     "microfocus",
-			//     "bluage"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The target platform for the environment.",
+			//	  "enum": [
+			//	    "microfocus",
+			//	    "bluage"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The target platform for the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,11 +53,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine_version": {
 			// Property: EngineVersion
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The version of the runtime engine for the environment.",
-			//   "pattern": "^\\S{1,10}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The version of the runtime engine for the environment.",
+			//	  "pattern": "^\\S{1,10}$",
+			//	  "type": "string"
+			//	}
 			Description: "The version of the runtime engine for the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -63,11 +66,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_arn": {
 			// Property: EnvironmentArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the runtime environment.",
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the runtime environment.",
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the runtime environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,11 +79,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_id": {
 			// Property: EnvironmentId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique identifier of the environment.",
-			//   "pattern": "^\\S{1,80}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The unique identifier of the environment.",
+			//	  "pattern": "^\\S{1,80}$",
+			//	  "type": "string"
+			//	}
 			Description: "The unique identifier of the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,21 +92,22 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"high_availability_config": {
 			// Property: HighAvailabilityConfig
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Defines the details of a high availability configuration.",
-			//   "properties": {
-			//     "DesiredCapacity": {
-			//       "maximum": 100,
-			//       "minimum": 1,
-			//       "type": "integer"
-			//     }
-			//   },
-			//   "required": [
-			//     "DesiredCapacity"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Defines the details of a high availability configuration.",
+			//	  "properties": {
+			//	    "DesiredCapacity": {
+			//	      "maximum": 100,
+			//	      "minimum": 1,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "DesiredCapacity"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Defines the details of a high availability configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -117,11 +123,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_type": {
 			// Property: InstanceType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The type of instance underlying the environment.",
-			//   "pattern": "^\\S{1,20}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The type of instance underlying the environment.",
+			//	  "pattern": "^\\S{1,20}$",
+			//	  "type": "string"
+			//	}
 			Description: "The type of instance underlying the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -129,11 +136,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the environment.",
-			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the environment.",
+			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the environment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -141,11 +149,12 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"preferred_maintenance_window": {
 			// Property: PreferredMaintenanceWindow
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
-			//   "pattern": "^\\S{1,50}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
+			//	  "pattern": "^\\S{1,50}$",
+			//	  "type": "string"
+			//	}
 			Description: "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -153,10 +162,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"publicly_accessible": {
 			// Property: PubliclyAccessible
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the environment is publicly accessible.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the environment is publicly accessible.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether the environment is publicly accessible.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -164,15 +174,16 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids": {
 			// Property: SecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The list of security groups for the VPC associated with this environment.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "pattern": "^\\S{1,50}$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The list of security groups for the VPC associated with this environment.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "pattern": "^\\S{1,50}$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The list of security groups for the VPC associated with this environment.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -180,59 +191,60 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"storage_configurations": {
 			// Property: StorageConfigurations
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The storage configurations defined for the runtime environment.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "description": "Defines the storage configuration for an environment.",
-			//     "properties": {
-			//       "Efs": {
-			//         "additionalProperties": false,
-			//         "description": "Defines the storage configuration for an Amazon EFS file system.",
-			//         "properties": {
-			//           "FileSystemId": {
-			//             "description": "The file system identifier.",
-			//             "pattern": "^\\S{1,200}$",
-			//             "type": "string"
-			//           },
-			//           "MountPoint": {
-			//             "description": "The mount point for the file system.",
-			//             "pattern": "^\\S{1,200}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "FileSystemId",
-			//           "MountPoint"
-			//         ],
-			//         "type": "object"
-			//       },
-			//       "Fsx": {
-			//         "additionalProperties": false,
-			//         "description": "Defines the storage configuration for an Amazon FSx file system.",
-			//         "properties": {
-			//           "FileSystemId": {
-			//             "description": "The file system identifier.",
-			//             "pattern": "^\\S{1,200}$",
-			//             "type": "string"
-			//           },
-			//           "MountPoint": {
-			//             "description": "The mount point for the file system.",
-			//             "pattern": "^\\S{1,200}$",
-			//             "type": "string"
-			//           }
-			//         },
-			//         "required": [
-			//           "FileSystemId",
-			//           "MountPoint"
-			//         ],
-			//         "type": "object"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The storage configurations defined for the runtime environment.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "description": "Defines the storage configuration for an environment.",
+			//	    "properties": {
+			//	      "Efs": {
+			//	        "additionalProperties": false,
+			//	        "description": "Defines the storage configuration for an Amazon EFS file system.",
+			//	        "properties": {
+			//	          "FileSystemId": {
+			//	            "description": "The file system identifier.",
+			//	            "pattern": "^\\S{1,200}$",
+			//	            "type": "string"
+			//	          },
+			//	          "MountPoint": {
+			//	            "description": "The mount point for the file system.",
+			//	            "pattern": "^\\S{1,200}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "FileSystemId",
+			//	          "MountPoint"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "Fsx": {
+			//	        "additionalProperties": false,
+			//	        "description": "Defines the storage configuration for an Amazon FSx file system.",
+			//	        "properties": {
+			//	          "FileSystemId": {
+			//	            "description": "The file system identifier.",
+			//	            "pattern": "^\\S{1,200}$",
+			//	            "type": "string"
+			//	          },
+			//	          "MountPoint": {
+			//	            "description": "The mount point for the file system.",
+			//	            "pattern": "^\\S{1,200}$",
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "FileSystemId",
+			//	          "MountPoint"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The storage configurations defined for the runtime environment.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -285,15 +297,16 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The unique identifiers of the subnets assigned to this runtime environment.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "pattern": "^\\S{1,50}$",
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The unique identifiers of the subnets assigned to this runtime environment.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "pattern": "^\\S{1,50}$",
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The unique identifiers of the subnets assigned to this runtime environment.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -301,18 +314,19 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Tags associated to this environment.",
-			//   "patternProperties": {
-			//     "": {
-			//       "maxLength": 256,
-			//       "minLength": 0,
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Tags associated to this environment.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "maxLength": 256,
+			//	      "minLength": 0,
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "Tags associated to this environment.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},

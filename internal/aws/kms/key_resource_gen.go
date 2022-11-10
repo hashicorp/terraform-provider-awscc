@@ -24,9 +24,10 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -36,12 +37,13 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
-			//   "maxLength": 8192,
-			//   "minLength": 0,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
+			//	  "maxLength": 8192,
+			//	  "minLength": 0,
+			//	  "type": "string"
+			//	}
 			Description: "A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -56,10 +58,11 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"enable_key_rotation": {
 			// Property: EnableKeyRotation
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -71,10 +74,11 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"enabled": {
 			// Property: Enabled
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -86,9 +90,10 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"key_id": {
 			// Property: KeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -98,10 +103,11 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"key_policy": {
 			// Property: KeyPolicy
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
+			//	  "type": "string"
+			//	}
 			Description: "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
 			Type:        types.StringType,
 			Required:    true,
@@ -109,26 +115,27 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"key_spec": {
 			// Property: KeySpec
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "SYMMETRIC_DEFAULT",
-			//   "description": "Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
-			//   "enum": [
-			//     "SYMMETRIC_DEFAULT",
-			//     "RSA_2048",
-			//     "RSA_3072",
-			//     "RSA_4096",
-			//     "ECC_NIST_P256",
-			//     "ECC_NIST_P384",
-			//     "ECC_NIST_P521",
-			//     "ECC_SECG_P256K1",
-			//     "HMAC_224",
-			//     "HMAC_256",
-			//     "HMAC_384",
-			//     "HMAC_512",
-			//     "SM2"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "SYMMETRIC_DEFAULT",
+			//	  "description": "Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
+			//	  "enum": [
+			//	    "SYMMETRIC_DEFAULT",
+			//	    "RSA_2048",
+			//	    "RSA_3072",
+			//	    "RSA_4096",
+			//	    "ECC_NIST_P256",
+			//	    "ECC_NIST_P384",
+			//	    "ECC_NIST_P521",
+			//	    "ECC_SECG_P256K1",
+			//	    "HMAC_224",
+			//	    "HMAC_256",
+			//	    "HMAC_384",
+			//	    "HMAC_512",
+			//	    "SM2"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -158,16 +165,17 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"key_usage": {
 			// Property: KeyUsage
 			// CloudFormation resource type schema:
-			// {
-			//   "default": "ENCRYPT_DECRYPT",
-			//   "description": "Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.",
-			//   "enum": [
-			//     "ENCRYPT_DECRYPT",
-			//     "SIGN_VERIFY",
-			//     "GENERATE_VERIFY_MAC"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "default": "ENCRYPT_DECRYPT",
+			//	  "description": "Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.",
+			//	  "enum": [
+			//	    "ENCRYPT_DECRYPT",
+			//	    "SIGN_VERIFY",
+			//	    "GENERATE_VERIFY_MAC"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -187,11 +195,12 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"multi_region": {
 			// Property: MultiRegion
 			// CloudFormation resource type schema:
-			// {
-			//   "default": false,
-			//   "description": "Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "default": false,
+			//	  "description": "Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.",
+			//	  "type": "boolean"
+			//	}
 			Description: "Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -204,12 +213,13 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"pending_window_in_days": {
 			// Property: PendingWindowInDays
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
-			//   "maximum": 30,
-			//   "minimum": 7,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			//	  "maximum": 30,
+			//	  "minimum": 7,
+			//	  "type": "integer"
+			//	}
 			Description: "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -225,35 +235,36 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "An array of key-value pairs to apply to this resource.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

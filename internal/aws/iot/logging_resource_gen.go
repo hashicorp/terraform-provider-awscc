@@ -25,13 +25,14 @@ func loggingResource(ctx context.Context) (resource.Resource, error) {
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
-			//   "maxLength": 12,
-			//   "minLength": 12,
-			//   "pattern": "^[0-9]{12}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
+			//	  "maxLength": 12,
+			//	  "minLength": 12,
+			//	  "pattern": "^[0-9]{12}$",
+			//	  "type": "string"
+			//	}
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
 			Type:        types.StringType,
 			Required:    true,
@@ -46,17 +47,18 @@ func loggingResource(ctx context.Context) (resource.Resource, error) {
 		"default_log_level": {
 			// Property: DefaultLogLevel
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			//   "enum": [
-			//     "ERROR",
-			//     "WARN",
-			//     "INFO",
-			//     "DEBUG",
-			//     "DISABLED"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+			//	  "enum": [
+			//	    "ERROR",
+			//	    "WARN",
+			//	    "INFO",
+			//	    "DEBUG",
+			//	    "DISABLED"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
 			Type:        types.StringType,
 			Required:    true,
@@ -73,12 +75,13 @@ func loggingResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ARN of the role that allows IoT to write to Cloudwatch logs.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ARN of the role that allows IoT to write to Cloudwatch logs.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "type": "string"
+			//	}
 			Description: "The ARN of the role that allows IoT to write to Cloudwatch logs.",
 			Type:        types.StringType,
 			Required:    true,

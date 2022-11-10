@@ -23,36 +23,37 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"device": {
 			// Property: Device
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The Edge Device you want to register against a device fleet",
-			//   "properties": {
-			//     "Description": {
-			//       "description": "Description of the device",
-			//       "maxLength": 40,
-			//       "minLength": 1,
-			//       "pattern": "[\\S\\s]+",
-			//       "type": "string"
-			//     },
-			//     "DeviceName": {
-			//       "description": "The name of the device",
-			//       "maxLength": 63,
-			//       "minLength": 1,
-			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//       "type": "string"
-			//     },
-			//     "IotThingName": {
-			//       "description": "AWS Internet of Things (IoT) object name.",
-			//       "maxLength": 128,
-			//       "pattern": "[a-zA-Z0-9:_-]+",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "required": [
-			//     "DeviceName"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The Edge Device you want to register against a device fleet",
+			//	  "properties": {
+			//	    "Description": {
+			//	      "description": "Description of the device",
+			//	      "maxLength": 40,
+			//	      "minLength": 1,
+			//	      "pattern": "[\\S\\s]+",
+			//	      "type": "string"
+			//	    },
+			//	    "DeviceName": {
+			//	      "description": "The name of the device",
+			//	      "maxLength": 63,
+			//	      "minLength": 1,
+			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+			//	      "type": "string"
+			//	    },
+			//	    "IotThingName": {
+			//	      "description": "AWS Internet of Things (IoT) object name.",
+			//	      "maxLength": 128,
+			//	      "pattern": "[a-zA-Z0-9:_-]+",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "DeviceName"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The Edge Device you want to register against a device fleet",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -81,13 +82,14 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"device_fleet_name": {
 			// Property: DeviceFleetName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the edge device fleet",
-			//   "maxLength": 63,
-			//   "minLength": 1,
-			//   "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the edge device fleet",
+			//	  "maxLength": 63,
+			//	  "minLength": 1,
+			//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the edge device fleet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -95,34 +97,35 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Associate tags with the resource",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Associate tags with the resource",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Associate tags with the resource",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

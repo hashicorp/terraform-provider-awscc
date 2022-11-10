@@ -23,10 +23,11 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		"local_gateway_id": {
 			// Property: LocalGatewayId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the local gateway.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the local gateway.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the local gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		"local_gateway_route_table_id": {
 			// Property: LocalGatewayRouteTableId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the local gateway route table.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the local gateway route table.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the local gateway route table.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,10 +47,11 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		"local_gateway_route_table_vpc_association_id": {
 			// Property: LocalGatewayRouteTableVpcAssociationId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the association.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the association.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,10 +59,11 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The state of the association.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The state of the association.",
+			//	  "type": "string"
+			//	}
 			Description: "The state of the association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,30 +71,31 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags for the association.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "properties": {
-			//       "Key": {
-			//         "maxLength": 127,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "maxLength": 255,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "type": "object"
-			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The tags for the association.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 127,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 255,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The tags for the association.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -111,10 +116,11 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The ID of the VPC.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The ID of the VPC.",
+			//	  "type": "string"
+			//	}
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Computed:    true,

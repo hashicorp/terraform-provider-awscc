@@ -23,24 +23,25 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"agent_permissions": {
 			// Property: AgentPermissions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The agent permissions attached to this profiling group.",
-			//   "properties": {
-			//     "Principals": {
-			//       "description": "The principals for the agent permissions.",
-			//       "items": {
-			//         "pattern": "^arn:aws([-\\w]*):iam::([0-9]{12}):[\\S]+$",
-			//         "type": "string"
-			//       },
-			//       "type": "array"
-			//     }
-			//   },
-			//   "required": [
-			//     "Principals"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The agent permissions attached to this profiling group.",
+			//	  "properties": {
+			//	    "Principals": {
+			//	      "description": "The principals for the agent permissions.",
+			//	      "items": {
+			//	        "pattern": "^arn:aws([-\\w]*):iam::([0-9]{12}):[\\S]+$",
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Principals"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "The agent permissions attached to this profiling group.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -57,29 +58,30 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"anomaly_detection_notification_configuration": {
 			// Property: AnomalyDetectionNotificationConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency",
-			//   "items": {
-			//     "description": "Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.",
-			//     "properties": {
-			//       "channelId": {
-			//         "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
-			//         "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
-			//         "type": "string"
-			//       },
-			//       "channelUri": {
-			//         "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
-			//         "pattern": "^arn:aws([-\\w]*):[a-z-]+:(([a-z]+-)+[0-9]+)?:([0-9]{12}):[^.]+$",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "channelUri"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency",
+			//	  "items": {
+			//	    "description": "Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.",
+			//	    "properties": {
+			//	      "channelId": {
+			//	        "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
+			//	        "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
+			//	        "type": "string"
+			//	      },
+			//	      "channelUri": {
+			//	        "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
+			//	        "pattern": "^arn:aws([-\\w]*):[a-z-]+:(([a-z]+-)+[0-9]+)?:([0-9]{12}):[^.]+$",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "channelUri"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -102,11 +104,12 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the specified profiling group.",
-			//   "pattern": "^arn:aws([-\\w]*):codeguru-profiler:(([a-z]+-)+[0-9]+):([0-9]{12}):profilingGroup/[^.]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the specified profiling group.",
+			//	  "pattern": "^arn:aws([-\\w]*):codeguru-profiler:(([a-z]+-)+[0-9]+):([0-9]{12}):profilingGroup/[^.]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -114,14 +117,15 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"compute_platform": {
 			// Property: ComputePlatform
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The compute platform of the profiling group.",
-			//   "enum": [
-			//     "Default",
-			//     "AWSLambda"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The compute platform of the profiling group.",
+			//	  "enum": [
+			//	    "Default",
+			//	    "AWSLambda"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "The compute platform of the profiling group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -129,13 +133,14 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"profiling_group_name": {
 			// Property: ProfilingGroupName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the profiling group.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "^[\\w-]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the profiling group.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "^[\\w-]+$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the profiling group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -143,35 +148,36 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The tags associated with a profiling group.",
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Value",
-			//       "Key"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 50,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "The tags associated with a profiling group.",
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to associate with a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "The tags associated with a profiling group.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

@@ -25,12 +25,13 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"data_delay_offset_in_minutes": {
 			// Property: DataDelayOffsetInMinutes
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
-			//   "maximum": 60,
-			//   "minimum": 0,
-			//   "type": "integer"
-			// }
+			//
+			//	{
+			//	  "description": "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
+			//	  "maximum": 60,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
 			Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
 			Type:        types.Int64Type,
 			Optional:    true,
@@ -45,61 +46,62 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"data_input_configuration": {
 			// Property: DataInputConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
-			//   "properties": {
-			//     "InferenceInputNameConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies configuration information for the input data for the inference, including timestamp format and delimiter.",
-			//       "properties": {
-			//         "ComponentTimestampDelimiter": {
-			//           "description": "Indicates the delimiter character used between items in the data.",
-			//           "maxLength": 1,
-			//           "minLength": 0,
-			//           "pattern": "^(\\-|\\_|\\s)?$",
-			//           "type": "string"
-			//         },
-			//         "TimestampFormat": {
-			//           "description": "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
-			//           "pattern": "^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     },
-			//     "InputTimeZoneOffset": {
-			//       "description": "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
-			//       "pattern": "^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$",
-			//       "type": "string"
-			//     },
-			//     "S3InputConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies configuration information for the input data for the inference, including input data S3 location.",
-			//       "properties": {
-			//         "Bucket": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Bucket"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3InputConfiguration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
+			//	  "properties": {
+			//	    "InferenceInputNameConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies configuration information for the input data for the inference, including timestamp format and delimiter.",
+			//	      "properties": {
+			//	        "ComponentTimestampDelimiter": {
+			//	          "description": "Indicates the delimiter character used between items in the data.",
+			//	          "maxLength": 1,
+			//	          "minLength": 0,
+			//	          "pattern": "^(\\-|\\_|\\s)?$",
+			//	          "type": "string"
+			//	        },
+			//	        "TimestampFormat": {
+			//	          "description": "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
+			//	          "pattern": "^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "InputTimeZoneOffset": {
+			//	      "description": "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
+			//	      "pattern": "^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$",
+			//	      "type": "string"
+			//	    },
+			//	    "S3InputConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies configuration information for the input data for the inference, including input data S3 location.",
+			//	      "properties": {
+			//	        "Bucket": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Bucket"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3InputConfiguration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -193,44 +195,45 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"data_output_configuration": {
 			// Property: DataOutputConfiguration
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
-			//   "properties": {
-			//     "KmsKeyId": {
-			//       "description": "The ID number for the AWS KMS key used to encrypt the inference output.",
-			//       "maxLength": 2048,
-			//       "minLength": 1,
-			//       "pattern": "",
-			//       "type": "string"
-			//     },
-			//     "S3OutputConfiguration": {
-			//       "additionalProperties": false,
-			//       "description": "Specifies configuration information for the output results from the inference, including output S3 location.",
-			//       "properties": {
-			//         "Bucket": {
-			//           "maxLength": 63,
-			//           "minLength": 3,
-			//           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//           "type": "string"
-			//         },
-			//         "Prefix": {
-			//           "maxLength": 1024,
-			//           "minLength": 0,
-			//           "type": "string"
-			//         }
-			//       },
-			//       "required": [
-			//         "Bucket"
-			//       ],
-			//       "type": "object"
-			//     }
-			//   },
-			//   "required": [
-			//     "S3OutputConfiguration"
-			//   ],
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
+			//	  "properties": {
+			//	    "KmsKeyId": {
+			//	      "description": "The ID number for the AWS KMS key used to encrypt the inference output.",
+			//	      "maxLength": 2048,
+			//	      "minLength": 1,
+			//	      "pattern": "",
+			//	      "type": "string"
+			//	    },
+			//	    "S3OutputConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Specifies configuration information for the output results from the inference, including output S3 location.",
+			//	      "properties": {
+			//	        "Bucket": {
+			//	          "maxLength": 63,
+			//	          "minLength": 3,
+			//	          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+			//	          "type": "string"
+			//	        },
+			//	        "Prefix": {
+			//	          "maxLength": 1024,
+			//	          "minLength": 0,
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Bucket"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "S3OutputConfiguration"
+			//	  ],
+			//	  "type": "object"
+			//	}
 			Description: "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -284,17 +287,18 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"data_upload_frequency": {
 			// Property: DataUploadFrequency
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "How often data is uploaded to the source S3 bucket for the input data.",
-			//   "enum": [
-			//     "PT5M",
-			//     "PT10M",
-			//     "PT15M",
-			//     "PT30M",
-			//     "PT1H"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "How often data is uploaded to the source S3 bucket for the input data.",
+			//	  "enum": [
+			//	    "PT5M",
+			//	    "PT10M",
+			//	    "PT15M",
+			//	    "PT30M",
+			//	    "PT1H"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "How often data is uploaded to the source S3 bucket for the input data.",
 			Type:        types.StringType,
 			Required:    true,
@@ -311,13 +315,14 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"inference_scheduler_arn": {
 			// Property: InferenceSchedulerArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the inference scheduler being created.",
-			//   "maxLength": 200,
-			//   "minLength": 1,
-			//   "pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the inference scheduler being created.",
+			//	  "maxLength": 200,
+			//	  "minLength": 1,
+			//	  "pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -328,13 +333,14 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"inference_scheduler_name": {
 			// Property: InferenceSchedulerName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the inference scheduler being created.",
-			//   "maxLength": 200,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-zA-Z_-]{1,200}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the inference scheduler being created.",
+			//	  "maxLength": 200,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-zA-Z_-]{1,200}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the inference scheduler being created.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -351,13 +357,14 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"model_name": {
 			// Property: ModelName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the previously trained ML model being used to create the inference scheduler.",
-			//   "maxLength": 200,
-			//   "minLength": 1,
-			//   "pattern": "^[0-9a-zA-Z_-]{1,200}$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the previously trained ML model being used to create the inference scheduler.",
+			//	  "maxLength": 200,
+			//	  "minLength": 1,
+			//	  "pattern": "^[0-9a-zA-Z_-]{1,200}$",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the previously trained ML model being used to create the inference scheduler.",
 			Type:        types.StringType,
 			Required:    true,
@@ -372,13 +379,14 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
-			//   "maxLength": 2048,
-			//   "minLength": 20,
-			//   "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 20,
+			//	  "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
 			Type:        types.StringType,
 			Required:    true,
@@ -390,13 +398,14 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"server_side_kms_key_id": {
 			// Property: ServerSideKmsKeyId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -412,38 +421,39 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Any tags associated with the inference scheduler.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "additionalProperties": false,
-			//     "description": "A tag is a key-value pair that can be added to a resource as metadata.",
-			//     "properties": {
-			//       "Key": {
-			//         "description": "The key for the specified tag.",
-			//         "maxLength": 128,
-			//         "minLength": 1,
-			//         "pattern": "",
-			//         "type": "string"
-			//       },
-			//       "Value": {
-			//         "description": "The value for the specified tag.",
-			//         "maxLength": 256,
-			//         "minLength": 0,
-			//         "pattern": "[\\s\\w+-=\\.:/@]*",
-			//         "type": "string"
-			//       }
-			//     },
-			//     "required": [
-			//       "Key",
-			//       "Value"
-			//     ],
-			//     "type": "object"
-			//   },
-			//   "maxItems": 200,
-			//   "type": "array",
-			//   "uniqueItems": true
-			// }
+			//
+			//	{
+			//	  "description": "Any tags associated with the inference scheduler.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A tag is a key-value pair that can be added to a resource as metadata.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "description": "The key for the specified tag.",
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "description": "The value for the specified tag.",
+			//	        "maxLength": 256,
+			//	        "minLength": 0,
+			//	        "pattern": "[\\s\\w+-=\\.:/@]*",
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 200,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
 			Description: "Any tags associated with the inference scheduler.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{

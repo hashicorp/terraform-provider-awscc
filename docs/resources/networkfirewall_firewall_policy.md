@@ -64,7 +64,16 @@ Required:
 
 Optional:
 
+- `override` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references--override))
 - `priority` (Number)
+
+<a id="nestedatt--firewall_policy--stateful_rule_group_references--override"></a>
+### Nested Schema for `firewall_policy.stateful_rule_group_references.override`
+
+Optional:
+
+- `action` (String)
+
 
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions"></a>

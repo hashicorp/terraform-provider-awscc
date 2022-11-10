@@ -25,11 +25,12 @@ func trackerConsumerResource(ctx context.Context) (resource.Resource, error) {
 		"consumer_arn": {
 			// Property: ConsumerArn
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 1600,
-			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 1600,
+			//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
@@ -43,12 +44,13 @@ func trackerConsumerResource(ctx context.Context) (resource.Resource, error) {
 		"tracker_name": {
 			// Property: TrackerName
 			// CloudFormation resource type schema:
-			// {
-			//   "maxLength": 100,
-			//   "minLength": 1,
-			//   "pattern": "^[-._\\w]+$",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "maxLength": 100,
+			//	  "minLength": 1,
+			//	  "pattern": "^[-._\\w]+$",
+			//	  "type": "string"
+			//	}
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{

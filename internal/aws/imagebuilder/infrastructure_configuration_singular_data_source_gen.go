@@ -23,10 +23,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The description of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The description of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The description of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,25 +47,26 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"instance_metadata_options": {
 			// Property: InstanceMetadataOptions
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The instance metadata option settings for the infrastructure configuration.",
-			//   "properties": {
-			//     "HttpPutResponseHopLimit": {
-			//       "description": "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
-			//       "type": "integer"
-			//     },
-			//     "HttpTokens": {
-			//       "description": "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
-			//       "enum": [
-			//         "required",
-			//         "optional"
-			//       ],
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The instance metadata option settings for the infrastructure configuration.",
+			//	  "properties": {
+			//	    "HttpPutResponseHopLimit": {
+			//	      "description": "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
+			//	      "type": "integer"
+			//	    },
+			//	    "HttpTokens": {
+			//	      "description": "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
+			//	      "enum": [
+			//	        "required",
+			//	        "optional"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The instance metadata option settings for the infrastructure configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -86,10 +89,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"instance_profile_name": {
 			// Property: InstanceProfileName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The instance profile of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The instance profile of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The instance profile of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -97,14 +101,15 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"instance_types": {
 			// Property: InstanceTypes
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The instance types of the infrastructure configuration.",
-			//   "insertionOrder": true,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The instance types of the infrastructure configuration.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The instance types of the infrastructure configuration.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -112,10 +117,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"key_pair": {
 			// Property: KeyPair
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The EC2 key pair of the infrastructure configuration..",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The EC2 key pair of the infrastructure configuration..",
+			//	  "type": "string"
+			//	}
 			Description: "The EC2 key pair of the infrastructure configuration..",
 			Type:        types.StringType,
 			Computed:    true,
@@ -123,28 +129,29 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"logging": {
 			// Property: Logging
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The logging configuration of the infrastructure configuration.",
-			//   "properties": {
-			//     "S3Logs": {
-			//       "additionalProperties": false,
-			//       "description": "The S3 path in which to store the logs.",
-			//       "properties": {
-			//         "S3BucketName": {
-			//           "description": "S3BucketName",
-			//           "type": "string"
-			//         },
-			//         "S3KeyPrefix": {
-			//           "description": "S3KeyPrefix",
-			//           "type": "string"
-			//         }
-			//       },
-			//       "type": "object"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The logging configuration of the infrastructure configuration.",
+			//	  "properties": {
+			//	    "S3Logs": {
+			//	      "additionalProperties": false,
+			//	      "description": "The S3 path in which to store the logs.",
+			//	      "properties": {
+			//	        "S3BucketName": {
+			//	          "description": "S3BucketName",
+			//	          "type": "string"
+			//	        },
+			//	        "S3KeyPrefix": {
+			//	          "description": "S3KeyPrefix",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The logging configuration of the infrastructure configuration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -176,10 +183,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The name of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The name of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The name of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -187,16 +195,17 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"resource_tags": {
 			// Property: ResourceTags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags attached to the resource created by Image Builder.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags attached to the resource created by Image Builder.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags attached to the resource created by Image Builder.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -205,14 +214,15 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"security_group_ids": {
 			// Property: SecurityGroupIds
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The security group IDs of the infrastructure configuration.",
-			//   "insertionOrder": false,
-			//   "items": {
-			//     "type": "string"
-			//   },
-			//   "type": "array"
-			// }
+			//
+			//	{
+			//	  "description": "The security group IDs of the infrastructure configuration.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "type": "string"
+			//	  },
+			//	  "type": "array"
+			//	}
 			Description: "The security group IDs of the infrastructure configuration.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
@@ -220,10 +230,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"sns_topic_arn": {
 			// Property: SnsTopicArn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -231,10 +242,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The subnet ID of the infrastructure configuration.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The subnet ID of the infrastructure configuration.",
+			//	  "type": "string"
+			//	}
 			Description: "The subnet ID of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -242,16 +254,17 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "The tags associated with the component.",
-			//   "patternProperties": {
-			//     "": {
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The tags associated with the component.",
+			//	  "patternProperties": {
+			//	    "": {
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
 			Description: "The tags associated with the component.",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
@@ -260,10 +273,11 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"terminate_instance_on_failure": {
 			// Property: TerminateInstanceOnFailure
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The terminate instance on failure configuration of the infrastructure configuration.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "The terminate instance on failure configuration of the infrastructure configuration.",
+			//	  "type": "boolean"
+			//	}
 			Description: "The terminate instance on failure configuration of the infrastructure configuration.",
 			Type:        types.BoolType,
 			Computed:    true,

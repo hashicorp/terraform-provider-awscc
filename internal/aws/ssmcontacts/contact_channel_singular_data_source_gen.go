@@ -23,10 +23,11 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
+			//	  "type": "string"
+			//	}
 			Description: "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -34,10 +35,11 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"channel_address": {
 			// Property: ChannelAddress
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The details that SSM Incident Manager uses when trying to engage the contact channel.",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The details that SSM Incident Manager uses when trying to engage the contact channel.",
+			//	  "type": "string"
+			//	}
 			Description: "The details that SSM Incident Manager uses when trying to engage the contact channel.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -45,13 +47,14 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"channel_name": {
 			// Property: ChannelName
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
-			//   "maxLength": 255,
-			//   "minLength": 1,
-			//   "pattern": "",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
+			//	  "maxLength": 255,
+			//	  "minLength": 1,
+			//	  "pattern": "",
+			//	  "type": "string"
+			//	}
 			Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -59,15 +62,16 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"channel_type": {
 			// Property: ChannelType
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
-			//   "enum": [
-			//     "SMS",
-			//     "VOICE",
-			//     "EMAIL"
-			//   ],
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
+			//	  "enum": [
+			//	    "SMS",
+			//	    "VOICE",
+			//	    "EMAIL"
+			//	  ],
+			//	  "type": "string"
+			//	}
 			Description: "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,13 +79,14 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"contact_id": {
 			// Property: ContactId
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "ARN of the contact resource",
-			//   "maxLength": 2048,
-			//   "minLength": 1,
-			//   "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
-			//   "type": "string"
-			// }
+			//
+			//	{
+			//	  "description": "ARN of the contact resource",
+			//	  "maxLength": 2048,
+			//	  "minLength": 1,
+			//	  "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
+			//	  "type": "string"
+			//	}
 			Description: "ARN of the contact resource",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,10 +94,11 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"defer_activation": {
 			// Property: DeferActivation
 			// CloudFormation resource type schema:
-			// {
-			//   "description": "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
-			//   "type": "boolean"
-			// }
+			//
+			//	{
+			//	  "description": "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
+			//	  "type": "boolean"
+			//	}
 			Description: "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
 			Type:        types.BoolType,
 			Computed:    true,
