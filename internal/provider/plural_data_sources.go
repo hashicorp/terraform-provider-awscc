@@ -320,6 +320,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rekognition_projects -cftype AWS::Rekognition::Project -package rekognition ../aws/rekognition/project_plural_data_source_gen.go ../aws/rekognition/project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_resiliencehub_apps -cftype AWS::ResilienceHub::App -package resiliencehub ../aws/resiliencehub/app_plural_data_source_gen.go ../aws/resiliencehub/app_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_resiliencehub_resiliency_policies -cftype AWS::ResilienceHub::ResiliencyPolicy -package resiliencehub ../aws/resiliencehub/resiliency_policy_plural_data_source_gen.go ../aws/resiliencehub/resiliency_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_resourceexplorer2_indices -cftype AWS::ResourceExplorer2::Index -package resourceexplorer2 ../aws/resourceexplorer2/index_plural_data_source_gen.go ../aws/resourceexplorer2/index_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_resourceexplorer2_views -cftype AWS::ResourceExplorer2::View -package resourceexplorer2 ../aws/resourceexplorer2/view_plural_data_source_gen.go ../aws/resourceexplorer2/view_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_resourcegroups_groups -cftype AWS::ResourceGroups::Group -package resourcegroups ../aws/resourcegroups/group_plural_data_source_gen.go ../aws/resourcegroups/group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_fleets -cftype AWS::RoboMaker::Fleet -package robomaker ../aws/robomaker/fleet_plural_data_source_gen.go ../aws/robomaker/fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_robots -cftype AWS::RoboMaker::Robot -package robomaker ../aws/robomaker/robot_plural_data_source_gen.go ../aws/robomaker/robot_plural_data_source_gen_test.go
@@ -370,6 +372,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sagemaker_pipelines -cftype AWS::SageMaker::Pipeline -package sagemaker ../aws/sagemaker/pipeline_plural_data_source_gen.go ../aws/sagemaker/pipeline_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sagemaker_projects -cftype AWS::SageMaker::Project -package sagemaker ../aws/sagemaker/project_plural_data_source_gen.go ../aws/sagemaker/project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sagemaker_user_profiles -cftype AWS::SageMaker::UserProfile -package sagemaker ../aws/sagemaker/user_profile_plural_data_source_gen.go ../aws/sagemaker/user_profile_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_scheduler_schedules -cftype AWS::Scheduler::Schedule -package scheduler ../aws/scheduler/schedule_plural_data_source_gen.go ../aws/scheduler/schedule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_scheduler_schedule_groups -cftype AWS::Scheduler::ScheduleGroup -package scheduler ../aws/scheduler/schedule_group_plural_data_source_gen.go ../aws/scheduler/schedule_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalog_service_actions -cftype AWS::ServiceCatalog::ServiceAction -package servicecatalog ../aws/servicecatalog/service_action_plural_data_source_gen.go ../aws/servicecatalog/service_action_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_applications -cftype AWS::ServiceCatalogAppRegistry::Application -package servicecatalogappregistry ../aws/servicecatalogappregistry/application_plural_data_source_gen.go ../aws/servicecatalogappregistry/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_attribute_groups -cftype AWS::ServiceCatalogAppRegistry::AttributeGroup -package servicecatalogappregistry ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen.go ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen_test.go
@@ -388,6 +392,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wafv2_logging_configurations -cftype AWS::WAFv2::LoggingConfiguration -package wafv2 ../aws/wafv2/logging_configuration_plural_data_source_gen.go ../aws/wafv2/logging_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_assistants -cftype AWS::Wisdom::Assistant -package wisdom ../aws/wisdom/assistant_plural_data_source_gen.go ../aws/wisdom/assistant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_knowledge_bases -cftype AWS::Wisdom::KnowledgeBase -package wisdom ../aws/wisdom/knowledge_base_plural_data_source_gen.go ../aws/wisdom/knowledge_base_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_xray_resource_policies -cftype AWS::XRay::ResourcePolicy -package xray ../aws/xray/resource_policy_plural_data_source_gen.go ../aws/xray/resource_policy_plural_data_source_gen_test.go
 
 package provider
 
@@ -497,6 +502,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/refactorspaces"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rekognition"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resiliencehub"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourceexplorer2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/robomaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rolesanywhere"
@@ -508,6 +514,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3objectlambda"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sagemaker"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/scheduler"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/servicecatalog"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/servicecatalogappregistry"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ses"
@@ -521,4 +528,5 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/voiceid"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/xray"
 )
