@@ -21,9 +21,19 @@ Data Source schema for AWS::AppStream::DirectoryConfig
 
 ### Read-Only
 
+- `certificate_based_auth_properties` (Attributes) (see [below for nested schema](#nestedatt--certificate_based_auth_properties))
 - `directory_name` (String)
 - `organizational_unit_distinguished_names` (List of String)
 - `service_account_credentials` (Attributes) (see [below for nested schema](#nestedatt--service_account_credentials))
+
+<a id="nestedatt--certificate_based_auth_properties"></a>
+### Nested Schema for `certificate_based_auth_properties`
+
+Read-Only:
+
+- `certificate_authority_arn` (String)
+- `status` (String)
+
 
 <a id="nestedatt--service_account_credentials"></a>
 ### Nested Schema for `service_account_credentials`

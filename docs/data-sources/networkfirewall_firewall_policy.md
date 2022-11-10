@@ -54,8 +54,17 @@ Read-Only:
 
 Read-Only:
 
+- `override` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references--override))
 - `priority` (Number)
 - `resource_arn` (String) A resource ARN.
+
+<a id="nestedatt--firewall_policy--stateful_rule_group_references--override"></a>
+### Nested Schema for `firewall_policy.stateful_rule_group_references.override`
+
+Read-Only:
+
+- `action` (String)
+
 
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions"></a>

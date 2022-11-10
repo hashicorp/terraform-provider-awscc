@@ -24,6 +24,7 @@ Data Source schema for AWS::Batch::ComputeEnvironment
 - `compute_environment_arn` (String)
 - `compute_environment_name` (String)
 - `compute_resources` (Attributes) (see [below for nested schema](#nestedatt--compute_resources))
+- `eks_configuration` (Attributes) (see [below for nested schema](#nestedatt--eks_configuration))
 - `replace_compute_environment` (Boolean)
 - `service_role` (String)
 - `state` (String)
@@ -62,6 +63,7 @@ Read-Only:
 Read-Only:
 
 - `image_id_override` (String)
+- `image_kubernetes_version` (String)
 - `image_type` (String)
 
 
@@ -74,6 +76,15 @@ Read-Only:
 - `launch_template_name` (String)
 - `version` (String)
 
+
+
+<a id="nestedatt--eks_configuration"></a>
+### Nested Schema for `eks_configuration`
+
+Read-Only:
+
+- `eks_cluster_arn` (String)
+- `kubernetes_namespace` (String)
 
 
 <a id="nestedatt--update_policy"></a>
