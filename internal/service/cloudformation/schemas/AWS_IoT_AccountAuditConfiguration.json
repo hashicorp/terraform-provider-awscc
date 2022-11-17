@@ -48,6 +48,9 @@
         },
         "UnauthenticatedCognitoRoleOverlyPermissiveCheck": {
           "$ref": "#/definitions/AuditCheckConfiguration"
+        },
+        "IntermediateCaRevokedForActiveDeviceCertificatesCheck": {
+          "$ref": "#/definitions/AuditCheckConfiguration"
         }
       },
       "additionalProperties": false

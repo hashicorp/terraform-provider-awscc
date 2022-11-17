@@ -13,7 +13,8 @@
                     "minLength": 1,
                     "maxLength": 1024
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "PublicAccessBlockConfiguration": {
             "type": "object",
@@ -34,7 +35,8 @@
                     "type": "boolean",
                     "description": "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked."
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "Arn": {
             "description": "the Amazon Resource Name (ARN) of the specified accesspoint.",
@@ -62,6 +64,12 @@
             "minLength": 3,
             "maxLength": 255
         },
+        "BucketAccountId": {
+            "description": "The AWS account ID associated with the S3 bucket associated with this access point.",
+            "type": "string",
+            "pattern": "^\\d{12}$",
+            "maxLength": 64
+        },
         "VpcConfiguration": {
             "description": "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
             "$ref": "#/definitions/VpcConfiguration"
@@ -85,7 +93,8 @@
                         "false"
                     ]
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "NetworkOrigin": {
             "description": "Indicates whether this Access Point allows access from the public Internet. If VpcConfiguration is specified for this Access Point, then NetworkOrigin is VPC, and the Access Point doesn't allow access from the public Internet. Otherwise, NetworkOrigin is Internet, and the Access Point allows access from the public Internet, subject to the Access Point and bucket access policies.",
@@ -109,11 +118,11 @@
     "createOnlyProperties": [
         "/properties/Name",
         "/properties/Bucket",
+        "/properties/BucketAccountId",
         "/properties/VpcConfiguration",
         "/properties/PublicAccessBlockConfiguration"
     ],
     "readOnlyProperties": [
-        "/properties/Name",
         "/properties/Alias",
         "/properties/NetworkOrigin",
         "/properties/Arn"

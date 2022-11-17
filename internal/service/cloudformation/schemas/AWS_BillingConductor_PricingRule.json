@@ -47,7 +47,8 @@
             "type": "string",
             "enum": [
                 "GLOBAL",
-                "SERVICE"
+                "SERVICE",
+                "BILLING_ENTITY"
             ]
         },
         "Type": {
@@ -69,6 +70,15 @@
             "minLength": 1,
             "maxLength": 128,
             "pattern": "[a-zA-Z0-9\\.\\-]+"
+        },
+        "BillingEntity": {
+            "description": "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
+            "type": "string",
+            "enum": [
+                "AWS",
+                "AWS Marketplace",
+                "AISPL"
+            ]
         },
         "AssociatedPricingPlanCount": {
             "description": "The number of pricing plans associated with pricing rule",
@@ -108,7 +118,8 @@
     ],
     "createOnlyProperties": [
         "/properties/Scope",
-        "/properties/Service"
+        "/properties/Service",
+        "/properties/BillingEntity"
     ],
     "readOnlyProperties": [
         "/properties/Arn",
