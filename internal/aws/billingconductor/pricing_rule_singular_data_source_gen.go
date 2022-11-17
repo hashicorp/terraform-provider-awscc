@@ -46,6 +46,23 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.Int64Type,
 			Computed:    true,
 		},
+		"billing_entity": {
+			// Property: BillingEntity
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
+			//	  "enum": [
+			//	    "AWS",
+			//	    "AWS Marketplace",
+			//	    "AISPL"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Description: "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -119,7 +136,8 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	  "description": "A term used to categorize the granularity of a Pricing Rule.",
 			//	  "enum": [
 			//	    "GLOBAL",
-			//	    "SERVICE"
+			//	    "SERVICE",
+			//	    "BILLING_ENTITY"
 			//	  ],
 			//	  "type": "string"
 			//	}
@@ -224,6 +242,7 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                           "Arn",
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
+		"billing_entity":                "BillingEntity",
 		"creation_time":                 "CreationTime",
 		"description":                   "Description",
 		"key":                           "Key",

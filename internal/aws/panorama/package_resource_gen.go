@@ -155,6 +155,7 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 					},
 				},
 			),
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),

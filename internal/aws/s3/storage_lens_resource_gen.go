@@ -45,6 +45,28 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 			//	          },
 			//	          "type": "object"
 			//	        },
+			//	        "AdvancedCostOptimizationMetrics": {
+			//	          "additionalProperties": false,
+			//	          "description": "Enables advanced cost optimization metrics.",
+			//	          "properties": {
+			//	            "IsEnabled": {
+			//	              "description": "Specifies whether advanced cost optimization metrics are enabled or disabled.",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "AdvancedDataProtectionMetrics": {
+			//	          "additionalProperties": false,
+			//	          "description": "Enables advanced data protection metrics.",
+			//	          "properties": {
+			//	            "IsEnabled": {
+			//	              "description": "Specifies whether advanced data protection metrics are enabled or disabled.",
+			//	              "type": "boolean"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
 			//	        "BucketLevel": {
 			//	          "additionalProperties": false,
 			//	          "description": "Bucket-level metrics configurations.",
@@ -55,6 +77,39 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 			//	              "properties": {
 			//	                "IsEnabled": {
 			//	                  "description": "Specifies whether activity metrics are enabled or disabled.",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "AdvancedCostOptimizationMetrics": {
+			//	              "additionalProperties": false,
+			//	              "description": "Enables advanced cost optimization metrics.",
+			//	              "properties": {
+			//	                "IsEnabled": {
+			//	                  "description": "Specifies whether advanced cost optimization metrics are enabled or disabled.",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "AdvancedDataProtectionMetrics": {
+			//	              "additionalProperties": false,
+			//	              "description": "Enables advanced data protection metrics.",
+			//	              "properties": {
+			//	                "IsEnabled": {
+			//	                  "description": "Specifies whether advanced data protection metrics are enabled or disabled.",
+			//	                  "type": "boolean"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            },
+			//	            "DetailedStatusCodesMetrics": {
+			//	              "additionalProperties": false,
+			//	              "description": "Enables detailed status codes metrics.",
+			//	              "properties": {
+			//	                "IsEnabled": {
+			//	                  "description": "Specifies whether detailed status codes metrics are enabled or disabled.",
 			//	                  "type": "boolean"
 			//	                }
 			//	              },
@@ -98,6 +153,17 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 			//	                "StorageMetrics"
 			//	              ],
 			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "DetailedStatusCodesMetrics": {
+			//	          "additionalProperties": false,
+			//	          "description": "Enables detailed status codes metrics.",
+			//	          "properties": {
+			//	            "IsEnabled": {
+			//	              "description": "Specifies whether detailed status codes metrics are enabled or disabled.",
+			//	              "type": "boolean"
 			//	            }
 			//	          },
 			//	          "type": "object"
@@ -312,6 +378,52 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 										resource.UseStateForUnknown(),
 									},
 								},
+								"advanced_cost_optimization_metrics": {
+									// Property: AdvancedCostOptimizationMetrics
+									Description: "Enables advanced cost optimization metrics.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"is_enabled": {
+												// Property: IsEnabled
+												Description: "Specifies whether advanced cost optimization metrics are enabled or disabled.",
+												Type:        types.BoolType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"advanced_data_protection_metrics": {
+									// Property: AdvancedDataProtectionMetrics
+									Description: "Enables advanced data protection metrics.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"is_enabled": {
+												// Property: IsEnabled
+												Description: "Specifies whether advanced data protection metrics are enabled or disabled.",
+												Type:        types.BoolType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
 								"bucket_level": {
 									// Property: BucketLevel
 									Description: "Bucket-level metrics configurations.",
@@ -325,6 +437,75 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 														"is_enabled": {
 															// Property: IsEnabled
 															Description: "Specifies whether activity metrics are enabled or disabled.",
+															Type:        types.BoolType,
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"advanced_cost_optimization_metrics": {
+												// Property: AdvancedCostOptimizationMetrics
+												Description: "Enables advanced cost optimization metrics.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"is_enabled": {
+															// Property: IsEnabled
+															Description: "Specifies whether advanced cost optimization metrics are enabled or disabled.",
+															Type:        types.BoolType,
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"advanced_data_protection_metrics": {
+												// Property: AdvancedDataProtectionMetrics
+												Description: "Enables advanced data protection metrics.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"is_enabled": {
+															// Property: IsEnabled
+															Description: "Specifies whether advanced data protection metrics are enabled or disabled.",
+															Type:        types.BoolType,
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"detailed_status_codes_metrics": {
+												// Property: DetailedStatusCodesMetrics
+												Description: "Enables detailed status codes metrics.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"is_enabled": {
+															// Property: IsEnabled
+															Description: "Specifies whether detailed status codes metrics are enabled or disabled.",
 															Type:        types.BoolType,
 															Optional:    true,
 															Computed:    true,
@@ -417,6 +598,29 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 										},
 									),
 									Required: true,
+								},
+								"detailed_status_codes_metrics": {
+									// Property: DetailedStatusCodesMetrics
+									Description: "Enables detailed status codes metrics.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"is_enabled": {
+												// Property: IsEnabled
+												Description: "Specifies whether detailed status codes metrics are enabled or disabled.",
+												Type:        types.BoolType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -753,39 +957,42 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                   "AccountId",
-		"account_level":                "AccountLevel",
-		"activity_metrics":             "ActivityMetrics",
-		"arn":                          "Arn",
-		"aws_org":                      "AwsOrg",
-		"bucket_level":                 "BucketLevel",
-		"buckets":                      "Buckets",
-		"cloudwatch_metrics":           "CloudWatchMetrics",
-		"data_export":                  "DataExport",
-		"delimiter":                    "Delimiter",
-		"encryption":                   "Encryption",
-		"exclude":                      "Exclude",
-		"format":                       "Format",
-		"id":                           "Id",
-		"include":                      "Include",
-		"is_enabled":                   "IsEnabled",
-		"key":                          "Key",
-		"key_id":                       "KeyId",
-		"max_depth":                    "MaxDepth",
-		"min_storage_bytes_percentage": "MinStorageBytesPercentage",
-		"output_schema_version":        "OutputSchemaVersion",
-		"prefix":                       "Prefix",
-		"prefix_level":                 "PrefixLevel",
-		"regions":                      "Regions",
-		"s3_bucket_destination":        "S3BucketDestination",
-		"selection_criteria":           "SelectionCriteria",
-		"ssekms":                       "SSEKMS",
-		"sses3":                        "SSES3",
-		"storage_lens_arn":             "StorageLensArn",
-		"storage_lens_configuration":   "StorageLensConfiguration",
-		"storage_metrics":              "StorageMetrics",
-		"tags":                         "Tags",
-		"value":                        "Value",
+		"account_id":                         "AccountId",
+		"account_level":                      "AccountLevel",
+		"activity_metrics":                   "ActivityMetrics",
+		"advanced_cost_optimization_metrics": "AdvancedCostOptimizationMetrics",
+		"advanced_data_protection_metrics":   "AdvancedDataProtectionMetrics",
+		"arn":                                "Arn",
+		"aws_org":                            "AwsOrg",
+		"bucket_level":                       "BucketLevel",
+		"buckets":                            "Buckets",
+		"cloudwatch_metrics":                 "CloudWatchMetrics",
+		"data_export":                        "DataExport",
+		"delimiter":                          "Delimiter",
+		"detailed_status_codes_metrics":      "DetailedStatusCodesMetrics",
+		"encryption":                         "Encryption",
+		"exclude":                            "Exclude",
+		"format":                             "Format",
+		"id":                                 "Id",
+		"include":                            "Include",
+		"is_enabled":                         "IsEnabled",
+		"key":                                "Key",
+		"key_id":                             "KeyId",
+		"max_depth":                          "MaxDepth",
+		"min_storage_bytes_percentage":       "MinStorageBytesPercentage",
+		"output_schema_version":              "OutputSchemaVersion",
+		"prefix":                             "Prefix",
+		"prefix_level":                       "PrefixLevel",
+		"regions":                            "Regions",
+		"s3_bucket_destination":              "S3BucketDestination",
+		"selection_criteria":                 "SelectionCriteria",
+		"ssekms":                             "SSEKMS",
+		"sses3":                              "SSES3",
+		"storage_lens_arn":                   "StorageLensArn",
+		"storage_lens_configuration":         "StorageLensConfiguration",
+		"storage_metrics":                    "StorageMetrics",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

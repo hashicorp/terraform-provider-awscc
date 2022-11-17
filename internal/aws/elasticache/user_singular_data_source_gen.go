@@ -44,6 +44,56 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"authentication_mode": {
+			// Property: AuthenticationMode
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Passwords": {
+			//	      "$comment": "List of passwords.",
+			//	      "description": "Passwords used for this user account. You can create up to two passwords for each user.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "Type": {
+			//	      "description": "Authentication Type",
+			//	      "enum": [
+			//	        "password",
+			//	        "no-password-required",
+			//	        "iam"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"passwords": {
+						// Property: Passwords
+						Description: "Passwords used for this user account. You can create up to two passwords for each user.",
+						Type:        types.ListType{ElemType: types.StringType},
+						Computed:    true,
+					},
+					"type": {
+						// Property: Type
+						Description: "Authentication Type",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"engine": {
 			// Property: Engine
 			// CloudFormation resource type schema:
@@ -147,10 +197,12 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_string":        "AccessString",
 		"arn":                  "Arn",
+		"authentication_mode":  "AuthenticationMode",
 		"engine":               "Engine",
 		"no_password_required": "NoPasswordRequired",
 		"passwords":            "Passwords",
 		"status":               "Status",
+		"type":                 "Type",
 		"user_id":              "UserId",
 		"user_name":            "UserName",
 	})

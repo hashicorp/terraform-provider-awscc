@@ -54,6 +54,35 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"billing_entity": {
+			// Property: BillingEntity
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
+			//	  "enum": [
+			//	    "AWS",
+			//	    "AWS Marketplace",
+			//	    "AISPL"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Description: "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AWS",
+					"AWS Marketplace",
+					"AISPL",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -147,7 +176,8 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 			//	  "description": "A term used to categorize the granularity of a Pricing Rule.",
 			//	  "enum": [
 			//	    "GLOBAL",
-			//	    "SERVICE"
+			//	    "SERVICE",
+			//	    "BILLING_ENTITY"
 			//	  ],
 			//	  "type": "string"
 			//	}
@@ -158,6 +188,7 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 				validate.StringInSlice([]string{
 					"GLOBAL",
 					"SERVICE",
+					"BILLING_ENTITY",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -290,6 +321,7 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                           "Arn",
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
+		"billing_entity":                "BillingEntity",
 		"creation_time":                 "CreationTime",
 		"description":                   "Description",
 		"key":                           "Key",

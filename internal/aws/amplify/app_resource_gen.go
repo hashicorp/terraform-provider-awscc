@@ -165,6 +165,11 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 			//	      "type": "array",
 			//	      "uniqueItems": false
 			//	    },
+			//	    "Framework": {
+			//	      "maxLength": 255,
+			//	      "pattern": "(?s).*",
+			//	      "type": "string"
+			//	    },
 			//	    "PullRequestEnvironmentName": {
 			//	      "maxLength": 20,
 			//	      "pattern": "(?s).*",
@@ -316,6 +321,19 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 						),
 						Optional: true,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"framework": {
+						// Property: Framework
+						Type:     types.StringType,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenAtMost(255),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
@@ -729,6 +747,32 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 			},
 			// OauthToken is a write-only property.
 		},
+		"platform": {
+			// Property: Platform
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "enum": [
+			//	    "WEB",
+			//	    "WEB_DYNAMIC",
+			//	    "WEB_COMPUTE"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"WEB",
+					"WEB_DYNAMIC",
+					"WEB_COMPUTE",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"repository": {
 			// Property: Repository
 			// CloudFormation resource type schema:
@@ -846,11 +890,13 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"enable_performance_mode":       "EnablePerformanceMode",
 		"enable_pull_request_preview":   "EnablePullRequestPreview",
 		"environment_variables":         "EnvironmentVariables",
+		"framework":                     "Framework",
 		"iam_service_role":              "IAMServiceRole",
 		"key":                           "Key",
 		"name":                          "Name",
 		"oauth_token":                   "OauthToken",
 		"password":                      "Password",
+		"platform":                      "Platform",
 		"pull_request_environment_name": "PullRequestEnvironmentName",
 		"repository":                    "Repository",
 		"source":                        "Source",

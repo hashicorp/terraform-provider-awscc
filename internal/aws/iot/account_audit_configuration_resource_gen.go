@@ -126,6 +126,17 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 			//	      },
 			//	      "type": "object"
 			//	    },
+			//	    "IntermediateCaRevokedForActiveDeviceCertificatesCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
 			//	    "IotPolicyOverlyPermissiveCheck": {
 			//	      "additionalProperties": false,
 			//	      "description": "The configuration for a specific audit check.",
@@ -349,6 +360,29 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 					},
 					"device_certificate_shared_check": {
 						// Property: DeviceCertificateSharedCheck
+						Description: "The configuration for a specific audit check.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Description: "True if the check is enabled.",
+									Type:        types.BoolType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"intermediate_ca_revoked_for_active_device_certificates_check": {
+						// Property: IntermediateCaRevokedForActiveDeviceCertificatesCheck
 						Description: "The configuration for a specific audit check.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -666,23 +700,24 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                                            "AccountId",
-		"audit_check_configurations":                            "AuditCheckConfigurations",
-		"audit_notification_target_configurations":              "AuditNotificationTargetConfigurations",
-		"authenticated_cognito_role_overly_permissive_check":    "AuthenticatedCognitoRoleOverlyPermissiveCheck",
-		"ca_certificate_expiring_check":                         "CaCertificateExpiringCheck",
-		"ca_certificate_key_quality_check":                      "CaCertificateKeyQualityCheck",
-		"conflicting_client_ids_check":                          "ConflictingClientIdsCheck",
-		"device_certificate_expiring_check":                     "DeviceCertificateExpiringCheck",
-		"device_certificate_key_quality_check":                  "DeviceCertificateKeyQualityCheck",
-		"device_certificate_shared_check":                       "DeviceCertificateSharedCheck",
-		"enabled":                                               "Enabled",
-		"iot_policy_overly_permissive_check":                    "IotPolicyOverlyPermissiveCheck",
-		"iot_role_alias_allows_access_to_unused_services_check": "IotRoleAliasAllowsAccessToUnusedServicesCheck",
-		"iot_role_alias_overly_permissive_check":                "IotRoleAliasOverlyPermissiveCheck",
-		"logging_disabled_check":                                "LoggingDisabledCheck",
-		"revoked_ca_certificate_still_active_check":             "RevokedCaCertificateStillActiveCheck",
-		"revoked_device_certificate_still_active_check":         "RevokedDeviceCertificateStillActiveCheck",
+		"account_id":                                                   "AccountId",
+		"audit_check_configurations":                                   "AuditCheckConfigurations",
+		"audit_notification_target_configurations":                     "AuditNotificationTargetConfigurations",
+		"authenticated_cognito_role_overly_permissive_check":           "AuthenticatedCognitoRoleOverlyPermissiveCheck",
+		"ca_certificate_expiring_check":                                "CaCertificateExpiringCheck",
+		"ca_certificate_key_quality_check":                             "CaCertificateKeyQualityCheck",
+		"conflicting_client_ids_check":                                 "ConflictingClientIdsCheck",
+		"device_certificate_expiring_check":                            "DeviceCertificateExpiringCheck",
+		"device_certificate_key_quality_check":                         "DeviceCertificateKeyQualityCheck",
+		"device_certificate_shared_check":                              "DeviceCertificateSharedCheck",
+		"enabled":                                                      "Enabled",
+		"intermediate_ca_revoked_for_active_device_certificates_check": "IntermediateCaRevokedForActiveDeviceCertificatesCheck",
+		"iot_policy_overly_permissive_check":                           "IotPolicyOverlyPermissiveCheck",
+		"iot_role_alias_allows_access_to_unused_services_check":        "IotRoleAliasAllowsAccessToUnusedServicesCheck",
+		"iot_role_alias_overly_permissive_check":                       "IotRoleAliasOverlyPermissiveCheck",
+		"logging_disabled_check":                                       "LoggingDisabledCheck",
+		"revoked_ca_certificate_still_active_check":                    "RevokedCaCertificateStillActiveCheck",
+		"revoked_device_certificate_still_active_check":                "RevokedDeviceCertificateStillActiveCheck",
 		"role_arn":   "RoleArn",
 		"sns":        "Sns",
 		"target_arn": "TargetArn",

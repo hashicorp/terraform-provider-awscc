@@ -63,6 +63,21 @@ func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"private_ip_address": {
+			// Property: PrivateIpAddress
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
@@ -145,13 +160,14 @@ func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_id":     "AllocationId",
-		"connectivity_type": "ConnectivityType",
-		"key":               "Key",
-		"nat_gateway_id":    "NatGatewayId",
-		"subnet_id":         "SubnetId",
-		"tags":              "Tags",
-		"value":             "Value",
+		"allocation_id":      "AllocationId",
+		"connectivity_type":  "ConnectivityType",
+		"key":                "Key",
+		"nat_gateway_id":     "NatGatewayId",
+		"private_ip_address": "PrivateIpAddress",
+		"subnet_id":          "SubnetId",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
