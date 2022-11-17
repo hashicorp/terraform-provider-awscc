@@ -41,6 +41,7 @@ Optional:
 - `device_certificate_expiring_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_expiring_check))
 - `device_certificate_key_quality_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_key_quality_check))
 - `device_certificate_shared_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_shared_check))
+- `intermediate_ca_revoked_for_active_device_certificates_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--intermediate_ca_revoked_for_active_device_certificates_check))
 - `iot_policy_overly_permissive_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--iot_policy_overly_permissive_check))
 - `iot_role_alias_allows_access_to_unused_services_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--iot_role_alias_allows_access_to_unused_services_check))
 - `iot_role_alias_overly_permissive_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--iot_role_alias_overly_permissive_check))
@@ -99,6 +100,14 @@ Optional:
 
 <a id="nestedatt--audit_check_configurations--device_certificate_shared_check"></a>
 ### Nested Schema for `audit_check_configurations.device_certificate_shared_check`
+
+Optional:
+
+- `enabled` (Boolean) True if the check is enabled.
+
+
+<a id="nestedatt--audit_check_configurations--intermediate_ca_revoked_for_active_device_certificates_check"></a>
+### Nested Schema for `audit_check_configurations.intermediate_ca_revoked_for_active_device_certificates_check`
 
 Optional:
 

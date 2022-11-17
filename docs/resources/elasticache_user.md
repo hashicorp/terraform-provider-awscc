@@ -24,6 +24,7 @@ Resource Type definition for AWS::ElastiCache::User
 ### Optional
 
 - `access_string` (String) Access permissions string used for this user account.
+- `authentication_mode` (Attributes) (see [below for nested schema](#nestedatt--authentication_mode))
 - `no_password_required` (Boolean) Indicates a password is not required for this user account.
 - `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
 
@@ -32,6 +33,17 @@ Resource Type definition for AWS::ElastiCache::User
 - `arn` (String) The Amazon Resource Name (ARN) of the user account.
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) Indicates the user status. Can be "active", "modifying" or "deleting".
+
+<a id="nestedatt--authentication_mode"></a>
+### Nested Schema for `authentication_mode`
+
+Required:
+
+- `type` (String) Authentication Type
+
+Optional:
+
+- `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
 
 ## Import
 

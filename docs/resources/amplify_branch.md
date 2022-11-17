@@ -29,6 +29,7 @@ The AWS::Amplify::Branch resource creates a new branch within an app.
 - `enable_performance_mode` (Boolean)
 - `enable_pull_request_preview` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
+- `framework` (String)
 - `pull_request_environment_name` (String)
 - `stage` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

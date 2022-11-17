@@ -17,7 +17,6 @@ The AWS::CloudWatch::CompositeAlarm type specifies an alarm which aggregates the
 
 ### Required
 
-- `alarm_name` (String) The name of the Composite Alarm
 - `alarm_rule` (String) Expression which aggregates the state of other Alarms (Metric or Composite Alarms)
 
 ### Optional
@@ -28,6 +27,7 @@ The AWS::CloudWatch::CompositeAlarm type specifies an alarm which aggregates the
 - `actions_suppressor_wait_period` (Number) Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.
 - `alarm_actions` (List of String) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).
 - `alarm_description` (String) The description of the alarm
+- `alarm_name` (String) The name of the Composite Alarm
 - `insufficient_data_actions` (List of String) The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 - `ok_actions` (List of String) The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 
