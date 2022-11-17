@@ -921,9 +921,6 @@
         }
     },
     "properties": {
-        "Tag": {
-            "$ref" : "#/definitions/Tag"
-        },
         "Tags" : {
             "type" : "array",
             "maxItems" : 50,

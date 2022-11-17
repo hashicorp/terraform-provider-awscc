@@ -49,7 +49,6 @@ Data Source schema for AWS::SageMaker::ModelPackage
 - `model_package_version` (Number) The version of the model package.
 - `sample_payload_url` (String) The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.
 - `source_algorithm_specification` (Attributes) Details about the algorithm that was used to create the model package. (see [below for nested schema](#nestedatt--source_algorithm_specification))
-- `tag` (Attributes) A key-value pair to associate with a resource. (see [below for nested schema](#nestedatt--tag))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `task` (String) The machine learning task your model package accomplishes.
 - `validation_specification` (Attributes) Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package. (see [below for nested schema](#nestedatt--validation_specification))
@@ -558,15 +557,6 @@ Read-Only:
 - `algorithm_name` (String) The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.
 - `model_data_url` (String) The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
 
-
-
-<a id="nestedatt--tag"></a>
-### Nested Schema for `tag`
-
-Read-Only:
-
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--tags"></a>

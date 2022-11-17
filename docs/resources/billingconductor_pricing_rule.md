@@ -24,6 +24,7 @@ A markup/discount that is defined for a specific set of services that can later 
 
 ### Optional
 
+- `billing_entity` (String) The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.
 - `description` (String) Pricing rule description
 - `service` (String) The service which a pricing rule is applied on
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))

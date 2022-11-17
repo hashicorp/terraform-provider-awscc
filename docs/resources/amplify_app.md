@@ -32,6 +32,7 @@ The AWS::Amplify::App resource creates Apps in the Amplify Console. An App is a 
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
 - `iam_service_role` (String)
 - `oauth_token` (String)
+- `platform` (String)
 - `repository` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -56,6 +57,7 @@ Optional:
 - `enable_performance_mode` (Boolean)
 - `enable_pull_request_preview` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
+- `framework` (String)
 - `pull_request_environment_name` (String)
 - `stage` (String)
 

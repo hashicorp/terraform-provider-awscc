@@ -54,6 +54,75 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"authentication_mode": {
+			// Property: AuthenticationMode
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Passwords": {
+			//	      "$comment": "List of passwords.",
+			//	      "description": "Passwords used for this user account. You can create up to two passwords for each user.",
+			//	      "insertionOrder": true,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "Type": {
+			//	      "description": "Authentication Type",
+			//	      "enum": [
+			//	        "password",
+			//	        "no-password-required",
+			//	        "iam"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Type"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"passwords": {
+						// Property: Passwords
+						Description: "Passwords used for this user account. You can create up to two passwords for each user.",
+						Type:        types.ListType{ElemType: types.StringType},
+						Optional:    true,
+						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"type": {
+						// Property: Type
+						Description: "Authentication Type",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"password",
+								"no-password-required",
+								"iam",
+							}),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+			// AuthenticationMode is a write-only property.
+		},
 		"engine": {
 			// Property: Engine
 			// CloudFormation resource type schema:
@@ -194,10 +263,12 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_string":        "AccessString",
 		"arn":                  "Arn",
+		"authentication_mode":  "AuthenticationMode",
 		"engine":               "Engine",
 		"no_password_required": "NoPasswordRequired",
 		"passwords":            "Passwords",
 		"status":               "Status",
+		"type":                 "Type",
 		"user_id":              "UserId",
 		"user_name":            "UserName",
 	})
@@ -206,6 +277,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Passwords",
 		"/properties/NoPasswordRequired",
 		"/properties/AccessString",
+		"/properties/AuthenticationMode",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

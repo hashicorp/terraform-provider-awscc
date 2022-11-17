@@ -4017,65 +4017,6 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 				resource.RequiresReplace(),
 			},
 		},
-		"tag": {
-			// Property: Tag
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A key-value pair to associate with a resource.",
-			//	  "properties": {
-			//	    "Key": {
-			//	      "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	      "maxLength": 128,
-			//	      "minLength": 1,
-			//	      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	      "type": "string"
-			//	    },
-			//	    "Value": {
-			//	      "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	      "maxLength": 256,
-			//	      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Key",
-			//	    "Value"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "A key-value pair to associate with a resource.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-					},
-					"value": {
-						// Property: Value
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -4798,7 +4739,6 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 		"supported_realtime_inference_instance_types": "SupportedRealtimeInferenceInstanceTypes",
 		"supported_response_mime_types":               "SupportedResponseMIMETypes",
 		"supported_transform_instance_types":          "SupportedTransformInstanceTypes",
-		"tag":                                         "Tag",
 		"tags":                                        "Tags",
 		"task":                                        "Task",
 		"transform_input":                             "TransformInput",

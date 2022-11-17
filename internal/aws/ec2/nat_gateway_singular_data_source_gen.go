@@ -50,6 +50,16 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"private_ip_address": {
+			// Property: PrivateIpAddress
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
@@ -120,13 +130,14 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NatGateway").WithTerraformTypeName("awscc_ec2_nat_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_id":     "AllocationId",
-		"connectivity_type": "ConnectivityType",
-		"key":               "Key",
-		"nat_gateway_id":    "NatGatewayId",
-		"subnet_id":         "SubnetId",
-		"tags":              "Tags",
-		"value":             "Value",
+		"allocation_id":      "AllocationId",
+		"connectivity_type":  "ConnectivityType",
+		"key":                "Key",
+		"nat_gateway_id":     "NatGatewayId",
+		"private_ip_address": "PrivateIpAddress",
+		"subnet_id":          "SubnetId",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

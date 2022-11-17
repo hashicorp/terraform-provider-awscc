@@ -158,11 +158,13 @@ func compositeAlarmResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "The name of the Composite Alarm",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},

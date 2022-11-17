@@ -23,6 +23,7 @@ Data Source schema for AWS::BillingConductor::PricingRule
 
 - `arn` (String) Pricing rule ARN
 - `associated_pricing_plan_count` (Number) The number of pricing plans associated with pricing rule
+- `billing_entity` (String) The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.
 - `creation_time` (Number) Creation timestamp in UNIX epoch time format
 - `description` (String) Pricing rule description
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format

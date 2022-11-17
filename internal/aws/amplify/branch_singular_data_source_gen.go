@@ -205,6 +205,18 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 			),
 			Computed: true,
 		},
+		"framework": {
+			// Property: Framework
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "maxLength": 255,
+			//	  "pattern": "(?s).*",
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"pull_request_environment_name": {
 			// Property: PullRequestEnvironmentName
 			// CloudFormation resource type schema:
@@ -311,6 +323,7 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_performance_mode":       "EnablePerformanceMode",
 		"enable_pull_request_preview":   "EnablePullRequestPreview",
 		"environment_variables":         "EnvironmentVariables",
+		"framework":                     "Framework",
 		"key":                           "Key",
 		"name":                          "Name",
 		"password":                      "Password",

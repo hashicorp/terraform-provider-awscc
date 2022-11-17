@@ -146,6 +146,11 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	      "type": "array",
 			//	      "uniqueItems": false
 			//	    },
+			//	    "Framework": {
+			//	      "maxLength": 255,
+			//	      "pattern": "(?s).*",
+			//	      "type": "string"
+			//	    },
 			//	    "PullRequestEnvironmentName": {
 			//	      "maxLength": 20,
 			//	      "pattern": "(?s).*",
@@ -235,6 +240,11 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 								},
 							},
 						),
+						Computed: true,
+					},
+					"framework": {
+						// Property: Framework
+						Type:     types.StringType,
 						Computed: true,
 					},
 					"pull_request_environment_name": {
@@ -505,6 +515,21 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"platform": {
+			// Property: Platform
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "enum": [
+			//	    "WEB",
+			//	    "WEB_DYNAMIC",
+			//	    "WEB_COMPUTE"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"repository": {
 			// Property: Repository
 			// CloudFormation resource type schema:
@@ -601,11 +626,13 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_performance_mode":       "EnablePerformanceMode",
 		"enable_pull_request_preview":   "EnablePullRequestPreview",
 		"environment_variables":         "EnvironmentVariables",
+		"framework":                     "Framework",
 		"iam_service_role":              "IAMServiceRole",
 		"key":                           "Key",
 		"name":                          "Name",
 		"oauth_token":                   "OauthToken",
 		"password":                      "Password",
+		"platform":                      "Platform",
 		"pull_request_environment_name": "PullRequestEnvironmentName",
 		"repository":                    "Repository",
 		"source":                        "Source",

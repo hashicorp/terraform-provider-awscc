@@ -23,6 +23,7 @@ Resource Type definition for AWS::EC2::NatGateway
 
 - `allocation_id` (String)
 - `connectivity_type` (String)
+- `private_ip_address` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

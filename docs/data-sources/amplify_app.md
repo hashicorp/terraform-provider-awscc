@@ -37,6 +37,7 @@ Data Source schema for AWS::Amplify::App
 - `iam_service_role` (String)
 - `name` (String)
 - `oauth_token` (String)
+- `platform` (String)
 - `repository` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -53,6 +54,7 @@ Read-Only:
 - `enable_performance_mode` (Boolean)
 - `enable_pull_request_preview` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
+- `framework` (String)
 - `pull_request_environment_name` (String)
 - `stage` (String)
 

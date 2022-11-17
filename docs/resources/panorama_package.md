@@ -21,6 +21,7 @@ Schema for Package CloudFormation Resource
 
 ### Optional
 
+- `storage_location` (Attributes) (see [below for nested schema](#nestedatt--storage_location))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -29,16 +30,6 @@ Schema for Package CloudFormation Resource
 - `created_time` (Number)
 - `id` (String) Uniquely identifies the resource.
 - `package_id` (String)
-- `storage_location` (Attributes) (see [below for nested schema](#nestedatt--storage_location))
-
-<a id="nestedatt--tags"></a>
-### Nested Schema for `tags`
-
-Required:
-
-- `key` (String)
-- `value` (String)
-
 
 <a id="nestedatt--storage_location"></a>
 ### Nested Schema for `storage_location`
@@ -50,6 +41,15 @@ Read-Only:
 - `generated_prefix_location` (String)
 - `manifest_prefix_location` (String)
 - `repo_prefix_location` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

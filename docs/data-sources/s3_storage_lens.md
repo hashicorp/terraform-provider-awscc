@@ -44,7 +44,10 @@ Read-Only:
 Read-Only:
 
 - `activity_metrics` (Attributes) Enables activity metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--activity_metrics))
+- `advanced_cost_optimization_metrics` (Attributes) Enables advanced cost optimization metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--advanced_cost_optimization_metrics))
+- `advanced_data_protection_metrics` (Attributes) Enables advanced data protection metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--advanced_data_protection_metrics))
 - `bucket_level` (Attributes) Bucket-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level))
+- `detailed_status_codes_metrics` (Attributes) Enables detailed status codes metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--detailed_status_codes_metrics))
 
 <a id="nestedatt--storage_lens_configuration--account_level--activity_metrics"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.activity_metrics`
@@ -54,12 +57,31 @@ Read-Only:
 - `is_enabled` (Boolean) Specifies whether activity metrics are enabled or disabled.
 
 
+<a id="nestedatt--storage_lens_configuration--account_level--advanced_cost_optimization_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.advanced_cost_optimization_metrics`
+
+Read-Only:
+
+- `is_enabled` (Boolean) Specifies whether advanced cost optimization metrics are enabled or disabled.
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--advanced_data_protection_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.advanced_data_protection_metrics`
+
+Read-Only:
+
+- `is_enabled` (Boolean) Specifies whether advanced data protection metrics are enabled or disabled.
+
+
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.bucket_level`
 
 Read-Only:
 
 - `activity_metrics` (Attributes) Enables activity metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--activity_metrics))
+- `advanced_cost_optimization_metrics` (Attributes) Enables advanced cost optimization metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--advanced_cost_optimization_metrics))
+- `advanced_data_protection_metrics` (Attributes) Enables advanced data protection metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--advanced_data_protection_metrics))
+- `detailed_status_codes_metrics` (Attributes) Enables detailed status codes metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--detailed_status_codes_metrics))
 - `prefix_level` (Attributes) Prefix-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level))
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--activity_metrics"></a>
@@ -68,6 +90,30 @@ Read-Only:
 Read-Only:
 
 - `is_enabled` (Boolean) Specifies whether activity metrics are enabled or disabled.
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--bucket_level--advanced_cost_optimization_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+
+Read-Only:
+
+- `is_enabled` (Boolean) Specifies whether advanced cost optimization metrics are enabled or disabled.
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--bucket_level--advanced_data_protection_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+
+Read-Only:
+
+- `is_enabled` (Boolean) Specifies whether advanced data protection metrics are enabled or disabled.
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--bucket_level--detailed_status_codes_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+
+Read-Only:
+
+- `is_enabled` (Boolean) Specifies whether detailed status codes metrics are enabled or disabled.
 
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level"></a>
@@ -96,6 +142,14 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--detailed_status_codes_metrics"></a>
+### Nested Schema for `storage_lens_configuration.account_level.detailed_status_codes_metrics`
+
+Read-Only:
+
+- `is_enabled` (Boolean) Specifies whether detailed status codes metrics are enabled or disabled.
 
 
 

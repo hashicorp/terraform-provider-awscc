@@ -45,12 +45,22 @@
     "InsightSeverity": {
       "description": "DevOps Guru Insight Severity Enum",
       "type": "string",
-      "enum": ["LOW", "MEDIUM", "HIGH"]
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
     },
     "NotificationMessageType": {
       "description": "DevOps Guru NotificationMessageType Enum",
       "type": "string",
-      "enum": ["NEW_INSIGHT", "CLOSED_INSIGHT", "NEW_ASSOCIATION", "SEVERITY_UPGRADED", "NEW_RECOMMENDATION"]
+      "enum": [
+        "NEW_INSIGHT",
+        "CLOSED_INSIGHT",
+        "NEW_ASSOCIATION",
+        "SEVERITY_UPGRADED",
+        "NEW_RECOMMENDATION"
+      ]
     },
     "InsightSeveritiesFilterList": {
       "description": "DevOps Guru insight severities to filter for",

@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 634 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 637 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -57,6 +57,15 @@ resource_schema "aws_amplify_domain" {
 
 resource_schema "aws_amplifyuibuilder_component" {
   cloudformation_type_name               = "AWS::AmplifyUIBuilder::Component"
+  suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_amplifyuibuilder_form" {
+  cloudformation_type_name               = "AWS::AmplifyUIBuilder::Form"
   suppress_plural_data_source_generation = true
 
   # Goes into infinite recursion while generating code...
@@ -2203,6 +2212,11 @@ resource_schema "aws_organizations_account" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_organizations_organizational_unit" {
+  cloudformation_type_name               = "AWS::Organizations::OrganizationalUnit"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_organizations_policy" {
   cloudformation_type_name               = "AWS::Organizations::Policy"
   suppress_plural_data_source_generation = true
@@ -2693,6 +2707,10 @@ resource_schema "aws_ssm_document" {
 
 resource_schema "aws_ssm_resource_data_sync" {
   cloudformation_type_name = "AWS::SSM::ResourceDataSync"
+}
+
+resource_schema "aws_ssm_resource_policy" {
+  cloudformation_type_name = "AWS::SSM::ResourcePolicy"
 }
 
 resource_schema "aws_ssmcontacts_contact" {

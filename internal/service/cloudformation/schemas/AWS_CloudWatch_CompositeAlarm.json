@@ -82,7 +82,6 @@
         }
     },
     "required": [
-        "AlarmName",
         "AlarmRule"
     ],
     "readOnlyProperties": [
@@ -124,5 +123,8 @@
                 "cloudwatch:DescribeAlarms"
             ]
         }
+    },
+    "tagging": {
+        "taggable": false
     }
 }
