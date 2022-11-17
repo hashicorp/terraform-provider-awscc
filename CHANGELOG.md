@@ -1,4 +1,13 @@
 ## 0.39.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_organizations_organizational_unit`
+* **New Data Source:** `awscc_ssm_resource_policies`
+* **New Data Source:** `awscc_ssm_resource_policy`
+* **New Resource:** `awscc_organizations_organizational_unit`
+* **New Resource:** `awscc_ssm_resource_policy`
+
 ## [0.38.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.38.0) (November 10, 2022)
 
 FEATURES:
