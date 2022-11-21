@@ -275,7 +275,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 										}),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: "static-key"}),
+										DefaultValue(types.StringValue("static-key")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -389,7 +389,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Int64{Value: 2000}),
+							DefaultValue(types.Int64Value(2000)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -400,7 +400,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Int64{Value: 2000}),
+							DefaultValue(types.Int64Value(2000)),
 							resource.UseStateForUnknown(),
 						},
 					},

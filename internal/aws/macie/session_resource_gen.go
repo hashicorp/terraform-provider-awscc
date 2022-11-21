@@ -62,7 +62,7 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "SIX_HOURS"}),
+				DefaultValue(types.StringValue("SIX_HOURS")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -105,7 +105,7 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "ENABLED"}),
+				DefaultValue(types.StringValue("ENABLED")),
 				resource.UseStateForUnknown(),
 			},
 		},

@@ -78,7 +78,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "ON_DEMAND"}),
+							DefaultValue(types.StringValue("ON_DEMAND")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -199,7 +199,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "ASC"}),
+							DefaultValue(types.StringValue("ASC")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -278,7 +278,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "AWS_OWNED_KMS_KEY"}),
+							DefaultValue(types.StringValue("AWS_OWNED_KMS_KEY")),
 							resource.UseStateForUnknown(),
 						},
 					},

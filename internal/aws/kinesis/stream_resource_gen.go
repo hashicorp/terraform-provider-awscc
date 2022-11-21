@@ -206,14 +206,13 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Object{
-					AttrTypes: map[string]attr.Type{
-						"stream_mode": types.StringType,
-					},
-					Attrs: map[string]attr.Value{
-						"stream_mode": types.String{Value: "PROVISIONED"},
-					},
+				DefaultValue(types.ObjectValueMust(map[string]attr.Type{
+					"stream_mode": types.StringType,
 				},
+					map[string]attr.Value{
+						"stream_mode": types.StringValue("PROVISIONED"),
+					},
+				),
 				),
 				resource.UseStateForUnknown(),
 			},

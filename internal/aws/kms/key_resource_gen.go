@@ -158,7 +158,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "SYMMETRIC_DEFAULT"}),
+				DefaultValue(types.StringValue("SYMMETRIC_DEFAULT")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -188,7 +188,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "ENCRYPT_DECRYPT"}),
+				DefaultValue(types.StringValue("ENCRYPT_DECRYPT")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -206,7 +206,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Bool{Value: false}),
+				DefaultValue(types.BoolValue(false)),
 				resource.UseStateForUnknown(),
 			},
 		},

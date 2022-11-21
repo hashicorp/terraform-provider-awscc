@@ -812,10 +812,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
-											types.String{Value: "GET"},
-											types.String{Value: "HEAD"},
-										}}),
+										DefaultValue(types.ListValueMust(types.StringType, []attr.Value{
+											types.StringValue("GET"),
+											types.StringValue("HEAD"),
+										})),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -834,10 +834,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
-											types.String{Value: "GET"},
-											types.String{Value: "HEAD"},
-										}}),
+										DefaultValue(types.ListValueMust(types.StringType, []attr.Value{
+											types.StringValue("GET"),
+											types.StringValue("HEAD"),
+										})),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -847,7 +847,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Bool{Value: false}),
+										DefaultValue(types.BoolValue(false)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -857,7 +857,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 86400.000000}),
+										DefaultValue(types.Float64Value(86400.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -867,7 +867,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -898,14 +898,13 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Object{
-														AttrTypes: map[string]attr.Type{
-															"forward": types.StringType,
-														},
-														Attrs: map[string]attr.Value{
-															"forward": types.String{Value: "none"},
-														},
+													DefaultValue(types.ObjectValueMust(map[string]attr.Type{
+														"forward": types.StringType,
 													},
+														map[string]attr.Value{
+															"forward": types.StringValue("none"),
+														},
+													),
 													),
 													resource.UseStateForUnknown(),
 												},
@@ -1016,7 +1015,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 31536000.000000}),
+										DefaultValue(types.Float64Value(31536000.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1026,7 +1025,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 0.000000}),
+										DefaultValue(types.Float64Value(0.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1068,7 +1067,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Bool{Value: false}),
+										DefaultValue(types.BoolValue(false)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1114,7 +1113,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: ""}),
+							DefaultValue(types.StringValue("")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -1128,7 +1127,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 300.000000}),
+										DefaultValue(types.Float64Value(300.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1178,7 +1177,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Int64{Value: 80}),
+										DefaultValue(types.Int64Value(80)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1188,7 +1187,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Int64{Value: 443}),
+										DefaultValue(types.Int64Value(443)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1220,10 +1219,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
-											types.String{Value: "GET"},
-											types.String{Value: "HEAD"},
-										}}),
+										DefaultValue(types.ListValueMust(types.StringType, []attr.Value{
+											types.StringValue("GET"),
+											types.StringValue("HEAD"),
+										})),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1233,7 +1232,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1243,10 +1242,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
-											types.String{Value: "GET"},
-											types.String{Value: "HEAD"},
-										}}),
+										DefaultValue(types.ListValueMust(types.StringType, []attr.Value{
+											types.StringValue("GET"),
+											types.StringValue("HEAD"),
+										})),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1256,7 +1255,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Bool{Value: false}),
+										DefaultValue(types.BoolValue(false)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1266,7 +1265,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 86400.000000}),
+										DefaultValue(types.Float64Value(86400.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1276,7 +1275,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1307,14 +1306,13 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Object{
-														AttrTypes: map[string]attr.Type{
-															"forward": types.StringType,
-														},
-														Attrs: map[string]attr.Value{
-															"forward": types.String{Value: "none"},
-														},
+													DefaultValue(types.ObjectValueMust(map[string]attr.Type{
+														"forward": types.StringType,
 													},
+														map[string]attr.Value{
+															"forward": types.StringValue("none"),
+														},
+													),
 													),
 													resource.UseStateForUnknown(),
 												},
@@ -1425,7 +1423,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 31536000.000000}),
+										DefaultValue(types.Float64Value(31536000.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1435,7 +1433,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Float64{Value: 0.000000}),
+										DefaultValue(types.Float64Value(0.000000)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1445,7 +1443,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1455,7 +1453,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1465,7 +1463,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1475,7 +1473,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Bool{Value: false}),
+										DefaultValue(types.BoolValue(false)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1517,7 +1515,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: ""}),
+							DefaultValue(types.StringValue("")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -1532,7 +1530,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "http1.1"}),
+							DefaultValue(types.StringValue("http1.1")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -1560,7 +1558,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Bool{Value: false}),
+										DefaultValue(types.BoolValue(false)),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1570,7 +1568,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1700,7 +1698,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64{Value: 80}),
+													DefaultValue(types.Int64Value(80)),
 													resource.UseStateForUnknown(),
 												},
 											},
@@ -1710,7 +1708,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64{Value: 443}),
+													DefaultValue(types.Int64Value(443)),
 													resource.UseStateForUnknown(),
 												},
 											},
@@ -1720,7 +1718,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64{Value: 5}),
+													DefaultValue(types.Int64Value(5)),
 													resource.UseStateForUnknown(),
 												},
 											},
@@ -1735,7 +1733,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64{Value: 30}),
+													DefaultValue(types.Int64Value(30)),
 													resource.UseStateForUnknown(),
 												},
 											},
@@ -1745,10 +1743,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
-														types.String{Value: "TLSv1"},
-														types.String{Value: "SSLv3"},
-													}}),
+													DefaultValue(types.ListValueMust(types.StringType, []attr.Value{
+														types.StringValue("TLSv1"),
+														types.StringValue("SSLv3"),
+													})),
 													resource.UseStateForUnknown(),
 												},
 											},
@@ -1807,7 +1805,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -1851,7 +1849,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.String{Value: ""}),
+													DefaultValue(types.StringValue("")),
 													resource.UseStateForUnknown(),
 												},
 											},
@@ -1877,7 +1875,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "PriceClass_All"}),
+							DefaultValue(types.StringValue("PriceClass_All")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -1912,25 +1910,23 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Object{
-								AttrTypes: map[string]attr.Type{
-									"geo_restriction": types.ObjectType{
-										AttrTypes: map[string]attr.Type{
-											"restriction_type": types.StringType,
-										},
-									},
-								},
-								Attrs: map[string]attr.Value{
-									"geo_restriction": types.Object{
-										AttrTypes: map[string]attr.Type{
-											"restriction_type": types.StringType,
-										},
-										Attrs: map[string]attr.Value{
-											"restriction_type": types.String{Value: "none"},
-										},
+							DefaultValue(types.ObjectValueMust(map[string]attr.Type{
+								"geo_restriction": types.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"restriction_type": types.StringType,
 									},
 								},
 							},
+								map[string]attr.Value{
+									"geo_restriction": types.ObjectValueMust(map[string]attr.Type{
+										"restriction_type": types.StringType,
+									},
+										map[string]attr.Value{
+											"restriction_type": types.StringValue("none"),
+										},
+									),
+								},
+							),
 							),
 							resource.UseStateForUnknown(),
 						},
@@ -1950,7 +1946,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: ""}),
+										DefaultValue(types.StringValue("")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -2016,14 +2012,13 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Object{
-								AttrTypes: map[string]attr.Type{
-									"cloudfront_default_certificate": types.BoolType,
-								},
-								Attrs: map[string]attr.Value{
-									"cloudfront_default_certificate": types.Bool{Value: true},
-								},
+							DefaultValue(types.ObjectValueMust(map[string]attr.Type{
+								"cloudfront_default_certificate": types.BoolType,
 							},
+								map[string]attr.Value{
+									"cloudfront_default_certificate": types.BoolValue(true),
+								},
+							),
 							),
 							resource.UseStateForUnknown(),
 						},
@@ -2034,7 +2029,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: ""}),
+							DefaultValue(types.StringValue("")),
 							resource.UseStateForUnknown(),
 						},
 					},

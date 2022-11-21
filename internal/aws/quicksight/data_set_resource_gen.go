@@ -447,7 +447,7 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 							validate.FloatBetween(1.000000, 36.000000),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Float64{Value: 36.000000}),
+							DefaultValue(types.Float64Value(36.000000)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -458,7 +458,7 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: true}),
+							DefaultValue(types.BoolValue(true)),
 							resource.UseStateForUnknown(),
 						},
 					},

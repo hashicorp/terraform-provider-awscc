@@ -53,7 +53,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				})),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -83,7 +83,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				})),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},

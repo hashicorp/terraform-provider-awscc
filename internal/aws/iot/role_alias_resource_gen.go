@@ -39,7 +39,7 @@ func roleAliasResource(ctx context.Context) (resource.Resource, error) {
 				validate.IntBetween(900, 43200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64{Value: 3600}),
+				DefaultValue(types.Int64Value(3600)),
 				resource.UseStateForUnknown(),
 			},
 		},

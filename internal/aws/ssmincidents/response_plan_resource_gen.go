@@ -228,7 +228,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 										validate.ArrayLenAtMost(200),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+										DefaultValue(types.SetValueMust(types.StringType, []attr.Value{})),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -263,7 +263,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 										validate.ArrayLenBetween(1, 200),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+										DefaultValue(types.SetValueMust(types.StringType, []attr.Value{})),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -310,7 +310,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -368,7 +368,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+							DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -429,7 +429,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.SetValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -575,7 +575,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 							validate.ArrayLenAtMost(50),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+							DefaultValue(types.SetValueMust(types.StringType, []attr.Value{})),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -607,7 +607,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
-							DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+							DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -720,7 +720,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.SetValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 			},
 		},

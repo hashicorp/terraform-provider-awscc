@@ -60,7 +60,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "NONE"}),
+				DefaultValue(types.StringValue("NONE")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -157,7 +157,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "TCP"}),
+				DefaultValue(types.StringValue("TCP")),
 				resource.UseStateForUnknown(),
 			},
 		},

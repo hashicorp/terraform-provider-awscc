@@ -81,7 +81,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Bool{Value: true}),
+				DefaultValue(types.BoolValue(true)),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -109,7 +109,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "IPV4"}),
+				DefaultValue(types.StringValue("IPV4")),
 				resource.UseStateForUnknown(),
 			},
 		},

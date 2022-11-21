@@ -1694,7 +1694,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: ""}),
+				DefaultValue(types.StringValue("")),
 				resource.UseStateForUnknown(),
 			},
 		},

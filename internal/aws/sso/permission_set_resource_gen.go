@@ -87,7 +87,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -176,7 +176,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.ListValueMust(types.StringType, []attr.Value{})),
 				resource.UseStateForUnknown(),
 			},
 		},
