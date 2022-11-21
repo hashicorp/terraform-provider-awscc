@@ -33,11 +33,11 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 		return
 	}
 
-	if list.Null || list.Unknown {
+	if list.IsNull() || list.IsUnknown() {
 		return
 	}
 
-	for i1, val1 := range list.Elems {
+	for i1, val1 := range list.Elements() {
 		val1, err := val1.ToTerraformValue(ctx)
 
 		if err != nil {
@@ -53,7 +53,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 			continue
 		}
 
-		for i2, val2 := range list.Elems {
+		for i2, val2 := range list.Elements() {
 			if i2 == i1 {
 				continue
 			}

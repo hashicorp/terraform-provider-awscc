@@ -132,19 +132,19 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 	isSlice := false
 	switch v := request.AttributeConfig.(type) {
 	case types.Object:
-		if v.Null || v.Unknown {
+		if v.IsNull() || v.IsUnknown() {
 			return
 		}
 		isMap = true
 
 	case types.List:
-		if v.Null || v.Unknown {
+		if v.IsNull() || v.IsUnknown() {
 			return
 		}
 		isSlice = true
 
 	case types.Set:
-		if v.Null || v.Unknown {
+		if v.IsNull() || v.IsUnknown() {
 			return
 		}
 		isSlice = true

@@ -146,19 +146,18 @@ func validateFloat(ctx context.Context, request tfsdk.ValidateAttributeRequest, 
 
 			return 0, false
 		} else {
-			if n.Unknown || n.Null {
+			if n.IsNull() || n.IsUnknown() {
 				return 0, false
 			}
-
-			f, _ := n.Value.Float64()
+			f, _ := n.ValueBigFloat().Float64()
 
 			return f, true
 		}
 	} else {
-		if n.Unknown || n.Null {
+		if n.IsNull() || n.IsUnknown() {
 			return 0, false
 		}
 
-		return n.Value, true
+		return n.ValueFloat64(), true
 	}
 }

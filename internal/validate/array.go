@@ -169,20 +169,20 @@ func validateArray(ctx context.Context, request tfsdk.ValidateAttributeRequest, 
 
 			return elems, elemKeyer, false
 		} else {
-			if v.Null || v.Unknown {
+			if v.IsNull() || v.IsUnknown() {
 				return elems, elemKeyer, false
 			}
 
 			elemKeyer = setKeyer
-			elems = v.Elems
+			elems = v.Elements()
 		}
 	} else {
-		if v.Null || v.Unknown {
+		if v.IsNull() || v.IsUnknown() {
 			return elems, elemKeyer, false
 		}
 
 		elemKeyer = listKeyer
-		elems = v.Elems
+		elems = v.Elements()
 	}
 
 	return elems, elemKeyer, true
