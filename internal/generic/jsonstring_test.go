@@ -23,19 +23,19 @@ func TestJSONStringTypeValueFromTerraform(t *testing.T) {
 	}{
 		"null value": {
 			val:      tftypes.NewValue(tftypes.String, nil),
-			expected: JSONString{Null: true},
+			expected: JSONStringNull(),
 		},
 		"unknown value": {
 			val:      tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-			expected: JSONString{Unknown: true},
+			expected: JSONStringUnknown(),
 		},
 		"empty string": {
 			val:      tftypes.NewValue(tftypes.String, ""),
-			expected: JSONString{Value: ""},
+			expected: JSONStringValue(""),
 		},
 		"valid string": {
 			val:      tftypes.NewValue(tftypes.String, `{"k1": 42}`),
-			expected: JSONString{Value: `{"k1": 42}`},
+			expected: JSONStringValue(`{"k1": 42}`),
 		},
 		"invalid string": {
 			val:         tftypes.NewValue(tftypes.String, "not ok"),
@@ -123,39 +123,39 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 	}
 	tests := map[string]testCase{
 		"planned not JSONString": {
-			plannedValue: types.Int64{Value: 1},
-			currentValue: JSONString{Value: `{}`},
+			plannedValue: types.Int64Value(1),
+			currentValue: JSONStringValue(`{}`),
 			expectError:  true,
 		},
 		"current not JSONString": {
-			plannedValue: JSONString{Value: `{}`},
-			currentValue: types.Int64{Value: 1},
+			plannedValue: JSONStringValue(`{}`),
+			currentValue: types.Int64Value(1),
 			expectError:  true,
 		},
 		"current null": {
-			plannedValue:  JSONString{Value: `{"k1": 42}`},
-			currentValue:  JSONString{Null: true},
-			expectedValue: JSONString{Value: `{"k1": 42}`},
+			plannedValue:  JSONStringValue(`{"k1": 42}`),
+			currentValue:  JSONStringNull(),
+			expectedValue: JSONStringValue(`{"k1": 42}`),
 		},
 		"exactly equal": {
-			plannedValue:  JSONString{Value: `{}`},
-			currentValue:  JSONString{Value: `{}`},
-			expectedValue: JSONString{Value: `{}`},
+			plannedValue:  JSONStringValue(`{}`),
+			currentValue:  JSONStringValue(`{}`),
+			expectedValue: JSONStringValue(`{}`),
 		},
 		"leading and trailing whitespace": {
-			plannedValue:  JSONString{Value: ` {}`},
-			currentValue:  JSONString{Value: `{}  `},
-			expectedValue: JSONString{Value: `{}  `},
+			plannedValue:  JSONStringValue(` {}`),
+			currentValue:  JSONStringValue(`{}  `),
+			expectedValue: JSONStringValue(`{}  `),
 		},
 		"not equal": {
-			plannedValue:  JSONString{Value: `{"k1": 42}`},
-			currentValue:  JSONString{Value: `{"k1": -1}`},
-			expectedValue: JSONString{Value: `{"k1": 42}`},
+			plannedValue:  JSONStringValue(`{"k1": 42}`),
+			currentValue:  JSONStringValue(`{"k1": -1}`),
+			expectedValue: JSONStringValue(`{"k1": 42}`),
 		},
 		"fields reordered": {
-			plannedValue:  JSONString{Value: `{"k2": ["v2",  {"k3": true}],  "k1": 42 }`},
-			currentValue:  JSONString{Value: `{"k1": 42, "k2": ["v2", {"k3": true}]}`},
-			expectedValue: JSONString{Value: `{"k1": 42, "k2": ["v2", {"k3": true}]}`},
+			plannedValue:  JSONStringValue(`{"k2": ["v2",  {"k3": true}],  "k1": 42 }`),
+			currentValue:  JSONStringValue(`{"k1": 42, "k2": ["v2", {"k3": true}]}`),
+			expectedValue: JSONStringValue(`{"k1": 42, "k2": ["v2", {"k3": true}]}`),
 		},
 	}
 

@@ -29,87 +29,87 @@ func TestMultiset(t *testing.T) {
 	}
 	tests := map[string]testCase{
 		"not lists": {
-			plannedValue: types.String{Value: "gamma"},
-			currentValue: types.String{Value: "beta"},
+			plannedValue: types.StringValue("gamma"),
+			currentValue: types.StringValue("beta"),
 			expectError:  true,
 		},
 		"null lists": {
-			plannedValue:  types.List{ElemType: types.StringType, Null: true},
-			currentValue:  types.List{ElemType: types.StringType, Null: true},
-			expectedValue: types.List{ElemType: types.StringType, Null: true},
+			plannedValue:  types.ListNull(types.StringType),
+			currentValue:  types.ListNull(types.StringType),
+			expectedValue: types.ListNull(types.StringType),
 		},
 		"single item": {
-			plannedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-			}},
-			currentValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "beta"},
-			}},
-			expectedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-			}},
+			plannedValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+			}),
+			currentValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("beta"),
+			}),
+			expectedValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+			}),
 		},
 		"different lengths": {
-			plannedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-				types.String{Value: "gamma"},
-			}},
-			currentValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-			}},
-			expectedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-				types.String{Value: "gamma"},
-			}},
+			plannedValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+				types.StringValue("gamma"),
+			}),
+			currentValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+			}),
+			expectedValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+				types.StringValue("gamma"),
+			}),
 		},
 		"equivalent": {
-			plannedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-				types.String{Value: "gamma"},
-				types.String{Value: "beta"},
-			}},
-			currentValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-				types.String{Value: "beta"},
-				types.String{Value: "gamma"},
-			}},
-			expectedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
-				types.String{Value: "gamma"},
-				types.String{Value: "beta"},
-				types.String{Value: "gamma"},
-			}},
+			plannedValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+				types.StringValue("gamma"),
+				types.StringValue("beta"),
+			}),
+			currentValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+				types.StringValue("beta"),
+				types.StringValue("gamma"),
+			}),
+			expectedValue: types.ListValueMust(types.StringType, []attr.Value{
+				types.StringValue("gamma"),
+				types.StringValue("beta"),
+				types.StringValue("gamma"),
+			}),
 		},
 		"list of objects": {
-			plannedValue: types.List{ElemType: tagElemType, Elems: []attr.Value{
-				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
-					"key":   types.String{Value: "k2"},
-					"value": types.String{Value: "v2"},
-				}},
-				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
-					"key":   types.String{Value: "k1"},
-					"value": types.String{Value: "v1"},
-				}},
-			}},
-			currentValue: types.List{ElemType: tagElemType, Elems: []attr.Value{
-				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
-					"key":   types.String{Value: "k1"},
-					"value": types.String{Value: "v1"},
-				}},
-				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
-					"key":   types.String{Value: "k2"},
-					"value": types.String{Value: "v2"},
-				}},
-			}},
-			expectedValue: types.List{ElemType: tagElemType, Elems: []attr.Value{
-				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
-					"key":   types.String{Value: "k1"},
-					"value": types.String{Value: "v1"},
-				}},
-				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
-					"key":   types.String{Value: "k2"},
-					"value": types.String{Value: "v2"},
-				}},
-			}},
+			plannedValue: types.ListValueMust(tagElemType, []attr.Value{
+				types.ObjectValueMust(tagAttrTypes, map[string]attr.Value{
+					"key":   types.StringValue("k2"),
+					"value": types.StringValue("v2"),
+				}),
+				types.ObjectValueMust(tagAttrTypes, map[string]attr.Value{
+					"key":   types.StringValue("k1"),
+					"value": types.StringValue("v1"),
+				}),
+			}),
+			currentValue: types.ListValueMust(tagElemType, []attr.Value{
+				types.ObjectValueMust(tagAttrTypes, map[string]attr.Value{
+					"key":   types.StringValue("k1"),
+					"value": types.StringValue("v1"),
+				}),
+				types.ObjectValueMust(tagAttrTypes, map[string]attr.Value{
+					"key":   types.StringValue("k2"),
+					"value": types.StringValue("v2"),
+				}),
+			}),
+			expectedValue: types.ListValueMust(tagElemType, []attr.Value{
+				types.ObjectValueMust(tagAttrTypes, map[string]attr.Value{
+					"key":   types.StringValue("k1"),
+					"value": types.StringValue("v1"),
+				}),
+				types.ObjectValueMust(tagAttrTypes, map[string]attr.Value{
+					"key":   types.StringValue("k2"),
+					"value": types.StringValue("v2"),
+				}),
+			}),
 		},
 	}
 
