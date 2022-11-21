@@ -349,30 +349,30 @@ type assumeRoleData struct {
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
-		RoleARN:     a.RoleARN.Value,
+		RoleARN:     a.RoleARN.ValueString(),
 		Duration:    a.Duration.Value,
-		ExternalID:  a.ExternalID.Value,
-		Policy:      a.Policy.Value,
-		SessionName: a.SessionName.Value,
+		ExternalID:  a.ExternalID.ValueString(),
+		Policy:      a.Policy.ValueString(),
+		SessionName: a.SessionName.ValueString(),
 	}
-	if !a.PolicyARNs.Null {
-		arns := make([]string, len(a.PolicyARNs.Elems))
-		for i, v := range a.PolicyARNs.Elems {
-			arns[i] = v.(types.String).Value
+	if !a.PolicyARNs.IsNull() {
+		arns := make([]string, len(a.PolicyARNs.Elements()))
+		for i, v := range a.PolicyARNs.Elements() {
+			arns[i] = v.(types.String).ValueString()
 		}
 		assumeRole.PolicyARNs = arns
 	}
-	if !a.Tags.Null {
+	if !a.Tags.IsNull() {
 		tags := make(map[string]string)
-		for key, value := range a.Tags.Elems {
-			tags[key] = value.(types.String).Value
+		for key, value := range a.Tags.Elements() {
+			tags[key] = value.(types.String).ValueString()
 		}
 		assumeRole.Tags = tags
 	}
-	if !a.TransitiveTagKeys.Null {
-		tagKeys := make([]string, len(a.TransitiveTagKeys.Elems))
-		for i, v := range a.TransitiveTagKeys.Elems {
-			tagKeys[i] = v.(types.String).Value
+	if !a.TransitiveTagKeys.IsNull() {
+		tagKeys := make([]string, len(a.TransitiveTagKeys.Elements()))
+		for i, v := range a.TransitiveTagKeys.Elements() {
+			tagKeys[i] = v.(types.String).ValueString()
 		}
 		assumeRole.TransitiveTagKeys = tagKeys
 	}
@@ -392,17 +392,17 @@ type assumeRoleWithWebIdentityData struct {
 
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
 	assumeRole := &awsbase.AssumeRoleWithWebIdentity{
-		RoleARN:              a.RoleARN.Value,
+		RoleARN:              a.RoleARN.ValueString(),
 		Duration:             a.Duration.Value,
-		Policy:               a.Policy.Value,
-		SessionName:          a.SessionName.Value,
-		WebIdentityToken:     a.WebIdentityToken.Value,
-		WebIdentityTokenFile: a.WebIdentityTokenFile.Value,
+		Policy:               a.Policy.ValueString(),
+		SessionName:          a.SessionName.ValueString(),
+		WebIdentityToken:     a.WebIdentityToken.ValueString(),
+		WebIdentityTokenFile: a.WebIdentityTokenFile.ValueString(),
 	}
-	if !a.PolicyARNs.Null {
-		arns := make([]string, len(a.PolicyARNs.Elems))
-		for i, v := range a.PolicyARNs.Elems {
-			arns[i] = v.(types.String).Value
+	if !a.PolicyARNs.IsNull() {
+		arns := make([]string, len(a.PolicyARNs.Elements()))
+		for i, v := range a.PolicyARNs.Elements() {
+			arns[i] = v.(types.String).ValueString()
 		}
 		assumeRole.PolicyARNs = arns
 	}
@@ -441,7 +441,7 @@ func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRe
 	providerData := &providerData{
 		ccAPIClient: ccClient,
 		region:      region,
-		roleARN:     config.RoleARN.Value,
+		roleARN:     config.RoleARN.ValueString(),
 	}
 
 	p.providerData = providerData
@@ -500,15 +500,15 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 // newCloudControlAPIClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
 func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Client, string, error) {
 	config := awsbase.Config{
-		AccessKey:              pd.AccessKey.Value,
+		AccessKey:              pd.AccessKey.ValueString(),
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
 		CallerName:             "Terraform AWS Cloud Control Provider",
-		HTTPProxy:              pd.HTTPProxy.Value,
-		Insecure:               pd.Insecure.Value,
-		Profile:                pd.Profile.Value,
-		Region:                 pd.Region.Value,
-		SecretKey:              pd.SecretKey.Value,
-		Token:                  pd.Token.Value,
+		HTTPProxy:              pd.HTTPProxy.ValueString(),
+		Insecure:               pd.Insecure.ValueBool(),
+		Profile:                pd.Profile.ValueString(),
+		Region:                 pd.Region.ValueString(),
+		SecretKey:              pd.SecretKey.ValueString(),
+		Token:                  pd.Token.ValueString(),
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
 			Products: []awsbase.UserAgentProduct{
@@ -518,22 +518,22 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 		},
 	}
 	config.UserAgent = userAgentProducts(pd.UserAgent)
-	if pd.MaxRetries.Null {
+	if pd.MaxRetries.IsNull() {
 		config.MaxRetries = defaultMaxRetries
 	} else {
-		config.MaxRetries = int(pd.MaxRetries.Value)
+		config.MaxRetries = int(pd.MaxRetries.ValueInt64())
 	}
-	if !pd.SharedConfigFiles.Null {
-		cf := make([]string, len(pd.SharedConfigFiles.Elems))
-		for i, v := range pd.SharedConfigFiles.Elems {
-			cf[i] = v.(types.String).Value
+	if !pd.SharedConfigFiles.IsNull() {
+		cf := make([]string, len(pd.SharedConfigFiles.Elements()))
+		for i, v := range pd.SharedConfigFiles.Elements() {
+			cf[i] = v.(types.String).ValueString()
 		}
 		config.SharedConfigFiles = cf
 	}
-	if !pd.SharedCredentialsFiles.Null {
-		cf := make([]string, len(pd.SharedCredentialsFiles.Elems))
-		for i, v := range pd.SharedCredentialsFiles.Elems {
-			cf[i] = v.(types.String).Value
+	if !pd.SharedCredentialsFiles.IsNull() {
+		cf := make([]string, len(pd.SharedCredentialsFiles.Elements()))
+		for i, v := range pd.SharedCredentialsFiles.Elements() {
+			cf[i] = v.(types.String).ValueString()
 		}
 		config.SharedCredentialsFiles = cf
 	}
@@ -544,9 +544,9 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 		config.AssumeRoleWithWebIdentity = pd.AssumeRoleWithWebIdentity.Config()
 	}
 
-	if pd.SkipMetadataApiCheck.Null {
+	if pd.SkipMetadataApiCheck.IsNull() {
 		config.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
-	} else if pd.SkipMetadataApiCheck.Value {
+	} else if pd.SkipMetadataApiCheck.IsNull() {
 		config.EC2MetadataServiceEnableState = imds.ClientDisabled
 	} else {
 		config.EC2MetadataServiceEnableState = imds.ClientEnabled
@@ -596,9 +596,9 @@ func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
 	results := make([]awsbase.UserAgentProduct, len(products))
 	for i, p := range products {
 		results[i] = awsbase.UserAgentProduct{
-			Name:    p.ProductName.Value,
-			Version: p.ProductVersion.Value,
-			Comment: p.Comment.Value,
+			Name:    p.ProductName.ValueString(),
+			Version: p.ProductVersion.ValueString(),
+			Comment: p.Comment.ValueString(),
 		}
 	}
 	return results
