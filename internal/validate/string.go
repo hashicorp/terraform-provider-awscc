@@ -288,9 +288,9 @@ func validateString(ctx context.Context, request tfsdk.ValidateAttributeRequest,
 		return "", false
 	}
 
-	if s.Unknown || s.Null {
+	if s.IsNull() || s.IsUnknown() {
 		return "", false
 	}
 
-	return s.Value, true
+	return s.ValueString(), true
 }

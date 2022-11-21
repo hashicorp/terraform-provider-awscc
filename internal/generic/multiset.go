@@ -55,16 +55,16 @@ func (attributePlanModifier multisetAttributePlanModifier) Modify(ctx context.Co
 		return
 	}
 
-	if len(planned.Elems) != len(current.Elems) {
+	if len(planned.Elements()) != len(current.Elements()) {
 		response.AttributePlan = request.AttributePlan
 
 		return
 	}
 
-	currentVals := make([]attr.Value, len(current.Elems))
-	copy(currentVals, current.Elems)
+	currentVals := make([]attr.Value, len(current.Elements()))
+	copy(currentVals, current.Elements())
 
-	for _, plannedVal := range planned.Elems {
+	for _, plannedVal := range planned.Elements() {
 		for i, currentVal := range currentVals {
 			if currentVal.Equal(plannedVal) {
 				// Remove from the slice.

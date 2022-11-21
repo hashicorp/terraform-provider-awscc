@@ -605,7 +605,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "LATEST"}),
+				DefaultValue(types.StringValue("LATEST")),
 				resource.UseStateForUnknown(),
 			},
 		},

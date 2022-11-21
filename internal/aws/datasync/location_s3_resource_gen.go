@@ -150,7 +150,7 @@ func locationS3Resource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "STANDARD"}),
+				DefaultValue(types.StringValue("STANDARD")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},

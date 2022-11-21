@@ -324,7 +324,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "PRIVACY"}),
+							DefaultValue(types.StringValue("PRIVACY")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -343,7 +343,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "PRIVACY"}),
+							DefaultValue(types.StringValue("PRIVACY")),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -375,7 +375,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 				validate.IntBetween(1, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64{Value: 3}),
+				DefaultValue(types.Int64Value(3)),
 				resource.UseStateForUnknown(),
 			},
 		},

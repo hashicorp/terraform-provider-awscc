@@ -146,7 +146,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "static-key"}),
+							DefaultValue(types.StringValue("static-key")),
 							resource.UseStateForUnknown(),
 						},
 					},

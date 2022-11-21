@@ -107,14 +107,13 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Object{
-					AttrTypes: map[string]attr.Type{
-						"version": types.StringType,
-					},
-					Attrs: map[string]attr.Value{
-						"version": types.String{Value: "AUTOMATIC"},
-					},
+				DefaultValue(types.ObjectValueMust(map[string]attr.Type{
+					"version": types.StringType,
 				},
+					map[string]attr.Value{
+						"version": types.StringValue("AUTOMATIC"),
+					},
+				),
 				),
 				resource.UseStateForUnknown(),
 			},

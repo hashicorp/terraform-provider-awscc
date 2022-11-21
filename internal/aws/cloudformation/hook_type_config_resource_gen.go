@@ -66,7 +66,7 @@ func hookTypeConfigResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "default"}),
+				DefaultValue(types.StringValue("default")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},

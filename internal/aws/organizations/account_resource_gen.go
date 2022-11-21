@@ -172,7 +172,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]{1,64}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "OrganizationAccountAccessRole"}),
+				DefaultValue(types.StringValue("OrganizationAccountAccessRole")),
 				resource.UseStateForUnknown(),
 			},
 			// RoleName is a write-only property.

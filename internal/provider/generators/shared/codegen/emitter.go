@@ -790,18 +790,18 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	// Primitive types.
 	//
 	case bool:
-		return features, fmt.Sprintf("DefaultValue(types.Bool{Value: %t})", v), nil
+		return features, fmt.Sprintf("DefaultValue(types.BoolValue(%t))", v), nil
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("DefaultValue(types.Int64{Value: %d})", int64(v)), nil
+			return features, fmt.Sprintf("DefaultValue(types.Int64Value(%d))", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("DefaultValue(types.Float64{Value: %f})", v), nil
+			return features, fmt.Sprintf("DefaultValue(types.Float64Value(%f))", v), nil
 		default:
 			return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
 	case string:
-		return features, fmt.Sprintf("DefaultValue(types.String{Value: %q})", v), nil
+		return features, fmt.Sprintf("DefaultValue(types.StringValue(%q))", v), nil
 
 	//
 	// Complex types.
@@ -814,31 +814,31 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			features |= UsesFrameworkAttr
 
 			w := &strings.Builder{}
-			fprintf(w, "DefaultValue(types.Set{ElemType:types.StringType, Elems: []attr.Value{\n")
+			fprintf(w, "DefaultValue(types.SetValueMust(types.StringType, []attr.Value{\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
-					fprintf(w, "types.String{Value: %q},\n", v)
+					fprintf(w, "types.StringValue(%q),\n", v)
 				default:
 					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
-			fprintf(w, "}})")
+			fprintf(w, "}))")
 			return features, w.String(), nil
 		default:
 			features |= UsesFrameworkAttr
 
 			w := &strings.Builder{}
-			fprintf(w, "DefaultValue(types.List{ElemType:types.StringType, Elems: []attr.Value{\n")
+			fprintf(w, "DefaultValue(types.ListValueMust(types.StringType, []attr.Value{\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
-					fprintf(w, "types.String{Value: %q},\n", v)
+					fprintf(w, "types.StringValue(%q),\n", v)
 				default:
 					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
-			fprintf(w, "}})")
+			fprintf(w, "}))")
 			return features, w.String(), nil
 		}
 
@@ -846,7 +846,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		features |= UsesFrameworkAttr
 
 		w := &strings.Builder{}
-		fprintf(w, "DefaultValue(types.Object{\nAttrTypes: map[string]attr.Type{\n")
+		fprintf(w, "DefaultValue(types.ObjectValueMust(map[string]attr.Type{\n")
 		for key1, v := range v {
 			switch v := v.(type) {
 			case bool:
@@ -872,15 +872,15 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			}
 		}
 		fprintf(w, "},\n")
-		fprintf(w, "Attrs: map[string]attr.Value{\n")
+		fprintf(w, "map[string]attr.Value{\n")
 		for key1, v := range v {
 			switch v := v.(type) {
 			case bool:
-				fprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
+				fprintf(w, "%q: types.BoolValue(%t),\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
 			case string:
-				fprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
+				fprintf(w, "%q: types.StringValue(%q),\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
 			case map[string]interface{}:
-				fprintf(w, "%q: types.Object{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				fprintf(w, "%q: types.ObjectValueMust(map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
 				for key2, v := range v {
 					switch v.(type) {
 					case bool:
@@ -890,21 +890,21 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 					}
 				}
 				fprintf(w, "},\n")
-				fprintf(w, "Attrs: map[string]attr.Value{\n")
+				fprintf(w, "map[string]attr.Value{\n")
 				for key2, v := range v {
 					switch v := v.(type) {
 					case bool:
-						fprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
+						fprintf(w, "%q: types.BoolValue(%t),\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
 					case string:
-						fprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
+						fprintf(w, "%q: types.StringValue(%q),\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
 					}
 				}
 				fprintf(w, "},\n")
-				fprintf(w, "},\n")
+				fprintf(w, "),\n")
 			}
 		}
 		fprintf(w, "},\n")
-		fprintf(w, "},\n")
+		fprintf(w, "),\n")
 		fprintf(w, ")")
 		return features, w.String(), nil
 

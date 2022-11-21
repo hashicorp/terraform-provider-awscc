@@ -166,7 +166,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "JSON"}),
+				DefaultValue(types.StringValue("JSON")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -428,7 +428,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "Replace"}),
+				DefaultValue(types.StringValue("Replace")),
 				resource.UseStateForUnknown(),
 			},
 		},

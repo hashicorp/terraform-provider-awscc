@@ -223,7 +223,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "OFF"}),
+				DefaultValue(types.StringValue("OFF")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
@@ -313,7 +313,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "OFF"}),
+				DefaultValue(types.StringValue("OFF")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
@@ -334,7 +334,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.IsRFC3339Time(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "253402243200"}),
+				DefaultValue(types.StringValue("253402243200")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
@@ -390,7 +390,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.FloatBetween(0.000000, 4294967295.000000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Float64{Value: 0.000000}),
+				DefaultValue(types.Float64Value(0.000000)),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
@@ -411,7 +411,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.IntAtLeast(0),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64{Value: 0}),
+				DefaultValue(types.Int64Value(0)),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
@@ -533,7 +533,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "OFF"}),
+				DefaultValue(types.StringValue("OFF")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
@@ -554,7 +554,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.IsRFC3339Time(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "0"}),
+				DefaultValue(types.StringValue("0")),
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},

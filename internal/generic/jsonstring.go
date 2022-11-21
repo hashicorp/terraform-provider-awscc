@@ -30,11 +30,11 @@ func (t jsonStringType) TerraformType(_ context.Context) tftypes.Type {
 
 func (t jsonStringType) ValueFromTerraform(_ context.Context, v tftypes.Value) (attr.Value, error) {
 	if !v.IsKnown() {
-		return JSONString{Unknown: true}, nil
+		return JSONStringUnknown(), nil
 	}
 
 	if v.IsNull() {
-		return JSONString{Null: true}, nil
+		return JSONStringNull(), nil
 	}
 
 	var s string
@@ -51,7 +51,7 @@ func (t jsonStringType) ValueFromTerraform(_ context.Context, v tftypes.Value) (
 		return nil, err
 	}
 
-	return JSONString{Value: s}, nil
+	return JSONStringValue(s), nil
 }
 
 func (t jsonStringType) ValueType(context.Context) attr.Value {
@@ -127,18 +127,33 @@ func (t jsonStringType) AttributePlanModifier() tfsdk.AttributePlanModifier {
 	return jsonStringAttributePlanModifier{}
 }
 
+func JSONStringNull() JSONString {
+	return JSONString{
+		state: attr.ValueStateNull,
+	}
+}
+
+func JSONStringUnknown() JSONString {
+	return JSONString{
+		state: attr.ValueStateUnknown,
+	}
+}
+
+func JSONStringValue(value string) JSONString {
+	return JSONString{
+		state: attr.ValueStateKnown,
+		value: value,
+	}
+}
+
 // A JSONString is a string containing a valid JSON document.
 type JSONString struct {
-	// Unknown will be true if the value is not yet known.
-	Unknown bool
+	// state represents whether the value is null, unknown, or known. The
+	// zero-value is null.
+	state attr.ValueState
 
-	// Null will be true if the value was not set, or was explicitly set to
-	// null.
-	Null bool
-
-	// Value contains the set value, as long as Unknown and Null are both
-	// false.
-	Value string
+	// value contains the known value, if not null or unknown.
+	value string
 }
 
 func (s JSONString) Type(_ context.Context) attr.Type {
@@ -148,19 +163,20 @@ func (s JSONString) Type(_ context.Context) attr.Type {
 func (s JSONString) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
 	t := JSONStringType.TerraformType(ctx)
 
-	if s.Null {
+	switch s.state {
+	case attr.ValueStateKnown:
+		if err := tftypes.ValidateValue(t, s.value); err != nil {
+			return tftypes.NewValue(t, tftypes.UnknownValue), err
+		}
+
+		return tftypes.NewValue(t, s.value), nil
+	case attr.ValueStateNull:
 		return tftypes.NewValue(t, nil), nil
-	}
-
-	if s.Unknown {
+	case attr.ValueStateUnknown:
 		return tftypes.NewValue(t, tftypes.UnknownValue), nil
+	default:
+		return tftypes.NewValue(t, tftypes.UnknownValue), fmt.Errorf("unhandled ARN state in ToTerraformValue: %s", s.state)
 	}
-
-	if err := tftypes.ValidateValue(tftypes.String, s.Value); err != nil {
-		return tftypes.NewValue(t, tftypes.UnknownValue), err
-	}
-
-	return tftypes.NewValue(t, s.Value), nil
 }
 
 func (s JSONString) Equal(other attr.Value) bool {
@@ -170,25 +186,25 @@ func (s JSONString) Equal(other attr.Value) bool {
 		return false
 	}
 
-	if s.Unknown != o.Unknown {
+	if s.state != o.state {
 		return false
 	}
 
-	if s.Null != o.Null {
-		return false
+	if s.state != attr.ValueStateKnown {
+		return true
 	}
 
-	return s.Value == o.Value
+	return s.value == o.value
 }
 
 // IsNull returns true if the Value is not set, or is explicitly set to null.
 func (s JSONString) IsNull() bool {
-	return s.Null
+	return s.state == attr.ValueStateNull
 }
 
-// IsNull returns true if the Value is not set, or is explicitly set to null.
+// IsUnknown returns true if the Value is not yet known.
 func (s JSONString) IsUnknown() bool {
-	return s.Unknown
+	return s.state == attr.ValueStateUnknown
 }
 
 // String returns a summary representation of either the underlying Value,
@@ -207,7 +223,12 @@ func (s JSONString) String() string {
 		return attr.NullValueString
 	}
 
-	return s.Value
+	return s.value
+}
+
+// JSONStringValue returns the known string value. If JSONString is null or unknown, returns "".
+func (s JSONString) ValueJSONString() string {
+	return s.value
 }
 
 type jsonStringAttributePlanModifier struct {
@@ -241,7 +262,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		return
 	}
 
-	plannedMap, err := expandJSONFromString(planned.Value)
+	plannedMap, err := expandJSONFromString(planned.ValueJSONString())
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -264,7 +285,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 	if current.IsNull() {
 		response.AttributePlan = request.AttributePlan
 	} else {
-		currentMap, err := expandJSONFromString(current.Value)
+		currentMap, err := expandJSONFromString(current.ValueJSONString())
 
 		if err != nil {
 			response.Diagnostics.AddError(

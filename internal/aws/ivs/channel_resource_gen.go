@@ -156,7 +156,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				validate.StringMatch(regexp.MustCompile("^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: ""}),
+				DefaultValue(types.StringValue("")),
 				resource.UseStateForUnknown(),
 			},
 		},

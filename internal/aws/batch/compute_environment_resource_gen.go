@@ -386,7 +386,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
+							DefaultValue(types.BoolValue(false)),
 							resource.UseStateForUnknown(),
 						},
 						// UpdateToLatestImageVersion is a write-only property.
@@ -429,7 +429,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
+							DefaultValue(types.BoolValue(false)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -439,7 +439,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
+							DefaultValue(types.BoolValue(false)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -464,7 +464,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Bool{Value: true}),
+				DefaultValue(types.BoolValue(true)),
 				resource.UseStateForUnknown(),
 			},
 			// ReplaceComputeEnvironment is a write-only property.
@@ -574,7 +574,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Int64{Value: 30}),
+							DefaultValue(types.Int64Value(30)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -584,7 +584,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
+							DefaultValue(types.BoolValue(false)),
 							resource.UseStateForUnknown(),
 						},
 					},

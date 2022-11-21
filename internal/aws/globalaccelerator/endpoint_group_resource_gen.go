@@ -65,7 +65,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: true}),
+							DefaultValue(types.BoolValue(true)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -85,7 +85,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 							validate.IntBetween(0, 255),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Int64{Value: 100}),
+							DefaultValue(types.Int64Value(100)),
 							resource.UseStateForUnknown(),
 						},
 					},
@@ -141,7 +141,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64{Value: 30}),
+				DefaultValue(types.Int64Value(30)),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -159,7 +159,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "/"}),
+				DefaultValue(types.StringValue("/")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -182,7 +182,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 				validate.IntBetween(-1, 65535),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64{Value: -1}),
+				DefaultValue(types.Int64Value(-1)),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -212,7 +212,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "TCP"}),
+				DefaultValue(types.StringValue("TCP")),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -303,7 +303,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64{Value: 3}),
+				DefaultValue(types.Int64Value(3)),
 				resource.UseStateForUnknown(),
 			},
 		},
@@ -326,7 +326,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 				validate.FloatBetween(0.000000, 100.000000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Float64{Value: 100.000000}),
+				DefaultValue(types.Float64Value(100.000000)),
 				resource.UseStateForUnknown(),
 			},
 		},

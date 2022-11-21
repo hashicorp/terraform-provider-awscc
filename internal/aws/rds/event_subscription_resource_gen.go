@@ -35,7 +35,7 @@ func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Bool{Value: true}),
+				DefaultValue(types.BoolValue(true)),
 				resource.UseStateForUnknown(),
 			},
 		},

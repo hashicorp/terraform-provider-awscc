@@ -2198,7 +2198,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.String{Value: "true"}),
+										DefaultValue(types.StringValue("true")),
 										resource.UseStateForUnknown(),
 									},
 								},
@@ -3537,7 +3537,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "Suspended"}),
+							DefaultValue(types.StringValue("Suspended")),
 							resource.UseStateForUnknown(),
 						},
 					},

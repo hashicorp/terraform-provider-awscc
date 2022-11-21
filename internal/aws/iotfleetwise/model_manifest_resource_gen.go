@@ -158,7 +158,7 @@ func modelManifestResource(ctx context.Context) (resource.Resource, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.String{Value: "DRAFT"}),
+				DefaultValue(types.StringValue("DRAFT")),
 				resource.UseStateForUnknown(),
 			},
 		},

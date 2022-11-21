@@ -202,11 +202,11 @@ func validateInt(ctx context.Context, request tfsdk.ValidateAttributeRequest, re
 
 			return 0, false
 		} else {
-			if n.Unknown || n.Null {
+			if n.IsNull() || n.IsUnknown() {
 				return 0, false
 			}
 
-			val := n.Value
+			val := n.ValueBigFloat()
 
 			if !val.IsInt() {
 				response.Diagnostics.Append(newNotAnIntegerValueError(
@@ -221,10 +221,10 @@ func validateInt(ctx context.Context, request tfsdk.ValidateAttributeRequest, re
 			return i, true
 		}
 	} else {
-		if n.Unknown || n.Null {
+		if n.IsNull() || n.IsUnknown() {
 			return 0, false
 		}
 
-		return n.Value, true
+		return n.ValueInt64(), true
 	}
 }

@@ -137,7 +137,7 @@ func codeSigningConfigResource(ctx context.Context) (resource.Resource, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.String{Value: "Warn"}),
+							DefaultValue(types.StringValue("Warn")),
 							resource.UseStateForUnknown(),
 						},
 					},

@@ -153,7 +153,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Bool{Value: false}),
+							DefaultValue(types.BoolValue(false)),
 							resource.UseStateForUnknown(),
 						},
 					},
