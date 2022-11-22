@@ -182,9 +182,10 @@ Optional:
 <a id="nestedatt--network_configuration"></a>
 ### Nested Schema for `network_configuration`
 
-Required:
+Optional:
 
 - `egress_configuration` (Attributes) Network egress configuration (see [below for nested schema](#nestedatt--network_configuration--egress_configuration))
+- `ingress_configuration` (Attributes) Network ingress configuration (see [below for nested schema](#nestedatt--network_configuration--ingress_configuration))
 
 <a id="nestedatt--network_configuration--egress_configuration"></a>
 ### Nested Schema for `network_configuration.egress_configuration`
@@ -196,6 +197,14 @@ Required:
 Optional:
 
 - `vpc_connector_arn` (String) The Amazon Resource Name (ARN) of the App Runner VpcConnector.
+
+
+<a id="nestedatt--network_configuration--ingress_configuration"></a>
+### Nested Schema for `network_configuration.ingress_configuration`
+
+Required:
+
+- `is_publicly_accessible` (Boolean) It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.
 
 
 
