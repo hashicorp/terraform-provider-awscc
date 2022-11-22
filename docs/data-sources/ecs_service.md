@@ -40,6 +40,7 @@ Data Source schema for AWS::ECS::Service
 - `role` (String)
 - `scheduling_strategy` (String)
 - `service_arn` (String)
+- `service_connect_configuration` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration))
 - `service_name` (String)
 - `service_registries` (Attributes List) (see [below for nested schema](#nestedatt--service_registries))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -127,6 +128,56 @@ Read-Only:
 
 - `field` (String)
 - `type` (String)
+
+
+<a id="nestedatt--service_connect_configuration"></a>
+### Nested Schema for `service_connect_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--log_configuration))
+- `namespace` (String)
+- `services` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--services))
+
+<a id="nestedatt--service_connect_configuration--log_configuration"></a>
+### Nested Schema for `service_connect_configuration.log_configuration`
+
+Read-Only:
+
+- `log_driver` (String)
+- `options` (Map of String)
+- `secret_options` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--log_configuration--secret_options))
+
+<a id="nestedatt--service_connect_configuration--log_configuration--secret_options"></a>
+### Nested Schema for `service_connect_configuration.log_configuration.secret_options`
+
+Read-Only:
+
+- `name` (String)
+- `value_from` (String)
+
+
+
+<a id="nestedatt--service_connect_configuration--services"></a>
+### Nested Schema for `service_connect_configuration.services`
+
+Read-Only:
+
+- `client_aliases` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases))
+- `discovery_name` (String)
+- `ingress_port_override` (Number)
+- `port_name` (String)
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases`
+
+Read-Only:
+
+- `dns_name` (String)
+- `port` (Number)
+
+
 
 
 <a id="nestedatt--service_registries"></a>

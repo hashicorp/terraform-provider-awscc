@@ -686,6 +686,242 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"service_connect_configuration": {
+			// Property: ServiceConnectConfiguration
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "properties": {
+			//	    "Enabled": {
+			//	      "type": "boolean"
+			//	    },
+			//	    "LogConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "LogDriver": {
+			//	          "type": "string"
+			//	        },
+			//	        "Options": {
+			//	          "additionalProperties": false,
+			//	          "patternProperties": {
+			//	            "": {
+			//	              "type": "string"
+			//	            }
+			//	          },
+			//	          "type": "object"
+			//	        },
+			//	        "SecretOptions": {
+			//	          "insertionOrder": false,
+			//	          "items": {
+			//	            "additionalProperties": false,
+			//	            "properties": {
+			//	              "Name": {
+			//	                "type": "string"
+			//	              },
+			//	              "ValueFrom": {
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "Name",
+			//	              "ValueFrom"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "type": "array"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
+			//	    "Namespace": {
+			//	      "type": "string"
+			//	    },
+			//	    "Services": {
+			//	      "items": {
+			//	        "additionalProperties": false,
+			//	        "properties": {
+			//	          "ClientAliases": {
+			//	            "items": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "DnsName": {
+			//	                  "type": "string"
+			//	                },
+			//	                "Port": {
+			//	                  "type": "integer"
+			//	                }
+			//	              },
+			//	              "required": [
+			//	                "Port"
+			//	              ],
+			//	              "type": "object"
+			//	            },
+			//	            "type": "array"
+			//	          },
+			//	          "DiscoveryName": {
+			//	            "type": "string"
+			//	          },
+			//	          "IngressPortOverride": {
+			//	            "type": "integer"
+			//	          },
+			//	          "PortName": {
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "PortName"
+			//	        ],
+			//	        "type": "object"
+			//	      },
+			//	      "type": "array"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Enabled"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"enabled": {
+						// Property: Enabled
+						Type:     types.BoolType,
+						Required: true,
+					},
+					"log_configuration": {
+						// Property: LogConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"log_driver": {
+									// Property: LogDriver
+									Type:     types.StringType,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"options": {
+									// Property: Options
+									// Pattern: ""
+									Type:     types.MapType{ElemType: types.StringType},
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"secret_options": {
+									// Property: SecretOptions
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"name": {
+												// Property: Name
+												Type:     types.StringType,
+												Required: true,
+											},
+											"value_from": {
+												// Property: ValueFrom
+												Type:     types.StringType,
+												Required: true,
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+										resource.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"namespace": {
+						// Property: Namespace
+						Type:     types.StringType,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"services": {
+						// Property: Services
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"client_aliases": {
+									// Property: ClientAliases
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"dns_name": {
+												// Property: DnsName
+												Type:     types.StringType,
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"port": {
+												// Property: Port
+												Type:     types.Int64Type,
+												Required: true,
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"discovery_name": {
+									// Property: DiscoveryName
+									Type:     types.StringType,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"ingress_port_override": {
+									// Property: IngressPortOverride
+									Type:     types.Int64Type,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"port_name": {
+									// Property: PortName
+									Type:     types.StringType,
+									Required: true,
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+			// ServiceConnectConfiguration is a write-only property.
+		},
 		"service_name": {
 			// Property: ServiceName
 			// CloudFormation resource type schema:
@@ -861,6 +1097,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"base":                              "Base",
 		"capacity_provider":                 "CapacityProvider",
 		"capacity_provider_strategy":        "CapacityProviderStrategy",
+		"client_aliases":                    "ClientAliases",
 		"cluster":                           "Cluster",
 		"container_name":                    "ContainerName",
 		"container_port":                    "ContainerPort",
@@ -868,42 +1105,58 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"deployment_configuration":          "DeploymentConfiguration",
 		"deployment_controller":             "DeploymentController",
 		"desired_count":                     "DesiredCount",
+		"discovery_name":                    "DiscoveryName",
+		"dns_name":                          "DnsName",
 		"enable":                            "Enable",
 		"enable_ecs_managed_tags":           "EnableECSManagedTags",
 		"enable_execute_command":            "EnableExecuteCommand",
+		"enabled":                           "Enabled",
 		"expression":                        "Expression",
 		"field":                             "Field",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"ingress_port_override":             "IngressPortOverride",
 		"key":                               "Key",
 		"launch_type":                       "LaunchType",
 		"load_balancer_name":                "LoadBalancerName",
 		"load_balancers":                    "LoadBalancers",
+		"log_configuration":                 "LogConfiguration",
+		"log_driver":                        "LogDriver",
 		"maximum_percent":                   "MaximumPercent",
 		"minimum_healthy_percent":           "MinimumHealthyPercent",
 		"name":                              "Name",
+		"namespace":                         "Namespace",
 		"network_configuration":             "NetworkConfiguration",
+		"options":                           "Options",
 		"placement_constraints":             "PlacementConstraints",
 		"placement_strategies":              "PlacementStrategies",
 		"platform_version":                  "PlatformVersion",
 		"port":                              "Port",
+		"port_name":                         "PortName",
 		"propagate_tags":                    "PropagateTags",
 		"registry_arn":                      "RegistryArn",
 		"role":                              "Role",
 		"rollback":                          "Rollback",
 		"scheduling_strategy":               "SchedulingStrategy",
+		"secret_options":                    "SecretOptions",
 		"security_groups":                   "SecurityGroups",
 		"service_arn":                       "ServiceArn",
+		"service_connect_configuration":     "ServiceConnectConfiguration",
 		"service_name":                      "ServiceName",
 		"service_registries":                "ServiceRegistries",
+		"services":                          "Services",
 		"subnets":                           "Subnets",
 		"tags":                              "Tags",
 		"target_group_arn":                  "TargetGroupArn",
 		"task_definition":                   "TaskDefinition",
 		"type":                              "Type",
 		"value":                             "Value",
+		"value_from":                        "ValueFrom",
 		"weight":                            "Weight",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ServiceConnectConfiguration",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(30)
 
 	opts = opts.WithUpdateTimeoutInMinutes(180)
