@@ -76,7 +76,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	      "DockerLabels": {
 			//	        "additionalProperties": false,
 			//	        "patternProperties": {
-			//	          ".{1,}": {
+			//	          "": {
 			//	            "type": "string"
 			//	          }
 			//	        },
@@ -156,7 +156,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	          "Options": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -314,7 +314,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	          "Options": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -383,11 +383,22 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	        "items": {
 			//	          "additionalProperties": false,
 			//	          "properties": {
+			//	            "AppProtocol": {
+			//	              "enum": [
+			//	                "http",
+			//	                "http2",
+			//	                "grpc"
+			//	              ],
+			//	              "type": "string"
+			//	            },
 			//	            "ContainerPort": {
 			//	              "type": "integer"
 			//	            },
 			//	            "HostPort": {
 			//	              "type": "integer"
+			//	            },
+			//	            "Name": {
+			//	              "type": "string"
 			//	            },
 			//	            "Protocol": {
 			//	              "type": "string"
@@ -582,7 +593,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 					},
 					"docker_labels": {
 						// Property: DockerLabels
-						// Pattern: ".{1,}"
+						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Computed: true,
 					},
@@ -663,7 +674,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 							map[string]tfsdk.Attribute{
 								"options": {
 									// Property: Options
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
@@ -839,7 +850,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								},
 								"options": {
 									// Property: Options
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
@@ -910,6 +921,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 						Description: "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
 						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"app_protocol": {
+									// Property: AppProtocol
+									Type:     types.StringType,
+									Computed: true,
+								},
 								"container_port": {
 									// Property: ContainerPort
 									Type:     types.Int64Type,
@@ -918,6 +934,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								"host_port": {
 									// Property: HostPort
 									Type:     types.Int64Type,
+									Computed: true,
+								},
+								"name": {
+									// Property: Name
+									Type:     types.StringType,
 									Computed: true,
 								},
 								"protocol": {
@@ -1443,7 +1464,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	          "DriverOpts": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -1452,7 +1473,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	          "Labels": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -1541,13 +1562,13 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								},
 								"driver_opts": {
 									// Property: DriverOpts
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"labels": {
 									// Property: Labels
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Computed: true,
 								},
@@ -1649,6 +1670,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_point_id":                "AccessPointId",
 		"add":                            "Add",
+		"app_protocol":                   "AppProtocol",
 		"authorization_config":           "AuthorizationConfig",
 		"autoprovision":                  "Autoprovision",
 		"capabilities":                   "Capabilities",
