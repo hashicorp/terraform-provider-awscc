@@ -119,6 +119,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// ImageUri is a write-only property.
 					},
 					"s3_bucket": {
 						// Property: S3Bucket
@@ -132,6 +133,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// S3Bucket is a write-only property.
 					},
 					"s3_key": {
 						// Property: S3Key
@@ -145,6 +147,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// S3Key is a write-only property.
 					},
 					"s3_object_version": {
 						// Property: S3ObjectVersion
@@ -158,6 +161,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// S3ObjectVersion is a write-only property.
 					},
 					"zip_file": {
 						// Property: ZipFile
@@ -168,6 +172,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// ZipFile is a write-only property.
 					},
 				},
 			),
@@ -924,6 +929,11 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Code",
+		"/properties/Code/ImageUri",
+		"/properties/Code/S3Bucket",
+		"/properties/Code/S3Key",
+		"/properties/Code/S3ObjectVersion",
+		"/properties/Code/ZipFile",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
