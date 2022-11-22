@@ -34,6 +34,7 @@ Resource Type definition for AWS::ECS::Service
 - `propagate_tags` (String)
 - `role` (String)
 - `scheduling_strategy` (String)
+- `service_connect_configuration` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration))
 - `service_name` (String)
 - `service_registries` (Attributes List) (see [below for nested schema](#nestedatt--service_registries))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -133,6 +134,65 @@ Required:
 Optional:
 
 - `field` (String)
+
+
+<a id="nestedatt--service_connect_configuration"></a>
+### Nested Schema for `service_connect_configuration`
+
+Required:
+
+- `enabled` (Boolean)
+
+Optional:
+
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--log_configuration))
+- `namespace` (String)
+- `services` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--services))
+
+<a id="nestedatt--service_connect_configuration--log_configuration"></a>
+### Nested Schema for `service_connect_configuration.log_configuration`
+
+Optional:
+
+- `log_driver` (String)
+- `options` (Map of String)
+- `secret_options` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--log_configuration--secret_options))
+
+<a id="nestedatt--service_connect_configuration--log_configuration--secret_options"></a>
+### Nested Schema for `service_connect_configuration.log_configuration.secret_options`
+
+Required:
+
+- `name` (String)
+- `value_from` (String)
+
+
+
+<a id="nestedatt--service_connect_configuration--services"></a>
+### Nested Schema for `service_connect_configuration.services`
+
+Required:
+
+- `port_name` (String)
+
+Optional:
+
+- `client_aliases` (Attributes List) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases))
+- `discovery_name` (String)
+- `ingress_port_override` (Number)
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases`
+
+Required:
+
+- `port` (Number)
+
+Optional:
+
+- `dns_name` (String)
+
+
 
 
 <a id="nestedatt--service_registries"></a>
