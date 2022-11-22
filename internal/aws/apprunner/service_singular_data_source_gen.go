@@ -246,11 +246,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	        "EgressType"
 			//	      ],
 			//	      "type": "object"
+			//	    },
+			//	    "IngressConfiguration": {
+			//	      "additionalProperties": false,
+			//	      "description": "Network ingress configuration",
+			//	      "properties": {
+			//	        "IsPubliclyAccessible": {
+			//	          "description": "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "IsPubliclyAccessible"
+			//	      ],
+			//	      "type": "object"
 			//	    }
 			//	  },
-			//	  "required": [
-			//	    "EgressConfiguration"
-			//	  ],
 			//	  "type": "object"
 			//	}
 			Description: "Network configuration",
@@ -271,6 +282,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: VpcConnectorArn
 									Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
 									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"ingress_configuration": {
+						// Property: IngressConfiguration
+						Description: "Network ingress configuration",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"is_publicly_accessible": {
+									// Property: IsPubliclyAccessible
+									Description: "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
+									Type:        types.BoolType,
 									Computed:    true,
 								},
 							},
@@ -442,7 +468,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	                    "NODEJS_14",
 			//	                    "CORRETTO_8",
 			//	                    "CORRETTO_11",
-			//	                    "NODEJS_16"
+			//	                    "NODEJS_16",
+			//	                    "GO_1",
+			//	                    "DOTNET_6",
+			//	                    "PHP_81",
+			//	                    "RUBY_31"
 			//	                  ],
 			//	                  "type": "string"
 			//	                },
@@ -859,9 +889,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"image_identifier":                "ImageIdentifier",
 		"image_repository":                "ImageRepository",
 		"image_repository_type":           "ImageRepositoryType",
+		"ingress_configuration":           "IngressConfiguration",
 		"instance_configuration":          "InstanceConfiguration",
 		"instance_role_arn":               "InstanceRoleArn",
 		"interval":                        "Interval",
+		"is_publicly_accessible":          "IsPubliclyAccessible",
 		"key":                             "Key",
 		"kms_key":                         "KmsKey",
 		"memory":                          "Memory",
