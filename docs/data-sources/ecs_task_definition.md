@@ -219,8 +219,10 @@ Read-Only:
 
 Read-Only:
 
+- `app_protocol` (String)
 - `container_port` (Number)
 - `host_port` (Number)
+- `name` (String)
 - `protocol` (String)
 
 
