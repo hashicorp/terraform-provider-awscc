@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_metric_filter.example <resource ID>

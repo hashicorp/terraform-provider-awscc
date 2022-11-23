@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_log_stream.example <resource ID>

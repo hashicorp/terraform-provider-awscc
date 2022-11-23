@@ -42,6 +42,7 @@ Optional:
 - `cache_behaviors` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--cache_behaviors))
 - `cnames` (List of String)
 - `comment` (String)
+- `continuous_deployment_policy_id` (String)
 - `custom_error_responses` (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--custom_error_responses))
 - `custom_origin` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--custom_origin))
 - `default_root_object` (String)
@@ -53,6 +54,7 @@ Optional:
 - `price_class` (String)
 - `restrictions` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--restrictions))
 - `s3_origin` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--s3_origin))
+- `staging` (Boolean)
 - `viewer_certificate` (Attributes) (see [below for nested schema](#nestedatt--distribution_config--viewer_certificate))
 - `web_acl_id` (String)
 

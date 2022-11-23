@@ -26,6 +26,7 @@ Data Source schema for AWS::AppFlow::Flow
 - `flow_arn` (String) ARN identifier of the flow.
 - `flow_name` (String) Name of the flow.
 - `kms_arn` (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
+- `metadata_catalog_config` (Attributes) Configurations of metadata catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config))
 - `source_flow_config` (Attributes) Configurations of Source connector of the flow. (see [below for nested schema](#nestedatt--source_flow_config))
 - `tags` (Attributes List) List of Tags. (see [below for nested schema](#nestedatt--tags))
 - `tasks` (Attributes List) List of tasks for the flow. (see [below for nested schema](#nestedatt--tasks))
@@ -172,6 +173,7 @@ Read-Only:
 Read-Only:
 
 - `aggregation_type` (String)
+- `target_file_size` (Number)
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--prefix_config"></a>
@@ -179,6 +181,7 @@ Read-Only:
 
 Read-Only:
 
+- `path_prefix_hierarchy` (List of String)
 - `prefix_format` (String)
 - `prefix_type` (String)
 
@@ -283,6 +286,7 @@ Read-Only:
 Read-Only:
 
 - `aggregation_type` (String)
+- `target_file_size` (Number)
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--prefix_config"></a>
@@ -290,6 +294,7 @@ Read-Only:
 
 Read-Only:
 
+- `path_prefix_hierarchy` (List of String)
 - `prefix_format` (String)
 - `prefix_type` (String)
 
@@ -316,6 +321,24 @@ Read-Only:
 - `fail_on_first_error` (Boolean)
 
 
+
+
+
+<a id="nestedatt--metadata_catalog_config"></a>
+### Nested Schema for `metadata_catalog_config`
+
+Read-Only:
+
+- `glue_data_catalog` (Attributes) Configurations of glue data catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config--glue_data_catalog))
+
+<a id="nestedatt--metadata_catalog_config--glue_data_catalog"></a>
+### Nested Schema for `metadata_catalog_config.glue_data_catalog`
+
+Read-Only:
+
+- `database_name` (String) A string containing the value for the tag
+- `role_arn` (String) A string containing the value for the tag
+- `table_prefix` (String) A string containing the value for the tag
 
 
 

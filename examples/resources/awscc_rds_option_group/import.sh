@@ -1,0 +1,1 @@
+$ terraform import awscc_rds_option_group.example <resource ID>

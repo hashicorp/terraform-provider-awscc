@@ -21,8 +21,10 @@ Data Source schema for AWS::GameLift::Fleet
 
 ### Read-Only
 
+- `anywhere_configuration` (Attributes) Configuration for Anywhere fleet. (see [below for nested schema](#nestedatt--anywhere_configuration))
 - `build_id` (String) A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.
 - `certificate_configuration` (Attributes) Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created. (see [below for nested schema](#nestedatt--certificate_configuration))
+- `compute_type` (String) ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.
 - `description` (String) A human-readable description of a fleet.
 - `desired_ec2_instances` (Number) [DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to "1" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.
 - `ec2_inbound_permissions` (Attributes List) A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server. (see [below for nested schema](#nestedatt--ec2_inbound_permissions))
@@ -48,6 +50,14 @@ This parameter is required unless the parameters ServerLaunchPath and ServerLaun
 Note: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.
 - `server_launch_parameters` (String) This parameter is no longer used but is retained for backward compatibility. Instead, specify server launch parameters in the RuntimeConfiguration parameter. A request must specify either a runtime configuration or values for both ServerLaunchParameters and ServerLaunchPath.
 - `server_launch_path` (String) This parameter is no longer used. Instead, specify a server launch path using the RuntimeConfiguration parameter. Requests that specify a server launch path and launch parameters instead of a runtime configuration will continue to work.
+
+<a id="nestedatt--anywhere_configuration"></a>
+### Nested Schema for `anywhere_configuration`
+
+Read-Only:
+
+- `cost` (String) Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.
+
 
 <a id="nestedatt--certificate_configuration"></a>
 ### Nested Schema for `certificate_configuration`

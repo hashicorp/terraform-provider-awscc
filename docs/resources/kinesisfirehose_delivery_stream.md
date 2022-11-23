@@ -17,6 +17,7 @@ Resource Type definition for AWS::KinesisFirehose::DeliveryStream
 
 ### Optional
 
+- `amazon_open_search_serverless_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration))
 - `amazonopensearchservice_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration))
 - `delivery_stream_encryption_configuration_input` (Attributes) (see [below for nested schema](#nestedatt--delivery_stream_encryption_configuration_input))
 - `delivery_stream_name` (String)
@@ -34,6 +35,147 @@ Resource Type definition for AWS::KinesisFirehose::DeliveryStream
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration`
+
+Required:
+
+- `index_name` (String)
+- `role_arn` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration))
+
+Optional:
+
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--cloudwatch_logging_options))
+- `collection_endpoint` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--retry_options))
+- `s3_backup_mode` (String)
+- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--vpc_configuration))
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration`
+
+Required:
+
+- `bucket_arn` (String)
+- `role_arn` (String)
+
+Optional:
+
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--buffering_hints"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration.cloudwatch_logging_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--encryption_configuration"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration.encryption_configuration`
+
+Optional:
+
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+
+Required:
+
+- `awskms_key_arn` (String)
+
+
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--buffering_hints"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.cloudwatch_logging_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.processing_configuration`
+
+Optional:
+
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration--processors))
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration--processors"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.processing_configuration.processors`
+
+Required:
+
+- `type` (String)
+
+Optional:
+
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration--processors--parameters))
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration--processors--parameters"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.processing_configuration.processors.parameters`
+
+Required:
+
+- `parameter_name` (String)
+- `parameter_value` (String)
+
+
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--retry_options"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.retry_options`
+
+Optional:
+
+- `duration_in_seconds` (Number)
+
+
+<a id="nestedatt--amazon_open_search_serverless_destination_configuration--vpc_configuration"></a>
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.vpc_configuration`
+
+Required:
+
+- `role_arn` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+
+
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration`
