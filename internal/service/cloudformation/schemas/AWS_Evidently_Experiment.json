@@ -62,16 +62,15 @@
     "OnlineAbConfig": {
       "$ref": "#/definitions/OnlineAbConfigObject"
     },
-    "Segment" : {
+    "Segment": {
       "type": "string",
       "minLength": 0,
       "maxLength": 2048,
       "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)"
     },
-    "RemoveSegment" : {
+    "RemoveSegment": {
       "type": "boolean"
     },
-
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
       "type": "array",

@@ -62,9 +62,12 @@
       "maxLength": 204
     },
     "VersionBump": {
-      "description":"Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
+      "description": "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
       "type": "string",
-      "enum": ["MAJOR", "MINOR"]
+      "enum": [
+        "MAJOR",
+        "MINOR"
+      ]
     },
     "MajorVersion": {
       "description": "The Major Version of the type you want to enable",
@@ -79,20 +82,31 @@
     },
     "Type": {
       "description": "The kind of extension",
-      "enum": ["RESOURCE", "MODULE", "HOOK"],
+      "enum": [
+        "RESOURCE",
+        "MODULE",
+        "HOOK"
+      ],
       "type": "string"
     }
   },
   "oneOf": [
     {
-      "required": ["TypeName", "PublisherId", "Type"]
+      "required": [
+        "TypeName",
+        "PublisherId",
+        "Type"
+      ]
     },
-
     {
-      "required": ["PublicTypeArn"]
+      "required": [
+        "PublicTypeArn"
+      ]
     }
   ],
-  "readOnlyProperties": ["/properties/Arn"],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
   "createOnlyProperties": [
     "/properties/ExecutionRoleArn",
     "/properties/LoggingConfig",
@@ -102,7 +116,9 @@
     "/properties/PublisherId",
     "/properties/PublicTypeArn"
   ],
-  "primaryIdentifier": ["/properties/Arn"],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -119,7 +135,9 @@
       ]
     },
     "read": {
-      "permissions": ["cloudformation:DescribeType"]
+      "permissions": [
+        "cloudformation:DescribeType"
+      ]
     },
     "delete": {
       "permissions": [
@@ -128,7 +146,9 @@
       ]
     },
     "list": {
-      "permissions": ["cloudformation:ListTypes"]
+      "permissions": [
+        "cloudformation:ListTypes"
+      ]
     }
   },
   "additionalProperties": false

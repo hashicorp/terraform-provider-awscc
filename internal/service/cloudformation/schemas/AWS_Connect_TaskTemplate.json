@@ -30,11 +30,11 @@
       ]
     },
     "FieldIdentifier": {
-      "description" : "the identifier (name) for the task template field",
+      "description": "the identifier (name) for the task template field",
       "type": "object",
       "properties": {
-        "Name" : {
-          "description" : "The name of the task template field",
+        "Name": {
+          "description": "The name of the task template field",
           "type": "string",
           "minLength": 1,
           "maxLength": 100
@@ -52,11 +52,11 @@
       "minLength": 1,
       "maxLength": 100
     },
-    "Field" : {
+    "Field": {
       "description": "A task template field object.",
       "type": "object",
       "properties": {
-        "Id" : {
+        "Id": {
           "$ref": "#/definitions/FieldIdentifier"
         },
         "Description": {
@@ -84,7 +84,7 @@
       ]
     },
     "InvisibleFieldInfo": {
-      "description" : "Invisible field info",
+      "description": "Invisible field info",
       "type": "object",
       "properties": {
         "Id": {
@@ -105,7 +105,7 @@
       }
     },
     "ReadOnlyFieldInfo": {
-      "description" : "ReadOnly field info",
+      "description": "ReadOnly field info",
       "type": "object",
       "properties": {
         "Id": {
@@ -116,7 +116,6 @@
       "required": [
         "Id"
       ]
-
     },
     "ReadOnlyTaskTemplateFields": {
       "description": "The list of the task template's read only fields",
@@ -127,7 +126,7 @@
       }
     },
     "RequiredFieldInfo": {
-      "description" : "Required field info",
+      "description": "Required field info",
       "type": "object",
       "properties": {
         "Id": {
@@ -138,7 +137,6 @@
       "required": [
         "Id"
       ]
-
     },
     "RequiredTaskTemplateFields": {
       "description": "The list of the task template's required fields",
@@ -148,7 +146,7 @@
         "$ref": "#/definitions/RequiredFieldInfo"
       }
     },
-    "FieldValue" : {
+    "FieldValue": {
       "description": "the default value for the task template's field",
       "type": "string",
       "minLength": 1,
@@ -172,8 +170,8 @@
       ]
     },
     "ClientToken": {
-      "description" : "the client token string in uuid format",
-      "type" : "string",
+      "description": "the client token string in uuid format",
+      "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
     "Tag": {
@@ -211,13 +209,13 @@
       "type": "string",
       "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
     },
-    "Name" : {
+    "Name": {
       "description": "The name of the task template.",
       "type": "string",
       "minLength": 1,
       "maxLength": 100
     },
-    "Description" : {
+    "Description": {
       "description": "The description of the task template.",
       "type": "string",
       "minLength": 0,
@@ -245,7 +243,7 @@
       }
     },
     "Defaults": {
-      "description" : "",
+      "description": "",
       "type": "array",
       "maxItems": 50,
       "items": {

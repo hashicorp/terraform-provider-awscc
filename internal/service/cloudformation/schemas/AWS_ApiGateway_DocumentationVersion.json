@@ -2,8 +2,7 @@
   "typeName": "AWS::ApiGateway::DocumentationVersion",
   "description": "A snapshot of the documentation of an API.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway.git",
-  "definitions": {
-  },
+  "definitions": {},
   "properties": {
     "Description": {
       "description": "The description of the API documentation snapshot.",

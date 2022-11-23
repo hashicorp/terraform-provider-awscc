@@ -34,7 +34,9 @@
               "description": "A specification that defines the pipeline in JSON format."
             }
           },
-          "required": ["PipelineDefinitionBody"]
+          "required": [
+            "PipelineDefinitionBody"
+          ]
         },
         {
           "additionalProperties": false,
@@ -43,7 +45,9 @@
               "$ref": "#/definitions/S3Location"
             }
           },
-          "required": ["PipelineDefinitionS3Location"]
+          "required": [
+            "PipelineDefinitionS3Location"
+          ]
         }
       ]
     },
@@ -68,10 +72,12 @@
         "MaxParallelExecutionSteps": {
           "description": "Maximum parallel execution steps",
           "type": "integer",
-          "minimum" : 1
+          "minimum": 1
         }
       },
-      "required": ["MaxParallelExecutionSteps"]
+      "required": [
+        "MaxParallelExecutionSteps"
+      ]
     }
   },
   "definitions": {
@@ -96,7 +102,10 @@
           "type": "string"
         }
       },
-      "required": ["Bucket", "Key"]
+      "required": [
+        "Bucket",
+        "Key"
+      ]
     },
     "Tag": {
       "type": "object",
@@ -109,12 +118,23 @@
           "type": "string"
         }
       },
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
-  "required": ["PipelineName", "PipelineDefinition", "RoleArn"],
-  "createOnlyProperties": ["/properties/PipelineName"],
-  "primaryIdentifier": ["/properties/PipelineName"],
+  "required": [
+    "PipelineName",
+    "PipelineDefinition",
+    "RoleArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/PipelineName"
+  ],
+  "primaryIdentifier": [
+    "/properties/PipelineName"
+  ],
   "handlers": {
     "create": {
       "permissions": [

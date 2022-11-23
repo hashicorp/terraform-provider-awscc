@@ -205,26 +205,26 @@
     },
     "S3BucketLogDestination": {
       "description": "Specifies an Amazon S3 bucket for logging audio conversations",
-      "type" : "object",
-      "properties" : {
-        "S3BucketArn" : {
-          "type" : "string",
-          "description" : "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-          "minLength" : 1,
-          "maxLength" : 2048,
-          "pattern" : "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+      "type": "object",
+      "properties": {
+        "S3BucketArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
         },
-        "LogPrefix" : {
-          "type" : "string",
-          "description" : "The Amazon S3 key of the deployment package.",
-          "minLength" : 0,
-          "maxLength" : 1024
+        "LogPrefix": {
+          "type": "string",
+          "description": "The Amazon S3 key of the deployment package.",
+          "minLength": 0,
+          "maxLength": 1024
         },
-        "KmsKeyArn" : {
-          "type" : "string",
-          "description" : "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-          "minLength" : 20,
-          "maxLength" : 2048,
+        "KmsKeyArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+          "minLength": 20,
+          "maxLength": 2048,
           "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"
         }
       },
@@ -1277,45 +1277,45 @@
       "description": "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
       "type": "object",
       "properties": {
-          "S3BucketName": {
-              "description": "The name of the S3 bucket that contains the grammar source.",
-              "$ref": "#/definitions/S3BucketName"
-          },
-          "S3ObjectKey": {
-              "description": "The path to the grammar in the S3 bucket.",
-              "$ref": "#/definitions/S3ObjectKey"
-          },
-          "KmsKeyArn": {
-              "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
-              "type": "string",
-              "minLength": 20,
-              "maxLength": 2048,
-              "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"
-          }
+        "S3BucketName": {
+          "description": "The name of the S3 bucket that contains the grammar source.",
+          "$ref": "#/definitions/S3BucketName"
+        },
+        "S3ObjectKey": {
+          "description": "The path to the grammar in the S3 bucket.",
+          "$ref": "#/definitions/S3ObjectKey"
+        },
+        "KmsKeyArn": {
+          "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"
+        }
       },
       "required": [
-          "S3BucketName",
-          "S3ObjectKey"
+        "S3BucketName",
+        "S3ObjectKey"
       ],
       "additionalProperties": false
     },
     "GrammarSlotTypeSetting": {
-        "description": "Settings required for a slot type based on a grammar that you provide.",
-        "type": "object",
-        "properties": {
-            "Source": {
-                "$ref": "#/definitions/GrammarSlotTypeSource"
-            }
-        },
-        "additionalProperties": false
+      "description": "Settings required for a slot type based on a grammar that you provide.",
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/GrammarSlotTypeSource"
+        }
+      },
+      "additionalProperties": false
     },
     "ExternalSourceSetting": {
       "description": "Provides information about the external source of the slot type's definition.",
       "type": "object",
       "properties": {
-          "GrammarSlotTypeSetting": {
-              "$ref": "#/definitions/GrammarSlotTypeSetting"
-          }
+        "GrammarSlotTypeSetting": {
+          "$ref": "#/definitions/GrammarSlotTypeSetting"
+        }
       },
       "additionalProperties": false
     },

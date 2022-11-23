@@ -59,7 +59,7 @@
             "$ref": "#/definitions/Method"
           }
         },
-        "IncludeChildPaths" : {
+        "IncludeChildPaths": {
           "type": "boolean"
         }
       },

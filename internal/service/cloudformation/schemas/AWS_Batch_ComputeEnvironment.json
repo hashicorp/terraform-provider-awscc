@@ -1,28 +1,28 @@
 {
-  "typeName" : "AWS::Batch::ComputeEnvironment",
-  "description" : "Resource Type definition for AWS::Batch::ComputeEnvironment",
-  "additionalProperties" : false,
-  "properties" : {
-    "ComputeEnvironmentArn" : {
-      "type" : "string"
+  "typeName": "AWS::Batch::ComputeEnvironment",
+  "description": "Resource Type definition for AWS::Batch::ComputeEnvironment",
+  "additionalProperties": false,
+  "properties": {
+    "ComputeEnvironmentArn": {
+      "type": "string"
     },
-    "ComputeEnvironmentName" : {
-      "type" : "string"
+    "ComputeEnvironmentName": {
+      "type": "string"
     },
-    "ComputeResources" : {
-      "$ref" : "#/definitions/ComputeResources"
+    "ComputeResources": {
+      "$ref": "#/definitions/ComputeResources"
     },
-    "ReplaceComputeEnvironment" : {
-      "type" : "boolean",
-      "default" : true
+    "ReplaceComputeEnvironment": {
+      "type": "boolean",
+      "default": true
     },
-    "ServiceRole" : {
-      "type" : "string"
+    "ServiceRole": {
+      "type": "string"
     },
-    "State" : {
-      "type" : "string"
+    "State": {
+      "type": "string"
     },
-    "Tags" : {
+    "Tags": {
       "type": "object",
       "description": "A key-value pair to associate with a resource.",
       "patternProperties": {
@@ -32,90 +32,90 @@
       },
       "additionalProperties": false
     },
-    "Type" : {
-      "type" : "string"
+    "Type": {
+      "type": "string"
     },
-    "UpdatePolicy" : {
-      "$ref" : "#/definitions/UpdatePolicy"
+    "UpdatePolicy": {
+      "$ref": "#/definitions/UpdatePolicy"
     },
-    "UnmanagedvCpus" : {
-      "type" : "integer"
+    "UnmanagedvCpus": {
+      "type": "integer"
     },
-    "EksConfiguration" : {
-      "$ref" : "#/definitions/EksConfiguration"
+    "EksConfiguration": {
+      "$ref": "#/definitions/EksConfiguration"
     }
   },
-  "definitions" : {
-    "ComputeResources" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "AllocationStrategy" : {
-          "type" : "string"
+  "definitions": {
+    "ComputeResources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AllocationStrategy": {
+          "type": "string"
         },
-        "BidPercentage" : {
-          "type" : "integer"
+        "BidPercentage": {
+          "type": "integer"
         },
-        "DesiredvCpus" : {
-          "type" : "integer"
+        "DesiredvCpus": {
+          "type": "integer"
         },
-        "Ec2Configuration" : {
-          "type" : "array",
-          "uniqueItems" : false,
+        "Ec2Configuration": {
+          "type": "array",
+          "uniqueItems": false,
           "insertionOrder": false,
-          "items" : {
-            "$ref" : "#/definitions/Ec2ConfigurationObject"
+          "items": {
+            "$ref": "#/definitions/Ec2ConfigurationObject"
           }
         },
-        "Ec2KeyPair" : {
-          "type" : "string"
+        "Ec2KeyPair": {
+          "type": "string"
         },
-        "ImageId" : {
-          "type" : "string"
+        "ImageId": {
+          "type": "string"
         },
-        "InstanceRole" : {
-          "type" : "string"
+        "InstanceRole": {
+          "type": "string"
         },
-        "InstanceTypes" : {
-          "type" : "array",
-          "uniqueItems" : false,
+        "InstanceTypes": {
+          "type": "array",
+          "uniqueItems": false,
           "insertionOrder": false,
-          "items" : {
-            "type" : "string"
+          "items": {
+            "type": "string"
           }
         },
-        "LaunchTemplate" : {
-          "$ref" : "#/definitions/LaunchTemplateSpecification"
+        "LaunchTemplate": {
+          "$ref": "#/definitions/LaunchTemplateSpecification"
         },
-        "MaxvCpus" : {
-          "type" : "integer"
+        "MaxvCpus": {
+          "type": "integer"
         },
-        "MinvCpus" : {
-          "type" : "integer"
+        "MinvCpus": {
+          "type": "integer"
         },
-        "PlacementGroup" : {
-          "type" : "string"
+        "PlacementGroup": {
+          "type": "string"
         },
-        "SecurityGroupIds" : {
-          "type" : "array",
-          "uniqueItems" : false,
+        "SecurityGroupIds": {
+          "type": "array",
+          "uniqueItems": false,
           "insertionOrder": false,
-          "items" : {
-            "type" : "string"
+          "items": {
+            "type": "string"
           }
         },
-        "SpotIamFleetRole" : {
-          "type" : "string"
+        "SpotIamFleetRole": {
+          "type": "string"
         },
-        "Subnets" : {
-          "type" : "array",
-          "uniqueItems" : false,
+        "Subnets": {
+          "type": "array",
+          "uniqueItems": false,
           "insertionOrder": false,
-          "items" : {
-            "type" : "string"
+          "items": {
+            "type": "string"
           }
         },
-        "Tags" : {
+        "Tags": {
           "type": "object",
           "description": "A key-value pair to associate with a resource.",
           "patternProperties": {
@@ -125,75 +125,81 @@
           },
           "additionalProperties": false
         },
-        "Type" : {
-          "type" : "string"
+        "Type": {
+          "type": "string"
         },
-        "UpdateToLatestImageVersion" : {
-          "type" : "boolean",
-          "default" : false
+        "UpdateToLatestImageVersion": {
+          "type": "boolean",
+          "default": false
         }
       },
-      "required" : [ "Subnets", "Type", "MaxvCpus" ]
+      "required": [
+        "Subnets",
+        "Type",
+        "MaxvCpus"
+      ]
     },
-    "Ec2ConfigurationObject" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "ImageIdOverride" : {
-          "type" : "string"
+    "Ec2ConfigurationObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ImageIdOverride": {
+          "type": "string"
         },
-        "ImageType" : {
-          "type" : "string"
+        "ImageType": {
+          "type": "string"
         },
-        "ImageKubernetesVersion" : {
-          "type" : "string"
+        "ImageKubernetesVersion": {
+          "type": "string"
         }
       },
-      "required" : [ "ImageType" ]
+      "required": [
+        "ImageType"
+      ]
     },
-    "LaunchTemplateSpecification" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "LaunchTemplateId" : {
-          "type" : "string"
+    "LaunchTemplateSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LaunchTemplateId": {
+          "type": "string"
         },
-        "LaunchTemplateName" : {
-          "type" : "string"
+        "LaunchTemplateName": {
+          "type": "string"
         },
-        "Version" : {
-          "type" : "string"
+        "Version": {
+          "type": "string"
         }
       }
     },
     "UpdatePolicy": {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "TerminateJobsOnUpdate" : {
-          "type" : "boolean",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TerminateJobsOnUpdate": {
+          "type": "boolean",
           "default": false
         },
-        "JobExecutionTimeoutMinutes" : {
-          "type" : "integer",
-          "default" : 30
+        "JobExecutionTimeoutMinutes": {
+          "type": "integer",
+          "default": 30
         }
       }
     },
-    "EksConfiguration" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "EksClusterArn" : {
-          "type" : "string",
-          "default" : false
+    "EksConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EksClusterArn": {
+          "type": "string",
+          "default": false
         },
-        "KubernetesNamespace" : {
-          "type" : "string",
-          "default" : false
+        "KubernetesNamespace": {
+          "type": "string",
+          "default": false
         }
       },
-      "required" : [
+      "required": [
         "EksClusterArn",
         "KubernetesNamespace"
       ]
@@ -206,8 +212,10 @@
     "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags"
   },
-  "required" : [ "Type" ],
-  "createOnlyProperties" : [
+  "required": [
+    "Type"
+  ],
+  "createOnlyProperties": [
     "/properties/ComputeResources/SpotIamFleetRole",
     "/properties/ComputeEnvironmentName",
     "/properties/Tags",
@@ -233,8 +241,12 @@
     "/properties/ComputeResources/UpdateToLatestImageVersion",
     "/properties/ReplaceComputeEnvironment"
   ],
-  "primaryIdentifier" : [ "/properties/ComputeEnvironmentArn" ],
-  "readOnlyProperties" : [ "/properties/ComputeEnvironmentArn" ],
+  "primaryIdentifier": [
+    "/properties/ComputeEnvironmentArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/ComputeEnvironmentArn"
+  ],
   "handlers": {
     "create": {
       "permissions": [

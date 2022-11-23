@@ -90,7 +90,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "MaintenanceStrategies" : {
+        "MaintenanceStrategies": {
           "$ref": "#/definitions/MaintenanceStrategies"
         },
         "SingleAvailabilityZone": {
@@ -626,11 +626,11 @@
         }
       }
     },
-    "MaintenanceStrategies" : {
+    "MaintenanceStrategies": {
       "type": "object",
       "additionalProperties": false,
-      "properties" : {
-        "CapacityRebalance" : {
+      "properties": {
+        "CapacityRebalance": {
           "$ref": "#/definitions/CapacityRebalance"
         }
       }

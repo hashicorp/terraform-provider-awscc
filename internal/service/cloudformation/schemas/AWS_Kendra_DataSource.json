@@ -1259,7 +1259,7 @@
           "minimum": 1,
           "maximum": 65535
         },
-        "Credentials":{
+        "Credentials": {
           "$ref": "#/definitions/SecretArn"
         }
       },
@@ -1283,7 +1283,7 @@
           "minimum": 1,
           "maximum": 65535
         },
-        "Credentials":{
+        "Credentials": {
           "$ref": "#/definitions/SecretArn"
         }
       },
@@ -1578,7 +1578,8 @@
         }
       },
       "required": [
-        "ConditionDocumentAttributeKey", "Operator"
+        "ConditionDocumentAttributeKey",
+        "Operator"
       ],
       "additionalProperties": false
     },
@@ -1666,7 +1667,8 @@
         }
       },
       "required": [
-        "LambdaArn", "S3Bucket"
+        "LambdaArn",
+        "S3Bucket"
       ],
       "additionalProperties": false
     },

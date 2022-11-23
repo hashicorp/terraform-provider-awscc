@@ -82,23 +82,26 @@
       ],
       "additionalProperties": false
     },
-    "Tag" : {
+    "Tag": {
       "description": "A key-value pair to apply to the resource",
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "Key" : {
-          "type" : "string",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
           "minLength": 1,
           "maxLength": 128
         },
-        "Value" : {
-          "type" : "string",
+        "Value": {
+          "type": "string",
           "minLength": 1,
           "maxLength": 256
         }
       },
-      "required" : [ "Value", "Key" ]
+      "required": [
+        "Value",
+        "Key"
+      ]
     },
     "EncryptionSpecification": {
       "description": "Represents the settings used to enable server-side encryption",
@@ -111,8 +114,10 @@
           "$ref": "#/definitions/KmsKeyIdentifier"
         }
       },
-      "required" : ["EncryptionType"],
-      "additionalProperties" : false
+      "required": [
+        "EncryptionType"
+      ],
+      "additionalProperties": false
     },
     "EncryptionType": {
       "description": "Server-side encryption type",
@@ -177,9 +182,9 @@
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource",
       "type": "array",
-      "uniqueItems" : true,
-      "items" : {
-        "$ref" : "#/definitions/Tag"
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
       },
       "minItems": 0,
       "maxItems": 50
@@ -190,7 +195,7 @@
       "minimum": 0
     },
     "EncryptionSpecification": {
-        "$ref": "#/definitions/EncryptionSpecification"
+      "$ref": "#/definitions/EncryptionSpecification"
     }
   },
   "additionalProperties": false,

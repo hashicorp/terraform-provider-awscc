@@ -18,7 +18,10 @@
     },
     "EncryptionMode": {
       "description": "Encryption mode",
-      "enum": ["SSE-KMS", "SSE-S3"],
+      "enum": [
+        "SSE-KMS",
+        "SSE-S3"
+      ],
       "type": "string"
     },
     "Name": {
@@ -29,12 +32,18 @@
     },
     "Type": {
       "description": "Job type",
-      "enum": ["PROFILE", "RECIPE"],
+      "enum": [
+        "PROFILE",
+        "RECIPE"
+      ],
       "type": "string"
     },
     "LogSubscription": {
       "description": "Log subscription",
-      "enum": ["ENABLE", "DISABLE"],
+      "enum": [
+        "ENABLE",
+        "DISABLE"
+      ],
       "type": "string"
     },
     "MaxCapacity": {
@@ -130,7 +139,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Bucket"]
+      "required": [
+        "Bucket"
+      ]
     },
     "CsvOutputOptions": {
       "description": "Output Csv options",
@@ -171,7 +182,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Bucket"]
+      "required": [
+        "Bucket"
+      ]
     },
     "Output": {
       "type": "object",
@@ -227,7 +240,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Location"]
+      "required": [
+        "Location"
+      ]
     },
     "DataCatalogOutput": {
       "type": "object",
@@ -258,7 +273,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["DatabaseName", "TableName"]
+      "required": [
+        "DatabaseName",
+        "TableName"
+      ]
     },
     "S3TableOutputOptions": {
       "type": "object",
@@ -268,7 +286,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Location"]
+      "required": [
+        "Location"
+      ]
     },
     "DatabaseTableOutputOptions": {
       "type": "object",
@@ -283,7 +303,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["TableName"]
+      "required": [
+        "TableName"
+      ]
     },
     "DatabaseOutput": {
       "type": "object",
@@ -294,7 +316,9 @@
         },
         "DatabaseOutputMode": {
           "description": "Database table name",
-          "enum": ["NEW_TABLE"],
+          "enum": [
+            "NEW_TABLE"
+          ],
           "type": "string"
         },
         "DatabaseOptions": {
@@ -302,7 +326,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["GlueConnectionName", "DatabaseOptions"]
+      "required": [
+        "GlueConnectionName",
+        "DatabaseOptions"
+      ]
     },
     "Recipe": {
       "type": "object",
@@ -317,7 +344,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Name"]
+      "required": [
+        "Name"
+      ]
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -335,11 +364,17 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     },
     "SampleMode": {
       "description": "Sample configuration mode for profile jobs.",
-      "enum": ["FULL_DATASET", "CUSTOM_ROWS"],
+      "enum": [
+        "FULL_DATASET",
+        "CUSTOM_ROWS"
+      ],
       "type": "string"
     },
     "JobSize": {
@@ -391,7 +426,9 @@
     "EntityDetectorConfiguration": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["EntityTypes"],
+      "required": [
+        "EntityTypes"
+      ],
       "properties": {
         "EntityTypes": {
           "type": "array",
@@ -412,7 +449,9 @@
     "AllowedStatistics": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["Statistics"],
+      "required": [
+        "Statistics"
+      ],
       "properties": {
         "Statistics": {
           "type": "array",
@@ -439,7 +478,9 @@
           "$ref": "#/definitions/StatisticsConfiguration"
         }
       },
-      "required": ["Statistics"],
+      "required": [
+        "Statistics"
+      ],
       "additionalProperties": false
     },
     "StatisticsConfiguration": {
@@ -496,7 +537,10 @@
           "$ref": "#/definitions/ParameterMap"
         }
       },
-      "required": ["Statistic", "Parameters"],
+      "required": [
+        "Statistic",
+        "Parameters"
+      ],
       "additionalProperties": false
     },
     "ParameterMap": {
@@ -509,8 +553,10 @@
       }
     },
     "ValidationMode": {
-      "type" : "string",
-      "enum" : [ "CHECK_ALL" ]
+      "type": "string",
+      "enum": [
+        "CHECK_ALL"
+      ]
     },
     "ValidationConfiguration": {
       "description": "Configuration to attach Rulesets to the job",
@@ -527,12 +573,20 @@
           "$ref": "#/definitions/ValidationMode"
         }
       },
-      "required": ["RulesetArn"]
+      "required": [
+        "RulesetArn"
+      ]
     }
   },
   "additionalProperties": false,
-  "required": ["Name", "RoleArn", "Type"],
-  "primaryIdentifier": ["/properties/Name"],
+  "required": [
+    "Name",
+    "RoleArn",
+    "Type"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Type",
@@ -556,10 +610,15 @@
       ]
     },
     "update": {
-      "permissions": ["databrew:UpdateProfileJob", "databrew:UpdateRecipeJob"]
+      "permissions": [
+        "databrew:UpdateProfileJob",
+        "databrew:UpdateRecipeJob"
+      ]
     },
     "delete": {
-      "permissions": ["databrew:DeleteJob"]
+      "permissions": [
+        "databrew:DeleteJob"
+      ]
     },
     "list": {
       "permissions": [

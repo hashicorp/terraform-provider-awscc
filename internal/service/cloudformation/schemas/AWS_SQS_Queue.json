@@ -83,7 +83,7 @@
       "type": [
         "object",
         "string"
-        ],
+      ],
       "description": "The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object."
     },
     "RedrivePolicy": {

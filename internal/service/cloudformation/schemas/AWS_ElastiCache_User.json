@@ -52,7 +52,11 @@
         "Type": {
           "description": "Authentication Type",
           "type": "string",
-          "enum": ["password", "no-password-required", "iam"]
+          "enum": [
+            "password",
+            "no-password-required",
+            "iam"
+          ]
         },
         "Passwords": {
           "type": "array",
@@ -65,7 +69,9 @@
           "description": "Passwords used for this user account. You can create up to two passwords for each user."
         }
       },
-      "required": ["Type"]
+      "required": [
+        "Type"
+      ]
     }
   },
   "additionalProperties": false,

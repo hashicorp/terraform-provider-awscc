@@ -268,7 +268,10 @@
     "UserProperty": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["Key", "Value"],
+      "required": [
+        "Key",
+        "Value"
+      ],
       "properties": {
         "Key": {
           "type": "string",

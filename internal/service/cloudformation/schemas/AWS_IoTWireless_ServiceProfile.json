@@ -136,7 +136,6 @@
     "/properties/LoRaWAN/NwkGeoLoc",
     "/properties/LoRaWAN/TargetPer",
     "/properties/LoRaWAN/MinGwDiversity"
-
   ],
   "primaryIdentifier": [
     "/properties/Id"

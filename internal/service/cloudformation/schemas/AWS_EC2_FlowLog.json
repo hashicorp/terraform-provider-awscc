@@ -110,7 +110,7 @@
         "PerHourPartition"
       ]
     }
-   },
+  },
   "required": [
     "ResourceType",
     "ResourceId"

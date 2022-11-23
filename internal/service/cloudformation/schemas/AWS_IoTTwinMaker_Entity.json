@@ -221,6 +221,35 @@
       },
       "additionalProperties": false
     },
+    "PropertyName": {
+      "type": "string",
+      "pattern": "[a-zA-Z_\\-0-9]+"
+    },
+    "PropertyGroup": {
+      "description": "An object that specifies information about a property group.",
+      "type": "object",
+      "properties": {
+        "GroupType": {
+          "description": "The type of property group.",
+          "type": "string",
+          "enum": [
+            "TABULAR"
+          ]
+        },
+        "PropertyNames": {
+          "description": "The list of property names in the property group.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PropertyName"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "Component": {
       "type": "object",
       "properties": {
@@ -256,6 +285,16 @@
           "patternProperties": {
             "": {
               "$ref": "#/definitions/Property"
+            }
+          },
+          "additionalProperties": false
+        },
+        "PropertyGroups": {
+          "description": "An object that maps strings to the property groups to set in the component type. Each string in the mapping must be unique to this object.",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/PropertyGroup"
             }
           },
           "additionalProperties": false
