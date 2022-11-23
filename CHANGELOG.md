@@ -1,4 +1,94 @@
 ## 0.40.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_documentation_part`
+* **New Data Source:** `awscc_apigatewayv2_api`
+* **New Data Source:** `awscc_apigatewayv2_apis`
+* **New Data Source:** `awscc_apigatewayv2_authorizer`
+* **New Data Source:** `awscc_apigatewayv2_deployment`
+* **New Data Source:** `awscc_apigatewayv2_model`
+* **New Data Source:** `awscc_appstream_image_builder`
+* **New Data Source:** `awscc_appstream_image_builders`
+* **New Data Source:** `awscc_autoscaling_scaling_policies`
+* **New Data Source:** `awscc_autoscaling_scaling_policy`
+* **New Data Source:** `awscc_autoscaling_scheduled_action`
+* **New Data Source:** `awscc_autoscaling_scheduled_actions`
+* **New Data Source:** `awscc_cloudfront_continuous_deployment_policies`
+* **New Data Source:** `awscc_cloudfront_continuous_deployment_policy`
+* **New Data Source:** `awscc_cloudfront_monitoring_subscription`
+* **New Data Source:** `awscc_codedeploy_deployment_config`
+* **New Data Source:** `awscc_codedeploy_deployment_configs`
+* **New Data Source:** `awscc_datapipeline_pipeline`
+* **New Data Source:** `awscc_datapipeline_pipelines`
+* **New Data Source:** `awscc_dynamodb_table`
+* **New Data Source:** `awscc_dynamodb_tables`
+* **New Data Source:** `awscc_ec2_eip`
+* **New Data Source:** `awscc_ec2_eips`
+* **New Data Source:** `awscc_ec2_volume`
+* **New Data Source:** `awscc_ec2_volumes`
+* **New Data Source:** `awscc_ec2_vpn_connection`
+* **New Data Source:** `awscc_ec2_vpn_connections`
+* **New Data Source:** `awscc_elasticache_subnet_group`
+* **New Data Source:** `awscc_elasticache_subnet_groups`
+* **New Data Source:** `awscc_elasticbeanstalk_application`
+* **New Data Source:** `awscc_elasticbeanstalk_application_version`
+* **New Data Source:** `awscc_elasticbeanstalk_application_versions`
+* **New Data Source:** `awscc_elasticbeanstalk_applications`
+* **New Data Source:** `awscc_elasticbeanstalk_environment`
+* **New Data Source:** `awscc_elasticbeanstalk_environments`
+* **New Data Source:** `awscc_emr_security_configuration`
+* **New Data Source:** `awscc_emr_security_configurations`
+* **New Data Source:** `awscc_iot_policies`
+* **New Data Source:** `awscc_iot_policy`
+* **New Data Source:** `awscc_logs_destination`
+* **New Data Source:** `awscc_logs_destinations`
+* **New Data Source:** `awscc_logs_log_stream`
+* **New Data Source:** `awscc_logs_metric_filter`
+* **New Data Source:** `awscc_logs_metric_filters`
+* **New Data Source:** `awscc_rds_db_cluster`
+* **New Data Source:** `awscc_rds_db_cluster_parameter_group`
+* **New Data Source:** `awscc_rds_db_cluster_parameter_groups`
+* **New Data Source:** `awscc_rds_db_clusters`
+* **New Data Source:** `awscc_rds_db_instance`
+* **New Data Source:** `awscc_rds_db_instances`
+* **New Data Source:** `awscc_rds_option_group`
+* **New Data Source:** `awscc_rds_option_groups`
+* **New Data Source:** `awscc_redshift_cluster_parameter_group`
+* **New Data Source:** `awscc_redshift_cluster_parameter_groups`
+* **New Data Source:** `awscc_redshift_cluster_subnet_group`
+* **New Data Source:** `awscc_redshift_cluster_subnet_groups`
+* **New Resource:** `awscc_apigateway_documentation_part`
+* **New Resource:** `awscc_apigatewayv2_api`
+* **New Resource:** `awscc_apigatewayv2_authorizer`
+* **New Resource:** `awscc_apigatewayv2_deployment`
+* **New Resource:** `awscc_apigatewayv2_model`
+* **New Resource:** `awscc_appstream_image_builder`
+* **New Resource:** `awscc_autoscaling_scaling_policy`
+* **New Resource:** `awscc_autoscaling_scheduled_action`
+* **New Resource:** `awscc_cloudfront_continuous_deployment_policy`
+* **New Resource:** `awscc_cloudfront_monitoring_subscription`
+* **New Resource:** `awscc_codedeploy_deployment_config`
+* **New Resource:** `awscc_datapipeline_pipeline`
+* **New Resource:** `awscc_dynamodb_table`
+* **New Resource:** `awscc_ec2_eip`
+* **New Resource:** `awscc_ec2_volume`
+* **New Resource:** `awscc_ec2_vpn_connection`
+* **New Resource:** `awscc_elasticache_subnet_group`
+* **New Resource:** `awscc_elasticbeanstalk_application`
+* **New Resource:** `awscc_elasticbeanstalk_application_version`
+* **New Resource:** `awscc_emr_security_configuration`
+* **New Resource:** `awscc_iot_policy`
+* **New Resource:** `awscc_logs_destination`
+* **New Resource:** `awscc_logs_log_stream`
+* **New Resource:** `awscc_logs_metric_filter`
+* **New Resource:** `awscc_rds_db_cluster`
+* **New Resource:** `awscc_rds_db_cluster_parameter_group`
+* **New Resource:** `awscc_rds_db_instance`
+* **New Resource:** `awscc_rds_option_group`
+* **New Resource:** `awscc_redshift_cluster_parameter_group`
+* **New Resource:** `awscc_redshift_cluster_subnet_group`
+
 ## [0.39.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.39.0) (November 17, 2022)
 
 FEATURES:
