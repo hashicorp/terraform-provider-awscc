@@ -20,13 +20,46 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::GameLift::Fleet resource.
 func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"anywhere_configuration": {
+			// Property: AnywhereConfiguration
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration for Anywhere fleet.",
+			//	  "properties": {
+			//	    "Cost": {
+			//	      "description": "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
+			//	      "maxLength": 11,
+			//	      "minLength": 1,
+			//	      "pattern": "^\\d{1,5}(?:\\.\\d{1,5})?$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Cost"
+			//	  ]
+			//	}
+			Description: "Configuration for Anywhere fleet.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cost": {
+						// Property: Cost
+						Description: "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"build_id": {
 			// Property: BuildId
 			// CloudFormation resource type schema:
 			//
 			//	{
 			//	  "description": "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
-			//	  "pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+",
+			//	  "pattern": "^build-\\S+|^arn:.*:build/build-\\S+",
 			//	  "type": "string"
 			//	}
 			Description: "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
@@ -65,6 +98,22 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 				},
 			),
 			Computed: true,
+		},
+		"compute_type": {
+			// Property: ComputeType
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			//	  "enum": [
+			//	    "EC2",
+			//	    "ANYWHERE"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"description": {
 			// Property: Description
@@ -112,7 +161,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	      },
 			//	      "IpRange": {
 			//	        "description": "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-			//	        "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)",
+			//	        "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/([0-9]|[1-2][0-9]|3[0-2]))$)",
 			//	        "type": "string"
 			//	      },
 			//	      "Protocol": {
@@ -241,7 +290,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	      "Location": {
 			//	        "maxLength": 64,
 			//	        "minLength": 1,
-			//	        "pattern": "^[a-z]+(-([a-z]+|\\d))*",
+			//	        "pattern": "^[A-Za-z0-9\\-]+",
 			//	        "type": "string"
 			//	      },
 			//	      "LocationCapacity": {
@@ -588,7 +637,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//
 			//	{
 			//	  "description": "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
-			//	  "pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+",
+			//	  "pattern": "^script-\\S+|^arn:.*:script/script-\\S+",
 			//	  "type": "string"
 			//	}
 			Description: "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
@@ -642,10 +691,13 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"anywhere_configuration":    "AnywhereConfiguration",
 		"build_id":                  "BuildId",
 		"certificate_configuration": "CertificateConfiguration",
 		"certificate_type":          "CertificateType",
+		"compute_type":              "ComputeType",
 		"concurrent_executions":     "ConcurrentExecutions",
+		"cost":                      "Cost",
 		"description":               "Description",
 		"desired_ec2_instances":     "DesiredEC2Instances",
 		"ec2_inbound_permissions":   "EC2InboundPermissions",

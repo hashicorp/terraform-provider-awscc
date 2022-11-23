@@ -123,7 +123,6 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "additionalProperties": false,
 			//	  "properties": {
 			//	    "IsPublic": {
 			//	      "description": "Specifies whether the policy is public or not.",
@@ -153,7 +152,6 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "additionalProperties": false,
 			//	  "description": "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			//	  "properties": {
 			//	    "BlockPublicAcls": {
@@ -211,7 +209,6 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "additionalProperties": false,
 			//	  "description": "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
 			//	  "properties": {
 			//	    "VpcId": {
