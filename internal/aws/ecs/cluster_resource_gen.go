@@ -323,6 +323,42 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"service_connect_defaults": {
+			// Property: ServiceConnectDefaults
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Service Connect Configuration default for all services or tasks within this cluster",
+			//	  "properties": {
+			//	    "Namespace": {
+			//	      "description": "Service Connect Namespace Name or ARN default for all services or tasks within this cluster",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "Service Connect Configuration default for all services or tasks within this cluster",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"namespace": {
+						// Property: Namespace
+						Description: "Service Connect Namespace Name or ARN default for all services or tasks within this cluster",
+						Type:        types.StringType,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -410,9 +446,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"log_configuration":                  "LogConfiguration",
 		"logging":                            "Logging",
 		"name":                               "Name",
+		"namespace":                          "Namespace",
 		"s3_bucket_name":                     "S3BucketName",
 		"s3_encryption_enabled":              "S3EncryptionEnabled",
 		"s3_key_prefix":                      "S3KeyPrefix",
+		"service_connect_defaults":           "ServiceConnectDefaults",
 		"tags":                               "Tags",
 		"value":                              "Value",
 		"weight":                             "Weight",

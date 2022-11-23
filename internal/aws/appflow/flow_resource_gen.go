@@ -304,6 +304,9 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//	                          "SingleFile"
 			//	                        ],
 			//	                        "type": "string"
+			//	                      },
+			//	                      "TargetFileSize": {
+			//	                        "type": "integer"
 			//	                      }
 			//	                    },
 			//	                    "type": "object"
@@ -319,6 +322,16 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//	                  "PrefixConfig": {
 			//	                    "additionalProperties": false,
 			//	                    "properties": {
+			//	                      "PathPrefixHierarchy": {
+			//	                        "items": {
+			//	                          "enum": [
+			//	                            "EXECUTION_ID",
+			//	                            "SCHEMA_VERSION"
+			//	                          ],
+			//	                          "type": "string"
+			//	                        },
+			//	                        "type": "array"
+			//	                      },
 			//	                      "PrefixFormat": {
 			//	                        "enum": [
 			//	                          "YEAR",
@@ -542,6 +555,9 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//	                          "SingleFile"
 			//	                        ],
 			//	                        "type": "string"
+			//	                      },
+			//	                      "TargetFileSize": {
+			//	                        "type": "integer"
 			//	                      }
 			//	                    },
 			//	                    "type": "object"
@@ -557,6 +573,16 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//	                  "PrefixConfig": {
 			//	                    "additionalProperties": false,
 			//	                    "properties": {
+			//	                      "PathPrefixHierarchy": {
+			//	                        "items": {
+			//	                          "enum": [
+			//	                            "EXECUTION_ID",
+			//	                            "SCHEMA_VERSION"
+			//	                          ],
+			//	                          "type": "string"
+			//	                        },
+			//	                        "type": "array"
+			//	                      },
 			//	                      "PrefixFormat": {
 			//	                        "enum": [
 			//	                          "YEAR",
@@ -1119,6 +1145,15 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 																			resource.UseStateForUnknown(),
 																		},
 																	},
+																	"target_file_size": {
+																		// Property: TargetFileSize
+																		Type:     types.Int64Type,
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
 																},
 															),
 															Optional: true,
@@ -1147,6 +1182,21 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 															// Property: PrefixConfig
 															Attributes: tfsdk.SingleNestedAttributes(
 																map[string]tfsdk.Attribute{
+																	"path_prefix_hierarchy": {
+																		// Property: PathPrefixHierarchy
+																		Type:     types.ListType{ElemType: types.StringType},
+																		Optional: true,
+																		Computed: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.ArrayForEach(validate.StringInSlice([]string{
+																				"EXECUTION_ID",
+																				"SCHEMA_VERSION",
+																			})),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
 																	"prefix_format": {
 																		// Property: PrefixFormat
 																		Type:     types.StringType,
@@ -1591,6 +1641,15 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 																			resource.UseStateForUnknown(),
 																		},
 																	},
+																	"target_file_size": {
+																		// Property: TargetFileSize
+																		Type:     types.Int64Type,
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
 																},
 															),
 															Optional: true,
@@ -1619,6 +1678,21 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 															// Property: PrefixConfig
 															Attributes: tfsdk.SingleNestedAttributes(
 																map[string]tfsdk.Attribute{
+																	"path_prefix_hierarchy": {
+																		// Property: PathPrefixHierarchy
+																		Type:     types.ListType{ElemType: types.StringType},
+																		Optional: true,
+																		Computed: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.ArrayForEach(validate.StringInSlice([]string{
+																				"EXECUTION_ID",
+																				"SCHEMA_VERSION",
+																			})),
+																		},
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
 																	"prefix_format": {
 																		// Property: PrefixFormat
 																		Type:     types.StringType,
@@ -1832,6 +1906,102 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
+			},
+		},
+		"metadata_catalog_config": {
+			// Property: MetadataCatalogConfig
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configurations of metadata catalog of the flow.",
+			//	  "properties": {
+			//	    "GlueDataCatalog": {
+			//	      "additionalProperties": false,
+			//	      "description": "Configurations of glue data catalog of the flow.",
+			//	      "properties": {
+			//	        "DatabaseName": {
+			//	          "description": "A string containing the value for the tag",
+			//	          "maxLength": 255,
+			//	          "minLength": 0,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        },
+			//	        "RoleArn": {
+			//	          "description": "A string containing the value for the tag",
+			//	          "maxLength": 512,
+			//	          "minLength": 0,
+			//	          "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+			//	          "type": "string"
+			//	        },
+			//	        "TablePrefix": {
+			//	          "description": "A string containing the value for the tag",
+			//	          "maxLength": 128,
+			//	          "minLength": 0,
+			//	          "pattern": "",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "RoleArn",
+			//	        "DatabaseName",
+			//	        "TablePrefix"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "Configurations of metadata catalog of the flow.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"glue_data_catalog": {
+						// Property: GlueDataCatalog
+						Description: "Configurations of glue data catalog of the flow.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"database_name": {
+									// Property: DatabaseName
+									Description: "A string containing the value for the tag",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 255),
+									},
+								},
+								"role_arn": {
+									// Property: RoleArn
+									Description: "A string containing the value for the tag",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 512),
+										validate.StringMatch(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
+									},
+								},
+								"table_prefix": {
+									// Property: TablePrefix
+									Description: "A string containing the value for the tag",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 128),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"source_flow_config": {
@@ -3182,7 +3352,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//	                "CONCAT_FORMAT",
 			//	                "SUBFIELD_CATEGORY_MAP",
 			//	                "EXCLUDE_SOURCE_FIELDS_LIST",
-			//	                "INCLUDE_NEW_FIELDS"
+			//	                "INCLUDE_NEW_FIELDS",
+			//	                "ORDERED_PARTITION_KEYS_LIST"
 			//	              ],
 			//	              "type": "string"
 			//	            },
@@ -3211,7 +3382,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			//	          "Merge",
 			//	          "Passthrough",
 			//	          "Truncate",
-			//	          "Validate"
+			//	          "Validate",
+			//	          "Partition"
 			//	        ],
 			//	        "type": "string"
 			//	      }
@@ -3739,6 +3911,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 											"SUBFIELD_CATEGORY_MAP",
 											"EXCLUDE_SOURCE_FIELDS_LIST",
 											"INCLUDE_NEW_FIELDS",
+											"ORDERED_PARTITION_KEYS_LIST",
 										}),
 									},
 								},
@@ -3775,6 +3948,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 								"Passthrough",
 								"Truncate",
 								"Validate",
+								"Partition",
 							}),
 						},
 					},
@@ -4005,6 +4179,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"custom_properties":                 "CustomProperties",
 		"data_pull_mode":                    "DataPullMode",
 		"data_transfer_api":                 "DataTransferApi",
+		"database_name":                     "DatabaseName",
 		"datadog":                           "Datadog",
 		"datetime_type_field_name":          "DatetimeTypeFieldName",
 		"description":                       "Description",
@@ -4023,6 +4198,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"flow_arn":                          "FlowArn",
 		"flow_error_deactivation_threshold": "FlowErrorDeactivationThreshold",
 		"flow_name":                         "FlowName",
+		"glue_data_catalog":                 "GlueDataCatalog",
 		"google_analytics":                  "GoogleAnalytics",
 		"id_field_names":                    "IdFieldNames",
 		"include_all_versions":              "IncludeAllVersions",
@@ -4036,13 +4212,16 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"kms_arn":                           "KMSArn",
 		"lookout_metrics":                   "LookoutMetrics",
 		"marketo":                           "Marketo",
+		"metadata_catalog_config":           "MetadataCatalogConfig",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
+		"path_prefix_hierarchy":             "PathPrefixHierarchy",
 		"prefix_config":                     "PrefixConfig",
 		"prefix_format":                     "PrefixFormat",
 		"prefix_type":                       "PrefixType",
 		"preserve_source_data_typing":       "PreserveSourceDataTyping",
 		"redshift":                          "Redshift",
+		"role_arn":                          "RoleArn",
 		"s3":                                "S3",
 		"s3_input_file_type":                "S3InputFileType",
 		"s3_input_format_config":            "S3InputFormatConfig",
@@ -4061,7 +4240,9 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"source_fields":                     "SourceFields",
 		"source_flow_config":                "SourceFlowConfig",
 		"success_response_handling_config":  "SuccessResponseHandlingConfig",
+		"table_prefix":                      "TablePrefix",
 		"tags":                              "Tags",
+		"target_file_size":                  "TargetFileSize",
 		"task_properties":                   "TaskProperties",
 		"task_type":                         "TaskType",
 		"tasks":                             "Tasks",

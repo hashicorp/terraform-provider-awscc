@@ -22,13 +22,54 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::GameLift::Fleet resource.
 func fleetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"anywhere_configuration": {
+			// Property: AnywhereConfiguration
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "Configuration for Anywhere fleet.",
+			//	  "properties": {
+			//	    "Cost": {
+			//	      "description": "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
+			//	      "maxLength": 11,
+			//	      "minLength": 1,
+			//	      "pattern": "^\\d{1,5}(?:\\.\\d{1,5})?$",
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "Cost"
+			//	  ]
+			//	}
+			Description: "Configuration for Anywhere fleet.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cost": {
+						// Property: Cost
+						Description: "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 11),
+							validate.StringMatch(regexp.MustCompile("^\\d{1,5}(?:\\.\\d{1,5})?$"), ""),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"build_id": {
 			// Property: BuildId
 			// CloudFormation resource type schema:
 			//
 			//	{
 			//	  "description": "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
-			//	  "pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+",
+			//	  "pattern": "^build-\\S+|^arn:.*:build/build-\\S+",
 			//	  "type": "string"
 			//	}
 			Description: "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
@@ -36,7 +77,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^build-\\S+|^arn:.*:build\\/build-\\S+"), ""),
+				validate.StringMatch(regexp.MustCompile("^build-\\S+|^arn:.*:build/build-\\S+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
@@ -82,6 +123,33 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			),
 			Optional: true,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
+		"compute_type": {
+			// Property: ComputeType
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			//	  "enum": [
+			//	    "EC2",
+			//	    "ANYWHERE"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"EC2",
+					"ANYWHERE",
+				}),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
@@ -147,7 +215,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			//	      },
 			//	      "IpRange": {
 			//	        "description": "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-			//	        "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)",
+			//	        "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/([0-9]|[1-2][0-9]|3[0-2]))$)",
 			//	        "type": "string"
 			//	      },
 			//	      "Protocol": {
@@ -194,7 +262,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)"), ""),
+							validate.StringMatch(regexp.MustCompile("(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/([0-9]|[1-2][0-9]|3[0-2]))$)"), ""),
 						},
 					},
 					"protocol": {
@@ -330,7 +398,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			//	      "Location": {
 			//	        "maxLength": 64,
 			//	        "minLength": 1,
-			//	        "pattern": "^[a-z]+(-([a-z]+|\\d))*",
+			//	        "pattern": "^[A-Za-z0-9\\-]+",
 			//	        "type": "string"
 			//	      },
 			//	      "LocationCapacity": {
@@ -378,7 +446,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
-							validate.StringMatch(regexp.MustCompile("^[a-z]+(-([a-z]+|\\d))*"), ""),
+							validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9\\-]+"), ""),
 						},
 					},
 					"location_capacity": {
@@ -532,13 +600,9 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "A descriptive label that is associated with a fleet. Fleet names do not need to be unique.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 			},
 		},
 		"new_game_session_protection_policy": {
@@ -823,7 +887,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			//
 			//	{
 			//	  "description": "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
-			//	  "pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+",
+			//	  "pattern": "^script-\\S+|^arn:.*:script/script-\\S+",
 			//	  "type": "string"
 			//	}
 			Description: "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
@@ -831,7 +895,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^script-\\S+|^arn:.*:script\\/script-\\S+"), ""),
+				validate.StringMatch(regexp.MustCompile("^script-\\S+|^arn:.*:script/script-\\S+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
@@ -894,7 +958,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := tfsdk.Schema{
-		Description: "The AWS::GameLift::Fleet resource creates an Amazon GameLift (GameLift) fleet to host game servers.  A fleet is a set of EC2 instances, each of which can host multiple game sessions.",
+		Description: "The AWS::GameLift::Fleet resource creates an Amazon GameLift (GameLift) fleet to host game servers. A fleet is a set of EC2 or Anywhere instances, each of which can host multiple game sessions.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -905,10 +969,13 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"anywhere_configuration":    "AnywhereConfiguration",
 		"build_id":                  "BuildId",
 		"certificate_configuration": "CertificateConfiguration",
 		"certificate_type":          "CertificateType",
+		"compute_type":              "ComputeType",
 		"concurrent_executions":     "ConcurrentExecutions",
+		"cost":                      "Cost",
 		"description":               "Description",
 		"desired_ec2_instances":     "DesiredEC2Instances",
 		"ec2_inbound_permissions":   "EC2InboundPermissions",
@@ -948,31 +1015,6 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
-
-	opts = opts.WithRequiredAttributesValidators(validate.AllOfRequired(
-		validate.Required(
-			"ec2_instance_type",
-			"name",
-		),
-		validate.OneOfRequired(
-			validate.Required(
-				"build_id",
-			),
-			validate.Required(
-				"script_id",
-			),
-		),
-		validate.OneOfRequired(
-			validate.Required(
-				"runtime_configuration",
-			),
-			validate.Required(
-				"server_launch_parameters",
-				"server_launch_path",
-			),
-		),
-	),
-	)
 
 	v, err := NewResource(ctx, opts...)
 

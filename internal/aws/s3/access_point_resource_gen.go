@@ -111,12 +111,7 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",
 			Type:        types.StringType,
-			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(3, 50),
-				validate.StringMatch(regexp.MustCompile("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"), ""),
-			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
@@ -162,7 +157,6 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "additionalProperties": false,
 			//	  "properties": {
 			//	    "IsPublic": {
 			//	      "description": "Specifies whether the policy is public or not.",
@@ -206,7 +200,6 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "additionalProperties": false,
 			//	  "description": "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			//	  "properties": {
 			//	    "BlockPublicAcls": {
@@ -285,7 +278,6 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "additionalProperties": false,
 			//	  "description": "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
 			//	  "properties": {
 			//	    "VpcId": {
