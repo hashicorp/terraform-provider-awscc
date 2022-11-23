@@ -89,11 +89,11 @@
     },
     "Platform": {
       "type": "string",
-        "enum": [
-          "WEB",
-          "WEB_DYNAMIC",
-          "WEB_COMPUTE"
-        ]
+      "enum": [
+        "WEB",
+        "WEB_DYNAMIC",
+        "WEB_COMPUTE"
+      ]
     },
     "Repository": {
       "type": "string",

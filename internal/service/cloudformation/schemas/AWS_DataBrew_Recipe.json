@@ -47,10 +47,14 @@
       },
       "oneOf": [
         {
-          "required": ["S3InputDefinition"]
+          "required": [
+            "S3InputDefinition"
+          ]
         },
         {
-          "required": ["DataCatalogInputDefinition"]
+          "required": [
+            "DataCatalogInputDefinition"
+          ]
         }
       ],
       "additionalProperties": false
@@ -67,7 +71,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Bucket"]
+      "required": [
+        "Bucket"
+      ]
     },
     "DataCatalogInputDefinition": {
       "type": "object",
@@ -106,7 +112,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Action"]
+      "required": [
+        "Action"
+      ]
     },
     "Action": {
       "type": "object",
@@ -127,7 +135,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Operation"]
+      "required": [
+        "Operation"
+      ]
     },
     "ConditionExpression": {
       "description": "Condition expressions applied to the step action",
@@ -147,7 +157,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Condition", "TargetColumn"]
+      "required": [
+        "Condition",
+        "TargetColumn"
+      ]
     },
     "RecipeParameters": {
       "additionalProperties": false,
@@ -482,10 +495,14 @@
           },
           "oneOf": [
             {
-              "required": ["S3InputDefinition"]
+              "required": [
+                "S3InputDefinition"
+              ]
             },
             {
-              "required": ["DataCatalogInputDefinition"]
+              "required": [
+                "DataCatalogInputDefinition"
+              ]
             }
           ],
           "additionalProperties": false
@@ -517,13 +534,24 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "additionalProperties": false,
-  "required": ["Name", "Steps"],
-  "primaryIdentifier": ["/properties/Name"],
-  "createOnlyProperties": ["/properties/Name", "/properties/Tags"],
+  "required": [
+    "Name",
+    "Steps"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Tags"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -541,7 +569,9 @@
       ]
     },
     "delete": {
-      "permissions": ["databrew:DeleteRecipeVersion"]
+      "permissions": [
+        "databrew:DeleteRecipeVersion"
+      ]
     },
     "list": {
       "permissions": [
@@ -551,7 +581,9 @@
       ]
     },
     "update": {
-      "permissions": ["databrew:UpdateRecipe"]
+      "permissions": [
+        "databrew:UpdateRecipe"
+      ]
     }
   }
 }

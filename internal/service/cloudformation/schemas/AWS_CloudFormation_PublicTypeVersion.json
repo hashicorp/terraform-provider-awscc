@@ -43,13 +43,26 @@
     },
     "Type": {
       "description": "The kind of extension",
-      "enum": ["RESOURCE", "MODULE", "HOOK"],
+      "enum": [
+        "RESOURCE",
+        "MODULE",
+        "HOOK"
+      ],
       "type": "string"
     }
   },
   "oneOf": [
-    {"required": ["TypeName", "Type"]},
-    {"required": ["Arn"]}
+    {
+      "required": [
+        "TypeName",
+        "Type"
+      ]
+    },
+    {
+      "required": [
+        "Arn"
+      ]
+    }
   ],
   "readOnlyProperties": [
     "/properties/PublicTypeArn",
@@ -63,7 +76,9 @@
     "/properties/Type",
     "/properties/Arn"
   ],
-  "primaryIdentifier": ["/properties/PublicTypeArn"],
+  "primaryIdentifier": [
+    "/properties/PublicTypeArn"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -79,12 +94,15 @@
       "permissions": []
     },
     "read": {
-      "permissions": ["cloudformation:DescribeType",
+      "permissions": [
+        "cloudformation:DescribeType",
         "cloudformation:DescribePublisher"
       ]
     },
     "list": {
-      "permissions": ["cloudformation:ListTypes"]
+      "permissions": [
+        "cloudformation:ListTypes"
+      ]
     }
   },
   "additionalProperties": false

@@ -9,8 +9,8 @@
   },
   "description": "Specifies a metric filter that describes how CloudWatch Logs extracts information from logs and transforms it into Amazon CloudWatch metrics.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-logs.git",
-  "tagging" : {
-    "taggable" : false
+  "tagging": {
+    "taggable": false
   },
   "definitions": {
     "Dimension": {
@@ -68,7 +68,35 @@
         "Unit": {
           "description": "The unit to assign to the metric. If you omit this, the unit is set as None.",
           "type": "string",
-          "enum":["Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"]
+          "enum": [
+            "Seconds",
+            "Microseconds",
+            "Milliseconds",
+            "Bytes",
+            "Kilobytes",
+            "Megabytes",
+            "Gigabytes",
+            "Terabytes",
+            "Bits",
+            "Kilobits",
+            "Megabits",
+            "Gigabits",
+            "Terabits",
+            "Percent",
+            "Count",
+            "Bytes/Second",
+            "Kilobytes/Second",
+            "Megabytes/Second",
+            "Gigabytes/Second",
+            "Terabytes/Second",
+            "Bits/Second",
+            "Kilobits/Second",
+            "Megabits/Second",
+            "Gigabits/Second",
+            "Terabits/Second",
+            "Count/Second",
+            "None"
+          ]
         },
         "Dimensions": {
           "description": "Dimensions are the key-value pairs that further define a metric",

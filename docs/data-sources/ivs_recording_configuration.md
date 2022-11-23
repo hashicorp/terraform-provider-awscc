@@ -24,6 +24,7 @@ Data Source schema for AWS::IVS::RecordingConfiguration
 - `arn` (String) Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.
 - `destination_configuration` (Attributes) Recording Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration))
 - `name` (String) Recording Configuration Name.
+- `recording_reconnect_window_seconds` (Number) Recording Reconnect Window Seconds. (0 means disabled)
 - `state` (String) Recording Configuration State.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 - `thumbnail_configuration` (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))

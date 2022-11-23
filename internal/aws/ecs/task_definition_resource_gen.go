@@ -77,7 +77,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	      "DockerLabels": {
 			//	        "additionalProperties": false,
 			//	        "patternProperties": {
-			//	          ".{1,}": {
+			//	          "": {
 			//	            "type": "string"
 			//	          }
 			//	        },
@@ -157,7 +157,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	          "Options": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -315,7 +315,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	          "Options": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -384,11 +384,22 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	        "items": {
 			//	          "additionalProperties": false,
 			//	          "properties": {
+			//	            "AppProtocol": {
+			//	              "enum": [
+			//	                "http",
+			//	                "http2",
+			//	                "grpc"
+			//	              ],
+			//	              "type": "string"
+			//	            },
 			//	            "ContainerPort": {
 			//	              "type": "integer"
 			//	            },
 			//	            "HostPort": {
 			//	              "type": "integer"
+			//	            },
+			//	            "Name": {
+			//	              "type": "string"
 			//	            },
 			//	            "Protocol": {
 			//	              "type": "string"
@@ -618,7 +629,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					},
 					"docker_labels": {
 						// Property: DockerLabels
-						// Pattern: ".{1,}"
+						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 						Computed: true,
@@ -756,7 +767,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							map[string]tfsdk.Attribute{
 								"options": {
 									// Property: Options
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -1045,7 +1056,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								},
 								"options": {
 									// Property: Options
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -1156,6 +1167,22 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Description: "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
 						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"app_protocol": {
+									// Property: AppProtocol
+									Type:     types.StringType,
+									Optional: true,
+									Computed: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"http",
+											"http2",
+											"grpc",
+										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
 								"container_port": {
 									// Property: ContainerPort
 									Type:     types.Int64Type,
@@ -1168,6 +1195,15 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								"host_port": {
 									// Property: HostPort
 									Type:     types.Int64Type,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"name": {
+									// Property: Name
+									Type:     types.StringType,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -1912,7 +1948,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	          "DriverOpts": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -1921,7 +1957,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	          "Labels": {
 			//	            "additionalProperties": false,
 			//	            "patternProperties": {
-			//	              ".{1,}": {
+			//	              "": {
 			//	                "type": "string"
 			//	              }
 			//	            },
@@ -2018,7 +2054,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								},
 								"driver_opts": {
 									// Property: DriverOpts
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -2028,7 +2064,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								},
 								"labels": {
 									// Property: Labels
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 									Computed: true,
@@ -2203,6 +2239,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_point_id":                "AccessPointId",
 		"add":                            "Add",
+		"app_protocol":                   "AppProtocol",
 		"authorization_config":           "AuthorizationConfig",
 		"autoprovision":                  "Autoprovision",
 		"capabilities":                   "Capabilities",

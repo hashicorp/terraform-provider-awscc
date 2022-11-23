@@ -128,6 +128,30 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 				resource.RequiresReplace(),
 			},
 		},
+		"recording_reconnect_window_seconds": {
+			// Property: RecordingReconnectWindowSeconds
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "default": 0,
+			//	  "description": "Recording Reconnect Window Seconds. (0 means disabled)",
+			//	  "maximum": 300,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
+			Description: "Recording Reconnect Window Seconds. (0 means disabled)",
+			Type:        types.Int64Type,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 300),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Int64Value(0)),
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
@@ -301,18 +325,19 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                       "Arn",
-		"bucket_name":               "BucketName",
-		"destination_configuration": "DestinationConfiguration",
-		"key":                       "Key",
-		"name":                      "Name",
-		"recording_mode":            "RecordingMode",
-		"s3":                        "S3",
-		"state":                     "State",
-		"tags":                      "Tags",
-		"target_interval_seconds":   "TargetIntervalSeconds",
-		"thumbnail_configuration":   "ThumbnailConfiguration",
-		"value":                     "Value",
+		"arn":                                "Arn",
+		"bucket_name":                        "BucketName",
+		"destination_configuration":          "DestinationConfiguration",
+		"key":                                "Key",
+		"name":                               "Name",
+		"recording_mode":                     "RecordingMode",
+		"recording_reconnect_window_seconds": "RecordingReconnectWindowSeconds",
+		"s3":                                 "S3",
+		"state":                              "State",
+		"tags":                               "Tags",
+		"target_interval_seconds":            "TargetIntervalSeconds",
+		"thumbnail_configuration":            "ThumbnailConfiguration",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

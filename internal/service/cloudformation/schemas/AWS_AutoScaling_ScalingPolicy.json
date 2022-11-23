@@ -7,11 +7,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-      	"CustomizedCapacityMetricSpecification": {
+        "CustomizedCapacityMetricSpecification": {
           "$ref": "#/definitions/PredictiveScalingCustomizedCapacityMetric"
         },
         "CustomizedLoadMetricSpecification": {
-            "$ref": "#/definitions/PredictiveScalingCustomizedLoadMetric"
+          "$ref": "#/definitions/PredictiveScalingCustomizedLoadMetric"
         },
         "CustomizedScalingMetricSpecification": {
           "$ref": "#/definitions/PredictiveScalingCustomizedScalingMetric"
@@ -401,10 +401,10 @@
     "/properties/AutoScalingGroupName"
   ],
   "tagging": {
-   	"taggable": false,
-   	"tagOnCreate": false,
-   	"tagUpdatable": false,
-   	"cloudFormationSystemTags": false
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
   },
   "handlers": {
     "create": {

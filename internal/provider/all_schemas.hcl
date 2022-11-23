@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 637 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 638 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -115,12 +115,8 @@ resource_schema "aws_apigateway_deployment" {
 }
 
 resource_schema "aws_apigateway_documentation_part" {
-  cloudformation_type_name = "AWS::ApiGateway::DocumentationPart"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::ApiGateway::DocumentationPart"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigateway_documentation_version" {
@@ -168,38 +164,21 @@ resource_schema "aws_apigateway_usage_plan_key" {
 
 resource_schema "aws_apigatewayv2_api" {
   cloudformation_type_name = "AWS::ApiGatewayV2::Api"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_authorizer" {
-  cloudformation_type_name = "AWS::ApiGatewayV2::Authorizer"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Authorizer"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_deployment" {
-  cloudformation_type_name = "AWS::ApiGatewayV2::Deployment"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Deployment"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_model" {
-  cloudformation_type_name = "AWS::ApiGatewayV2::Model"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Model"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_vpc_link" {
@@ -269,11 +248,6 @@ resource_schema "aws_appstream_entitlement" {
 
 resource_schema "aws_appstream_image_builder" {
   cloudformation_type_name = "AWS::AppStream::ImageBuilder"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appsync_domain_name" {
@@ -323,20 +297,10 @@ resource_schema "aws_autoscaling_lifecycle_hook" {
 
 resource_schema "aws_autoscaling_scaling_policy" {
   cloudformation_type_name = "AWS::AutoScaling::ScalingPolicy"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_autoscaling_scheduled_action" {
   cloudformation_type_name = "AWS::AutoScaling::ScheduledAction"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_autoscaling_warm_pool" {
@@ -491,6 +455,10 @@ resource_schema "aws_cloudfront_cloudfront_origin_access_identity" {
   cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 }
 
+resource_schema "aws_cloudfront_continuous_deployment_policy" {
+  cloudformation_type_name = "AWS::CloudFront::ContinuousDeploymentPolicy"
+}
+
 resource_schema "aws_cloudfront_distribution" {
   cloudformation_type_name = "AWS::CloudFront::Distribution"
 }
@@ -504,12 +472,8 @@ resource_schema "aws_cloudfront_key_group" {
 }
 
 resource_schema "aws_cloudfront_monitoring_subscription" {
-  cloudformation_type_name = "AWS::CloudFront::MonitoringSubscription"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::CloudFront::MonitoringSubscription"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_cloudfront_origin_access_control" {
@@ -558,11 +522,6 @@ resource_schema "aws_codeartifact_repository" {
 
 resource_schema "aws_codedeploy_deployment_config" {
   cloudformation_type_name = "AWS::CodeDeploy::DeploymentConfig"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_codeguruprofiler_profiling_group" {
@@ -713,11 +672,6 @@ resource_schema "aws_databrew_schedule" {
 
 resource_schema "aws_datapipeline_pipeline" {
   cloudformation_type_name = "AWS::DataPipeline::Pipeline"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_datasync_agent" {
@@ -791,11 +745,6 @@ resource_schema "aws_dynamodb_global_table" {
 
 resource_schema "aws_dynamodb_table" {
   cloudformation_type_name = "AWS::DynamoDB::Table"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ec2_capacity_reservation" {
@@ -824,11 +773,6 @@ resource_schema "aws_ec2_ec2_fleet" {
 
 resource_schema "aws_ec2_eip" {
   cloudformation_type_name = "AWS::EC2::EIP"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ec2_egress_only_internet_gateway" {
@@ -1001,11 +945,6 @@ resource_schema "aws_ec2_vpc_peering_connection" {
 
 resource_schema "aws_ec2_vpn_connection" {
   cloudformation_type_name = "AWS::EC2::VPNConnection"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ec2_vpn_gateway" {
@@ -1014,11 +953,6 @@ resource_schema "aws_ec2_vpn_gateway" {
 
 resource_schema "aws_ec2_volume" {
   cloudformation_type_name = "AWS::EC2::Volume"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ecr_pull_through_cache_rule" {
@@ -1110,11 +1044,6 @@ resource_schema "aws_eks_nodegroup" {
 
 resource_schema "aws_emr_security_configuration" {
   cloudformation_type_name = "AWS::EMR::SecurityConfiguration"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_emr_studio" {
@@ -1135,11 +1064,6 @@ resource_schema "aws_elasticache_global_replication_group" {
 
 resource_schema "aws_elasticache_subnet_group" {
   cloudformation_type_name = "AWS::ElastiCache::SubnetGroup"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_elasticache_user" {
@@ -1152,29 +1076,14 @@ resource_schema "aws_elasticache_user_group" {
 
 resource_schema "aws_elasticbeanstalk_application" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::Application"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_elasticbeanstalk_application_version" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_elasticbeanstalk_environment" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::Environment"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
@@ -1514,11 +1423,6 @@ resource_schema "aws_iot_mitigation_action" {
 
 resource_schema "aws_iot_policy" {
   cloudformation_type_name = "AWS::IoT::Policy"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_provisioning_template" {
@@ -1919,11 +1823,6 @@ resource_schema "aws_location_tracker_consumer" {
 
 resource_schema "aws_logs_destination" {
   cloudformation_type_name = "AWS::Logs::Destination"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_logs_log_group" {
@@ -1931,21 +1830,12 @@ resource_schema "aws_logs_log_group" {
 }
 
 resource_schema "aws_logs_log_stream" {
-  cloudformation_type_name = "AWS::Logs::LogStream"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::Logs::LogStream"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_logs_metric_filter" {
   cloudformation_type_name = "AWS::Logs::MetricFilter"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_logs_query_definition" {
@@ -2292,29 +2182,14 @@ resource_schema "aws_quicksight_theme" {
 
 resource_schema "aws_rds_db_cluster" {
   cloudformation_type_name = "AWS::RDS::DBCluster"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_rds_db_cluster_parameter_group" {
   cloudformation_type_name = "AWS::RDS::DBClusterParameterGroup"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_rds_db_instance" {
   cloudformation_type_name = "AWS::RDS::DBInstance"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_rds_db_parameter_group" {
@@ -2348,11 +2223,6 @@ resource_schema "aws_rds_global_cluster" {
 
 resource_schema "aws_rds_option_group" {
   cloudformation_type_name = "AWS::RDS::OptionGroup"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_rum_app_monitor" {
@@ -2370,20 +2240,10 @@ resource_schema "aws_redshift_cluster" {
 
 resource_schema "aws_redshift_cluster_parameter_group" {
   cloudformation_type_name = "AWS::Redshift::ClusterParameterGroup"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_redshift_cluster_subnet_group" {
   cloudformation_type_name = "AWS::Redshift::ClusterSubnetGroup"
-
-  # Suppress until given green light by AWS.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_redshift_endpoint_access" {

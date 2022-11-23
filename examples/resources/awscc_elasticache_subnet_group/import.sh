@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticache_subnet_group.example <resource ID>

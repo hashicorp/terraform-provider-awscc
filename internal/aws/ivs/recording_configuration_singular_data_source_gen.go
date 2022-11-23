@@ -101,6 +101,21 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"recording_reconnect_window_seconds": {
+			// Property: RecordingReconnectWindowSeconds
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "default": 0,
+			//	  "description": "Recording Reconnect Window Seconds. (0 means disabled)",
+			//	  "maximum": 300,
+			//	  "minimum": 0,
+			//	  "type": "integer"
+			//	}
+			Description: "Recording Reconnect Window Seconds. (0 means disabled)",
+			Type:        types.Int64Type,
+			Computed:    true,
+		},
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
@@ -232,18 +247,19 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::RecordingConfiguration").WithTerraformTypeName("awscc_ivs_recording_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                       "Arn",
-		"bucket_name":               "BucketName",
-		"destination_configuration": "DestinationConfiguration",
-		"key":                       "Key",
-		"name":                      "Name",
-		"recording_mode":            "RecordingMode",
-		"s3":                        "S3",
-		"state":                     "State",
-		"tags":                      "Tags",
-		"target_interval_seconds":   "TargetIntervalSeconds",
-		"thumbnail_configuration":   "ThumbnailConfiguration",
-		"value":                     "Value",
+		"arn":                                "Arn",
+		"bucket_name":                        "BucketName",
+		"destination_configuration":          "DestinationConfiguration",
+		"key":                                "Key",
+		"name":                               "Name",
+		"recording_mode":                     "RecordingMode",
+		"recording_reconnect_window_seconds": "RecordingReconnectWindowSeconds",
+		"s3":                                 "S3",
+		"state":                              "State",
+		"tags":                               "Tags",
+		"target_interval_seconds":            "TargetIntervalSeconds",
+		"thumbnail_configuration":            "ThumbnailConfiguration",
+		"value":                              "Value",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

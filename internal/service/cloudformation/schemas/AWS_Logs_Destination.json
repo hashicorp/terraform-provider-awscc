@@ -2,8 +2,8 @@
   "typeName": "AWS::Logs::Destination",
   "description": "The AWS::Logs::Destination resource specifies a CloudWatch Logs destination. A destination encapsulates a physical resource (such as an Amazon Kinesis data stream) and enables you to subscribe that resource to a stream of log events.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-logs.git",
-  "tagging" : {
-    "taggable" : false
+  "tagging": {
+    "taggable": false
   },
   "properties": {
     "Arn": {

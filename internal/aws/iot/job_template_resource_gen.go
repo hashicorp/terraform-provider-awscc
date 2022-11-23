@@ -245,96 +245,6 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			},
 			// JobArn is a write-only property.
 		},
-		"job_executions_retry_config": {
-			// Property: JobExecutionsRetryConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "RetryCriteriaList": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies how many times a failure type should be retried.",
-			//	        "properties": {
-			//	          "FailureType": {
-			//	            "enum": [
-			//	              "FAILED",
-			//	              "TIMED_OUT",
-			//	              "ALL"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "NumberOfRetries": {
-			//	            "maximum": 10,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 2,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"retry_criteria_list": {
-						// Property: RetryCriteriaList
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"failure_type": {
-									// Property: FailureType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"FAILED",
-											"TIMED_OUT",
-											"ALL",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"number_of_retries": {
-									// Property: NumberOfRetries
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 10),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 2),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
 		"job_executions_rollout_config": {
 			// Property: JobExecutionsRolloutConfig
 			// CloudFormation resource type schema:
@@ -704,18 +614,15 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"in_progress_timeout_in_minutes": "InProgressTimeoutInMinutes",
 		"increment_factor":               "IncrementFactor",
 		"job_arn":                        "JobArn",
-		"job_executions_retry_config":    "JobExecutionsRetryConfig",
 		"job_executions_rollout_config":  "JobExecutionsRolloutConfig",
 		"job_template_id":                "JobTemplateId",
 		"key":                            "Key",
 		"maximum_per_minute":             "MaximumPerMinute",
 		"min_number_of_executed_things":  "MinNumberOfExecutedThings",
 		"number_of_notified_things":      "NumberOfNotifiedThings",
-		"number_of_retries":              "NumberOfRetries",
 		"number_of_succeeded_things":     "NumberOfSucceededThings",
 		"presigned_url_config":           "PresignedUrlConfig",
 		"rate_increase_criteria":         "RateIncreaseCriteria",
-		"retry_criteria_list":            "RetryCriteriaList",
 		"role_arn":                       "RoleArn",
 		"tags":                           "Tags",
 		"threshold_percentage":           "ThresholdPercentage",

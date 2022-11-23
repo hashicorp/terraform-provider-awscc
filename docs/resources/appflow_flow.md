@@ -27,6 +27,7 @@ Resource schema for AWS::AppFlow::Flow.
 
 - `description` (String) Description of the flow.
 - `kms_arn` (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
+- `metadata_catalog_config` (Attributes) Configurations of metadata catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config))
 - `tags` (Attributes List) List of Tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -193,6 +194,7 @@ Optional:
 Optional:
 
 - `aggregation_type` (String)
+- `target_file_size` (Number)
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--prefix_config"></a>
@@ -200,6 +202,7 @@ Optional:
 
 Optional:
 
+- `path_prefix_hierarchy` (List of String)
 - `prefix_format` (String)
 - `prefix_type` (String)
 
@@ -318,6 +321,7 @@ Optional:
 
 Optional:
 
+- `path_prefix_hierarchy` (List of String)
 - `prefix_format` (String)
 - `prefix_type` (String)
 
@@ -328,6 +332,7 @@ Optional:
 Optional:
 
 - `aggregation_type` (String)
+- `target_file_size` (Number)
 
 
 
@@ -636,6 +641,24 @@ Optional:
 - `schedule_offset` (Number)
 - `schedule_start_time` (Number)
 - `time_zone` (String)
+
+
+
+<a id="nestedatt--metadata_catalog_config"></a>
+### Nested Schema for `metadata_catalog_config`
+
+Optional:
+
+- `glue_data_catalog` (Attributes) Configurations of glue data catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config--glue_data_catalog))
+
+<a id="nestedatt--metadata_catalog_config--glue_data_catalog"></a>
+### Nested Schema for `metadata_catalog_config.glue_data_catalog`
+
+Required:
+
+- `database_name` (String) A string containing the value for the tag
+- `role_arn` (String) A string containing the value for the tag
+- `table_prefix` (String) A string containing the value for the tag
 
 
 

@@ -1045,7 +1045,7 @@
       ],
       "additionalProperties": false
     },
-    "CaptchaConfig" : {
+    "CaptchaConfig": {
       "type": "object",
       "properties": {
         "ImmunityTimeProperty": {
@@ -1054,7 +1054,7 @@
       },
       "additionalProperties": false
     },
-    "ImmunityTimeProperty" : {
+    "ImmunityTimeProperty": {
       "type": "object",
       "properties": {
         "ImmunityTime": {
@@ -1094,7 +1094,7 @@
       },
       "additionalProperties": false
     },
-    "FieldIdentifier" : {
+    "FieldIdentifier": {
       "type": "object",
       "properties": {
         "Identifier": {

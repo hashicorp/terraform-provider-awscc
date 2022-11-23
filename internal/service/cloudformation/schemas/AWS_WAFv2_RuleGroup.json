@@ -920,7 +920,7 @@
       ],
       "additionalProperties": false
     },
-    "CaptchaConfig" : {
+    "CaptchaConfig": {
       "type": "object",
       "properties": {
         "ImmunityTimeProperty": {
@@ -929,7 +929,7 @@
       },
       "additionalProperties": false
     },
-    "ImmunityTimeProperty" : {
+    "ImmunityTimeProperty": {
       "type": "object",
       "properties": {
         "ImmunityTime": {

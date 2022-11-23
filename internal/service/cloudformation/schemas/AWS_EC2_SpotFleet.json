@@ -241,7 +241,7 @@
             "launch-before-terminate"
           ]
         },
-        "TerminationDelay" : {
+        "TerminationDelay": {
           "type": "integer"
         }
       }

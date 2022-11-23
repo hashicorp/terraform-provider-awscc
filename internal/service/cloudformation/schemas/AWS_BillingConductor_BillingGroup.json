@@ -152,7 +152,6 @@
         "billingconductor:CreateBillingGroup",
         "billingconductor:AssociateAccounts",
         "billingconductor:ListBillingGroups"
-
       ]
     },
     "read": {

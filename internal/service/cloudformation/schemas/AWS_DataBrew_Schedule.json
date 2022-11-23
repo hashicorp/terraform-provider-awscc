@@ -56,13 +56,24 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "additionalProperties": false,
-  "required": ["Name", "CronExpression"],
-  "primaryIdentifier": ["/properties/Name"],
-  "createOnlyProperties": ["/properties/Name", "/properties/Tags"],
+  "required": [
+    "Name",
+    "CronExpression"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Tags"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -80,10 +91,14 @@
       ]
     },
     "update": {
-      "permissions": ["databrew:UpdateSchedule"]
+      "permissions": [
+        "databrew:UpdateSchedule"
+      ]
     },
     "delete": {
-      "permissions": ["databrew:DeleteSchedule"]
+      "permissions": [
+        "databrew:DeleteSchedule"
+      ]
     },
     "list": {
       "permissions": [

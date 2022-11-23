@@ -50,12 +50,18 @@
         },
         "Type": {
           "description": "Sample type",
-          "enum": ["FIRST_N", "LAST_N", "RANDOM"],
+          "enum": [
+            "FIRST_N",
+            "LAST_N",
+            "RANDOM"
+          ],
           "type": "string"
         }
       },
       "additionalProperties": false,
-      "required": ["Type"]
+      "required": [
+        "Type"
+      ]
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -73,13 +79,26 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "additionalProperties": false,
-  "required": ["DatasetName", "Name", "RecipeName", "RoleArn"],
-  "primaryIdentifier": ["/properties/Name"],
-  "createOnlyProperties": ["/properties/Name", "/properties/Tags"],
+  "required": [
+    "DatasetName",
+    "Name",
+    "RecipeName",
+    "RoleArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Tags"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -97,10 +116,14 @@
       ]
     },
     "update": {
-      "permissions": ["databrew:UpdateProject"]
+      "permissions": [
+        "databrew:UpdateProject"
+      ]
     },
     "delete": {
-      "permissions": ["databrew:DeleteProject"]
+      "permissions": [
+        "databrew:DeleteProject"
+      ]
     },
     "list": {
       "permissions": [

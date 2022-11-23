@@ -11,6 +11,10 @@
       "type": "string",
       "pattern": "[a-zA-Z_\\.\\-0-9:]+"
     },
+    "PropertyName": {
+      "type": "string",
+      "pattern": "[a-zA-Z_\\-0-9]+"
+    },
     "RequiredProperty": {
       "type": "string",
       "pattern": "[a-zA-Z_\\-0-9]+"
@@ -267,6 +271,31 @@
       },
       "additionalProperties": false
     },
+    "PropertyGroup": {
+      "description": "An object that sets information about a property group.",
+      "type": "object",
+      "properties": {
+        "GroupType": {
+          "description": "The type of property group.",
+          "type": "string",
+          "enum": [
+            "TABULAR"
+          ]
+        },
+        "PropertyNames": {
+          "description": "The list of property names in the property group.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PropertyName"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "Status": {
       "type": "object",
       "properties": {
@@ -354,6 +383,16 @@
       "patternProperties": {
         "": {
           "$ref": "#/definitions/PropertyDefinition"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PropertyGroups": {
+      "description": "An map of the property groups in the component type. Each property group's key must be unique to this map.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/PropertyGroup"
         }
       },
       "additionalProperties": false

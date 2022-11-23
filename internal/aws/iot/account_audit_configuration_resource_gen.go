@@ -137,6 +137,17 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 			//	      },
 			//	      "type": "object"
 			//	    },
+			//	    "IoTPolicyPotentialMisConfigurationCheck": {
+			//	      "additionalProperties": false,
+			//	      "description": "The configuration for a specific audit check.",
+			//	      "properties": {
+			//	        "Enabled": {
+			//	          "description": "True if the check is enabled.",
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "type": "object"
+			//	    },
 			//	    "IotPolicyOverlyPermissiveCheck": {
 			//	      "additionalProperties": false,
 			//	      "description": "The configuration for a specific audit check.",
@@ -383,6 +394,29 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 					},
 					"intermediate_ca_revoked_for_active_device_certificates_check": {
 						// Property: IntermediateCaRevokedForActiveDeviceCertificatesCheck
+						Description: "The configuration for a specific audit check.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Description: "True if the check is enabled.",
+									Type:        types.BoolType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"io_t_policy_potential_mis_configuration_check": {
+						// Property: IoTPolicyPotentialMisConfigurationCheck
 						Description: "The configuration for a specific audit check.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -712,6 +746,7 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		"device_certificate_shared_check":                              "DeviceCertificateSharedCheck",
 		"enabled":                                                      "Enabled",
 		"intermediate_ca_revoked_for_active_device_certificates_check": "IntermediateCaRevokedForActiveDeviceCertificatesCheck",
+		"io_t_policy_potential_mis_configuration_check":                "IoTPolicyPotentialMisConfigurationCheck",
 		"iot_policy_overly_permissive_check":                           "IotPolicyOverlyPermissiveCheck",
 		"iot_role_alias_allows_access_to_unused_services_check":        "IotRoleAliasAllowsAccessToUnusedServicesCheck",
 		"iot_role_alias_overly_permissive_check":                       "IotRoleAliasOverlyPermissiveCheck",

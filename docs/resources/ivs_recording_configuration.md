@@ -22,6 +22,7 @@ Resource Type definition for AWS::IVS::RecordingConfiguration
 ### Optional
 
 - `name` (String) Recording Configuration Name.
+- `recording_reconnect_window_seconds` (Number) Recording Reconnect Window Seconds. (0 means disabled)
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 - `thumbnail_configuration` (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))
 

@@ -27,6 +27,7 @@ Data Source schema for AWS::ECS::Cluster
 - `cluster_settings` (Attributes List) (see [below for nested schema](#nestedatt--cluster_settings))
 - `configuration` (Attributes) The configurations to be set at cluster level. (see [below for nested schema](#nestedatt--configuration))
 - `default_capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
+- `service_connect_defaults` (Attributes) Service Connect Configuration default for all services or tasks within this cluster (see [below for nested schema](#nestedatt--service_connect_defaults))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--cluster_settings"></a>
@@ -76,6 +77,14 @@ Read-Only:
 - `base` (Number)
 - `capacity_provider` (String)
 - `weight` (Number)
+
+
+<a id="nestedatt--service_connect_defaults"></a>
+### Nested Schema for `service_connect_defaults`
+
+Read-Only:
+
+- `namespace` (String) Service Connect Namespace Name or ARN default for all services or tasks within this cluster
 
 
 <a id="nestedatt--tags"></a>

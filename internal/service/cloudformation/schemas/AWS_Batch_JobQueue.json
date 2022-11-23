@@ -18,7 +18,10 @@
           "type": "integer"
         }
       },
-      "required": [ "ComputeEnvironment", "Order" ]
+      "required": [
+        "ComputeEnvironment",
+        "Order"
+      ]
     }
   },
   "properties": {
@@ -71,39 +74,49 @@
     "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags"
   },
-  "required": [ "ComputeEnvironmentOrder", "Priority" ],
-  "primaryIdentifier": [ "/properties/JobQueueArn" ],
-  "createOnlyProperties": [ "/properties/Tags", "/properties/JobQueueName" ],
-  "readOnlyProperties": [ "/properties/JobQueueArn" ],
+  "required": [
+    "ComputeEnvironmentOrder",
+    "Priority"
+  ],
+  "primaryIdentifier": [
+    "/properties/JobQueueArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Tags",
+    "/properties/JobQueueName"
+  ],
+  "readOnlyProperties": [
+    "/properties/JobQueueArn"
+  ],
   "handlers": {
-      "create": {
-          "permissions": [
-              "Batch:CreateJobQueue",
-              "Batch:TagResource",
-              "Batch:DescribeJobQueues"
-          ]
-      },
-      "read": {
-          "permissions": [
-              "Batch:DescribeJobQueues"
-          ]
-      },
-      "update": {
-          "permissions": [
-              "Batch:UpdateJobQueue",
-              "Batch:TagResource",
-              "Batch:UnTagResource"
-          ]
-      },
-      "delete": {
-          "permissions": [
-              "Batch:DeleteJobQueue"
-          ]
-      },
-      "list": {
-          "permissions": [
-              "Batch:DescribeJobQueues"
-          ]
-      }
+    "create": {
+      "permissions": [
+        "Batch:CreateJobQueue",
+        "Batch:TagResource",
+        "Batch:DescribeJobQueues"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Batch:DescribeJobQueues"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Batch:UpdateJobQueue",
+        "Batch:TagResource",
+        "Batch:UnTagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Batch:DeleteJobQueue"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Batch:DescribeJobQueues"
+      ]
+    }
   }
 }

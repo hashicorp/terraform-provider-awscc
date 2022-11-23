@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_vpn_connection.example <resource ID>
