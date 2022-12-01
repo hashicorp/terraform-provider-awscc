@@ -1,0 +1,1 @@
+$ terraform import awscc_oam_sink.example <resource ID>
