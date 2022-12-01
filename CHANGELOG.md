@@ -1,4 +1,17 @@
 ## 0.41.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_gamelift_location`
+* **New Data Source:** `awscc_gamelift_locations`
+* **New Data Source:** `awscc_oam_link`
+* **New Data Source:** `awscc_oam_links`
+* **New Data Source:** `awscc_oam_sink`
+* **New Data Source:** `awscc_oam_sinks`
+* **New Resource:** `awscc_gamelift_location`
+* **New Resource:** `awscc_oam_link`
+* **New Resource:** `awscc_oam_sink`
+
 ## [0.40.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.40.0) (November 23, 2022)
 
 FEATURES:
