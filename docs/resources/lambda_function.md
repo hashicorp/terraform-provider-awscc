@@ -38,6 +38,7 @@ Resource Type definition for AWS::Lambda::Function
 - `package_type` (String) PackageType.
 - `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
 - `runtime` (String) The identifier of the function's runtime.
+- `snap_start` (Attributes) The SnapStart setting of your function (see [below for nested schema](#nestedatt--snap_start))
 - `tags` (Attributes Set) A list of tags to apply to the function. (see [below for nested schema](#nestedatt--tags))
 - `timeout` (Number) The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
 - `tracing_config` (Attributes) Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray. (see [below for nested schema](#nestedatt--tracing_config))
@@ -47,6 +48,7 @@ Resource Type definition for AWS::Lambda::Function
 
 - `arn` (String) Unique identifier for function resources
 - `id` (String) Uniquely identifies the resource.
+- `snap_start_response` (Attributes) The SnapStart response of your function (see [below for nested schema](#nestedatt--snap_start_response))
 
 <a id="nestedatt--code"></a>
 ### Nested Schema for `code`
@@ -103,6 +105,14 @@ Optional:
 - `working_directory` (String) WorkingDirectory.
 
 
+<a id="nestedatt--snap_start"></a>
+### Nested Schema for `snap_start`
+
+Required:
+
+- `apply_on` (String) Applying SnapStart setting on function resource type.
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -130,6 +140,15 @@ Optional:
 
 - `security_group_ids` (List of String) A list of VPC security groups IDs.
 - `subnet_ids` (List of String) A list of VPC subnet IDs.
+
+
+<a id="nestedatt--snap_start_response"></a>
+### Nested Schema for `snap_start_response`
+
+Read-Only:
+
+- `apply_on` (String) Applying SnapStart setting on function resource type.
+- `optimization_status` (String) Indicates whether SnapStart is activated for the specified function version.
 
 ## Import
 

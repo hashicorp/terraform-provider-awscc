@@ -480,6 +480,87 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"snap_start": {
+			// Property: SnapStart
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The SnapStart setting of your function",
+			//	  "properties": {
+			//	    "ApplyOn": {
+			//	      "description": "Applying SnapStart setting on function resource type.",
+			//	      "enum": [
+			//	        "PublishedVersions",
+			//	        "None"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ApplyOn"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Description: "The SnapStart setting of your function",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"apply_on": {
+						// Property: ApplyOn
+						Description: "Applying SnapStart setting on function resource type.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
+		"snap_start_response": {
+			// Property: SnapStartResponse
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The SnapStart response of your function",
+			//	  "properties": {
+			//	    "ApplyOn": {
+			//	      "description": "Applying SnapStart setting on function resource type.",
+			//	      "enum": [
+			//	        "PublishedVersions",
+			//	        "None"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "OptimizationStatus": {
+			//	      "description": "Indicates whether SnapStart is activated for the specified function version.",
+			//	      "enum": [
+			//	        "On",
+			//	        "Off"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "The SnapStart response of your function",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"apply_on": {
+						// Property: ApplyOn
+						Description: "Applying SnapStart setting on function resource type.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"optimization_status": {
+						// Property: OptimizationStatus
+						Description: "Indicates whether SnapStart is activated for the specified function version.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -642,6 +723,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Function").WithTerraformTypeName("awscc_lambda_function")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"apply_on":                       "ApplyOn",
 		"architectures":                  "Architectures",
 		"arn":                            "Arn",
 		"code":                           "Code",
@@ -663,6 +745,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"local_mount_path":               "LocalMountPath",
 		"memory_size":                    "MemorySize",
 		"mode":                           "Mode",
+		"optimization_status":            "OptimizationStatus",
 		"package_type":                   "PackageType",
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
@@ -672,6 +755,8 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_object_version":              "S3ObjectVersion",
 		"security_group_ids":             "SecurityGroupIds",
 		"size":                           "Size",
+		"snap_start":                     "SnapStart",
+		"snap_start_response":            "SnapStartResponse",
 		"subnet_ids":                     "SubnetIds",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",

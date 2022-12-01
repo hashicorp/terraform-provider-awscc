@@ -410,10 +410,6 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 			//	              "type": "string"
 			//	            }
 			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
 			//	          "type": "object"
 			//	        },
 			//	        "SAPOData": {
@@ -818,21 +814,48 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 			//	              "maxLength": 128,
 			//	              "type": "string"
 			//	            },
+			//	            "ClusterIdentifier": {
+			//	              "description": "The unique identifier of the Amazon Redshift cluster.",
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            },
+			//	            "DataApiRoleArn": {
+			//	              "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+			//	              "maxLength": 512,
+			//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+			//	              "type": "string"
+			//	            },
+			//	            "DatabaseName": {
+			//	              "description": "The name of the Amazon Redshift database that will store the transferred data.",
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
+			//	            },
 			//	            "DatabaseUrl": {
 			//	              "description": "The JDBC URL of the Amazon Redshift cluster.",
 			//	              "maxLength": 512,
 			//	              "pattern": "\\S+",
 			//	              "type": "string"
 			//	            },
+			//	            "IsRedshiftServerless": {
+			//	              "description": "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+			//	              "type": "boolean"
+			//	            },
 			//	            "RoleArn": {
 			//	              "description": "The Amazon Resource Name (ARN) of the IAM role.",
 			//	              "maxLength": 512,
 			//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
 			//	              "type": "string"
+			//	            },
+			//	            "WorkgroupName": {
+			//	              "description": "The name of the Amazon Redshift serverless workgroup",
+			//	              "maxLength": 512,
+			//	              "pattern": "\\S+",
+			//	              "type": "string"
 			//	            }
 			//	          },
 			//	          "required": [
-			//	            "DatabaseUrl",
 			//	            "BucketName",
 			//	            "RoleArn"
 			//	          ],
@@ -1024,9 +1047,6 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 			//	      "type": "object"
 			//	    }
 			//	  },
-			//	  "required": [
-			//	    "ConnectorProfileCredentials"
-			//	  ],
 			//	  "type": "object"
 			//	}
 			Description: "Connector specific configurations needed to create connector profile",
@@ -1571,20 +1591,28 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Password
 												Description: "The password that corresponds to the username.",
 												Type:        types.StringType,
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"username": {
 												// Property: Username
 												Description: "The name of the user.",
 												Type:        types.StringType,
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -2120,7 +2148,11 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								},
 							},
 						),
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 					"connector_profile_properties": {
 						// Property: ConnectorProfileProperties
@@ -2316,14 +2348,70 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 													resource.UseStateForUnknown(),
 												},
 											},
+											"cluster_identifier": {
+												// Property: ClusterIdentifier
+												Description: "The unique identifier of the Amazon Redshift cluster.",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"data_api_role_arn": {
+												// Property: DataApiRoleArn
+												Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"database_name": {
+												// Property: DatabaseName
+												Description: "The name of the Amazon Redshift database that will store the transferred data.",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
 											"database_url": {
 												// Property: DatabaseUrl
 												Description: "The JDBC URL of the Amazon Redshift cluster.",
 												Type:        types.StringType,
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+											"is_redshift_serverless": {
+												// Property: IsRedshiftServerless
+												Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+												Type:        types.BoolType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 											"role_arn": {
@@ -2334,6 +2422,20 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
+												},
+											},
+											"workgroup_name": {
+												// Property: WorkgroupName
+												Description: "The name of the Amazon Redshift serverless workgroup",
+												Type:        types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
 												},
 											},
 										},
@@ -2883,6 +2985,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"client_id":                     "ClientId",
 		"client_number":                 "ClientNumber",
 		"client_secret":                 "ClientSecret",
+		"cluster_identifier":            "ClusterIdentifier",
 		"connection_mode":               "ConnectionMode",
 		"connector_label":               "ConnectorLabel",
 		"connector_o_auth_request":      "ConnectorOAuthRequest",
@@ -2897,6 +3000,8 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"custom":                        "Custom",
 		"custom_authentication_type":    "CustomAuthenticationType",
 		"custom_connector":              "CustomConnector",
+		"data_api_role_arn":             "DataApiRoleArn",
+		"database_name":                 "DatabaseName",
 		"database_url":                  "DatabaseUrl",
 		"datadog":                       "Datadog",
 		"datakey":                       "Datakey",
@@ -2904,6 +3009,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"google_analytics":              "GoogleAnalytics",
 		"infor_nexus":                   "InforNexus",
 		"instance_url":                  "InstanceUrl",
+		"is_redshift_serverless":        "IsRedshiftServerless",
 		"is_sandbox_environment":        "isSandboxEnvironment",
 		"kms_arn":                       "KMSArn",
 		"logon_language":                "LogonLanguage",
@@ -2940,6 +3046,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"username":                      "Username",
 		"veeva":                         "Veeva",
 		"warehouse":                     "Warehouse",
+		"workgroup_name":                "WorkgroupName",
 		"zendesk":                       "Zendesk",
 	})
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_gamelift_location.example <resource ID>

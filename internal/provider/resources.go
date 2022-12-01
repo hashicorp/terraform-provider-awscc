@@ -260,6 +260,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_alias -cfschema ../service/cloudformation/schemas/AWS_GameLift_Alias.json -package gamelift -- ../aws/gamelift/alias_resource_gen.go ../aws/gamelift/alias_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_fleet -cfschema ../service/cloudformation/schemas/AWS_GameLift_Fleet.json -package gamelift -- ../aws/gamelift/fleet_resource_gen.go ../aws/gamelift/fleet_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_game_server_group -cfschema ../service/cloudformation/schemas/AWS_GameLift_GameServerGroup.json -package gamelift -- ../aws/gamelift/game_server_group_resource_gen.go ../aws/gamelift/game_server_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_gamelift_location -cfschema ../service/cloudformation/schemas/AWS_GameLift_Location.json -package gamelift -- ../aws/gamelift/location_resource_gen.go ../aws/gamelift/location_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_globalaccelerator_accelerator -cfschema ../service/cloudformation/schemas/AWS_GlobalAccelerator_Accelerator.json -package globalaccelerator -- ../aws/globalaccelerator/accelerator_resource_gen.go ../aws/globalaccelerator/accelerator_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_globalaccelerator_endpoint_group -cfschema ../service/cloudformation/schemas/AWS_GlobalAccelerator_EndpointGroup.json -package globalaccelerator -- ../aws/globalaccelerator/endpoint_group_resource_gen.go ../aws/globalaccelerator/endpoint_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_globalaccelerator_listener -cfschema ../service/cloudformation/schemas/AWS_GlobalAccelerator_Listener.json -package globalaccelerator -- ../aws/globalaccelerator/listener_resource_gen.go ../aws/globalaccelerator/listener_resource_gen_test.go
@@ -440,6 +441,8 @@
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_streaming_image -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json -package nimblestudio -- ../aws/nimblestudio/streaming_image_resource_gen.go ../aws/nimblestudio/streaming_image_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_Studio.json -package nimblestudio -- ../aws/nimblestudio/studio_resource_gen.go ../aws/nimblestudio/studio_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio_component -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json -package nimblestudio -- ../aws/nimblestudio/studio_component_resource_gen.go ../aws/nimblestudio/studio_component_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_oam_link -cfschema ../service/cloudformation/schemas/AWS_Oam_Link.json -package oam -- ../aws/oam/link_resource_gen.go ../aws/oam/link_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_oam_sink -cfschema ../service/cloudformation/schemas/AWS_Oam_Sink.json -package oam -- ../aws/oam/sink_resource_gen.go ../aws/oam/sink_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_account -cfschema ../service/cloudformation/schemas/AWS_Organizations_Account.json -package organizations -- ../aws/organizations/account_resource_gen.go ../aws/organizations/account_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_organizational_unit -cfschema ../service/cloudformation/schemas/AWS_Organizations_OrganizationalUnit.json -package organizations -- ../aws/organizations/organizational_unit_resource_gen.go ../aws/organizations/organizational_unit_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_policy -cfschema ../service/cloudformation/schemas/AWS_Organizations_Policy.json -package organizations -- ../aws/organizations/policy_resource_gen.go ../aws/organizations/policy_resource_gen_test.go
@@ -718,6 +721,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/organizations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"

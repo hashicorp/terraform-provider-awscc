@@ -435,8 +435,13 @@ Read-Only:
 
 - `bucket_name` (String) The name of the Amazon S3 bucket associated with Redshift.
 - `bucket_prefix` (String) The object key for the destination bucket in which Amazon AppFlow will place the ?les.
+- `cluster_identifier` (String) The unique identifier of the Amazon Redshift cluster.
+- `data_api_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.
+- `database_name` (String) The name of the Amazon Redshift database that will store the transferred data.
 - `database_url` (String) The JDBC URL of the Amazon Redshift cluster.
+- `is_redshift_serverless` (Boolean) If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role.
+- `workgroup_name` (String) The name of the Amazon Redshift serverless workgroup
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--salesforce"></a>

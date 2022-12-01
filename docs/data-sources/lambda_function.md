@@ -40,6 +40,8 @@ Data Source schema for AWS::Lambda::Function
 - `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
 - `role` (String) The Amazon Resource Name (ARN) of the function's execution role.
 - `runtime` (String) The identifier of the function's runtime.
+- `snap_start` (Attributes) The SnapStart setting of your function (see [below for nested schema](#nestedatt--snap_start))
+- `snap_start_response` (Attributes) The SnapStart response of your function (see [below for nested schema](#nestedatt--snap_start_response))
 - `tags` (Attributes Set) A list of tags to apply to the function. (see [below for nested schema](#nestedatt--tags))
 - `timeout` (Number) The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
 - `tracing_config` (Attributes) Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray. (see [below for nested schema](#nestedatt--tracing_config))
@@ -98,6 +100,23 @@ Read-Only:
 - `command` (List of String) Command.
 - `entry_point` (List of String) EntryPoint.
 - `working_directory` (String) WorkingDirectory.
+
+
+<a id="nestedatt--snap_start"></a>
+### Nested Schema for `snap_start`
+
+Read-Only:
+
+- `apply_on` (String) Applying SnapStart setting on function resource type.
+
+
+<a id="nestedatt--snap_start_response"></a>
+### Nested Schema for `snap_start_response`
+
+Read-Only:
+
+- `apply_on` (String) Applying SnapStart setting on function resource type.
+- `optimization_status` (String) Indicates whether SnapStart is activated for the specified function version.
 
 
 <a id="nestedatt--tags"></a>

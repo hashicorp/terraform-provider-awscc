@@ -36,12 +36,9 @@ Resource Type definition for AWS::AppFlow::ConnectorProfile
 <a id="nestedatt--connector_profile_config"></a>
 ### Nested Schema for `connector_profile_config`
 
-Required:
-
-- `connector_profile_credentials` (Attributes) Connector specific configuration needed to create connector profile based on Authentication mechanism (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials))
-
 Optional:
 
+- `connector_profile_credentials` (Attributes) Connector specific configuration needed to create connector profile based on Authentication mechanism (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials))
 - `connector_profile_properties` (Attributes) Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials"></a>
@@ -226,7 +223,7 @@ granted.
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--redshift"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.redshift`
 
-Required:
+Optional:
 
 - `password` (String) The password that corresponds to the username.
 - `username` (String) The name of the user.
@@ -461,12 +458,17 @@ Required:
 Required:
 
 - `bucket_name` (String) The name of the Amazon S3 bucket associated with Redshift.
-- `database_url` (String) The JDBC URL of the Amazon Redshift cluster.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role.
 
 Optional:
 
 - `bucket_prefix` (String) The object key for the destination bucket in which Amazon AppFlow will place the ?les.
+- `cluster_identifier` (String) The unique identifier of the Amazon Redshift cluster.
+- `data_api_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.
+- `database_name` (String) The name of the Amazon Redshift database that will store the transferred data.
+- `database_url` (String) The JDBC URL of the Amazon Redshift cluster.
+- `is_redshift_serverless` (Boolean) If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.
+- `workgroup_name` (String) The name of the Amazon Redshift serverless workgroup
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--salesforce"></a>

@@ -179,6 +179,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_aliases -cftype AWS::GameLift::Alias -package gamelift ../aws/gamelift/alias_plural_data_source_gen.go ../aws/gamelift/alias_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_fleets -cftype AWS::GameLift::Fleet -package gamelift ../aws/gamelift/fleet_plural_data_source_gen.go ../aws/gamelift/fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_game_server_groups -cftype AWS::GameLift::GameServerGroup -package gamelift ../aws/gamelift/game_server_group_plural_data_source_gen.go ../aws/gamelift/game_server_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_locations -cftype AWS::GameLift::Location -package gamelift ../aws/gamelift/location_plural_data_source_gen.go ../aws/gamelift/location_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_globalaccelerator_accelerators -cftype AWS::GlobalAccelerator::Accelerator -package globalaccelerator ../aws/globalaccelerator/accelerator_plural_data_source_gen.go ../aws/globalaccelerator/accelerator_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_registries -cftype AWS::Glue::Registry -package glue ../aws/glue/registry_plural_data_source_gen.go ../aws/glue/registry_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_schemas -cftype AWS::Glue::Schema -package glue ../aws/glue/schema_plural_data_source_gen.go ../aws/glue/schema_plural_data_source_gen_test.go
@@ -314,6 +315,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_site_to_site_vpn_attachments -cftype AWS::NetworkManager::SiteToSiteVpnAttachment -package networkmanager ../aws/networkmanager/site_to_site_vpn_attachment_plural_data_source_gen.go ../aws/networkmanager/site_to_site_vpn_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_vpc_attachments -cftype AWS::NetworkManager::VpcAttachment -package networkmanager ../aws/networkmanager/vpc_attachment_plural_data_source_gen.go ../aws/networkmanager/vpc_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_links -cftype AWS::Oam::Link -package oam ../aws/oam/link_plural_data_source_gen.go ../aws/oam/link_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_sinks -cftype AWS::Oam::Sink -package oam ../aws/oam/sink_plural_data_source_gen.go ../aws/oam/sink_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_application_instances -cftype AWS::Panorama::ApplicationInstance -package panorama ../aws/panorama/application_instance_plural_data_source_gen.go ../aws/panorama/application_instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_packages -cftype AWS::Panorama::Package -package panorama ../aws/panorama/package_plural_data_source_gen.go ../aws/panorama/package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_datasets -cftype AWS::Personalize::Dataset -package personalize ../aws/personalize/dataset_plural_data_source_gen.go ../aws/personalize/dataset_plural_data_source_gen_test.go
@@ -521,6 +524,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"

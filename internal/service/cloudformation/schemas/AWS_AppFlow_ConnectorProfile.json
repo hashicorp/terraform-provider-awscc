@@ -77,9 +77,6 @@
     "ConnectorProfileConfig": {
       "description": "Connector specific configurations needed to create connector profile",
       "type": "object",
-      "required": [
-        "ConnectorProfileCredentials"
-      ],
       "properties": {
         "ConnectorProfileProperties": {
           "$ref": "#/definitions/ConnectorProfileProperties"
@@ -367,10 +364,6 @@
     },
     "RedshiftConnectorProfileCredentials": {
       "type": "object",
-      "required": [
-        "Username",
-        "Password"
-      ],
       "properties": {
         "Username": {
           "description": "The name of the user.",
@@ -385,7 +378,6 @@
     "RedshiftConnectorProfileProperties": {
       "type": "object",
       "required": [
-        "DatabaseUrl",
         "BucketName",
         "RoleArn"
       ],
@@ -405,6 +397,26 @@
         "RoleArn": {
           "description": "The Amazon Resource Name (ARN) of the IAM role.",
           "$ref": "#/definitions/RoleArn"
+        },
+        "IsRedshiftServerless": {
+          "description": "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+          "type": "boolean"
+        },
+        "DataApiRoleArn": {
+          "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+          "$ref": "#/definitions/DataApiRoleArn"
+        },
+        "ClusterIdentifier": {
+          "description": "The unique identifier of the Amazon Redshift cluster.",
+          "$ref": "#/definitions/ClusterIdentifier"
+        },
+        "WorkgroupName": {
+          "description": "The name of the Amazon Redshift serverless workgroup",
+          "$ref": "#/definitions/WorkgroupName"
+        },
+        "DatabaseName": {
+          "description": "The name of the Amazon Redshift database that will store the transferred data.",
+          "$ref": "#/definitions/DatabaseName"
         }
       }
     },
@@ -961,6 +973,26 @@
     "RoleArn": {
       "type": "string",
       "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+      "maxLength": 512
+    },
+    "DataApiRoleArn": {
+      "type": "string",
+      "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+      "maxLength": 512
+    },
+    "ClusterIdentifier": {
+      "type": "string",
+      "pattern": "\\S+",
+      "maxLength": 512
+    },
+    "WorkgroupName": {
+      "type": "string",
+      "pattern": "\\S+",
+      "maxLength": 512
+    },
+    "DatabaseName": {
+      "type": "string",
+      "pattern": "\\S+",
       "maxLength": 512
     },
     "Warehouse": {
