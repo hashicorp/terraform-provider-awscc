@@ -666,6 +666,106 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"snap_start": {
+			// Property: SnapStart
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The SnapStart setting of your function",
+			//	  "properties": {
+			//	    "ApplyOn": {
+			//	      "description": "Applying SnapStart setting on function resource type.",
+			//	      "enum": [
+			//	        "PublishedVersions",
+			//	        "None"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "required": [
+			//	    "ApplyOn"
+			//	  ],
+			//	  "type": "object"
+			//	}
+			Description: "The SnapStart setting of your function",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"apply_on": {
+						// Property: ApplyOn
+						Description: "Applying SnapStart setting on function resource type.",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PublishedVersions",
+								"None",
+							}),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
+		"snap_start_response": {
+			// Property: SnapStartResponse
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The SnapStart response of your function",
+			//	  "properties": {
+			//	    "ApplyOn": {
+			//	      "description": "Applying SnapStart setting on function resource type.",
+			//	      "enum": [
+			//	        "PublishedVersions",
+			//	        "None"
+			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "OptimizationStatus": {
+			//	      "description": "Indicates whether SnapStart is activated for the specified function version.",
+			//	      "enum": [
+			//	        "On",
+			//	        "Off"
+			//	      ],
+			//	      "type": "string"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "The SnapStart response of your function",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"apply_on": {
+						// Property: ApplyOn
+						Description: "Applying SnapStart setting on function resource type.",
+						Type:        types.StringType,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"optimization_status": {
+						// Property: OptimizationStatus
+						Description: "Indicates whether SnapStart is activated for the specified function version.",
+						Type:        types.StringType,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -885,6 +985,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"apply_on":                       "ApplyOn",
 		"architectures":                  "Architectures",
 		"arn":                            "Arn",
 		"code":                           "Code",
@@ -906,6 +1007,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"local_mount_path":               "LocalMountPath",
 		"memory_size":                    "MemorySize",
 		"mode":                           "Mode",
+		"optimization_status":            "OptimizationStatus",
 		"package_type":                   "PackageType",
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
@@ -915,6 +1017,8 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"s3_object_version":              "S3ObjectVersion",
 		"security_group_ids":             "SecurityGroupIds",
 		"size":                           "Size",
+		"snap_start":                     "SnapStart",
+		"snap_start_response":            "SnapStartResponse",
 		"subnet_ids":                     "SubnetIds",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",
