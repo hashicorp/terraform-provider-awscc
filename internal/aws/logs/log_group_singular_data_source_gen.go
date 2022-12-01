@@ -32,6 +32,18 @@ func logGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"data_protection_policy": {
+			// Property: DataProtectionPolicy
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The body of the policy document you want to use for this topic.\n\nYou can only add one policy per topic.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 30720",
+			//	  "type": "object"
+			//	}
+			Description: "The body of the policy document you want to use for this topic.\n\nYou can only add one policy per topic.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 30720",
+			Type:        types.MapType{ElemType: types.StringType},
+			Computed:    true,
+		},
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
@@ -167,13 +179,14 @@ func logGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogGroup").WithTerraformTypeName("awscc_logs_log_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"key":               "Key",
-		"kms_key_id":        "KmsKeyId",
-		"log_group_name":    "LogGroupName",
-		"retention_in_days": "RetentionInDays",
-		"tags":              "Tags",
-		"value":             "Value",
+		"arn":                    "Arn",
+		"data_protection_policy": "DataProtectionPolicy",
+		"key":                    "Key",
+		"kms_key_id":             "KmsKeyId",
+		"log_group_name":         "LogGroupName",
+		"retention_in_days":      "RetentionInDays",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)
