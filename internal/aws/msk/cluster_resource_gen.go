@@ -67,6 +67,60 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			//	            }
 			//	          },
 			//	          "type": "object"
+			//	        },
+			//	        "VpcConnectivity": {
+			//	          "additionalProperties": false,
+			//	          "properties": {
+			//	            "ClientAuthentication": {
+			//	              "additionalProperties": false,
+			//	              "properties": {
+			//	                "Sasl": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Iam": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "Enabled": {
+			//	                          "type": "boolean"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Enabled"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    },
+			//	                    "Scram": {
+			//	                      "additionalProperties": false,
+			//	                      "properties": {
+			//	                        "Enabled": {
+			//	                          "type": "boolean"
+			//	                        }
+			//	                      },
+			//	                      "required": [
+			//	                        "Enabled"
+			//	                      ],
+			//	                      "type": "object"
+			//	                    }
+			//	                  },
+			//	                  "type": "object"
+			//	                },
+			//	                "Tls": {
+			//	                  "additionalProperties": false,
+			//	                  "properties": {
+			//	                    "Enabled": {
+			//	                      "type": "boolean"
+			//	                    }
+			//	                  },
+			//	                  "required": [
+			//	                    "Enabled"
+			//	                  ],
+			//	                  "type": "object"
+			//	                }
+			//	              },
+			//	              "type": "object"
+			//	            }
+			//	          },
+			//	          "type": "object"
 			//	        }
 			//	      },
 			//	      "type": "object"
@@ -160,6 +214,93 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(7, 23),
 												},
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													resource.UseStateForUnknown(),
+												},
+											},
+										},
+									),
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"vpc_connectivity": {
+									// Property: VpcConnectivity
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"client_authentication": {
+												// Property: ClientAuthentication
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"sasl": {
+															// Property: Sasl
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"iam": {
+																		// Property: Iam
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
+																				"enabled": {
+																					// Property: Enabled
+																					Type:     types.BoolType,
+																					Required: true,
+																				},
+																			},
+																		),
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
+																	"scram": {
+																		// Property: Scram
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
+																				"enabled": {
+																					// Property: Enabled
+																					Type:     types.BoolType,
+																					Required: true,
+																				},
+																			},
+																		),
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []tfsdk.AttributePlanModifier{
+																			resource.UseStateForUnknown(),
+																		},
+																	},
+																},
+															),
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+														"tls": {
+															// Property: Tls
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"enabled": {
+																		// Property: Enabled
+																		Type:     types.BoolType,
+																		Required: true,
+																	},
+																},
+															),
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																resource.UseStateForUnknown(),
+															},
+														},
+													},
+												),
+												Optional: true,
+												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
 													resource.UseStateForUnknown(),
 												},
@@ -1069,6 +1210,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"unauthenticated":                "Unauthenticated",
 		"volume_size":                    "VolumeSize",
 		"volume_throughput":              "VolumeThroughput",
+		"vpc_connectivity":               "VpcConnectivity",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(30)

@@ -604,8 +604,12 @@ resource_schema "aws_connect_phone_number" {
 }
 
 resource_schema "aws_connect_rule" {
-  cloudformation_type_name               = "AWS::Connect::Rule"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Connect::Rule"
+
+  # Actions/AssignContactCategoryActions is of unsupported type: set of undefined schema.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_connect_quick_connect" {

@@ -90,10 +90,8 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "The ID of a core network for the VPC attachment.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -339,11 +337,9 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "Subnet Arn list",
 			Type:        types.ListType{ElemType: types.StringType},
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				resource.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -424,13 +420,10 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "The ARN of the VPC.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
-			// VpcArn is a write-only property.
 		},
 	}
 
@@ -477,9 +470,6 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_arn":                       "VpcArn",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/VpcArn",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)
 
 	opts = opts.WithUpdateTimeoutInMinutes(60)

@@ -144,9 +144,13 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "Pricing rule modifier percentage",
 			Type:        types.Float64Type,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatAtLeast(0.000000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -274,25 +278,80 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"tiering": {
+			// Property: Tiering
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The set of tiering configurations for the pricing rule.",
+			//	  "properties": {
+			//	    "FreeTier": {
+			//	      "additionalProperties": false,
+			//	      "description": "The possible customizable free tier configurations.",
+			//	      "properties": {
+			//	        "Activated": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "Activated"
+			//	      ],
+			//	      "type": "object"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "The set of tiering configurations for the pricing rule.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"free_tier": {
+						// Property: FreeTier
+						Description: "The possible customizable free tier configurations.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"activated": {
+									// Property: Activated
+									Type:     types.BoolType,
+									Required: true,
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
 			//
 			//	{
-			//	  "description": "One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.",
+			//	  "description": "One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.",
 			//	  "enum": [
 			//	    "MARKUP",
-			//	    "DISCOUNT"
+			//	    "DISCOUNT",
+			//	    "TIERING"
 			//	  ],
 			//	  "type": "string"
 			//	}
-			Description: "One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.",
+			Description: "One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.",
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"MARKUP",
 					"DISCOUNT",
+					"TIERING",
 				}),
 			},
 		},
@@ -319,11 +378,13 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"activated":                     "Activated",
 		"arn":                           "Arn",
 		"associated_pricing_plan_count": "AssociatedPricingPlanCount",
 		"billing_entity":                "BillingEntity",
 		"creation_time":                 "CreationTime",
 		"description":                   "Description",
+		"free_tier":                     "FreeTier",
 		"key":                           "Key",
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
@@ -331,6 +392,7 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 		"scope":                         "Scope",
 		"service":                       "Service",
 		"tags":                          "Tags",
+		"tiering":                       "Tiering",
 		"type":                          "Type",
 		"value":                         "Value",
 	})

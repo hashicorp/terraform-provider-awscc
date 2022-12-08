@@ -209,6 +209,14 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			//	        "S3Uri"
 			//	      ],
 			//	      "type": "object"
+			//	    },
+			//	    "TableFormat": {
+			//	      "description": "Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.",
+			//	      "enum": [
+			//	        "Iceberg",
+			//	        "Glue"
+			//	      ],
+			//	      "type": "string"
 			//	    }
 			//	  },
 			//	  "required": [
@@ -291,6 +299,22 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 							},
 						),
 						Required: true,
+					},
+					"table_format": {
+						// Property: TableFormat
+						Description: "Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.",
+						Type:        types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Iceberg",
+								"Glue",
+							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -509,6 +533,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		"s3_storage_config":              "S3StorageConfig",
 		"s3_uri":                         "S3Uri",
 		"security_config":                "SecurityConfig",
+		"table_format":                   "TableFormat",
 		"table_name":                     "TableName",
 		"tags":                           "Tags",
 		"value":                          "Value",

@@ -274,7 +274,9 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 			//	    "rtp",
 			//	    "zixi-pull",
 			//	    "rist",
-			//	    "srt-listener"
+			//	    "fujitsu-qos",
+			//	    "srt-listener",
+			//	    "srt-caller"
 			//	  ],
 			//	  "type": "string"
 			//	}
@@ -288,7 +290,9 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					"rtp",
 					"zixi-pull",
 					"rist",
+					"fujitsu-qos",
 					"srt-listener",
+					"srt-caller",
 				}),
 			},
 		},
