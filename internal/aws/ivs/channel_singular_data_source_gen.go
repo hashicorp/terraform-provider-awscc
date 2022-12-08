@@ -40,6 +40,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
+			//	  "default": false,
 			//	  "description": "Whether the channel is authorized.",
 			//	  "type": "boolean"
 			//	}
@@ -64,6 +65,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
+			//	  "default": "LOW",
 			//	  "description": "Channel latency mode.",
 			//	  "enum": [
 			//	    "NORMAL",
@@ -80,6 +82,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
+			//	  "default": "-",
 			//	  "description": "Channel",
 			//	  "maxLength": 128,
 			//	  "minLength": 0,
@@ -108,13 +111,13 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//
 			//	{
 			//	  "default": "",
-			//	  "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
+			//	  "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
 			//	  "maxLength": 128,
 			//	  "minLength": 0,
 			//	  "pattern": "^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 			//	  "type": "string"
 			//	}
-			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
+			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -171,6 +174,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			// CloudFormation resource type schema:
 			//
 			//	{
+			//	  "default": "STANDARD",
 			//	  "description": "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
 			//	  "enum": [
 			//	    "STANDARD",

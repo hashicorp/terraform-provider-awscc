@@ -110,6 +110,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	{
 			//	  "description": "Specifies the tags applied to a connection.",
 			//	  "items": {
+			//	    "additionalProperties": false,
 			//	    "description": "A key-value pair to associate with a resource.",
 			//	    "properties": {
 			//	      "Key": {

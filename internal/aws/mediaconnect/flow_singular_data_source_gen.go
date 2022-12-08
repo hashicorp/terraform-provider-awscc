@@ -168,14 +168,24 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	      "type": "string"
 			//	    },
 			//	    "Protocol": {
-			//	      "description": "The protocol that is used by the source or output.",
+			//	      "description": "The protocol that is used by the source.",
 			//	      "enum": [
 			//	        "zixi-push",
 			//	        "rtp-fec",
 			//	        "rtp",
 			//	        "rist",
-			//	        "srt-listener"
+			//	        "fujitsu-qos",
+			//	        "srt-listener",
+			//	        "srt-caller"
 			//	      ],
+			//	      "type": "string"
+			//	    },
+			//	    "SenderControlPort": {
+			//	      "description": "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+			//	      "type": "integer"
+			//	    },
+			//	    "SenderIpAddress": {
+			//	      "description": "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
 			//	      "type": "string"
 			//	    },
 			//	    "SourceArn": {
@@ -185,6 +195,14 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	    "SourceIngestPort": {
 			//	      "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
 			//	      "type": "string"
+			//	    },
+			//	    "SourceListenerAddress": {
+			//	      "description": "Source IP or domain name for SRT-caller protocol.",
+			//	      "type": "string"
+			//	    },
+			//	    "SourceListenerPort": {
+			//	      "description": "Source port for SRT-caller protocol.",
+			//	      "type": "integer"
 			//	    },
 			//	    "StreamId": {
 			//	      "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
@@ -317,7 +335,19 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 					},
 					"protocol": {
 						// Property: Protocol
-						Description: "The protocol that is used by the source or output.",
+						Description: "The protocol that is used by the source.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"sender_control_port": {
+						// Property: SenderControlPort
+						Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+						Type:        types.Int64Type,
+						Computed:    true,
+					},
+					"sender_ip_address": {
+						// Property: SenderIpAddress
+						Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -331,6 +361,18 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: SourceIngestPort
 						Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
 						Type:        types.StringType,
+						Computed:    true,
+					},
+					"source_listener_address": {
+						// Property: SourceListenerAddress
+						Description: "Source IP or domain name for SRT-caller protocol.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"source_listener_port": {
+						// Property: SourceListenerPort
+						Description: "Source port for SRT-caller protocol.",
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"stream_id": {
@@ -363,9 +405,31 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	  "additionalProperties": false,
 			//	  "description": "The source failover config of the flow.",
 			//	  "properties": {
+			//	    "FailoverMode": {
+			//	      "description": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.",
+			//	      "enum": [
+			//	        "MERGE",
+			//	        "FAILOVER"
+			//	      ],
+			//	      "type": "string"
+			//	    },
 			//	    "RecoveryWindow": {
 			//	      "description": "Search window time to look for dash-7 packets",
 			//	      "type": "integer"
+			//	    },
+			//	    "SourcePriority": {
+			//	      "additionalProperties": false,
+			//	      "description": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
+			//	      "properties": {
+			//	        "PrimarySource": {
+			//	          "description": "The name of the source you choose as the primary source for this flow.",
+			//	          "type": "string"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "PrimarySource"
+			//	      ],
+			//	      "type": "object"
 			//	    },
 			//	    "State": {
 			//	      "enum": [
@@ -380,11 +444,32 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The source failover config of the flow.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"failover_mode": {
+						// Property: FailoverMode
+						Description: "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
 					"recovery_window": {
 						// Property: RecoveryWindow
 						Description: "Search window time to look for dash-7 packets",
 						Type:        types.Int64Type,
 						Computed:    true,
+					},
+					"source_priority": {
+						// Property: SourcePriority
+						Description: "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"primary_source": {
+									// Property: PrimarySource
+									Description: "The name of the source you choose as the primary source for this flow.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
 					},
 					"state": {
 						// Property: State
@@ -421,6 +506,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                    "Description",
 		"device_id":                      "DeviceId",
 		"entitlement_arn":                "EntitlementArn",
+		"failover_mode":                  "FailoverMode",
 		"flow_arn":                       "FlowArn",
 		"flow_availability_zone":         "FlowAvailabilityZone",
 		"ingest_ip":                      "IngestIp",
@@ -430,16 +516,22 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_latency":                    "MaxLatency",
 		"min_latency":                    "MinLatency",
 		"name":                           "Name",
+		"primary_source":                 "PrimarySource",
 		"protocol":                       "Protocol",
 		"recovery_window":                "RecoveryWindow",
 		"region":                         "Region",
 		"resource_id":                    "ResourceId",
 		"role_arn":                       "RoleArn",
 		"secret_arn":                     "SecretArn",
+		"sender_control_port":            "SenderControlPort",
+		"sender_ip_address":              "SenderIpAddress",
 		"source":                         "Source",
 		"source_arn":                     "SourceArn",
 		"source_failover_config":         "SourceFailoverConfig",
 		"source_ingest_port":             "SourceIngestPort",
+		"source_listener_address":        "SourceListenerAddress",
+		"source_listener_port":           "SourceListenerPort",
+		"source_priority":                "SourcePriority",
 		"state":                          "State",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",

@@ -173,8 +173,35 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	  "additionalProperties": false,
 			//	  "description": "Identifies the report template for the report. Reports are built using a report template.",
 			//	  "properties": {
+			//	    "Accounts": {
+			//	      "description": "The list of AWS accounts that a report covers.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
 			//	    "FrameworkArns": {
 			//	      "description": "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "OrganizationUnits": {
+			//	      "description": "The list of AWS organization units that a report covers.",
+			//	      "insertionOrder": false,
+			//	      "items": {
+			//	        "type": "string"
+			//	      },
+			//	      "type": "array",
+			//	      "uniqueItems": true
+			//	    },
+			//	    "Regions": {
+			//	      "description": "The list of AWS regions that a report covers.",
 			//	      "insertionOrder": false,
 			//	      "items": {
 			//	        "type": "string"
@@ -195,9 +222,27 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Identifies the report template for the report. Reports are built using a report template.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"accounts": {
+						// Property: Accounts
+						Description: "The list of AWS accounts that a report covers.",
+						Type:        types.SetType{ElemType: types.StringType},
+						Computed:    true,
+					},
 					"framework_arns": {
 						// Property: FrameworkArns
 						Description: "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
+						Type:        types.SetType{ElemType: types.StringType},
+						Computed:    true,
+					},
+					"organization_units": {
+						// Property: OrganizationUnits
+						Description: "The list of AWS organization units that a report covers.",
+						Type:        types.SetType{ElemType: types.StringType},
+						Computed:    true,
+					},
+					"regions": {
+						// Property: Regions
+						Description: "The list of AWS regions that a report covers.",
 						Type:        types.SetType{ElemType: types.StringType},
 						Computed:    true,
 					},
@@ -230,9 +275,12 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::ReportPlan").WithTerraformTypeName("awscc_backup_report_plan")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accounts":                "Accounts",
 		"formats":                 "Formats",
 		"framework_arns":          "FrameworkArns",
 		"key":                     "Key",
+		"organization_units":      "OrganizationUnits",
+		"regions":                 "Regions",
 		"report_delivery_channel": "ReportDeliveryChannel",
 		"report_plan_arn":         "ReportPlanArn",
 		"report_plan_description": "ReportPlanDescription",

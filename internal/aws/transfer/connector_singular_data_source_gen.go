@@ -71,7 +71,8 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	      "enum": [
 			//	        "AES128_CBC",
 			//	        "AES192_CBC",
-			//	        "AES256_CBC"
+			//	        "AES256_CBC",
+			//	        "NONE"
 			//	      ],
 			//	      "type": "string"
 			//	    },

@@ -87,13 +87,13 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	  "additionalProperties": false,
 			//	  "properties": {
 			//	    "ChangeableForDays": {
-			//	      "type": "number"
+			//	      "type": "integer"
 			//	    },
 			//	    "MaxRetentionDays": {
-			//	      "type": "number"
+			//	      "type": "integer"
 			//	    },
 			//	    "MinRetentionDays": {
-			//	      "type": "number"
+			//	      "type": "integer"
 			//	    }
 			//	  },
 			//	  "required": [
@@ -105,17 +105,17 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 				map[string]tfsdk.Attribute{
 					"changeable_for_days": {
 						// Property: ChangeableForDays
-						Type:     types.Float64Type,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"max_retention_days": {
 						// Property: MaxRetentionDays
-						Type:     types.Float64Type,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"min_retention_days": {
 						// Property: MinRetentionDays
-						Type:     types.Float64Type,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},

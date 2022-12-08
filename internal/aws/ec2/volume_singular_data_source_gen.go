@@ -50,6 +50,16 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:     types.BoolType,
 			Computed: true,
 		},
+		"id": {
+			// Property: Id
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"iops": {
 			// Property: Iops
 			// CloudFormation resource type schema:
@@ -160,16 +170,6 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:     types.Int64Type,
 			Computed: true,
 		},
-		"volume_id": {
-			// Property: VolumeId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
 		"volume_type": {
 			// Property: VolumeType
 			// CloudFormation resource type schema:
@@ -202,6 +202,7 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_enable_io":       "AutoEnableIO",
 		"availability_zone":    "AvailabilityZone",
 		"encrypted":            "Encrypted",
+		"id":                   "Id",
 		"iops":                 "Iops",
 		"key":                  "Key",
 		"kms_key_id":           "KmsKeyId",
@@ -212,7 +213,6 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                 "Tags",
 		"throughput":           "Throughput",
 		"value":                "Value",
-		"volume_id":            "VolumeId",
 		"volume_type":          "VolumeType",
 	})
 
