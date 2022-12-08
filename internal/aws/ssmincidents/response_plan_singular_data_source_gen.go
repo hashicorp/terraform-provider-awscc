@@ -475,6 +475,114 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 			),
 			Computed: true,
 		},
+		"integrations": {
+			// Property: Integrations
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "default": [],
+			//	  "description": "The list of integrations.",
+			//	  "insertionOrder": true,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "oneOf": [
+			//	      {
+			//	        "required": [
+			//	          "PagerDutyConfiguration"
+			//	        ]
+			//	      }
+			//	    ],
+			//	    "properties": {
+			//	      "PagerDutyConfiguration": {
+			//	        "additionalProperties": false,
+			//	        "description": "The pagerDuty configuration to use when starting the incident.",
+			//	        "properties": {
+			//	          "Name": {
+			//	            "description": "The name of the pagerDuty configuration.",
+			//	            "maxLength": 200,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          },
+			//	          "PagerDutyIncidentConfiguration": {
+			//	            "additionalProperties": false,
+			//	            "description": "The pagerDuty incident configuration.",
+			//	            "properties": {
+			//	              "ServiceId": {
+			//	                "description": "The pagerDuty serviceId.",
+			//	                "maxLength": 200,
+			//	                "minLength": 1,
+			//	                "type": "string"
+			//	              }
+			//	            },
+			//	            "required": [
+			//	              "ServiceId"
+			//	            ],
+			//	            "type": "object"
+			//	          },
+			//	          "SecretId": {
+			//	            "description": "The AWS secrets manager secretId storing the pagerDuty token.",
+			//	            "maxLength": 512,
+			//	            "minLength": 1,
+			//	            "type": "string"
+			//	          }
+			//	        },
+			//	        "required": [
+			//	          "Name",
+			//	          "SecretId",
+			//	          "PagerDutyIncidentConfiguration"
+			//	        ],
+			//	        "type": "object"
+			//	      }
+			//	    },
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 1,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
+			Description: "The list of integrations.",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"pager_duty_configuration": {
+						// Property: PagerDutyConfiguration
+						Description: "The pagerDuty configuration to use when starting the incident.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"name": {
+									// Property: Name
+									Description: "The name of the pagerDuty configuration.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"pager_duty_incident_configuration": {
+									// Property: PagerDutyIncidentConfiguration
+									Description: "The pagerDuty incident configuration.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"service_id": {
+												// Property: ServiceId
+												Description: "The pagerDuty serviceId.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"secret_id": {
+									// Property: SecretId
+									Description: "The AWS secrets manager secretId storing the pagerDuty token.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -560,33 +668,38 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("awscc_ssmincidents_response_plan")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions":              "Actions",
-		"arn":                  "Arn",
-		"chat_channel":         "ChatChannel",
-		"chatbot_sns":          "ChatbotSns",
-		"dedupe_string":        "DedupeString",
-		"display_name":         "DisplayName",
-		"document_name":        "DocumentName",
-		"document_version":     "DocumentVersion",
-		"dynamic_parameters":   "DynamicParameters",
-		"engagements":          "Engagements",
-		"impact":               "Impact",
-		"incident_tags":        "IncidentTags",
-		"incident_template":    "IncidentTemplate",
-		"key":                  "Key",
-		"name":                 "Name",
-		"notification_targets": "NotificationTargets",
-		"parameters":           "Parameters",
-		"role_arn":             "RoleArn",
-		"sns_topic_arn":        "SnsTopicArn",
-		"ssm_automation":       "SsmAutomation",
-		"summary":              "Summary",
-		"tags":                 "Tags",
-		"target_account":       "TargetAccount",
-		"title":                "Title",
-		"value":                "Value",
-		"values":               "Values",
-		"variable":             "Variable",
+		"actions":                           "Actions",
+		"arn":                               "Arn",
+		"chat_channel":                      "ChatChannel",
+		"chatbot_sns":                       "ChatbotSns",
+		"dedupe_string":                     "DedupeString",
+		"display_name":                      "DisplayName",
+		"document_name":                     "DocumentName",
+		"document_version":                  "DocumentVersion",
+		"dynamic_parameters":                "DynamicParameters",
+		"engagements":                       "Engagements",
+		"impact":                            "Impact",
+		"incident_tags":                     "IncidentTags",
+		"incident_template":                 "IncidentTemplate",
+		"integrations":                      "Integrations",
+		"key":                               "Key",
+		"name":                              "Name",
+		"notification_targets":              "NotificationTargets",
+		"pager_duty_configuration":          "PagerDutyConfiguration",
+		"pager_duty_incident_configuration": "PagerDutyIncidentConfiguration",
+		"parameters":                        "Parameters",
+		"role_arn":                          "RoleArn",
+		"secret_id":                         "SecretId",
+		"service_id":                        "ServiceId",
+		"sns_topic_arn":                     "SnsTopicArn",
+		"ssm_automation":                    "SsmAutomation",
+		"summary":                           "Summary",
+		"tags":                              "Tags",
+		"target_account":                    "TargetAccount",
+		"title":                             "Title",
+		"value":                             "Value",
+		"values":                            "Values",
+		"variable":                          "Variable",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

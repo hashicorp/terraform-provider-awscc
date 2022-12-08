@@ -31,9 +31,11 @@ Resource schema for AWS::EC2::NetworkInsightsPath
 ### Read-Only
 
 - `created_date` (String)
+- `destination_arn` (String)
 - `id` (String) Uniquely identifies the resource.
 - `network_insights_path_arn` (String)
 - `network_insights_path_id` (String)
+- `source_arn` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

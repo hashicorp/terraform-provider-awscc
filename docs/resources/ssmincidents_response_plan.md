@@ -26,6 +26,7 @@ Resource type definition for AWS::SSMIncidents::ResponsePlan
 - `chat_channel` (Attributes) The chat channel configuration. (see [below for nested schema](#nestedatt--chat_channel))
 - `display_name` (String) The display name of the response plan.
 - `engagements` (Set of String) The list of engagements to use.
+- `integrations` (Attributes List) The list of integrations. (see [below for nested schema](#nestedatt--integrations))
 - `tags` (Attributes Set) The tags to apply to the response plan. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -122,6 +123,32 @@ Required:
 Optional:
 
 - `chatbot_sns` (List of String)
+
+
+<a id="nestedatt--integrations"></a>
+### Nested Schema for `integrations`
+
+Optional:
+
+- `pager_duty_configuration` (Attributes) The pagerDuty configuration to use when starting the incident. (see [below for nested schema](#nestedatt--integrations--pager_duty_configuration))
+
+<a id="nestedatt--integrations--pager_duty_configuration"></a>
+### Nested Schema for `integrations.pager_duty_configuration`
+
+Required:
+
+- `name` (String) The name of the pagerDuty configuration.
+- `pager_duty_incident_configuration` (Attributes) The pagerDuty incident configuration. (see [below for nested schema](#nestedatt--integrations--pager_duty_configuration--pager_duty_incident_configuration))
+- `secret_id` (String) The AWS secrets manager secretId storing the pagerDuty token.
+
+<a id="nestedatt--integrations--pager_duty_configuration--pager_duty_incident_configuration"></a>
+### Nested Schema for `integrations.pager_duty_configuration.pager_duty_incident_configuration`
+
+Required:
+
+- `service_id` (String) The pagerDuty serviceId.
+
+
 
 
 <a id="nestedatt--tags"></a>

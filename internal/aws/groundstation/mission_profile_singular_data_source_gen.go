@@ -154,6 +154,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 			//	        "type": "string"
 			//	      }
 			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
 			//	    "type": "object"
 			//	  },
 			//	  "type": "array"

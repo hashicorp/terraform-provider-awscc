@@ -164,6 +164,11 @@
         "iam:PassRole",
         "iam:CreateServiceLinkedRole"
       ]
+    },
+    "list": {
+      "permissions": [
+        "backup:ListBackupSelections"
+      ]
     }
   }
 }

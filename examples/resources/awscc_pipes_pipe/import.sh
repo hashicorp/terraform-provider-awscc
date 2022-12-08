@@ -1,0 +1,1 @@
+$ terraform import awscc_pipes_pipe.example <resource ID>

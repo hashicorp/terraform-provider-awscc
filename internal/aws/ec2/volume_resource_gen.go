@@ -43,9 +43,6 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Type:     types.StringType,
 			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
 		},
 		"encrypted": {
 			// Property: Encrypted
@@ -59,7 +56,19 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
+			},
+		},
+		"id": {
+			// Property: Id
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 			},
 		},
 		"iops": {
@@ -88,7 +97,6 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
 			},
 		},
 		"multi_attach_enabled": {
@@ -145,7 +153,6 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -206,19 +213,6 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
-		"volume_id": {
-			// Property: VolumeId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
 		"volume_type": {
 			// Property: VolumeType
 			// CloudFormation resource type schema:
@@ -235,15 +229,6 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		},
 	}
 
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
-		},
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::Volume",
 		Version:     1,
@@ -254,11 +239,12 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Volume").WithTerraformTypeName("awscc_ec2_volume")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_enable_io":       "AutoEnableIO",
 		"availability_zone":    "AvailabilityZone",
 		"encrypted":            "Encrypted",
+		"id":                   "Id",
 		"iops":                 "Iops",
 		"key":                  "Key",
 		"kms_key_id":           "KmsKeyId",
@@ -269,7 +255,6 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                 "Tags",
 		"throughput":           "Throughput",
 		"value":                "Value",
-		"volume_id":            "VolumeId",
 		"volume_type":          "VolumeType",
 	})
 

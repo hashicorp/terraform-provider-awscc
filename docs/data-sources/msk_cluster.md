@@ -54,6 +54,7 @@ Read-Only:
 Read-Only:
 
 - `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
+- `vpc_connectivity` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info--public_access"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.public_access`
@@ -61,6 +62,56 @@ Read-Only:
 Read-Only:
 
 - `type` (String)
+
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity`
+
+Read-Only:
+
+- `client_authentication` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication))
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication`
+
+Read-Only:
+
+- `sasl` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl))
+- `tls` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--tls))
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl`
+
+Read-Only:
+
+- `iam` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--iam))
+- `scram` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--scram))
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--iam"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--scram"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--tls"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
 
 
 

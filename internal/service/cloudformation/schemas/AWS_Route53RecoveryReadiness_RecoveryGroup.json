@@ -70,19 +70,25 @@
       "permissions": [
         "route53-recovery-readiness:CreateRecoveryGroup",
         "route53-recovery-readiness:GetRecoveryGroup",
-        "route53-recovery-readiness:GetCell"
+        "route53-recovery-readiness:GetCell",
+        "route53-recovery-readiness:ListTagsForResources",
+        "route53-recovery-readiness:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "route53-recovery-readiness:GetRecoveryGroup"
+        "route53-recovery-readiness:GetRecoveryGroup",
+        "route53-recovery-readiness:ListTagsForResources"
       ]
     },
     "update": {
       "permissions": [
         "route53-recovery-readiness:UpdateRecoveryGroup",
         "route53-recovery-readiness:GetRecoveryGroup",
-        "route53-recovery-readiness:GetCell"
+        "route53-recovery-readiness:GetCell",
+        "route53-recovery-readiness:ListTagsForResources",
+        "route53-recovery-readiness:TagResource",
+        "route53-recovery-readiness:UntagResource"
       ]
     },
     "delete": {

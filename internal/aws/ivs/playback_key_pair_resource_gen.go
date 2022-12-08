@@ -89,10 +89,13 @@ func playbackKeyPairResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "The public portion of a customer-generated key pair.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
+			// PublicKeyMaterial is a write-only property.
 		},
 		"tags": {
 			// Property: Tags
@@ -187,6 +190,9 @@ func playbackKeyPairResource(ctx context.Context) (resource.Resource, error) {
 		"value":               "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/PublicKeyMaterial",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

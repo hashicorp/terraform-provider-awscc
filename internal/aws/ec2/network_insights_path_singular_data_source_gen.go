@@ -40,6 +40,16 @@ func networkInsightsPathDataSource(ctx context.Context) (datasource.DataSource, 
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"destination_arn": {
+			// Property: DestinationArn
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"destination_ip": {
 			// Property: DestinationIp
 			// CloudFormation resource type schema:
@@ -96,6 +106,16 @@ func networkInsightsPathDataSource(ctx context.Context) (datasource.DataSource, 
 		},
 		"source": {
 			// Property: Source
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "type": "string"
+			//	}
+			Type:     types.StringType,
+			Computed: true,
+		},
+		"source_arn": {
+			// Property: SourceArn
 			// CloudFormation resource type schema:
 			//
 			//	{
@@ -174,6 +194,7 @@ func networkInsightsPathDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_date":              "CreatedDate",
 		"destination":               "Destination",
+		"destination_arn":           "DestinationArn",
 		"destination_ip":            "DestinationIp",
 		"destination_port":          "DestinationPort",
 		"key":                       "Key",
@@ -181,6 +202,7 @@ func networkInsightsPathDataSource(ctx context.Context) (datasource.DataSource, 
 		"network_insights_path_id":  "NetworkInsightsPathId",
 		"protocol":                  "Protocol",
 		"source":                    "Source",
+		"source_arn":                "SourceArn",
 		"source_ip":                 "SourceIp",
 		"tags":                      "Tags",
 		"value":                     "Value",

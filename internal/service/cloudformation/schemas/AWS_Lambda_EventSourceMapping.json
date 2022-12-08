@@ -147,6 +147,10 @@
     "SelfManagedKafkaEventSourceConfig": {
       "description": "Specific configuration settings for a Self-Managed Apache Kafka event source.",
       "$ref": "#/definitions/SelfManagedKafkaEventSourceConfig"
+    },
+    "ScalingConfig": {
+      "description": "The scaling configuration for the event source.",
+      "$ref": "#/definitions/ScalingConfig"
     }
   },
   "definitions": {
@@ -292,6 +296,23 @@
         "ConsumerGroupId": {
           "description": "The identifier for the Kafka Consumer Group to join.",
           "$ref": "#/definitions/ConsumerGroupId"
+        }
+      }
+    },
+    "MaximumConcurrency": {
+      "description": "The maximum number of concurrent functions that an event source can invoke.",
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 1000
+    },
+    "ScalingConfig": {
+      "description": "The scaling configuration for the event source.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaximumConcurrency": {
+          "description": "The maximum number of concurrent functions that the event source can invoke.",
+          "$ref": "#/definitions/MaximumConcurrency"
         }
       }
     }

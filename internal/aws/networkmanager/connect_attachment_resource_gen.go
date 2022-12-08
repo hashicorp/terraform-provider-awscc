@@ -90,10 +90,8 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "ID of the CoreNetwork that the attachment will be attached to.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -122,10 +120,8 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "Edge location of the attachment.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -159,10 +155,8 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 					},
 				},
 			),
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},
@@ -387,10 +381,8 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Description: "Id of transport attachment",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
 				resource.RequiresReplace(),
 			},
 		},

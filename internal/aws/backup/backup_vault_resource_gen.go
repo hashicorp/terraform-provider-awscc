@@ -111,13 +111,13 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 			//	  "additionalProperties": false,
 			//	  "properties": {
 			//	    "ChangeableForDays": {
-			//	      "type": "number"
+			//	      "type": "integer"
 			//	    },
 			//	    "MaxRetentionDays": {
-			//	      "type": "number"
+			//	      "type": "integer"
 			//	    },
 			//	    "MinRetentionDays": {
-			//	      "type": "number"
+			//	      "type": "integer"
 			//	    }
 			//	  },
 			//	  "required": [
@@ -129,16 +129,17 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 				map[string]tfsdk.Attribute{
 					"changeable_for_days": {
 						// Property: ChangeableForDays
-						Type:     types.Float64Type,
+						Type:     types.Int64Type,
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							resource.UseStateForUnknown(),
 						},
+						// ChangeableForDays is a write-only property.
 					},
 					"max_retention_days": {
 						// Property: MaxRetentionDays
-						Type:     types.Float64Type,
+						Type:     types.Int64Type,
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -147,7 +148,7 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 					},
 					"min_retention_days": {
 						// Property: MinRetentionDays
-						Type:     types.Float64Type,
+						Type:     types.Int64Type,
 						Required: true,
 					},
 				},
@@ -243,6 +244,9 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 		"sns_topic_arn":       "SNSTopicArn",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/LockConfiguration/ChangeableForDays",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

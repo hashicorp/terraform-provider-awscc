@@ -239,13 +239,19 @@
   ],
   "writeOnlyProperties": [
     "/properties/ComputeResources/UpdateToLatestImageVersion",
-    "/properties/ReplaceComputeEnvironment"
+    "/properties/ReplaceComputeEnvironment",
+    "/properties/UpdatePolicy"
   ],
   "primaryIdentifier": [
     "/properties/ComputeEnvironmentArn"
   ],
   "readOnlyProperties": [
     "/properties/ComputeEnvironmentArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ComputeEnvironmentName"
+    ]
   ],
   "handlers": {
     "create": {

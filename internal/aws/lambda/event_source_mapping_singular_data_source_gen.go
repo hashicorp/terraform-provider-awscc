@@ -333,6 +333,36 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 		},
+		"scaling_config": {
+			// Property: ScalingConfig
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "additionalProperties": false,
+			//	  "description": "The scaling configuration for the event source.",
+			//	  "properties": {
+			//	    "MaximumConcurrency": {
+			//	      "description": "The maximum number of concurrent functions that the event source can invoke.",
+			//	      "maximum": 1000,
+			//	      "minimum": 2,
+			//	      "type": "integer"
+			//	    }
+			//	  },
+			//	  "type": "object"
+			//	}
+			Description: "The scaling configuration for the event source.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"maximum_concurrency": {
+						// Property: MaximumConcurrency
+						Description: "The maximum number of concurrent functions that the event source can invoke.",
+						Type:        types.Int64Type,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"self_managed_event_source": {
 			// Property: SelfManagedEventSource
 			// CloudFormation resource type schema:
@@ -573,12 +603,14 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"id":                                     "Id",
 		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
+		"maximum_concurrency":                    "MaximumConcurrency",
 		"maximum_record_age_in_seconds":          "MaximumRecordAgeInSeconds",
 		"maximum_retry_attempts":                 "MaximumRetryAttempts",
 		"on_failure":                             "OnFailure",
 		"parallelization_factor":                 "ParallelizationFactor",
 		"pattern":                                "Pattern",
 		"queues":                                 "Queues",
+		"scaling_config":                         "ScalingConfig",
 		"self_managed_event_source":              "SelfManagedEventSource",
 		"self_managed_kafka_event_source_config": "SelfManagedKafkaEventSourceConfig",
 		"source_access_configurations":           "SourceAccessConfigurations",

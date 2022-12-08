@@ -141,6 +141,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 			//	{
 			//	  "description": "Specifies the tags applied to a connection.",
 			//	  "items": {
+			//	    "additionalProperties": false,
 			//	    "description": "A key-value pair to associate with a resource.",
 			//	    "properties": {
 			//	      "Key": {

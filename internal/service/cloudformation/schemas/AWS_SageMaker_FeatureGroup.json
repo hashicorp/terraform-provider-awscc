@@ -58,6 +58,9 @@
         },
         "DataCatalogConfig": {
           "$ref": "#/definitions/DataCatalogConfig"
+        },
+        "TableFormat": {
+          "$ref": "#/definitions/TableFormat"
         }
       },
       "required": [
@@ -168,6 +171,14 @@
         "TableName",
         "Catalog",
         "Database"
+      ]
+    },
+    "TableFormat": {
+      "type": "string",
+      "description": "Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.",
+      "enum": [
+        "Iceberg",
+        "Glue"
       ]
     },
     "Tag": {

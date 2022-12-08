@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 640 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 650 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -148,6 +148,10 @@ resource_schema "aws_apigateway_resource" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigateway_rest_api" {
+  cloudformation_type_name = "AWS::ApiGateway::RestApi"
+}
+
 resource_schema "aws_apigateway_stage" {
   cloudformation_type_name               = "AWS::ApiGateway::Stage"
   suppress_plural_data_source_generation = true
@@ -183,6 +187,10 @@ resource_schema "aws_apigatewayv2_model" {
 
 resource_schema "aws_apigatewayv2_vpc_link" {
   cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
+}
+
+resource_schema "aws_appflow_connector" {
+  cloudformation_type_name = "AWS::AppFlow::Connector"
 }
 
 resource_schema "aws_appflow_connector_profile" {
@@ -595,6 +603,15 @@ resource_schema "aws_connect_phone_number" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_rule" {
+  cloudformation_type_name = "AWS::Connect::Rule"
+
+  # Actions/AssignContactCategoryActions is of unsupported type: set of undefined schema.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_connect_quick_connect" {
   cloudformation_type_name               = "AWS::Connect::QuickConnect"
   suppress_plural_data_source_generation = true
@@ -852,6 +869,10 @@ resource_schema "aws_ec2_network_insights_path" {
 
 resource_schema "aws_ec2_network_interface" {
   cloudformation_type_name = "AWS::EC2::NetworkInterface"
+}
+
+resource_schema "aws_ec2_network_performance_metric_subscription" {
+  cloudformation_type_name = "AWS::EC2::NetworkPerformanceMetricSubscription"
 }
 
 resource_schema "aws_ec2_placement_group" {
@@ -2091,6 +2112,52 @@ resource_schema "aws_oam_sink" {
   cloudformation_type_name = "AWS::Oam::Sink"
 }
 
+resource_schema "aws_opensearchserverless_access_policy" {
+  cloudformation_type_name = "AWS::OpenSearchServerless::AccessPolicy"
+
+  # Preview service.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_opensearchserverless_collection" {
+  cloudformation_type_name = "AWS::OpenSearchServerless::Collection"
+
+  # Preview service.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_opensearchserverless_security_config" {
+  cloudformation_type_name = "AWS::OpenSearchServerless::SecurityConfig"
+
+  # Preview service.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_opensearchserverless_security_policy" {
+  cloudformation_type_name = "AWS::OpenSearchServerless::SecurityPolicy"
+
+  # Preview service.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_opensearchserverless_vpc_endpoint" {
+  cloudformation_type_name = "AWS::OpenSearchServerless::VpcEndpoint"
+
+  # Preview service.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+
 resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name = "AWS::OpenSearchService::Domain"
 
@@ -2155,6 +2222,11 @@ resource_schema "aws_personalize_solution" {
 
 resource_schema "aws_pinpoint_in_app_template" {
   cloudformation_type_name = "AWS::Pinpoint::InAppTemplate"
+}
+
+resource_schema "aws_pipes_pipe" {
+  cloudformation_type_name               = "AWS::Pipes::Pipe"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_qldb_stream" {

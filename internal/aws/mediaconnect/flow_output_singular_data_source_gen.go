@@ -215,7 +215,9 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	    "rtp",
 			//	    "zixi-pull",
 			//	    "rist",
-			//	    "srt-listener"
+			//	    "fujitsu-qos",
+			//	    "srt-listener",
+			//	    "srt-caller"
 			//	  ],
 			//	  "type": "string"
 			//	}

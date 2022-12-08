@@ -80,7 +80,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			//	      "enum": [
 			//	        "AES128_CBC",
 			//	        "AES192_CBC",
-			//	        "AES256_CBC"
+			//	        "AES256_CBC",
+			//	        "NONE"
 			//	      ],
 			//	      "type": "string"
 			//	    },
@@ -169,6 +170,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								"AES128_CBC",
 								"AES192_CBC",
 								"AES256_CBC",
+								"NONE",
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{

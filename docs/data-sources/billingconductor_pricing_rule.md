@@ -32,7 +32,8 @@ Data Source schema for AWS::BillingConductor::PricingRule
 - `scope` (String) A term used to categorize the granularity of a Pricing Rule.
 - `service` (String) The service which a pricing rule is applied on
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- `type` (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
+- `tiering` (Attributes) The set of tiering configurations for the pricing rule. (see [below for nested schema](#nestedatt--tiering))
+- `type` (String) One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -41,5 +42,20 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--tiering"></a>
+### Nested Schema for `tiering`
+
+Read-Only:
+
+- `free_tier` (Attributes) The possible customizable free tier configurations. (see [below for nested schema](#nestedatt--tiering--free_tier))
+
+<a id="nestedatt--tiering--free_tier"></a>
+### Nested Schema for `tiering.free_tier`
+
+Read-Only:
+
+- `activated` (Boolean)
 
 

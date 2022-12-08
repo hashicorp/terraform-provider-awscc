@@ -187,6 +187,10 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 			//	        "type": "string"
 			//	      }
 			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
 			//	    "type": "object"
 			//	  },
 			//	  "type": "array"
@@ -196,25 +200,17 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
 						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
 						},
 					},
 				},

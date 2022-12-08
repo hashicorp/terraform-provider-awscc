@@ -595,6 +595,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				resource.UseStateForUnknown(),
 			},
+			// UpdatePolicy is a write-only property.
 		},
 	}
 
@@ -661,6 +662,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ComputeResources/UpdateToLatestImageVersion",
 		"/properties/ReplaceComputeEnvironment",
+		"/properties/UpdatePolicy",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

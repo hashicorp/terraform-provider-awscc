@@ -35,8 +35,7 @@ Resource Type definition for AWS::EC2::Volume
 
 ### Read-Only
 
-- `id` (String) Uniquely identifies the resource.
-- `volume_id` (String)
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
