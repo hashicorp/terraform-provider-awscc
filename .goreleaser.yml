@@ -24,7 +24,7 @@ builds:
       - goos: freebsd
         goarch: arm64
     ldflags:
-      - -s -w -X internal/provider.Version={{.Version}}
+      - -s -w -X 'github.com/hashicorp/terraform-provider-awscc/internal/provider.Version={{.Version}}'
     mod_timestamp: '{{ .CommitTimestamp }}'
 checksum:
   extra_files:
