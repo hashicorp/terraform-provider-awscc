@@ -23,12 +23,14 @@ Data Source schema for AWS::EC2::NetworkInsightsPath
 
 - `created_date` (String)
 - `destination` (String)
+- `destination_arn` (String)
 - `destination_ip` (String)
 - `destination_port` (Number)
 - `network_insights_path_arn` (String)
 - `network_insights_path_id` (String)
 - `protocol` (String)
 - `source` (String)
+- `source_arn` (String)
 - `source_ip` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

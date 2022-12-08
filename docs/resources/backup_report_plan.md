@@ -53,7 +53,10 @@ Required:
 
 Optional:
 
+- `accounts` (Set of String) The list of AWS accounts that a report covers.
 - `framework_arns` (Set of String) The Amazon Resource Names (ARNs) of the frameworks a report covers.
+- `organization_units` (Set of String) The list of AWS organization units that a report covers.
+- `regions` (Set of String) The list of AWS regions that a report covers.
 
 
 <a id="nestedatt--report_plan_tags"></a>

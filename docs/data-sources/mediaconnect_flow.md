@@ -42,9 +42,13 @@ Read-Only:
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the source.
-- `protocol` (String) The protocol that is used by the source or output.
+- `protocol` (String) The protocol that is used by the source.
+- `sender_control_port` (Number) The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.
+- `sender_ip_address` (String) The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.
 - `source_arn` (String) The ARN of the source.
 - `source_ingest_port` (String) The port that the flow will be listening on for incoming content.(ReadOnly)
+- `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
+- `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -71,7 +75,16 @@ Read-Only:
 
 Read-Only:
 
+- `failover_mode` (String) The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
 - `recovery_window` (Number) Search window time to look for dash-7 packets
+- `source_priority` (Attributes) The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams. (see [below for nested schema](#nestedatt--source_failover_config--source_priority))
 - `state` (String)
+
+<a id="nestedatt--source_failover_config--source_priority"></a>
+### Nested Schema for `source_failover_config.source_priority`
+
+Read-Only:
+
+- `primary_source` (String) The name of the source you choose as the primary source for this flow.
 
 

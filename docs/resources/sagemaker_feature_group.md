@@ -54,6 +54,7 @@ Optional:
 
 - `data_catalog_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--data_catalog_config))
 - `disable_glue_table_creation` (Boolean)
+- `table_format` (String) Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.
 
 <a id="nestedatt--offline_store_config--s3_storage_config"></a>
 ### Nested Schema for `offline_store_config.s3_storage_config`

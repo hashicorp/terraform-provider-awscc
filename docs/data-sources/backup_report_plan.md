@@ -52,7 +52,10 @@ Read-Only:
 
 Read-Only:
 
+- `accounts` (Set of String) The list of AWS accounts that a report covers.
 - `framework_arns` (Set of String) The Amazon Resource Names (ARNs) of the frameworks a report covers.
+- `organization_units` (Set of String) The list of AWS organization units that a report covers.
+- `regions` (Set of String) The list of AWS regions that a report covers.
 - `report_template` (String) Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
 
 

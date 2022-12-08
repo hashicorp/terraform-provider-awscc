@@ -17,17 +17,18 @@ A markup/discount that is defined for a specific set of services that can later 
 
 ### Required
 
-- `modifier_percentage` (Number) Pricing rule modifier percentage
 - `name` (String) Pricing rule name
 - `scope` (String) A term used to categorize the granularity of a Pricing Rule.
-- `type` (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
+- `type` (String) One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.
 
 ### Optional
 
 - `billing_entity` (String) The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.
 - `description` (String) Pricing rule description
+- `modifier_percentage` (Number) Pricing rule modifier percentage
 - `service` (String) The service which a pricing rule is applied on
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tiering` (Attributes) The set of tiering configurations for the pricing rule. (see [below for nested schema](#nestedatt--tiering))
 
 ### Read-Only
 
@@ -44,6 +45,21 @@ Required:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--tiering"></a>
+### Nested Schema for `tiering`
+
+Optional:
+
+- `free_tier` (Attributes) The possible customizable free tier configurations. (see [below for nested schema](#nestedatt--tiering--free_tier))
+
+<a id="nestedatt--tiering--free_tier"></a>
+### Nested Schema for `tiering.free_tier`
+
+Required:
+
+- `activated` (Boolean)
 
 ## Import
 

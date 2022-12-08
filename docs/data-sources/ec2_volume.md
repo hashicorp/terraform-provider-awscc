@@ -32,7 +32,6 @@ Data Source schema for AWS::EC2::Volume
 - `snapshot_id` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `throughput` (Number)
-- `volume_id` (String)
 - `volume_type` (String)
 
 <a id="nestedatt--tags"></a>
