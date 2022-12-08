@@ -221,6 +221,15 @@
         }
       }
     },
+    "VpcConnectivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClientAuthentication": {
+          "$ref": "#/definitions/VpcConnectivityClientAuthentication"
+        }
+      }
+    },
     "ConfigurationInfo": {
       "type": "object",
       "additionalProperties": false,
@@ -318,8 +327,59 @@
       "properties": {
         "PublicAccess": {
           "$ref": "#/definitions/PublicAccess"
+        },
+        "VpcConnectivity": {
+          "$ref": "#/definitions/VpcConnectivity"
         }
       }
+    },
+    "VpcConnectivityTls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "VpcConnectivitySasl": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Scram": {
+          "$ref": "#/definitions/VpcConnectivityScram"
+        },
+        "Iam": {
+          "$ref": "#/definitions/VpcConnectivityIam"
+        }
+      }
+    },
+    "VpcConnectivityScram": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "VpcConnectivityIam": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
     },
     "Tls": {
       "type": "object",
@@ -398,6 +458,18 @@
         },
         "Unauthenticated": {
           "$ref": "#/definitions/Unauthenticated"
+        }
+      }
+    },
+    "VpcConnectivityClientAuthentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Tls": {
+          "$ref": "#/definitions/VpcConnectivityTls"
+        },
+        "Sasl": {
+          "$ref": "#/definitions/VpcConnectivitySasl"
         }
       }
     },

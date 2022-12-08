@@ -156,6 +156,12 @@
   "primaryIdentifier": [
     "/properties/AttachmentId"
   ],
+  "required": [
+    "CoreNetworkId",
+    "EdgeLocation",
+    "TransportAttachmentId",
+    "Options"
+  ],
   "handlers": {
     "create": {
       "permissions": [

@@ -22,6 +22,19 @@
         "Key",
         "Value"
       ]
+    },
+    "FreeTier": {
+      "description": "The possible customizable free tier configurations.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Activated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Activated"
+      ]
     }
   },
   "properties": {
@@ -52,11 +65,12 @@
       ]
     },
     "Type": {
-      "description": "One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.",
+      "description": "One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.",
       "type": "string",
       "enum": [
         "MARKUP",
-        "DISCOUNT"
+        "DISCOUNT",
+        "TIERING"
       ]
     },
     "ModifierPercentage": {
@@ -79,6 +93,16 @@
         "AWS Marketplace",
         "AISPL"
       ]
+    },
+    "Tiering": {
+      "description": "The set of tiering configurations for the pricing rule.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FreeTier": {
+          "$ref": "#/definitions/FreeTier"
+        }
+      }
     },
     "AssociatedPricingPlanCount": {
       "description": "The number of pricing plans associated with pricing rule",
@@ -113,8 +137,7 @@
   "required": [
     "Name",
     "Scope",
-    "Type",
-    "ModifierPercentage"
+    "Type"
   ],
   "createOnlyProperties": [
     "/properties/Scope",

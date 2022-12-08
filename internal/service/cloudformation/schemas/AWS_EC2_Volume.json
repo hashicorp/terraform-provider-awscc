@@ -33,10 +33,10 @@
     "SnapshotId": {
       "type": "string"
     },
-    "VolumeId": {
+    "VolumeType": {
       "type": "string"
     },
-    "VolumeType": {
+    "Id": {
       "type": "string"
     },
     "Tags": {
@@ -68,16 +68,10 @@
   "required": [
     "AvailabilityZone"
   ],
-  "createOnlyProperties": [
-    "/properties/KmsKeyId",
-    "/properties/Encrypted",
-    "/properties/SnapshotId",
-    "/properties/AvailabilityZone"
-  ],
   "primaryIdentifier": [
-    "/properties/VolumeId"
+    "/properties/Id"
   ],
   "readOnlyProperties": [
-    "/properties/VolumeId"
+    "/properties/Id"
   ]
 }
