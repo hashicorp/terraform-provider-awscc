@@ -1,4 +1,19 @@
 ## 0.42.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_rest_api`
+* **New Data Source:** `awscc_apigateway_rest_apis`
+* **New Data Source:** `awscc_appflow_connector`
+* **New Data Source:** `awscc_appflow_connectors`
+* **New Data Source:** `awscc_ec2_network_performance_metric_subscription`
+* **New Data Source:** `awscc_ec2_network_performance_metric_subscriptions`
+* **New Data Source:** `awscc_pipes_pipe`
+* **New Resource:** `awscc_apigateway_rest_api`
+* **New Resource:** `awscc_appflow_connector`
+* **New Resource:** `awscc_ec2_network_performance_metric_subscription`
+* **New Resource:** `awscc_pipes_pipe`
+
 ## [0.41.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.41.0) (December  1, 2022)
 
 FEATURES:
