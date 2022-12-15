@@ -80,6 +80,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 			//	                        "BLOCK",
 			//	                        "COUNT",
 			//	                        "CAPTCHA",
+			//	                        "CHALLENGE",
 			//	                        "EXCLUDED_AS_COUNT"
 			//	                      ],
 			//	                      "type": "string"

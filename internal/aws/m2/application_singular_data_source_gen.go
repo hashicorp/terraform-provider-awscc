@@ -102,6 +102,19 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"kms_key_id": {
+			// Property: KmsKeyId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
+			Description: "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -158,6 +171,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"definition":      "Definition",
 		"description":     "Description",
 		"engine_type":     "EngineType",
+		"kms_key_id":      "KmsKeyId",
 		"name":            "Name",
 		"s3_location":     "S3Location",
 		"tags":            "Tags",

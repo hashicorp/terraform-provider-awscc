@@ -394,6 +394,9 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 			//	            "ContainerPort": {
 			//	              "type": "integer"
 			//	            },
+			//	            "ContainerPortRange": {
+			//	              "type": "string"
+			//	            },
 			//	            "HostPort": {
 			//	              "type": "integer"
 			//	            },
@@ -929,6 +932,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								"container_port": {
 									// Property: ContainerPort
 									Type:     types.Int64Type,
+									Computed: true,
+								},
+								"container_port_range": {
+									// Property: ContainerPortRange
+									Type:     types.StringType,
 									Computed: true,
 								},
 								"host_port": {
@@ -1680,6 +1688,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"container_name":                 "ContainerName",
 		"container_path":                 "ContainerPath",
 		"container_port":                 "ContainerPort",
+		"container_port_range":           "ContainerPortRange",
 		"cpu":                            "Cpu",
 		"cpu_architecture":               "CpuArchitecture",
 		"credentials_parameter":          "CredentialsParameter",

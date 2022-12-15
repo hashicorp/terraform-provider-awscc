@@ -71,6 +71,19 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"configuration_values": {
+			// Property: ConfigurationValues
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The configuration values to use with the add-on",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
+			Description: "The configuration values to use with the add-on",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"resolve_conflicts": {
 			// Property: ResolveConflicts
 			// CloudFormation resource type schema:
@@ -177,6 +190,7 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"addon_version":            "AddonVersion",
 		"arn":                      "Arn",
 		"cluster_name":             "ClusterName",
+		"configuration_values":     "ConfigurationValues",
 		"key":                      "Key",
 		"resolve_conflicts":        "ResolveConflicts",
 		"service_account_role_arn": "ServiceAccountRoleArn",

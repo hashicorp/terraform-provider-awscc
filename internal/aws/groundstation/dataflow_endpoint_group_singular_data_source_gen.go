@@ -182,6 +182,10 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 			//	        "type": "string"
 			//	      }
 			//	    },
+			//	    "required": [
+			//	      "Key",
+			//	      "Value"
+			//	    ],
 			//	    "type": "object"
 			//	  },
 			//	  "type": "array"

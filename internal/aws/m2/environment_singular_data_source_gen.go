@@ -133,6 +133,19 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"kms_key_id": {
+			// Property: KmsKeyId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
+			Description: "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -362,6 +375,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fsx":                          "Fsx",
 		"high_availability_config":     "HighAvailabilityConfig",
 		"instance_type":                "InstanceType",
+		"kms_key_id":                   "KmsKeyId",
 		"mount_point":                  "MountPoint",
 		"name":                         "Name",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
