@@ -2139,47 +2139,22 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_opensearchserverless_access_policy" {
   cloudformation_type_name = "AWS::OpenSearchServerless::AccessPolicy"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_collection" {
   cloudformation_type_name = "AWS::OpenSearchServerless::Collection"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_security_config" {
   cloudformation_type_name = "AWS::OpenSearchServerless::SecurityConfig"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_security_policy" {
   cloudformation_type_name = "AWS::OpenSearchServerless::SecurityPolicy"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_vpc_endpoint" {
   cloudformation_type_name = "AWS::OpenSearchServerless::VpcEndpoint"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 
