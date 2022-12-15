@@ -70,6 +70,7 @@
         "ONEZONE_IA",
         "INTELLIGENT_TIERING",
         "GLACIER",
+        "GLACIER_INSTANT_RETRIEVAL",
         "DEEP_ARCHIVE"
       ],
       "default": "STANDARD"

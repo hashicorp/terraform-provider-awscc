@@ -94,6 +94,23 @@
       ],
       "additionalProperties": false
     },
+    "RuleActionOverride": {
+      "description": "Action override for rules in the rule group.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/EntityName"
+        },
+        "ActionToUse": {
+          "$ref": "#/definitions/RuleAction"
+        }
+      },
+      "required": [
+        "Name",
+        "ActionToUse"
+      ],
+      "additionalProperties": false
+    },
     "ExcludedRules": {
       "type": "array",
       "items": {
@@ -291,6 +308,15 @@
             "$ref": "#/definitions/ManagedRuleGroupConfig"
           },
           "minItems": 1
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
+          },
+          "minItems": 1,
+          "maxItems": 100
         }
       },
       "required": [
@@ -497,6 +523,9 @@
         },
         "CaptchaConfig": {
           "$ref": "#/definitions/CaptchaConfig"
+        },
+        "ChallengeConfig": {
+          "$ref": "#/definitions/ChallengeConfig"
         }
       },
       "required": [
@@ -529,6 +558,9 @@
         },
         "Captcha": {
           "$ref": "#/definitions/CaptchaAction"
+        },
+        "Challenge": {
+          "$ref": "#/definitions/ChallengeAction"
         }
       },
       "additionalProperties": false
@@ -555,6 +587,16 @@
     },
     "CaptchaAction": {
       "description": "Checks valid token exists with request.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChallengeAction": {
+      "description": "Checks that the request has a valid token with an unexpired challenge timestamp and, if not, returns a browser challenge to the client.",
       "type": "object",
       "properties": {
         "CustomRequestHandling": {
@@ -706,6 +748,15 @@
           "items": {
             "$ref": "#/definitions/ExcludedRule"
           }
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
+          },
+          "minItems": 1,
+          "maxItems": 100
         }
       },
       "required": [
@@ -1054,6 +1105,15 @@
       },
       "additionalProperties": false
     },
+    "ChallengeConfig": {
+      "type": "object",
+      "properties": {
+        "ImmunityTimeProperty": {
+          "$ref": "#/definitions/ImmunityTimeProperty"
+        }
+      },
+      "additionalProperties": false
+    },
     "ImmunityTimeProperty": {
       "type": "object",
       "properties": {
@@ -1090,9 +1150,39 @@
         },
         "PasswordField": {
           "$ref": "#/definitions/FieldIdentifier"
+        },
+        "AWSManagedRulesBotControlRuleSet": {
+          "$ref": "#/definitions/AWSManagedRulesBotControlRuleSet"
         }
       },
       "additionalProperties": false
+    },
+    "AWSManagedRulesBotControlRuleSet": {
+      "description": "Configures how to use the Bot Control managed rule group in the web ACL",
+      "type": "object",
+      "properties": {
+        "InspectionLevel": {
+          "type": "string",
+          "enum": [
+            "COMMON",
+            "TARGETED"
+          ]
+        }
+      },
+      "required": [
+        "InspectionLevel"
+      ],
+      "additionalProperties": false
+    },
+    "TokenDomains": {
+      "description": "List of domains to accept in web request tokens, in addition to the domain of the protected resource.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[\\w\\.\\-/]+$",
+        "minLength": 1,
+        "maxLength": 253
+      }
     },
     "FieldIdentifier": {
       "type": "object",
@@ -1292,6 +1382,12 @@
     },
     "CaptchaConfig": {
       "$ref": "#/definitions/CaptchaConfig"
+    },
+    "ChallengeConfig": {
+      "$ref": "#/definitions/ChallengeConfig"
+    },
+    "TokenDomains": {
+      "$ref": "#/definitions/TokenDomains"
     }
   },
   "required": [

@@ -58,6 +58,11 @@
       "type": "string",
       "minLength": 1
     },
+    "ConfigurationValues": {
+      "description": "The configuration values to use with the add-on",
+      "type": "string",
+      "minLength": 1
+    },
     "Arn": {
       "description": "Amazon Resource Name (ARN) of the add-on",
       "type": "string"

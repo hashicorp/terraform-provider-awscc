@@ -50,6 +50,12 @@
         "apigateway:POST"
       ]
     },
+    "update": {
+      "permissions": [
+        "apigateway:GET",
+        "apigateway:PATCH"
+      ]
+    },
     "delete": {
       "permissions": [
         "apigateway:DELETE"
