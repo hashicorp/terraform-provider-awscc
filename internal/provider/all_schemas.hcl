@@ -543,6 +543,12 @@ resource_schema "aws_codegurureviewer_repository_association" {
 
 resource_schema "aws_codepipeline_custom_action_type" {
   cloudformation_type_name = "AWS::CodePipeline::CustomActionType"
+
+  # Top-level "Id" property is not a primary identifier.
+  # Top-level property Provider conflicts with Terraform meta-argument: provider.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_codestarconnections_connection" {

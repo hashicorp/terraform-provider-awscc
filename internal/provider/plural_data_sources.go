@@ -63,7 +63,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeartifact_repositories -cftype AWS::CodeArtifact::Repository -package codeartifact ../aws/codeartifact/repository_plural_data_source_gen.go ../aws/codeartifact/repository_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codedeploy_deployment_configs -cftype AWS::CodeDeploy::DeploymentConfig -package codedeploy ../aws/codedeploy/deployment_config_plural_data_source_gen.go ../aws/codedeploy/deployment_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeguruprofiler_profiling_groups -cftype AWS::CodeGuruProfiler::ProfilingGroup -package codeguruprofiler ../aws/codeguruprofiler/profiling_group_plural_data_source_gen.go ../aws/codeguruprofiler/profiling_group_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_codepipeline_custom_action_types -cftype AWS::CodePipeline::CustomActionType -package codepipeline ../aws/codepipeline/custom_action_type_plural_data_source_gen.go ../aws/codepipeline/custom_action_type_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarconnections_connections -cftype AWS::CodeStarConnections::Connection -package codestarconnections ../aws/codestarconnections/connection_plural_data_source_gen.go ../aws/codestarconnections/connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarnotifications_notification_rules -cftype AWS::CodeStarNotifications::NotificationRule -package codestarnotifications ../aws/codestarnotifications/notification_rule_plural_data_source_gen.go ../aws/codestarnotifications/notification_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_aggregation_authorizations -cftype AWS::Config::AggregationAuthorization -package config ../aws/config/aggregation_authorization_plural_data_source_gen.go ../aws/config/aggregation_authorization_plural_data_source_gen_test.go
@@ -322,6 +321,11 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_links -cftype AWS::Oam::Link -package oam ../aws/oam/link_plural_data_source_gen.go ../aws/oam/link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_sinks -cftype AWS::Oam::Sink -package oam ../aws/oam/sink_plural_data_source_gen.go ../aws/oam/sink_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_access_policies -cftype AWS::OpenSearchServerless::AccessPolicy -package opensearchserverless ../aws/opensearchserverless/access_policy_plural_data_source_gen.go ../aws/opensearchserverless/access_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_collections -cftype AWS::OpenSearchServerless::Collection -package opensearchserverless ../aws/opensearchserverless/collection_plural_data_source_gen.go ../aws/opensearchserverless/collection_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_security_configs -cftype AWS::OpenSearchServerless::SecurityConfig -package opensearchserverless ../aws/opensearchserverless/security_config_plural_data_source_gen.go ../aws/opensearchserverless/security_config_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_security_policies -cftype AWS::OpenSearchServerless::SecurityPolicy -package opensearchserverless ../aws/opensearchserverless/security_policy_plural_data_source_gen.go ../aws/opensearchserverless/security_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_vpc_endpoints -cftype AWS::OpenSearchServerless::VpcEndpoint -package opensearchserverless ../aws/opensearchserverless/vpc_endpoint_plural_data_source_gen.go ../aws/opensearchserverless/vpc_endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_application_instances -cftype AWS::Panorama::ApplicationInstance -package panorama ../aws/panorama/application_instance_plural_data_source_gen.go ../aws/panorama/application_instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_packages -cftype AWS::Panorama::Package -package panorama ../aws/panorama/package_plural_data_source_gen.go ../aws/panorama/package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_datasets -cftype AWS::Personalize::Dataset -package personalize ../aws/personalize/dataset_plural_data_source_gen.go ../aws/personalize/dataset_plural_data_source_gen_test.go
@@ -456,7 +460,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeartifact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codedeploy"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeguruprofiler"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codepipeline"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarconnections"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarnotifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
@@ -532,6 +535,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"
