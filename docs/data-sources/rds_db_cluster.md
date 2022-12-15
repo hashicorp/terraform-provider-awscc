@@ -36,6 +36,7 @@ Data Source schema for AWS::RDS::DBCluster
 - `db_cluster_resource_id` (String) The AWS Region-unique, immutable identifier for the DB cluster.
 - `db_instance_parameter_group_name` (String) The name of the DB parameter group to apply to all instances of the DB cluster.
 - `db_subnet_group_name` (String) A DB subnet group that you want to associate with this DB cluster.
+- `db_system_id` (String) Reserved for future use.
 - `deletion_protection` (Boolean) A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 - `domain` (String) The Active Directory directory ID to create the DB cluster in.
 - `domain_iam_role_name` (String) Specify the name of the IAM role to be used when making API calls to the Directory Service.
@@ -122,6 +123,8 @@ The maximum capacity must be greater than or equal to the minimum capacity.
 For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
 For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.
 The minimum capacity must be less than or equal to the maximum capacity.
+- `seconds_before_timeout` (Number) The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.
+The default is 300.
 - `seconds_until_auto_pause` (Number) The time, in seconds, before an Aurora DB cluster in serverless mode is paused.
 - `timeout_action` (String) The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.
 ForceApplyCapacityChange sets the capacity to the specified value as soon as possible.

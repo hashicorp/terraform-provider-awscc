@@ -24,6 +24,7 @@ Data Source schema for AWS::SSMIncidents::ReplicationSet
 - `arn` (String) The ARN of the ReplicationSet.
 - `deletion_protected` (Boolean) Configures the ReplicationSet deletion protection.
 - `regions` (Attributes Set) The ReplicationSet configuration. (see [below for nested schema](#nestedatt--regions))
+- `tags` (Attributes Set) The tags to apply to the replication set. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--regions"></a>
 ### Nested Schema for `regions`
@@ -39,5 +40,15 @@ Read-Only:
 Read-Only:
 
 - `sse_kms_key_id` (String) The ARN of the ReplicationSet.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 

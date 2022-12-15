@@ -221,6 +221,7 @@ Read-Only:
 
 - `app_protocol` (String)
 - `container_port` (Number)
+- `container_port_range` (String)
 - `host_port` (Number)
 - `name` (String)
 - `protocol` (String)

@@ -26,6 +26,7 @@ Data Source schema for AWS::M2::Application
 - `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
 - `description` (String)
 - `engine_type` (String)
+- `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.
 - `name` (String)
 - `tags` (Map of String)
 

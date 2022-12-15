@@ -1,0 +1,1 @@
+$ terraform import awscc_iottwinmaker_sync_job.example <resource ID>

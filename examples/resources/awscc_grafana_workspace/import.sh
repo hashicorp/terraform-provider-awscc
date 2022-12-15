@@ -1,0 +1,1 @@
+$ terraform import awscc_grafana_workspace.example <resource ID>

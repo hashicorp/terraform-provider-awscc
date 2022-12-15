@@ -28,6 +28,7 @@ Data Source schema for AWS::M2::Environment
 - `environment_id` (String) The unique identifier of the environment.
 - `high_availability_config` (Attributes) Defines the details of a high availability configuration. (see [below for nested schema](#nestedatt--high_availability_config))
 - `instance_type` (String) The type of instance underlying the environment.
+- `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.
 - `name` (String) The name of the environment.
 - `preferred_maintenance_window` (String) Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
 - `publicly_accessible` (Boolean) Specifies whether the environment is publicly accessible.

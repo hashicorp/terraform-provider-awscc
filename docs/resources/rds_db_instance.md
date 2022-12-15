@@ -34,6 +34,15 @@ For the list of permissions required for the IAM role, see Configure IAM and you
 
 This setting is required for RDS Custom.
 - `db_cluster_identifier` (String) The identifier of the DB cluster that the instance will belong to.
+- `db_cluster_snapshot_identifier` (String) The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .
+
+Constraints:
+ * Must match the identifier of an existing Multi-AZ DB cluster snapshot.
+ * Can't be specified when DBSnapshotIdentifier is specified.
+ * Must be specified when DBSnapshotIdentifier isn't specified.
+ * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.
+ * Can't be the identifier of an Aurora DB cluster snapshot.
+ * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.
 - `db_instance_class` (String) The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines.
 - `db_instance_identifier` (String) A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance.
 - `db_name` (String) The meaning of this parameter differs according to the database engine you use.
@@ -72,7 +81,10 @@ This setting is required for RDS Custom.
 - `promotion_tier` (Number) A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.
 - `publicly_accessible` (Boolean) Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.
 - `replica_mode` (String) The open mode of an Oracle read replica. The default is open-read-only.
+- `restore_time` (String) The date and time to restore from.
+- `source_db_instance_automated_backups_arn` (String) The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.
 - `source_db_instance_identifier` (String) If you want to create a Read Replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of Read Replicas.
+- `source_dbi_resource_id` (String) The resource ID of the source DB instance from which to restore.
 - `source_region` (String) The ID of the region that contains the source DB instance for the Read Replica.
 - `storage_encrypted` (Boolean) A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.
 - `storage_throughput` (Number) Specifies the storage throughput for the DB instance.
@@ -82,6 +94,7 @@ This setting is required for RDS Custom.
 - `tde_credential_password` (String) The password for the given ARN from the key store in order to access the device.
 - `timezone` (String) The time zone of the DB instance. The time zone parameter is currently supported only by Microsoft SQL Server.
 - `use_default_processor_features` (Boolean) A value that indicates whether the DB instance class of the DB instance uses its default processor features.
+- `use_latest_restorable_time` (Boolean) A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.
 - `vpc_security_groups` (List of String) A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.
 
 ### Read-Only
