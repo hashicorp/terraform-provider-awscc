@@ -186,6 +186,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_globalaccelerator_accelerators -cftype AWS::GlobalAccelerator::Accelerator -package globalaccelerator ../aws/globalaccelerator/accelerator_plural_data_source_gen.go ../aws/globalaccelerator/accelerator_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_registries -cftype AWS::Glue::Registry -package glue ../aws/glue/registry_plural_data_source_gen.go ../aws/glue/registry_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_schemas -cftype AWS::Glue::Schema -package glue ../aws/glue/schema_plural_data_source_gen.go ../aws/glue/schema_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_grafana_workspaces -cftype AWS::Grafana::Workspace -package grafana ../aws/grafana/workspace_plural_data_source_gen.go ../aws/grafana/workspace_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_greengrassv2_component_versions -cftype AWS::GreengrassV2::ComponentVersion -package greengrassv2 ../aws/greengrassv2/component_version_plural_data_source_gen.go ../aws/greengrassv2/component_version_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_greengrassv2_deployments -cftype AWS::GreengrassV2::Deployment -package greengrassv2 ../aws/greengrassv2/deployment_plural_data_source_gen.go ../aws/greengrassv2/deployment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_groundstation_dataflow_endpoint_groups -cftype AWS::GroundStation::DataflowEndpointGroup -package groundstation ../aws/groundstation/dataflow_endpoint_group_plural_data_source_gen.go ../aws/groundstation/dataflow_endpoint_group_plural_data_source_gen_test.go
@@ -320,6 +321,11 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_links -cftype AWS::Oam::Link -package oam ../aws/oam/link_plural_data_source_gen.go ../aws/oam/link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_sinks -cftype AWS::Oam::Sink -package oam ../aws/oam/sink_plural_data_source_gen.go ../aws/oam/sink_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_access_policies -cftype AWS::OpenSearchServerless::AccessPolicy -package opensearchserverless ../aws/opensearchserverless/access_policy_plural_data_source_gen.go ../aws/opensearchserverless/access_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_collections -cftype AWS::OpenSearchServerless::Collection -package opensearchserverless ../aws/opensearchserverless/collection_plural_data_source_gen.go ../aws/opensearchserverless/collection_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_security_configs -cftype AWS::OpenSearchServerless::SecurityConfig -package opensearchserverless ../aws/opensearchserverless/security_config_plural_data_source_gen.go ../aws/opensearchserverless/security_config_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_security_policies -cftype AWS::OpenSearchServerless::SecurityPolicy -package opensearchserverless ../aws/opensearchserverless/security_policy_plural_data_source_gen.go ../aws/opensearchserverless/security_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_vpc_endpoints -cftype AWS::OpenSearchServerless::VpcEndpoint -package opensearchserverless ../aws/opensearchserverless/vpc_endpoint_plural_data_source_gen.go ../aws/opensearchserverless/vpc_endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_application_instances -cftype AWS::Panorama::ApplicationInstance -package panorama ../aws/panorama/application_instance_plural_data_source_gen.go ../aws/panorama/application_instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_packages -cftype AWS::Panorama::Package -package panorama ../aws/panorama/package_plural_data_source_gen.go ../aws/panorama/package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_datasets -cftype AWS::Personalize::Dataset -package personalize ../aws/personalize/dataset_plural_data_source_gen.go ../aws/personalize/dataset_plural_data_source_gen_test.go
@@ -485,6 +491,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/gamelift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/globalaccelerator"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/glue"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/grafana"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/greengrassv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/groundstation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthlake"
@@ -528,6 +535,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"

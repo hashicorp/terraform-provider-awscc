@@ -81,6 +81,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 			//	                        "BLOCK",
 			//	                        "COUNT",
 			//	                        "CAPTCHA",
+			//	                        "CHALLENGE",
 			//	                        "EXCLUDED_AS_COUNT"
 			//	                      ],
 			//	                      "type": "string"
@@ -190,6 +191,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 																	"BLOCK",
 																	"COUNT",
 																	"CAPTCHA",
+																	"CHALLENGE",
 																	"EXCLUDED_AS_COUNT",
 																}),
 															},

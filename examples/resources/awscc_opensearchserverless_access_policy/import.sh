@@ -1,0 +1,1 @@
+$ terraform import awscc_opensearchserverless_access_policy.example <resource ID>

@@ -80,6 +80,29 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	{
 			//	  "additionalProperties": false,
 			//	  "properties": {
+			//	    "Alarms": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AlarmNames": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "Enable": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Rollback": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "AlarmNames",
+			//	        "Rollback",
+			//	        "Enable"
+			//	      ],
+			//	      "type": "object"
+			//	    },
 			//	    "DeploymentCircuitBreaker": {
 			//	      "additionalProperties": false,
 			//	      "properties": {
@@ -107,6 +130,29 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"alarms": {
+						// Property: Alarms
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"alarm_names": {
+									// Property: AlarmNames
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+								"enable": {
+									// Property: Enable
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"rollback": {
+									// Property: Rollback
+									Type:     types.BoolType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"deployment_circuit_breaker": {
 						// Property: DeploymentCircuitBreaker
 						Attributes: tfsdk.SingleNestedAttributes(
@@ -807,6 +853,8 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::Service").WithTerraformTypeName("awscc_ecs_service")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_names":                       "AlarmNames",
+		"alarms":                            "Alarms",
 		"assign_public_ip":                  "AssignPublicIp",
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"base":                              "Base",

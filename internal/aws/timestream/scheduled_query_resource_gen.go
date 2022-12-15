@@ -617,7 +617,8 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			//	                        "BIGINT",
 			//	                        "BOOLEAN",
 			//	                        "DOUBLE",
-			//	                        "VARCHAR"
+			//	                        "VARCHAR",
+			//	                        "TIMESTAMP"
 			//	                      ],
 			//	                      "type": "string"
 			//	                    },
@@ -673,7 +674,8 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			//	                      "BIGINT",
 			//	                      "BOOLEAN",
 			//	                      "DOUBLE",
-			//	                      "VARCHAR"
+			//	                      "VARCHAR",
+			//	                      "TIMESTAMP"
 			//	                    ],
 			//	                    "type": "string"
 			//	                  },
@@ -827,6 +829,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 																	"BOOLEAN",
 																	"DOUBLE",
 																	"VARCHAR",
+																	"TIMESTAMP",
 																}),
 															},
 														},
@@ -911,6 +914,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 																	"BOOLEAN",
 																	"DOUBLE",
 																	"VARCHAR",
+																	"TIMESTAMP",
 																}),
 															},
 														},

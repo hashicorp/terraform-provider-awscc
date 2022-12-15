@@ -131,6 +131,10 @@
       "type": "string",
       "description": "The identifier of the DB cluster that the instance will belong to."
     },
+    "DBClusterSnapshotIdentifier": {
+      "type": "string",
+      "description": "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .\n\nConstraints:\n * Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n * Can't be specified when DBSnapshotIdentifier is specified.\n * Must be specified when DBSnapshotIdentifier isn't specified.\n * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.\n * Can't be the identifier of an Aurora DB cluster snapshot.\n * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot."
+    },
     "DBInstanceArn": {
       "type": "string",
       "description": "The Amazon Resource Name (ARN) for the DB instance."
@@ -312,6 +316,19 @@
       "description": "The open mode of an Oracle read replica. The default is open-read-only.",
       "type": "string"
     },
+    "RestoreTime": {
+      "description": "The date and time to restore from.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "SourceDbiResourceId": {
+      "type": "string",
+      "description": "The resource ID of the source DB instance from which to restore."
+    },
+    "SourceDBInstanceAutomatedBackupsArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore."
+    },
     "SourceDBInstanceIdentifier": {
       "type": "string",
       "description": "If you want to create a Read Replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of Read Replicas."
@@ -357,6 +374,10 @@
       "type": "boolean",
       "description": "A value that indicates whether the DB instance class of the DB instance uses its default processor features."
     },
+    "UseLatestRestorableTime": {
+      "type": "boolean",
+      "description": "A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time."
+    },
     "VPCSecurityGroups": {
       "type": "array",
       "uniqueItems": true,
@@ -369,11 +390,13 @@
   "additionalProperties": false,
   "propertyTransform": {
     "/properties/DBClusterIdentifier": "$lowercase(DBClusterIdentifier)",
+    "/properties/DBClusterSnapshotIdentifier": "$lowercase(DBClusterSnapshotIdentifier)",
     "/properties/DBInstanceIdentifier": "$lowercase(DBInstanceIdentifier)",
     "/properties/DBParameterGroupName": "$lowercase(DBParameterGroupName)",
     "/properties/DBSubnetGroupName": "$lowercase(DBSubnetGroupName)",
     "/properties/DBSnapshotIdentifier": "$lowercase(DBSnapshotIdentifier)",
     "/properties/OptionGroupName": "$lowercase(OptionGroupName)",
+    "/properties/SourceDBInstanceAutomatedBackupsArn": "$lowercase(SourceDBInstanceAutomatedBackupsArn)",
     "/properties/SourceDBInstanceIdentifier": "$lowercase(SourceDBInstanceIdentifier)"
   },
   "createOnlyProperties": [
@@ -392,6 +415,7 @@
     "/properties/Timezone"
   ],
   "conditionalCreateOnlyProperties": [
+    "/properties/DBClusterSnapshotIdentifier",
     "/properties/DBSnapshotIdentifier",
     "/properties/AutoMinorVersionUpgrade",
     "/properties/AvailabilityZone",
@@ -401,8 +425,12 @@
     "/properties/MultiAZ",
     "/properties/PerformanceInsightsKMSKeyId",
     "/properties/PreferredMaintenanceWindow",
+    "/properties/RestoreTime",
+    "/properties/SourceDBInstanceAutomatedBackupsArn",
     "/properties/SourceDBInstanceIdentifier",
-    "/properties/StorageType"
+    "/properties/SourceDbiResourceId",
+    "/properties/StorageType",
+    "/properties/UseLatestRestorableTime"
   ],
   "deprecatedProperties": [
     "/properties/TdeCredentialArn",
@@ -412,9 +440,13 @@
     "/properties/DBSnapshotIdentifier",
     "/properties/MasterUserPassword",
     "/properties/Port",
+    "/properties/RestoreTime",
+    "/properties/SourceDBInstanceAutomatedBackupsArn",
     "/properties/SourceDBInstanceIdentifier",
+    "/properties/SourceDbiResourceId",
     "/properties/SourceRegion",
-    "/properties/TdeCredentialPassword"
+    "/properties/TdeCredentialPassword",
+    "/properties/UseLatestRestorableTime"
   ],
   "readOnlyProperties": [
     "/properties/Endpoint/Address",
@@ -450,7 +482,8 @@
         "rds:DescribeDBSnapshots",
         "rds:ModifyDBInstance",
         "rds:RebootDBInstance",
-        "rds:RestoreDBInstanceFromDBSnapshot"
+        "rds:RestoreDBInstanceFromDBSnapshot",
+        "rds:RestoreDBInstanceToPointInTime"
       ],
       "timeoutInMinutes": 2160
     },

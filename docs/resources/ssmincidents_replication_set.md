@@ -22,6 +22,7 @@ Resource type definition for AWS::SSMIncidents::ReplicationSet
 ### Optional
 
 - `deletion_protected` (Boolean) Configures the ReplicationSet deletion protection.
+- `tags` (Attributes Set) The tags to apply to the replication set. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -42,6 +43,16 @@ Optional:
 Required:
 
 - `sse_kms_key_id` (String) The ARN of the ReplicationSet.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

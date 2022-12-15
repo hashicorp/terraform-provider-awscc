@@ -500,7 +500,8 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 			//	                        "BIGINT",
 			//	                        "BOOLEAN",
 			//	                        "DOUBLE",
-			//	                        "VARCHAR"
+			//	                        "VARCHAR",
+			//	                        "TIMESTAMP"
 			//	                      ],
 			//	                      "type": "string"
 			//	                    },
@@ -556,7 +557,8 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 			//	                      "BIGINT",
 			//	                      "BOOLEAN",
 			//	                      "DOUBLE",
-			//	                      "VARCHAR"
+			//	                      "VARCHAR",
+			//	                      "TIMESTAMP"
 			//	                    ],
 			//	                    "type": "string"
 			//	                  },

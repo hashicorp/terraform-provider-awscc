@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 650 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 656 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -539,6 +539,16 @@ resource_schema "aws_codeguruprofiler_profiling_group" {
 resource_schema "aws_codegurureviewer_repository_association" {
   cloudformation_type_name               = "AWS::CodeGuruReviewer::RepositoryAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_codepipeline_custom_action_type" {
+  cloudformation_type_name = "AWS::CodePipeline::CustomActionType"
+
+  # Top-level "Id" property is not a primary identifier.
+  # Top-level property Provider conflicts with Terraform meta-argument: provider.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -1096,12 +1106,18 @@ resource_schema "aws_elasticache_user_group" {
 }
 
 resource_schema "aws_elasticbeanstalk_application" {
-  cloudformation_type_name = "AWS::ElasticBeanstalk::Application"
+ cloudformation_type_name = "AWS::ElasticBeanstalk::Application"
 }
 
 resource_schema "aws_elasticbeanstalk_application_version" {
-  cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
+ cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
 }
+
+#	* properties.OptionSettings: Additional property arrayType is not allowed
+#	* properties.OptionSettings: Must validate all the schemas (allOf)
+# resource_schema "aws_elasticbeanstalk_configuration_template" {
+#   cloudformation_type_name = "AWS::ElasticBeanstalk::ConfigurationTemplate"
+# }
 
 resource_schema "aws_elasticbeanstalk_environment" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::Environment"
@@ -1124,6 +1140,12 @@ resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
+
+#	* properties.OptionSettings: Additional property arrayType is not allowed
+#	* properties.OptionSettings: Must validate all the schemas (allOf)
+# resource_schema "aws_elasticloadbalancingv2_target_group" {
+#  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::TargetGroup"
+# }
 
 resource_schema "aws_emrserverless_application" {
   cloudformation_type_name = "AWS::EMRServerless::Application"
@@ -1279,6 +1301,10 @@ resource_schema "aws_glue_schema_version" {
 resource_schema "aws_glue_schema_version_metadata" {
   cloudformation_type_name               = "AWS::Glue::SchemaVersionMetadata"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_grafana_workspace" {
+  cloudformation_type_name = "AWS::Grafana::Workspace"
 }
 
 resource_schema "aws_greengrassv2_component_version" {
@@ -1614,6 +1640,11 @@ resource_schema "aws_iottwinmaker_entity" {
 
 resource_schema "aws_iottwinmaker_scene" {
   cloudformation_type_name               = "AWS::IoTTwinMaker::Scene"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_iottwinmaker_sync_job" {
+  cloudformation_type_name               = "AWS::IoTTwinMaker::SyncJob"
   suppress_plural_data_source_generation = true
 }
 
@@ -2114,47 +2145,22 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_opensearchserverless_access_policy" {
   cloudformation_type_name = "AWS::OpenSearchServerless::AccessPolicy"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_collection" {
   cloudformation_type_name = "AWS::OpenSearchServerless::Collection"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_security_config" {
   cloudformation_type_name = "AWS::OpenSearchServerless::SecurityConfig"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_security_policy" {
   cloudformation_type_name = "AWS::OpenSearchServerless::SecurityPolicy"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_vpc_endpoint" {
   cloudformation_type_name = "AWS::OpenSearchServerless::VpcEndpoint"
-
-  # Preview service.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 

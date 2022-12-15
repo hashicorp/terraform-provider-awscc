@@ -115,6 +115,57 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 			),
 			Computed: true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "default": [],
+			//	  "description": "The tags to apply to the replication set.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to tag a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
+			Description: "The tags to apply to the replication set.",
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -136,10 +187,13 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                  "Arn",
 		"deletion_protected":   "DeletionProtected",
+		"key":                  "Key",
 		"region_configuration": "RegionConfiguration",
 		"region_name":          "RegionName",
 		"regions":              "Regions",
 		"sse_kms_key_id":       "SseKmsKeyId",
+		"tags":                 "Tags",
+		"value":                "Value",
 	})
 
 	v, err := NewSingularDataSource(ctx, opts...)

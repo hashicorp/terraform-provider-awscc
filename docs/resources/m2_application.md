@@ -24,6 +24,7 @@ Represents an application that runs on an AWS Mainframe Modernization Environmen
 ### Optional
 
 - `description` (String)
+- `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.
 - `tags` (Map of String)
 
 ### Read-Only

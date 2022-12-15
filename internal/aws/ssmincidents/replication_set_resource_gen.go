@@ -6,6 +6,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -143,6 +144,71 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 				validate.ArrayLenBetween(1, 3),
 			},
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "default": [],
+			//	  "description": "The tags to apply to the replication set.",
+			//	  "insertionOrder": false,
+			//	  "items": {
+			//	    "additionalProperties": false,
+			//	    "description": "A key-value pair to tag a resource.",
+			//	    "properties": {
+			//	      "Key": {
+			//	        "maxLength": 128,
+			//	        "minLength": 1,
+			//	        "pattern": "",
+			//	        "type": "string"
+			//	      },
+			//	      "Value": {
+			//	        "maxLength": 256,
+			//	        "minLength": 1,
+			//	        "type": "string"
+			//	      }
+			//	    },
+			//	    "required": [
+			//	      "Value",
+			//	      "Key"
+			//	    ],
+			//	    "type": "object"
+			//	  },
+			//	  "maxItems": 50,
+			//	  "type": "array",
+			//	  "uniqueItems": true
+			//	}
+			Description: "The tags to apply to the replication set.",
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtMost(50),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.SetValueMust(types.StringType, []attr.Value{})),
+				resource.UseStateForUnknown(),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -168,10 +234,13 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                  "Arn",
 		"deletion_protected":   "DeletionProtected",
+		"key":                  "Key",
 		"region_configuration": "RegionConfiguration",
 		"region_name":          "RegionName",
 		"regions":              "Regions",
 		"sse_kms_key_id":       "SseKmsKeyId",
+		"tags":                 "Tags",
+		"value":                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

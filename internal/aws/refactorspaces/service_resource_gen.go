@@ -137,7 +137,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			//	    "Arn": {
 			//	      "maxLength": 2048,
 			//	      "minLength": 1,
-			//	      "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:\n(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+			//	      "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 			//	      "type": "string"
 			//	    }
 			//	  },
@@ -154,7 +154,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
-							validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:\n(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+							validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 						},
 					},
 				},

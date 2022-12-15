@@ -108,6 +108,7 @@ func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
 			//	    "ONEZONE_IA",
 			//	    "INTELLIGENT_TIERING",
 			//	    "GLACIER",
+			//	    "GLACIER_INSTANT_RETRIEVAL",
 			//	    "DEEP_ARCHIVE"
 			//	  ],
 			//	  "type": "string"

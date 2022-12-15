@@ -271,6 +271,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_glue_schema -cfschema ../service/cloudformation/schemas/AWS_Glue_Schema.json -package glue -- ../aws/glue/schema_resource_gen.go ../aws/glue/schema_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_glue_schema_version -cfschema ../service/cloudformation/schemas/AWS_Glue_SchemaVersion.json -package glue -- ../aws/glue/schema_version_resource_gen.go ../aws/glue/schema_version_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_glue_schema_version_metadata -cfschema ../service/cloudformation/schemas/AWS_Glue_SchemaVersionMetadata.json -package glue -- ../aws/glue/schema_version_metadata_resource_gen.go ../aws/glue/schema_version_metadata_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_grafana_workspace -cfschema ../service/cloudformation/schemas/AWS_Grafana_Workspace.json -package grafana -- ../aws/grafana/workspace_resource_gen.go ../aws/grafana/workspace_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_greengrassv2_component_version -cfschema ../service/cloudformation/schemas/AWS_GreengrassV2_ComponentVersion.json -package greengrassv2 -- ../aws/greengrassv2/component_version_resource_gen.go ../aws/greengrassv2/component_version_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_greengrassv2_deployment -cfschema ../service/cloudformation/schemas/AWS_GreengrassV2_Deployment.json -package greengrassv2 -- ../aws/greengrassv2/deployment_resource_gen.go ../aws/greengrassv2/deployment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_groundstation_dataflow_endpoint_group -cfschema ../service/cloudformation/schemas/AWS_GroundStation_DataflowEndpointGroup.json -package groundstation -- ../aws/groundstation/dataflow_endpoint_group_resource_gen.go ../aws/groundstation/dataflow_endpoint_group_resource_gen_test.go
@@ -335,6 +336,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_iotsitewise_portal -cfschema ../service/cloudformation/schemas/AWS_IoTSiteWise_Portal.json -package iotsitewise -- ../aws/iotsitewise/portal_resource_gen.go ../aws/iotsitewise/portal_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotsitewise_project -cfschema ../service/cloudformation/schemas/AWS_IoTSiteWise_Project.json -package iotsitewise -- ../aws/iotsitewise/project_resource_gen.go ../aws/iotsitewise/project_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iottwinmaker_scene -cfschema ../service/cloudformation/schemas/AWS_IoTTwinMaker_Scene.json -package iottwinmaker -- ../aws/iottwinmaker/scene_resource_gen.go ../aws/iottwinmaker/scene_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_iottwinmaker_sync_job -cfschema ../service/cloudformation/schemas/AWS_IoTTwinMaker_SyncJob.json -package iottwinmaker -- ../aws/iottwinmaker/sync_job_resource_gen.go ../aws/iottwinmaker/sync_job_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iottwinmaker_workspace -cfschema ../service/cloudformation/schemas/AWS_IoTTwinMaker_Workspace.json -package iottwinmaker -- ../aws/iottwinmaker/workspace_resource_gen.go ../aws/iottwinmaker/workspace_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotwireless_destination -cfschema ../service/cloudformation/schemas/AWS_IoTWireless_Destination.json -package iotwireless -- ../aws/iotwireless/destination_resource_gen.go ../aws/iotwireless/destination_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iotwireless_device_profile -cfschema ../service/cloudformation/schemas/AWS_IoTWireless_DeviceProfile.json -package iotwireless -- ../aws/iotwireless/device_profile_resource_gen.go ../aws/iotwireless/device_profile_resource_gen_test.go
@@ -446,6 +448,11 @@
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio_component -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json -package nimblestudio -- ../aws/nimblestudio/studio_component_resource_gen.go ../aws/nimblestudio/studio_component_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_oam_link -cfschema ../service/cloudformation/schemas/AWS_Oam_Link.json -package oam -- ../aws/oam/link_resource_gen.go ../aws/oam/link_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_oam_sink -cfschema ../service/cloudformation/schemas/AWS_Oam_Sink.json -package oam -- ../aws/oam/sink_resource_gen.go ../aws/oam/sink_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_opensearchserverless_access_policy -cfschema ../service/cloudformation/schemas/AWS_OpenSearchServerless_AccessPolicy.json -package opensearchserverless -- ../aws/opensearchserverless/access_policy_resource_gen.go ../aws/opensearchserverless/access_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_opensearchserverless_collection -cfschema ../service/cloudformation/schemas/AWS_OpenSearchServerless_Collection.json -package opensearchserverless -- ../aws/opensearchserverless/collection_resource_gen.go ../aws/opensearchserverless/collection_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_opensearchserverless_security_config -cfschema ../service/cloudformation/schemas/AWS_OpenSearchServerless_SecurityConfig.json -package opensearchserverless -- ../aws/opensearchserverless/security_config_resource_gen.go ../aws/opensearchserverless/security_config_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_opensearchserverless_security_policy -cfschema ../service/cloudformation/schemas/AWS_OpenSearchServerless_SecurityPolicy.json -package opensearchserverless -- ../aws/opensearchserverless/security_policy_resource_gen.go ../aws/opensearchserverless/security_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_opensearchserverless_vpc_endpoint -cfschema ../service/cloudformation/schemas/AWS_OpenSearchServerless_VpcEndpoint.json -package opensearchserverless -- ../aws/opensearchserverless/vpc_endpoint_resource_gen.go ../aws/opensearchserverless/vpc_endpoint_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_account -cfschema ../service/cloudformation/schemas/AWS_Organizations_Account.json -package organizations -- ../aws/organizations/account_resource_gen.go ../aws/organizations/account_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_organizational_unit -cfschema ../service/cloudformation/schemas/AWS_Organizations_OrganizationalUnit.json -package organizations -- ../aws/organizations/organizational_unit_resource_gen.go ../aws/organizations/organizational_unit_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_policy -cfschema ../service/cloudformation/schemas/AWS_Organizations_Policy.json -package organizations -- ../aws/organizations/policy_resource_gen.go ../aws/organizations/policy_resource_gen_test.go
@@ -681,6 +688,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/gamelift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/globalaccelerator"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/glue"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/grafana"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/greengrassv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/groundstation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthlake"
@@ -726,6 +734,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/organizations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"

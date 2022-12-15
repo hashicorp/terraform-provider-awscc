@@ -22,6 +22,7 @@ Data Source schema for AWS::EMRServerless::Application
 ### Read-Only
 
 - `application_id` (String) The ID of the EMR Serverless Application.
+- `architecture` (String) The cpu architecture of an application.
 - `arn` (String) The Amazon Resource Name (ARN) of the EMR Serverless Application.
 - `auto_start_configuration` (Attributes) Configuration for Auto Start of Application. (see [below for nested schema](#nestedatt--auto_start_configuration))
 - `auto_stop_configuration` (Attributes) Configuration for Auto Stop of Application. (see [below for nested schema](#nestedatt--auto_stop_configuration))

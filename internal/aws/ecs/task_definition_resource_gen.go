@@ -395,6 +395,9 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			//	            "ContainerPort": {
 			//	              "type": "integer"
 			//	            },
+			//	            "ContainerPortRange": {
+			//	              "type": "string"
+			//	            },
 			//	            "HostPort": {
 			//	              "type": "integer"
 			//	            },
@@ -1186,6 +1189,15 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								"container_port": {
 									// Property: ContainerPort
 									Type:     types.Int64Type,
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										resource.UseStateForUnknown(),
+									},
+								},
+								"container_port_range": {
+									// Property: ContainerPortRange
+									Type:     types.StringType,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -2249,6 +2261,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"container_name":                 "ContainerName",
 		"container_path":                 "ContainerPath",
 		"container_port":                 "ContainerPort",
+		"container_port_range":           "ContainerPortRange",
 		"cpu":                            "Cpu",
 		"cpu_architecture":               "CpuArchitecture",
 		"credentials_parameter":          "CredentialsParameter",

@@ -317,6 +317,23 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				resource.RequiresReplace(),
 			},
 		},
+		"db_system_id": {
+			// Property: DBSystemId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "Reserved for future use.",
+			//	  "type": "string"
+			//	}
+			Description: "Reserved for future use.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"database_name": {
 			// Property: DatabaseName
 			// CloudFormation resource type schema:
@@ -878,6 +895,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			//	      "description": "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe minimum capacity must be less than or equal to the maximum capacity.",
 			//	      "type": "integer"
 			//	    },
+			//	    "SecondsBeforeTimeout": {
+			//	      "description": "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.\nThe default is 300.",
+			//	      "type": "integer"
+			//	    },
 			//	    "SecondsUntilAutoPause": {
 			//	      "description": "The time, in seconds, before an Aurora DB cluster in serverless mode is paused.",
 			//	      "type": "integer"
@@ -915,6 +936,16 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					"min_capacity": {
 						// Property: MinCapacity
 						Description: "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe minimum capacity must be less than or equal to the maximum capacity.",
+						Type:        types.Int64Type,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
+					"seconds_before_timeout": {
+						// Property: SecondsBeforeTimeout
+						Description: "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.\nThe default is 300.",
 						Type:        types.Int64Type,
 						Optional:    true,
 						Computed:    true,
@@ -1247,6 +1278,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"db_cluster_resource_id":                "DBClusterResourceId",
 		"db_instance_parameter_group_name":      "DBInstanceParameterGroupName",
 		"db_subnet_group_name":                  "DBSubnetGroupName",
+		"db_system_id":                          "DBSystemId",
 		"deletion_protection":                   "DeletionProtection",
 		"domain":                                "Domain",
 		"domain_iam_role_name":                  "DomainIAMRoleName",
@@ -1281,6 +1313,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"restore_type":                          "RestoreType",
 		"role_arn":                              "RoleArn",
 		"scaling_configuration":                 "ScalingConfiguration",
+		"seconds_before_timeout":                "SecondsBeforeTimeout",
 		"seconds_until_auto_pause":              "SecondsUntilAutoPause",
 		"serverless_v2_scaling_configuration":   "ServerlessV2ScalingConfiguration",
 		"snapshot_identifier":                   "SnapshotIdentifier",

@@ -3,6 +3,14 @@
   "description": "Resource schema for AWS::EMRServerless::Application Type",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
+    "Architecture": {
+      "description": "The cpu architecture of an application.",
+      "enum": [
+        "ARM64",
+        "X86_64"
+      ],
+      "type": "string"
+    },
     "InitialCapacityConfigMap": {
       "type": "array",
       "uniqueItems": true,
@@ -216,6 +224,9 @@
     }
   },
   "properties": {
+    "Architecture": {
+      "$ref": "#/definitions/Architecture"
+    },
     "Name": {
       "description": "User friendly Application name.",
       "type": "string",

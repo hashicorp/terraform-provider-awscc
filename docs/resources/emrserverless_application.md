@@ -22,6 +22,7 @@ Resource schema for AWS::EMRServerless::Application Type
 
 ### Optional
 
+- `architecture` (String) The cpu architecture of an application.
 - `auto_start_configuration` (Attributes) Configuration for Auto Start of Application. (see [below for nested schema](#nestedatt--auto_start_configuration))
 - `auto_stop_configuration` (Attributes) Configuration for Auto Stop of Application. (see [below for nested schema](#nestedatt--auto_stop_configuration))
 - `initial_capacity` (Attributes Set) Initial capacity initialized when an Application is started. (see [below for nested schema](#nestedatt--initial_capacity))

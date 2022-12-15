@@ -34,6 +34,22 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"architecture": {
+			// Property: Architecture
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The cpu architecture of an application.",
+			//	  "enum": [
+			//	    "ARM64",
+			//	    "X86_64"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Description: "The cpu architecture of an application.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -479,6 +495,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":           "ApplicationId",
+		"architecture":             "Architecture",
 		"arn":                      "Arn",
 		"auto_start_configuration": "AutoStartConfiguration",
 		"auto_stop_configuration":  "AutoStopConfiguration",

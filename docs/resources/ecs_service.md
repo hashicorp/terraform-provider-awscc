@@ -61,9 +61,20 @@ Optional:
 
 Optional:
 
+- `alarms` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
 - `deployment_circuit_breaker` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
 - `maximum_percent` (Number)
 - `minimum_healthy_percent` (Number)
+
+<a id="nestedatt--deployment_configuration--alarms"></a>
+### Nested Schema for `deployment_configuration.alarms`
+
+Required:
+
+- `alarm_names` (List of String)
+- `enable` (Boolean)
+- `rollback` (Boolean)
+
 
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker"></a>
 ### Nested Schema for `deployment_configuration.deployment_circuit_breaker`
