@@ -39,6 +39,32 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"architecture": {
+			// Property: Architecture
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The cpu architecture of an application.",
+			//	  "enum": [
+			//	    "ARM64",
+			//	    "X86_64"
+			//	  ],
+			//	  "type": "string"
+			//	}
+			Description: "The cpu architecture of an application.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ARM64",
+					"X86_64",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -613,6 +639,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":           "ApplicationId",
+		"architecture":             "Architecture",
 		"arn":                      "Arn",
 		"auto_start_configuration": "AutoStartConfiguration",
 		"auto_stop_configuration":  "AutoStopConfiguration",

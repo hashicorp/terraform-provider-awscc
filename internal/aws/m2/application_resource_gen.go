@@ -138,6 +138,27 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				resource.RequiresReplace(),
 			},
 		},
+		"kms_key_id": {
+			// Property: KmsKeyId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.",
+			//	  "maxLength": 2048,
+			//	  "type": "string"
+			//	}
+			Description: "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtMost(2048),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+				resource.RequiresReplace(),
+			},
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -208,6 +229,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"definition":      "Definition",
 		"description":     "Description",
 		"engine_type":     "EngineType",
+		"kms_key_id":      "KmsKeyId",
 		"name":            "Name",
 		"s3_location":     "S3Location",
 		"tags":            "Tags",

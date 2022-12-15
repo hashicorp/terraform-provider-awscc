@@ -102,6 +102,29 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			//	{
 			//	  "additionalProperties": false,
 			//	  "properties": {
+			//	    "Alarms": {
+			//	      "additionalProperties": false,
+			//	      "properties": {
+			//	        "AlarmNames": {
+			//	          "items": {
+			//	            "type": "string"
+			//	          },
+			//	          "type": "array"
+			//	        },
+			//	        "Enable": {
+			//	          "type": "boolean"
+			//	        },
+			//	        "Rollback": {
+			//	          "type": "boolean"
+			//	        }
+			//	      },
+			//	      "required": [
+			//	        "AlarmNames",
+			//	        "Rollback",
+			//	        "Enable"
+			//	      ],
+			//	      "type": "object"
+			//	    },
 			//	    "DeploymentCircuitBreaker": {
 			//	      "additionalProperties": false,
 			//	      "properties": {
@@ -129,6 +152,33 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			//	}
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"alarms": {
+						// Property: Alarms
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"alarm_names": {
+									// Property: AlarmNames
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
+								},
+								"enable": {
+									// Property: Enable
+									Type:     types.BoolType,
+									Required: true,
+								},
+								"rollback": {
+									// Property: Rollback
+									Type:     types.BoolType,
+									Required: true,
+								},
+							},
+						),
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							resource.UseStateForUnknown(),
+						},
+					},
 					"deployment_circuit_breaker": {
 						// Property: DeploymentCircuitBreaker
 						Attributes: tfsdk.SingleNestedAttributes(
@@ -1092,6 +1142,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_names":                       "AlarmNames",
+		"alarms":                            "Alarms",
 		"assign_public_ip":                  "AssignPublicIp",
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"base":                              "Base",

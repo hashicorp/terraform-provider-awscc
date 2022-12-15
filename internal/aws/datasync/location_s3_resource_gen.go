@@ -131,6 +131,7 @@ func locationS3Resource(ctx context.Context) (resource.Resource, error) {
 			//	    "ONEZONE_IA",
 			//	    "INTELLIGENT_TIERING",
 			//	    "GLACIER",
+			//	    "GLACIER_INSTANT_RETRIEVAL",
 			//	    "DEEP_ARCHIVE"
 			//	  ],
 			//	  "type": "string"
@@ -146,6 +147,7 @@ func locationS3Resource(ctx context.Context) (resource.Resource, error) {
 					"ONEZONE_IA",
 					"INTELLIGENT_TIERING",
 					"GLACIER",
+					"GLACIER_INSTANT_RETRIEVAL",
 					"DEEP_ARCHIVE",
 				}),
 			},

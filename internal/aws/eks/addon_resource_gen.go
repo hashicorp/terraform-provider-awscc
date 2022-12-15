@@ -94,6 +94,26 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 				resource.RequiresReplace(),
 			},
 		},
+		"configuration_values": {
+			// Property: ConfigurationValues
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The configuration values to use with the add-on",
+			//	  "minLength": 1,
+			//	  "type": "string"
+			//	}
+			Description: "The configuration values to use with the add-on",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"resolve_conflicts": {
 			// Property: ResolveConflicts
 			// CloudFormation resource type schema:
@@ -234,6 +254,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		"addon_version":            "AddonVersion",
 		"arn":                      "Arn",
 		"cluster_name":             "ClusterName",
+		"configuration_values":     "ConfigurationValues",
 		"key":                      "Key",
 		"resolve_conflicts":        "ResolveConflicts",
 		"service_account_role_arn": "ServiceAccountRoleArn",

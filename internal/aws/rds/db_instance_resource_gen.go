@@ -244,6 +244,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				resource.RequiresReplace(),
 			},
 		},
+		"db_cluster_snapshot_identifier": {
+			// Property: DBClusterSnapshotIdentifier
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .\n\nConstraints:\n * Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n * Can't be specified when DBSnapshotIdentifier is specified.\n * Must be specified when DBSnapshotIdentifier isn't specified.\n * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.\n * Can't be the identifier of an Aurora DB cluster snapshot.\n * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
+			//	  "type": "string"
+			//	}
+			Description: "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .\n\nConstraints:\n * Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n * Can't be specified when DBSnapshotIdentifier is specified.\n * Must be specified when DBSnapshotIdentifier isn't specified.\n * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.\n * Can't be the identifier of an Aurora DB cluster snapshot.\n * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+		},
 		"db_instance_arn": {
 			// Property: DBInstanceArn
 			// CloudFormation resource type schema:
@@ -1024,6 +1040,44 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"restore_time": {
+			// Property: RestoreTime
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The date and time to restore from.",
+			//	  "format": "date-time",
+			//	  "type": "string"
+			//	}
+			Description: "The date and time to restore from.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IsRFC3339Time(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+			// RestoreTime is a write-only property.
+		},
+		"source_db_instance_automated_backups_arn": {
+			// Property: SourceDBInstanceAutomatedBackupsArn
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.",
+			//	  "type": "string"
+			//	}
+			Description: "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+			// SourceDBInstanceAutomatedBackupsArn is a write-only property.
+		},
 		"source_db_instance_identifier": {
 			// Property: SourceDBInstanceIdentifier
 			// CloudFormation resource type schema:
@@ -1040,6 +1094,23 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 			// SourceDBInstanceIdentifier is a write-only property.
+		},
+		"source_dbi_resource_id": {
+			// Property: SourceDbiResourceId
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "The resource ID of the source DB instance from which to restore.",
+			//	  "type": "string"
+			//	}
+			Description: "The resource ID of the source DB instance from which to restore.",
+			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+			// SourceDbiResourceId is a write-only property.
 		},
 		"source_region": {
 			// Property: SourceRegion
@@ -1240,6 +1311,23 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				resource.UseStateForUnknown(),
 			},
 		},
+		"use_latest_restorable_time": {
+			// Property: UseLatestRestorableTime
+			// CloudFormation resource type schema:
+			//
+			//	{
+			//	  "description": "A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.",
+			//	  "type": "boolean"
+			//	}
+			Description: "A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.",
+			Type:        types.BoolType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				resource.UseStateForUnknown(),
+			},
+			// UseLatestRestorableTime is a write-only property.
+		},
 		"vpc_security_groups": {
 			// Property: VPCSecurityGroups
 			// CloudFormation resource type schema:
@@ -1286,84 +1374,93 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":                               "Address",
-		"allocated_storage":                     "AllocatedStorage",
-		"allow_major_version_upgrade":           "AllowMajorVersionUpgrade",
-		"associated_roles":                      "AssociatedRoles",
-		"auto_minor_version_upgrade":            "AutoMinorVersionUpgrade",
-		"availability_zone":                     "AvailabilityZone",
-		"backup_retention_period":               "BackupRetentionPeriod",
-		"ca_certificate_identifier":             "CACertificateIdentifier",
-		"character_set_name":                    "CharacterSetName",
-		"copy_tags_to_snapshot":                 "CopyTagsToSnapshot",
-		"custom_iam_instance_profile":           "CustomIAMInstanceProfile",
-		"db_cluster_identifier":                 "DBClusterIdentifier",
-		"db_instance_arn":                       "DBInstanceArn",
-		"db_instance_class":                     "DBInstanceClass",
-		"db_instance_identifier":                "DBInstanceIdentifier",
-		"db_name":                               "DBName",
-		"db_parameter_group_name":               "DBParameterGroupName",
-		"db_security_groups":                    "DBSecurityGroups",
-		"db_snapshot_identifier":                "DBSnapshotIdentifier",
-		"db_subnet_group_name":                  "DBSubnetGroupName",
-		"dbi_resource_id":                       "DbiResourceId",
-		"delete_automated_backups":              "DeleteAutomatedBackups",
-		"deletion_protection":                   "DeletionProtection",
-		"domain":                                "Domain",
-		"domain_iam_role_name":                  "DomainIAMRoleName",
-		"enable_cloudwatch_logs_exports":        "EnableCloudwatchLogsExports",
-		"enable_iam_database_authentication":    "EnableIAMDatabaseAuthentication",
-		"enable_performance_insights":           "EnablePerformanceInsights",
-		"endpoint":                              "Endpoint",
-		"engine":                                "Engine",
-		"engine_version":                        "EngineVersion",
-		"feature_name":                          "FeatureName",
-		"hosted_zone_id":                        "HostedZoneId",
-		"iops":                                  "Iops",
-		"key":                                   "Key",
-		"kms_key_id":                            "KmsKeyId",
-		"license_model":                         "LicenseModel",
-		"master_user_password":                  "MasterUserPassword",
-		"master_username":                       "MasterUsername",
-		"max_allocated_storage":                 "MaxAllocatedStorage",
-		"monitoring_interval":                   "MonitoringInterval",
-		"monitoring_role_arn":                   "MonitoringRoleArn",
-		"multi_az":                              "MultiAZ",
-		"name":                                  "Name",
-		"nchar_character_set_name":              "NcharCharacterSetName",
-		"network_type":                          "NetworkType",
-		"option_group_name":                     "OptionGroupName",
-		"performance_insights_kms_key_id":       "PerformanceInsightsKMSKeyId",
-		"performance_insights_retention_period": "PerformanceInsightsRetentionPeriod",
-		"port":                                  "Port",
-		"preferred_backup_window":               "PreferredBackupWindow",
-		"preferred_maintenance_window":          "PreferredMaintenanceWindow",
-		"processor_features":                    "ProcessorFeatures",
-		"promotion_tier":                        "PromotionTier",
-		"publicly_accessible":                   "PubliclyAccessible",
-		"replica_mode":                          "ReplicaMode",
-		"role_arn":                              "RoleArn",
-		"source_db_instance_identifier":         "SourceDBInstanceIdentifier",
-		"source_region":                         "SourceRegion",
-		"storage_encrypted":                     "StorageEncrypted",
-		"storage_throughput":                    "StorageThroughput",
-		"storage_type":                          "StorageType",
-		"tags":                                  "Tags",
-		"tde_credential_arn":                    "TdeCredentialArn",
-		"tde_credential_password":               "TdeCredentialPassword",
-		"timezone":                              "Timezone",
-		"use_default_processor_features":        "UseDefaultProcessorFeatures",
-		"value":                                 "Value",
-		"vpc_security_groups":                   "VPCSecurityGroups",
+		"address":                                  "Address",
+		"allocated_storage":                        "AllocatedStorage",
+		"allow_major_version_upgrade":              "AllowMajorVersionUpgrade",
+		"associated_roles":                         "AssociatedRoles",
+		"auto_minor_version_upgrade":               "AutoMinorVersionUpgrade",
+		"availability_zone":                        "AvailabilityZone",
+		"backup_retention_period":                  "BackupRetentionPeriod",
+		"ca_certificate_identifier":                "CACertificateIdentifier",
+		"character_set_name":                       "CharacterSetName",
+		"copy_tags_to_snapshot":                    "CopyTagsToSnapshot",
+		"custom_iam_instance_profile":              "CustomIAMInstanceProfile",
+		"db_cluster_identifier":                    "DBClusterIdentifier",
+		"db_cluster_snapshot_identifier":           "DBClusterSnapshotIdentifier",
+		"db_instance_arn":                          "DBInstanceArn",
+		"db_instance_class":                        "DBInstanceClass",
+		"db_instance_identifier":                   "DBInstanceIdentifier",
+		"db_name":                                  "DBName",
+		"db_parameter_group_name":                  "DBParameterGroupName",
+		"db_security_groups":                       "DBSecurityGroups",
+		"db_snapshot_identifier":                   "DBSnapshotIdentifier",
+		"db_subnet_group_name":                     "DBSubnetGroupName",
+		"dbi_resource_id":                          "DbiResourceId",
+		"delete_automated_backups":                 "DeleteAutomatedBackups",
+		"deletion_protection":                      "DeletionProtection",
+		"domain":                                   "Domain",
+		"domain_iam_role_name":                     "DomainIAMRoleName",
+		"enable_cloudwatch_logs_exports":           "EnableCloudwatchLogsExports",
+		"enable_iam_database_authentication":       "EnableIAMDatabaseAuthentication",
+		"enable_performance_insights":              "EnablePerformanceInsights",
+		"endpoint":                                 "Endpoint",
+		"engine":                                   "Engine",
+		"engine_version":                           "EngineVersion",
+		"feature_name":                             "FeatureName",
+		"hosted_zone_id":                           "HostedZoneId",
+		"iops":                                     "Iops",
+		"key":                                      "Key",
+		"kms_key_id":                               "KmsKeyId",
+		"license_model":                            "LicenseModel",
+		"master_user_password":                     "MasterUserPassword",
+		"master_username":                          "MasterUsername",
+		"max_allocated_storage":                    "MaxAllocatedStorage",
+		"monitoring_interval":                      "MonitoringInterval",
+		"monitoring_role_arn":                      "MonitoringRoleArn",
+		"multi_az":                                 "MultiAZ",
+		"name":                                     "Name",
+		"nchar_character_set_name":                 "NcharCharacterSetName",
+		"network_type":                             "NetworkType",
+		"option_group_name":                        "OptionGroupName",
+		"performance_insights_kms_key_id":          "PerformanceInsightsKMSKeyId",
+		"performance_insights_retention_period":    "PerformanceInsightsRetentionPeriod",
+		"port":                                     "Port",
+		"preferred_backup_window":                  "PreferredBackupWindow",
+		"preferred_maintenance_window":             "PreferredMaintenanceWindow",
+		"processor_features":                       "ProcessorFeatures",
+		"promotion_tier":                           "PromotionTier",
+		"publicly_accessible":                      "PubliclyAccessible",
+		"replica_mode":                             "ReplicaMode",
+		"restore_time":                             "RestoreTime",
+		"role_arn":                                 "RoleArn",
+		"source_db_instance_automated_backups_arn": "SourceDBInstanceAutomatedBackupsArn",
+		"source_db_instance_identifier":            "SourceDBInstanceIdentifier",
+		"source_dbi_resource_id":                   "SourceDbiResourceId",
+		"source_region":                            "SourceRegion",
+		"storage_encrypted":                        "StorageEncrypted",
+		"storage_throughput":                       "StorageThroughput",
+		"storage_type":                             "StorageType",
+		"tags":                                     "Tags",
+		"tde_credential_arn":                       "TdeCredentialArn",
+		"tde_credential_password":                  "TdeCredentialPassword",
+		"timezone":                                 "Timezone",
+		"use_default_processor_features":           "UseDefaultProcessorFeatures",
+		"use_latest_restorable_time":               "UseLatestRestorableTime",
+		"value":                                    "Value",
+		"vpc_security_groups":                      "VPCSecurityGroups",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DBSnapshotIdentifier",
 		"/properties/MasterUserPassword",
 		"/properties/Port",
+		"/properties/RestoreTime",
+		"/properties/SourceDBInstanceAutomatedBackupsArn",
 		"/properties/SourceDBInstanceIdentifier",
+		"/properties/SourceDbiResourceId",
 		"/properties/SourceRegion",
 		"/properties/TdeCredentialPassword",
+		"/properties/UseLatestRestorableTime",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 
