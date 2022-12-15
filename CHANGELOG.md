@@ -1,4 +1,28 @@
 ## 0.43.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_grafana_workspace`
+* **New Data Source:** `awscc_grafana_workspaces`
+* **New Data Source:** `awscc_iottwinmaker_sync_job`
+* **New Data Source:** `awscc_opensearchserverless_access_policies`
+* **New Data Source:** `awscc_opensearchserverless_access_policy`
+* **New Data Source:** `awscc_opensearchserverless_collection`
+* **New Data Source:** `awscc_opensearchserverless_collections`
+* **New Data Source:** `awscc_opensearchserverless_security_config`
+* **New Data Source:** `awscc_opensearchserverless_security_configs`
+* **New Data Source:** `awscc_opensearchserverless_security_policies`
+* **New Data Source:** `awscc_opensearchserverless_security_policy`
+* **New Data Source:** `awscc_opensearchserverless_vpc_endpoint`
+* **New Data Source:** `awscc_opensearchserverless_vpc_endpoints`
+* **New Resource:** `awscc_grafana_workspace`
+* **New Resource:** `awscc_iottwinmaker_sync_job`
+* **New Resource:** `awscc_opensearchserverless_access_policy`
+* **New Resource:** `awscc_opensearchserverless_collection`
+* **New Resource:** `awscc_opensearchserverless_security_config`
+* **New Resource:** `awscc_opensearchserverless_security_policy`
+* **New Resource:** `awscc_opensearchserverless_vpc_endpoint`
+
 ## [0.42.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.42.0) (December  8, 2022)
 
 FEATURES:
