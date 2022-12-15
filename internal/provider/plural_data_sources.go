@@ -63,6 +63,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeartifact_repositories -cftype AWS::CodeArtifact::Repository -package codeartifact ../aws/codeartifact/repository_plural_data_source_gen.go ../aws/codeartifact/repository_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codedeploy_deployment_configs -cftype AWS::CodeDeploy::DeploymentConfig -package codedeploy ../aws/codedeploy/deployment_config_plural_data_source_gen.go ../aws/codedeploy/deployment_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeguruprofiler_profiling_groups -cftype AWS::CodeGuruProfiler::ProfilingGroup -package codeguruprofiler ../aws/codeguruprofiler/profiling_group_plural_data_source_gen.go ../aws/codeguruprofiler/profiling_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_codepipeline_custom_action_types -cftype AWS::CodePipeline::CustomActionType -package codepipeline ../aws/codepipeline/custom_action_type_plural_data_source_gen.go ../aws/codepipeline/custom_action_type_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarconnections_connections -cftype AWS::CodeStarConnections::Connection -package codestarconnections ../aws/codestarconnections/connection_plural_data_source_gen.go ../aws/codestarconnections/connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarnotifications_notification_rules -cftype AWS::CodeStarNotifications::NotificationRule -package codestarnotifications ../aws/codestarnotifications/notification_rule_plural_data_source_gen.go ../aws/codestarnotifications/notification_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_aggregation_authorizations -cftype AWS::Config::AggregationAuthorization -package config ../aws/config/aggregation_authorization_plural_data_source_gen.go ../aws/config/aggregation_authorization_plural_data_source_gen_test.go
@@ -186,6 +187,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_globalaccelerator_accelerators -cftype AWS::GlobalAccelerator::Accelerator -package globalaccelerator ../aws/globalaccelerator/accelerator_plural_data_source_gen.go ../aws/globalaccelerator/accelerator_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_registries -cftype AWS::Glue::Registry -package glue ../aws/glue/registry_plural_data_source_gen.go ../aws/glue/registry_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_schemas -cftype AWS::Glue::Schema -package glue ../aws/glue/schema_plural_data_source_gen.go ../aws/glue/schema_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_grafana_workspaces -cftype AWS::Grafana::Workspace -package grafana ../aws/grafana/workspace_plural_data_source_gen.go ../aws/grafana/workspace_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_greengrassv2_component_versions -cftype AWS::GreengrassV2::ComponentVersion -package greengrassv2 ../aws/greengrassv2/component_version_plural_data_source_gen.go ../aws/greengrassv2/component_version_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_greengrassv2_deployments -cftype AWS::GreengrassV2::Deployment -package greengrassv2 ../aws/greengrassv2/deployment_plural_data_source_gen.go ../aws/greengrassv2/deployment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_groundstation_dataflow_endpoint_groups -cftype AWS::GroundStation::DataflowEndpointGroup -package groundstation ../aws/groundstation/dataflow_endpoint_group_plural_data_source_gen.go ../aws/groundstation/dataflow_endpoint_group_plural_data_source_gen_test.go
@@ -454,6 +456,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeartifact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codedeploy"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeguruprofiler"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codepipeline"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarconnections"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarnotifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
@@ -485,6 +488,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/gamelift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/globalaccelerator"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/glue"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/grafana"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/greengrassv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/groundstation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthlake"
