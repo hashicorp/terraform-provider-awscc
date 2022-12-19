@@ -6,6 +6,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -27,29 +29,45 @@ func TestUniqueItemsValidator(t *testing.T) {
 			"val": types.StringType,
 		},
 	}
+	schemaStringList := schema.Schema{
+		Attributes: map[string]schema.Attribute{
+			"test": schema.ListAttribute{
+				Required:    true,
+				ElementType: types.StringType,
+			},
+		},
+	}
+	schemaObjectList := schema.Schema{
+		Attributes: map[string]schema.Attribute{
+			"test": schema.ListAttribute{
+				Required:    true,
+				ElementType: objectElementAttrType,
+			},
+		},
+	}
 
 	type testCase struct {
 		val         tftypes.Value
-		f           func(context.Context, tftypes.Value) (attr.Value, error)
+		schema      schema.Schema
 		expectError bool
 	}
 	tests := map[string]testCase{
 		"not a list": {
 			val:         tftypes.NewValue(tftypes.Bool, true),
-			f:           types.BoolType.ValueFromTerraform,
+			schema:      schemaStringList,
 			expectError: true,
 		},
 		"unknown list": {
-			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, tftypes.UnknownValue),
-			f:   types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
+			val:    tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, tftypes.UnknownValue),
+			schema: schemaStringList,
 		},
 		"null list": {
-			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
-			f:   types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
+			val:    tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
+			schema: schemaStringList,
 		},
 		"empty list": {
-			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{}),
-			f:   types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
+			val:    tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{}),
+			schema: schemaStringList,
 		},
 		"unique list of string": {
 			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.String}, []tftypes.Value{
@@ -57,7 +75,7 @@ func TestUniqueItemsValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "beta"),
 				tftypes.NewValue(tftypes.String, "gamma"),
 			}),
-			f: types.ListType{ElemType: types.StringType}.ValueFromTerraform,
+			schema: schemaStringList,
 		},
 		"duplicates in list of string": {
 			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.String}, []tftypes.Value{
@@ -66,7 +84,7 @@ func TestUniqueItemsValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "gamma"),
 				tftypes.NewValue(tftypes.String, "beta"),
 			}),
-			f:           types.ListType{ElemType: types.StringType}.ValueFromTerraform,
+			schema:      schemaStringList,
 			expectError: true,
 		},
 		"unique list of object": {
@@ -87,7 +105,7 @@ func TestUniqueItemsValidator(t *testing.T) {
 					}),
 				},
 			),
-			f: types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			schema: schemaObjectList,
 		},
 		"duplicates in list of object": {
 			val: tftypes.NewValue(
@@ -107,7 +125,7 @@ func TestUniqueItemsValidator(t *testing.T) {
 					}),
 				},
 			),
-			f:           types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			schema:      schemaObjectList,
 			expectError: true,
 		},
 		"unique list of object with unknowns": {
@@ -132,7 +150,7 @@ func TestUniqueItemsValidator(t *testing.T) {
 					}),
 				},
 			),
-			f: types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			schema: schemaObjectList,
 		},
 		"duplicates in list of object with unknowns": {
 			val: tftypes.NewValue(
@@ -156,7 +174,7 @@ func TestUniqueItemsValidator(t *testing.T) {
 					}),
 				},
 			),
-			f:           types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			schema:      schemaObjectList,
 			expectError: true,
 		},
 	}
@@ -165,18 +183,16 @@ func TestUniqueItemsValidator(t *testing.T) {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
-			val, err := test.f(ctx, test.val)
 
-			if err != nil {
-				t.Fatalf("got unexpected error: %s", err)
+			request := validator.ListRequest{
+				Config: tfsdk.Config{
+					Raw:    test.val,
+					Schema: test.schema,
+				},
+				Path: path.Root("test"),
 			}
-
-			request := tfsdk.ValidateAttributeRequest{
-				AttributePath:   path.Root("test"),
-				AttributeConfig: val,
-			}
-			response := tfsdk.ValidateAttributeResponse{}
-			UniqueItems().Validate(ctx, request, &response)
+			response := validator.ListResponse{}
+			UniqueItems().ValidateList(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")

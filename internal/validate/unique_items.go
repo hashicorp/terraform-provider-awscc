@@ -3,8 +3,7 @@ package validate
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -22,27 +21,17 @@ func (v uniqueItemsValidator) MarkdownDescription(ctx context.Context) string {
 }
 
 // Validate performs the validation.
-func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var list types.List
-
-	diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &list)
-
-	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
-
+func (v uniqueItemsValidator) ValidateList(ctx context.Context, request validator.ListRequest, response *validator.ListResponse) {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
 		return
 	}
 
-	if list.IsNull() || list.IsUnknown() {
-		return
-	}
-
-	for i1, val1 := range list.Elements() {
+	for i1, val1 := range request.ConfigValue.Elements() {
 		val1, err := val1.ToTerraformValue(ctx)
 
 		if err != nil {
 			response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
-				request.AttributePath,
+				request.Path,
 				err,
 			))
 
@@ -53,7 +42,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 			continue
 		}
 
-		for i2, val2 := range list.Elements() {
+		for i2, val2 := range request.ConfigValue.Elements() {
 			if i2 == i1 {
 				continue
 			}
@@ -62,7 +51,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 
 			if err != nil {
 				response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
-					request.AttributePath,
+					request.Path,
 					err,
 				))
 
@@ -75,7 +64,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 
 			if val1.Equal(val2) {
 				response.Diagnostics.AddAttributeError(
-					request.AttributePath,
+					request.Path,
 					"Duplicate value",
 					"duplicate values",
 				)
@@ -87,6 +76,6 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 }
 
 // UniqueItems returns a new unique items validator.
-func UniqueItems() tfsdk.AttributeValidator {
+func UniqueItems() validator.List {
 	return uniqueItemsValidator{}
 }
