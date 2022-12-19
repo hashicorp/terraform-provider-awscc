@@ -236,7 +236,9 @@
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_user_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_UserGroup.json -package elasticache -- ../aws/elasticache/user_group_resource_gen.go ../aws/elasticache/user_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticbeanstalk_application -cfschema ../service/cloudformation/schemas/AWS_ElasticBeanstalk_Application.json -package elasticbeanstalk -- ../aws/elasticbeanstalk/application_resource_gen.go ../aws/elasticbeanstalk/application_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticbeanstalk_application_version -cfschema ../service/cloudformation/schemas/AWS_ElasticBeanstalk_ApplicationVersion.json -package elasticbeanstalk -- ../aws/elasticbeanstalk/application_version_resource_gen.go ../aws/elasticbeanstalk/application_version_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_elasticbeanstalk_configuration_template -cfschema ../service/cloudformation/schemas/AWS_ElasticBeanstalk_ConfigurationTemplate.json -package elasticbeanstalk -- ../aws/elasticbeanstalk/configuration_template_resource_gen.go ../aws/elasticbeanstalk/configuration_template_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticbeanstalk_environment -cfschema ../service/cloudformation/schemas/AWS_ElasticBeanstalk_Environment.json -package elasticbeanstalk -- ../aws/elasticbeanstalk/environment_resource_gen.go ../aws/elasticbeanstalk/environment_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_elasticloadbalancingv2_target_group -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_TargetGroup.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/target_group_resource_gen.go ../aws/elasticloadbalancingv2/target_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_emrserverless_application -cfschema ../service/cloudformation/schemas/AWS_EMRServerless_Application.json -package emrserverless -- ../aws/emrserverless/application_resource_gen.go ../aws/emrserverless/application_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_eventschemas_registry_policy -cfschema ../service/cloudformation/schemas/AWS_EventSchemas_RegistryPolicy.json -package eventschemas -- ../aws/eventschemas/registry_policy_resource_gen.go ../aws/eventschemas/registry_policy_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_api_destination -cfschema ../service/cloudformation/schemas/AWS_Events_ApiDestination.json -package events -- ../aws/events/api_destination_resource_gen.go ../aws/events/api_destination_resource_gen_test.go
@@ -673,6 +675,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticbeanstalk"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticloadbalancingv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrserverless"
