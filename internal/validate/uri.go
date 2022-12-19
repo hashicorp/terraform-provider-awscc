@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/url"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -22,7 +22,7 @@ func (validator uriValidator) MarkdownDescription(ctx context.Context) string {
 }
 
 // Validate performs the validation.
-func (validator uriValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator uriValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
 	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
@@ -30,7 +30,7 @@ func (validator uriValidator) Validate(ctx context.Context, request tfsdk.Valida
 
 	if _, err := url.Parse(s); err != nil {
 		response.Diagnostics.Append(ccdiag.NewInvalidFormatAttributeError(
-			request.AttributePath,
+			request.Path,
 			"expected value to be a URI",
 		))
 
@@ -39,6 +39,6 @@ func (validator uriValidator) Validate(ctx context.Context, request tfsdk.Valida
 }
 
 // ARN returns a new ARN validator.
-func IsURI() tfsdk.AttributeValidator {
+func IsURI() validator.String {
 	return uriValidator{}
 }
