@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticbeanstalk_configuration_template.example <resource ID>
