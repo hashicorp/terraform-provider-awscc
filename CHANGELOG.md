@@ -1,4 +1,14 @@
 ## 0.44.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_elasticbeanstalk_configuration_template`
+* **New Data Source:** `awscc_elasticbeanstalk_configuration_templates`
+* **New Data Source:** `awscc_elasticloadbalancingv2_target_group`
+* **New Data Source:** `awscc_elasticloadbalancingv2_target_groups`
+* **New Resource:** `awscc_elasticbeanstalk_configuration_template`
+* **New Resource:** `awscc_elasticloadbalancingv2_target_group`
+
 ## [0.43.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.43.0) (December 15, 2022)
 
 FEATURES:
