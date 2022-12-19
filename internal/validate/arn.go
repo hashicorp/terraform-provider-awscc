@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -24,7 +24,7 @@ func (validator arnValidator) MarkdownDescription(ctx context.Context) string {
 }
 
 // Validate performs the validation.
-func (validator arnValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator arnValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
 	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
@@ -32,7 +32,7 @@ func (validator arnValidator) Validate(ctx context.Context, request tfsdk.Valida
 
 	if !arn.IsARN(s) {
 		response.Diagnostics.Append(ccdiag.NewInvalidFormatAttributeError(
-			request.AttributePath,
+			request.Path,
 			"expected value to be an ARN",
 		))
 
@@ -41,7 +41,7 @@ func (validator arnValidator) Validate(ctx context.Context, request tfsdk.Valida
 }
 
 // ARN returns a new ARN validator.
-func ARN() tfsdk.AttributeValidator {
+func ARN() validator.String {
 	return arnValidator{}
 }
 
@@ -57,9 +57,9 @@ func (validator iamPolicyARNValidator) MarkdownDescription(ctx context.Context) 
 	return validator.Description(ctx)
 }
 
-func (validator iamPolicyARNValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator iamPolicyARNValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
 	errDiag := ccdiag.NewInvalidFormatAttributeError(
-		request.AttributePath,
+		request.Path,
 		"expected an IAM policy ARN",
 	)
 
@@ -74,11 +74,11 @@ func (validator iamPolicyARNValidator) Validate(ctx context.Context, request tfs
 }
 
 // IAMPolicyARN returns a new string is IAM policy ARN validator.
-func IAMPolicyARN() tfsdk.AttributeValidator {
+func IAMPolicyARN() validator.String {
 	return iamPolicyARNValidator{}
 }
 
-func validateARN(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse, errDiag diag.Diagnostic) (arn.ARN, bool) {
+func validateARN(ctx context.Context, request validator.StringRequest, response *validator.StringResponse, errDiag diag.Diagnostic) (arn.ARN, bool) {
 	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return arn.ARN{}, false
