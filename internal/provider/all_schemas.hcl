@@ -1113,11 +1113,9 @@ resource_schema "aws_elasticbeanstalk_application_version" {
  cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
 }
 
-#	* properties.OptionSettings: Additional property arrayType is not allowed
-#	* properties.OptionSettings: Must validate all the schemas (allOf)
-# resource_schema "aws_elasticbeanstalk_configuration_template" {
-#   cloudformation_type_name = "AWS::ElasticBeanstalk::ConfigurationTemplate"
-# }
+resource_schema "aws_elasticbeanstalk_configuration_template" {
+  cloudformation_type_name = "AWS::ElasticBeanstalk::ConfigurationTemplate"
+}
 
 resource_schema "aws_elasticbeanstalk_environment" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::Environment"
@@ -1141,11 +1139,9 @@ resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   suppress_singular_data_source_generation = true
 }
 
-#	* properties.OptionSettings: Additional property arrayType is not allowed
-#	* properties.OptionSettings: Must validate all the schemas (allOf)
-# resource_schema "aws_elasticloadbalancingv2_target_group" {
-#  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::TargetGroup"
-# }
+resource_schema "aws_elasticloadbalancingv2_target_group" {
+ cloudformation_type_name = "AWS::ElasticLoadBalancingV2::TargetGroup"
+}
 
 resource_schema "aws_emrserverless_application" {
   cloudformation_type_name = "AWS::EMRServerless::Application"

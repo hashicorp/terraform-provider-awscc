@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticloadbalancingv2_target_group.example <resource ID>

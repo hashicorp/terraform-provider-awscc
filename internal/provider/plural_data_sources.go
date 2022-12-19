@@ -162,7 +162,9 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticache_user_groups -cftype AWS::ElastiCache::UserGroup -package elasticache ../aws/elasticache/user_group_plural_data_source_gen.go ../aws/elasticache/user_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticbeanstalk_applications -cftype AWS::ElasticBeanstalk::Application -package elasticbeanstalk ../aws/elasticbeanstalk/application_plural_data_source_gen.go ../aws/elasticbeanstalk/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticbeanstalk_application_versions -cftype AWS::ElasticBeanstalk::ApplicationVersion -package elasticbeanstalk ../aws/elasticbeanstalk/application_version_plural_data_source_gen.go ../aws/elasticbeanstalk/application_version_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticbeanstalk_configuration_templates -cftype AWS::ElasticBeanstalk::ConfigurationTemplate -package elasticbeanstalk ../aws/elasticbeanstalk/configuration_template_plural_data_source_gen.go ../aws/elasticbeanstalk/configuration_template_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticbeanstalk_environments -cftype AWS::ElasticBeanstalk::Environment -package elasticbeanstalk ../aws/elasticbeanstalk/environment_plural_data_source_gen.go ../aws/elasticbeanstalk/environment_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticloadbalancingv2_target_groups -cftype AWS::ElasticLoadBalancingV2::TargetGroup -package elasticloadbalancingv2 ../aws/elasticloadbalancingv2/target_group_plural_data_source_gen.go ../aws/elasticloadbalancingv2/target_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emrserverless_applications -cftype AWS::EMRServerless::Application -package emrserverless ../aws/emrserverless/application_plural_data_source_gen.go ../aws/emrserverless/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_api_destinations -cftype AWS::Events::ApiDestination -package events ../aws/events/api_destination_plural_data_source_gen.go ../aws/events/api_destination_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_archives -cftype AWS::Events::Archive -package events ../aws/events/archive_plural_data_source_gen.go ../aws/events/archive_plural_data_source_gen_test.go
@@ -479,6 +481,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticbeanstalk"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticloadbalancingv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrserverless"
