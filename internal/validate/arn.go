@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
-	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
@@ -25,12 +24,13 @@ func (validator arnValidator) MarkdownDescription(ctx context.Context) string {
 
 // Validate performs the validation.
 func (validator arnValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
-	s, ok := validateString(ctx, request, response)
-	if !ok {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
 		return
 	}
 
-	if !arn.IsARN(s) {
+	value := request.ConfigValue.ValueString()
+
+	if !arn.IsARN(value) {
 		response.Diagnostics.Append(ccdiag.NewInvalidFormatAttributeError(
 			request.Path,
 			"expected value to be an ARN",
@@ -63,8 +63,16 @@ func (validator iamPolicyARNValidator) ValidateString(ctx context.Context, reque
 		"expected an IAM policy ARN",
 	)
 
-	arn, ok := validateARN(ctx, request, response, errDiag)
-	if !ok {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
+		return
+	}
+
+	value := request.ConfigValue.ValueString()
+	arn, err := arn.Parse(value)
+
+	if err != nil {
+		response.Diagnostics.Append(errDiag)
+
 		return
 	}
 
@@ -76,20 +84,4 @@ func (validator iamPolicyARNValidator) ValidateString(ctx context.Context, reque
 // IAMPolicyARN returns a new string is IAM policy ARN validator.
 func IAMPolicyARN() validator.String {
 	return iamPolicyARNValidator{}
-}
-
-func validateARN(ctx context.Context, request validator.StringRequest, response *validator.StringResponse, errDiag diag.Diagnostic) (arn.ARN, bool) {
-	s, ok := validateString(ctx, request, response)
-	if !ok {
-		return arn.ARN{}, false
-	}
-
-	arn, err := arn.Parse(s)
-	if err != nil {
-		response.Diagnostics.Append(errDiag)
-
-		return arn, false
-	}
-
-	return arn, true
 }

@@ -6,8 +6,6 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -26,13 +24,14 @@ func (validator stringIsJsonObjectValidator) MarkdownDescription(ctx context.Con
 
 // Validate performs the validation.
 func (validator stringIsJsonObjectValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
-	s, ok := validateString(ctx, request, response)
-	if !ok {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
 		return
 	}
 
+	value := request.ConfigValue.ValueString()
+
 	// A JSON object starts with a '{'
-	if s[:1] != "{" {
+	if value[:1] != "{" {
 		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.Path,
 			"expected value to be a valid JSON object",
@@ -42,7 +41,7 @@ func (validator stringIsJsonObjectValidator) ValidateString(ctx context.Context,
 
 	// Use json.Unmarshal() instead of just json.Valid() to get the parsing error
 	var i interface{}
-	err := json.Unmarshal([]byte(s), &i)
+	err := json.Unmarshal([]byte(value), &i)
 	if err != nil {
 		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.Path,
@@ -54,21 +53,4 @@ func (validator stringIsJsonObjectValidator) ValidateString(ctx context.Context,
 // StringIsJsonObject returns a new string is JSON validator.
 func StringIsJsonObject() validator.String {
 	return stringIsJsonObjectValidator{}
-}
-
-func validateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) (string, bool) {
-	var s types.String
-	diags := tfsdk.ValueAs(ctx, request.ConfigValue, &s)
-
-	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
-
-		return "", false
-	}
-
-	if s.IsNull() || s.IsUnknown() {
-		return "", false
-	}
-
-	return s.ValueString(), true
 }

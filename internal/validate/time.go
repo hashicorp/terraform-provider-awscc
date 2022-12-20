@@ -24,15 +24,16 @@ func (validator isRFC3339TimeValidator) MarkdownDescription(ctx context.Context)
 
 // Validate performs the validation.
 func (validator isRFC3339TimeValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
-	s, ok := validateString(ctx, request, response)
-	if !ok {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
 		return
 	}
 
-	if _, err := time.Parse(time.RFC3339, s); err != nil {
+	value := request.ConfigValue.ValueString()
+
+	if _, err := time.Parse(time.RFC3339, value); err != nil {
 		response.Diagnostics.Append(diag.NewInvalidFormatAttributeError(
 			request.Path,
-			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", s, err),
+			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", value, err),
 		))
 
 		return

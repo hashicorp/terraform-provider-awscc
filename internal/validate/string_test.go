@@ -5,10 +5,9 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -16,42 +15,30 @@ func TestStringIsJsonValidator(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		val         tftypes.Value
+		val         types.String
 		expectError bool
 	}
 	tests := map[string]testCase{
-		"not a string": {
-			val:         tftypes.NewValue(tftypes.Bool, true),
-			expectError: true,
-		},
 		"unknown string": {
-			val: tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+			val: basetypes.NewStringUnknown(),
 		},
 		"null string": {
-			val: tftypes.NewValue(tftypes.String, nil),
+			val: basetypes.NewStringNull(),
 		},
 		"valid JSON object": {
-			val: tftypes.NewValue(tftypes.String, `{
+			val: basetypes.NewStringValue(`{
 	"key": "value"
 }`),
 		},
 		"parsing error": {
-			val: tftypes.NewValue(tftypes.String, `{
+			val: basetypes.NewStringValue(`{
 	"key": "value",
 }`),
 			expectError: true,
 		},
 		"not an object": {
-			val:         tftypes.NewValue(tftypes.String, "[]"),
+			val:         basetypes.NewStringValue("[]"),
 			expectError: true,
-		},
-	}
-
-	schema := schema.Schema{
-		Attributes: map[string]schema.Attribute{
-			"test": schema.StringAttribute{
-				Required: true,
-			},
 		},
 	}
 
@@ -61,11 +48,8 @@ func TestStringIsJsonValidator(t *testing.T) {
 			ctx := context.TODO()
 
 			request := validator.StringRequest{
-				Config: tfsdk.Config{
-					Raw:    test.val,
-					Schema: schema,
-				},
-				Path: path.Root("test"),
+				ConfigValue: test.val,
+				Path:        path.Root("test"),
 			}
 			response := validator.StringResponse{}
 			StringIsJsonObject().ValidateString(ctx, request, &response)

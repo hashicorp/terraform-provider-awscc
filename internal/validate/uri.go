@@ -23,12 +23,13 @@ func (validator uriValidator) MarkdownDescription(ctx context.Context) string {
 
 // Validate performs the validation.
 func (validator uriValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
-	s, ok := validateString(ctx, request, response)
-	if !ok {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
 		return
 	}
 
-	if _, err := url.Parse(s); err != nil {
+	value := request.ConfigValue.ValueString()
+
+	if _, err := url.Parse(value); err != nil {
 		response.Diagnostics.Append(ccdiag.NewInvalidFormatAttributeError(
 			request.Path,
 			"expected value to be a URI",

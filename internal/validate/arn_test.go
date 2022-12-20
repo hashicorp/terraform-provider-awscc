@@ -5,10 +5,9 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -16,34 +15,22 @@ func TestARNValidator(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		val         tftypes.Value
+		val         types.String
 		expectError bool
 	}
 	tests := map[string]testCase{
-		"not a string": {
-			val:         tftypes.NewValue(tftypes.Bool, true),
-			expectError: true,
-		},
 		"unknown string": {
-			val: tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+			val: basetypes.NewStringUnknown(),
 		},
 		"null string": {
-			val: tftypes.NewValue(tftypes.String, nil),
+			val: basetypes.NewStringNull(),
 		},
 		"valid string": {
-			val: tftypes.NewValue(tftypes.String, "arn:aws:kafka:us-west-2:123456789012:cluster/tf-acc-test-3972327032919409894/09494266-aaf8-48e7-b7ce-8548498bb813-11"),
+			val: basetypes.NewStringValue("arn:aws:kafka:us-west-2:123456789012:cluster/tf-acc-test-3972327032919409894/09494266-aaf8-48e7-b7ce-8548498bb813-11"),
 		},
 		"invalid string": {
-			val:         tftypes.NewValue(tftypes.String, "not ok"),
+			val:         basetypes.NewStringValue("not ok"),
 			expectError: true,
-		},
-	}
-
-	schema := schema.Schema{
-		Attributes: map[string]schema.Attribute{
-			"test": schema.StringAttribute{
-				Required: true,
-			},
 		},
 	}
 
@@ -53,11 +40,8 @@ func TestARNValidator(t *testing.T) {
 			ctx := context.TODO()
 
 			request := validator.StringRequest{
-				Config: tfsdk.Config{
-					Raw:    test.val,
-					Schema: schema,
-				},
-				Path: path.Root("test"),
+				ConfigValue: test.val,
+				Path:        path.Root("test"),
 			}
 			response := validator.StringResponse{}
 			ARN().ValidateString(ctx, request, &response)
@@ -77,38 +61,26 @@ func TestIAMPolicyARNValidator(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		val         tftypes.Value
+		val         types.String
 		expectError bool
 	}
 	tests := map[string]testCase{
-		"not a string": {
-			val:         tftypes.NewValue(tftypes.Bool, true),
-			expectError: true,
-		},
 		"unknown string": {
-			val: tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+			val: basetypes.NewStringUnknown(),
 		},
 		"null string": {
-			val: tftypes.NewValue(tftypes.String, nil),
+			val: basetypes.NewStringNull(),
 		},
 		"valid IAM Policy ARN": {
-			val: tftypes.NewValue(tftypes.String, "arn:aws:iam::123456789012:policy/policy_name"),
+			val: basetypes.NewStringValue("arn:aws:iam::123456789012:policy/policy_name"),
 		},
 		"invalid ARN": {
-			val:         tftypes.NewValue(tftypes.String, "arn:aws:iam::123456789012:user/user_name"),
+			val:         basetypes.NewStringValue("arn:aws:iam::123456789012:user/user_name"),
 			expectError: true,
 		},
 		"not an ARN": {
-			val:         tftypes.NewValue(tftypes.String, "not an ARN"),
+			val:         basetypes.NewStringValue("not an ARN"),
 			expectError: true,
-		},
-	}
-
-	schema := schema.Schema{
-		Attributes: map[string]schema.Attribute{
-			"test": schema.StringAttribute{
-				Required: true,
-			},
 		},
 	}
 
@@ -118,11 +90,8 @@ func TestIAMPolicyARNValidator(t *testing.T) {
 			ctx := context.TODO()
 
 			request := validator.StringRequest{
-				Config: tfsdk.Config{
-					Raw:    test.val,
-					Schema: schema,
-				},
-				Path: path.Root("test"),
+				ConfigValue: test.val,
+				Path:        path.Root("test"),
 			}
 			response := validator.StringResponse{}
 			IAMPolicyARN().ValidateString(ctx, request, &response)
