@@ -5,14 +5,13 @@ issues:
 linters:
   disable-all: true
   enable:
-    - deadcode
+    - asciicheck
     - errcheck
-    - errorlint
-    - goconst
+    - exportloopref
+    - gocritic
     - gofmt
     - gomnd
     - gosimple
-    - govet
     - ineffassign
     - makezero
     - misspell
@@ -20,11 +19,14 @@ linters:
     - nilerr
     - nolintlint
     - staticcheck
-    - structcheck
+    - stylecheck
+    - typecheck
     - unconvert
-    - unused
     - unparam
-    - varcheck
+    - unused
+    - vet
+    - vetshadow
+    - whitespace
 
 linters-settings:
   errcheck:
@@ -32,6 +34,14 @@ linters-settings:
     ignore: fmt:.*,github.com/hashicorp/terraform-plugin-framework/tfsdk:SetAttribute,fprintf
     # exclude-functions:
     #   - (*github.com/hashicorp/terraform-plugin-framework/tfsdk.State).SetAttribute
+  gocritic:
+    enabled-tags:
+      - diagnostic
+    disabled-tags:
+      - style
+      - performance
+      - experimental
+      - opinionated
   gomnd:
     settings:
       mnd:
@@ -47,7 +57,9 @@ linters-settings:
           - validate.StringLenAtMost
           - validate.StringLenBetween
   nolintlint:
-    allow-unused: true # Because of the disabled rules with Go 1.18
+    allow-unused: false
+  stylecheck:
+    checks: ["all", "-ST1003"]
   unparam:
     check-exported: true
 

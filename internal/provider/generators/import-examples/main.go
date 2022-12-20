@@ -73,7 +73,6 @@ func GenerateExample(resourceName string, ui *cli.BasicUi) {
 	if err != nil {
 		ui.Error(fmt.Sprintf("error writing to file (%s): %s", filename, err))
 	}
-
 }
 
 type TemplateData struct {

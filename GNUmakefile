@@ -41,9 +41,11 @@ testacc:
 lint: golangci-lint importlint
 
 golangci-lint:
+	@echo "==> Checking source code with golangci-lint..."
 	@golangci-lint run ./internal/...
 
 importlint:
+	@echo "==> Checking source code with importlint..."
 	@impi --local . --scheme stdThirdPartyLocal --ignore-generated=true ./...
 
 tools:

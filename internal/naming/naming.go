@@ -77,8 +77,8 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 // Pluralize converts a name to its plural form.
 // The inflection package is used as a first attempt to pluralize names,
 // but exceptions to the rule are handled as follows:
-//  - '_plural' is appended to a name ending in 's' e.g. 'windows'
-//  - 's' is appended to a name ending in a number
+//   - '_plural' is appended to a name ending in 's' e.g. 'windows'
+//   - 's' is appended to a name ending in a number
 func Pluralize(name string) string {
 	if name == "" {
 		return name

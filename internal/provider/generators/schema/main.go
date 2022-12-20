@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"go/format"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -89,30 +88,34 @@ func main() {
 		generatedCodeRootDirectoryName = *generatedCodeRoot
 	}
 
+	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename))
+}
+
+func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename string) int {
 	ui := &cli.BasicUi{
 		Reader:      os.Stdin,
 		Writer:      os.Stdout,
 		ErrorWriter: os.Stderr,
 	}
 
-	tempDirectory, err := ioutil.TempDir("", "*")
-
-	if err != nil {
-		ui.Error(fmt.Sprintf("error creating temporary directory: %s", err))
-		os.Exit(1)
-	}
-
-	defer os.RemoveAll(tempDirectory)
-
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
 
 	if err != nil {
 		ui.Error(fmt.Sprintf("error loading AWS SDK config: %s", err))
-		os.Exit(1)
+		return 1
 	}
 
 	client := cloudformation.NewFromConfig(cfg)
+
+	tempDirectory, err := os.MkdirTemp("", "*")
+
+	if err != nil {
+		ui.Error(fmt.Sprintf("error creating temporary directory: %s", err))
+		return 1
+	}
+
+	defer os.RemoveAll(tempDirectory)
 
 	downloader := &Downloader{
 		client:        client,
@@ -123,19 +126,19 @@ func main() {
 	err = hclsimple.DecodeFile(*configFile, nil, &downloader.config)
 	if err != nil {
 		ui.Error(fmt.Sprintf("error loading configuration: %s", err))
-		os.Exit(1)
+		return 1
 	}
 
 	if err := downloader.MetaSchema(); err != nil {
 		ui.Error(fmt.Sprintf("error loading CloudFormation Resource Provider Definition Schema: %s", err))
-		os.Exit(1)
+		return 1
 	}
 
 	resources, dataSources, err := downloader.Schemas()
 
 	if err != nil {
 		ui.Error(fmt.Sprintf("error processing CloudFormation Resource Provider Schemas: %s", err))
-		os.Exit(1)
+		return 1
 	}
 
 	generator := &Generator{
@@ -144,18 +147,20 @@ func main() {
 
 	if err := generator.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform resource generation instructions: %s", err))
-		os.Exit(1)
+		return 1
 	}
 
 	if err := generator.GenerateDataSources(destinationPackage, singularDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Singular); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform singular data-source generation instructions: %s", err))
-		os.Exit(1)
+		return 1
 	}
 
 	if err := generator.GenerateDataSources(destinationPackage, pluralDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Plural); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform plural data-source generation instructions: %s", err))
-		os.Exit(1)
+		return 1
 	}
+
+	return 0
 }
 
 var errCopyFileWithDir = errors.New("dir argument to CopyFile")
@@ -337,7 +342,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("sanitizing schema: %w", err)
 		}
 
-		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
+		err = os.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("writing schema to %q: %w", dst, err)

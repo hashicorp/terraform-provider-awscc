@@ -128,9 +128,11 @@ func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctes
 }
 
 // Terraform resource schema definition.
+//
 //go:embed schema.tmpl
 var dataSourceSchemaTemplateBody string
 
 // Terraform acceptance tests.
+//
 //go:embed tests.tmpl
 var acceptanceTestsTemplateBody string
