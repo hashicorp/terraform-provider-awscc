@@ -14,11 +14,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
 )
 
@@ -69,7 +69,7 @@ func resourceWithCloudFormationTypeName(v string) ResourceOptionsFunc {
 // that set a resource type's Terraform schema.
 // If multiple resourceWithTerraformSchema calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithTerraformSchema(v tfsdk.Schema) ResourceOptionsFunc {
+func resourceWithTerraformSchema(v schema.Schema) ResourceOptionsFunc {
 	return func(o *genericResource) error {
 		o.tfSchema = v
 
@@ -191,13 +191,13 @@ func resourceWithDeleteTimeoutInMinutes(v int) ResourceOptionsFunc {
 	}
 }
 
-// resourceWithRequiredAttributesValidators is a helper function to construct functional options
-// that set a resource type's required attributes validators.
-// If multiple resourceWithRequiredAttributesValidators calls are made, the last call overrides
+// resourceWithConfigValidators is a helper function to construct functional options
+// that set a resource type's config validators.
+// If multiple resourceWithConfigValidators calls are made, the last call overrides
 // the previous calls' values.
-func resourceWithRequiredAttributesValidators(fs ...validate.RequiredAttributesFunc) ResourceOptionsFunc {
+func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOptionsFunc {
 	return func(o *genericResource) error {
-		o.requiredAttributesValidators = fs
+		o.configValidators = vs
 
 		return nil
 	}
@@ -226,7 +226,7 @@ func (opts ResourceOptions) WithCloudFormationTypeName(v string) ResourceOptions
 // that set a resource type's Terraform schema, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceOptions) WithTerraformSchema(v tfsdk.Schema) ResourceOptions {
+func (opts ResourceOptions) WithTerraformSchema(v schema.Schema) ResourceOptions {
 	return append(opts, resourceWithTerraformSchema(v))
 }
 
@@ -286,12 +286,12 @@ func (opts ResourceOptions) WithDeleteTimeoutInMinutes(v int) ResourceOptions {
 	return append(opts, resourceWithDeleteTimeoutInMinutes(v))
 }
 
-// WithRequiredAttributesValidator is a helper function to construct functional options
-// that set a resource type's required attribyte validator, append that function to the
+// WithConfigValidators is a helper function to construct functional options
+// that set a resource type's config validators, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceOptions) WithRequiredAttributesValidators(v ...validate.RequiredAttributesFunc) ResourceOptions {
-	return append(opts, resourceWithRequiredAttributesValidators(v...))
+func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator) ResourceOptions {
+	return append(opts, resourceWithConfigValidators(vs...))
 }
 
 // NewResource returns a new Resource from the specified varidaic list of functional options.
@@ -319,19 +319,19 @@ func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Res
 
 // Implements resource.Resource.
 type genericResource struct {
-	cfTypeName                   string                            // CloudFormation type name for the resource type
-	tfSchema                     tfsdk.Schema                      // Terraform schema for the resource type
-	tfTypeName                   string                            // Terraform type name for resource type
-	tfToCfNameMap                map[string]string                 // Map of Terraform attribute name to CloudFormation property name
-	cfToTfNameMap                map[string]string                 // Map of CloudFormation property name to Terraform attribute name
-	isImmutableType              bool                              // Resources cannot be updated and must be recreated
-	syntheticIDAttribute         bool                              // Resource type has a synthetic ID attribute
-	writeOnlyAttributePaths      []*path.Path                      // Paths to any write-only attributes
-	createTimeout                time.Duration                     // Maximum wait time for resource creation
-	updateTimeout                time.Duration                     // Maximum wait time for resource update
-	deleteTimeout                time.Duration                     // Maximum wait time for resource deletion
-	requiredAttributesValidators []validate.RequiredAttributesFunc // Required attributes validators
-	provider                     tfcloudcontrol.Provider
+	cfTypeName              string                     // CloudFormation type name for the resource type
+	tfSchema                schema.Schema              // Terraform schema for the resource type
+	tfTypeName              string                     // Terraform type name for resource type
+	tfToCfNameMap           map[string]string          // Map of Terraform attribute name to CloudFormation property name
+	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
+	isImmutableType         bool                       // Resources cannot be updated and must be recreated
+	syntheticIDAttribute    bool                       // Resource type has a synthetic ID attribute
+	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
+	createTimeout           time.Duration              // Maximum wait time for resource creation
+	updateTimeout           time.Duration              // Maximum wait time for resource update
+	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
+	configValidators        []resource.ConfigValidator // Required attributes validators
+	provider                tfcloudcontrol.Provider
 }
 
 var (
@@ -344,8 +344,8 @@ func (r *genericResource) Metadata(_ context.Context, request resource.MetadataR
 	response.TypeName = r.tfTypeName
 }
 
-func (r *genericResource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagnostics) {
-	return r.tfSchema, nil
+func (r *genericResource) Schema(_ context.Context, request resource.SchemaRequest, response *resource.SchemaResponse) {
+	response.Schema = r.tfSchema
 }
 
 func (r *genericResource) Configure(_ context.Context, request resource.ConfigureRequest, response *resource.ConfigureResponse) { //nolint:unparam
@@ -686,8 +686,8 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 func (r *genericResource) ConfigValidators(context.Context) []resource.ConfigValidator {
 	validators := make([]resource.ConfigValidator, 0)
 
-	if len(r.requiredAttributesValidators) > 0 {
-		validators = append(validators, validate.ResourceConfigRequiredAttributes(r.requiredAttributesValidators...))
+	if len(r.configValidators) > 0 {
+		validators = append(validators, r.configValidators...)
 	}
 
 	return validators
