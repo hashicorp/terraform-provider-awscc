@@ -9,7 +9,6 @@ import (
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -50,8 +49,8 @@ func (sd *genericSingularDataSource) Metadata(_ context.Context, request datasou
 	response.TypeName = sd.tfTypeName
 }
 
-func (sd *genericSingularDataSource) GetSchema(_ context.Context) (tfsdk.Schema, diag.Diagnostics) {
-	return sd.tfSchema, nil
+func (sd *genericSingularDataSource) Schema(_ context.Context, request datasource.SchemaRequest, response *datasource.SchemaResponse) {
+	response.Schema = sd.tfSchema
 }
 
 func (sd *genericSingularDataSource) Configure(_ context.Context, request datasource.ConfigureRequest, response *datasource.ConfigureResponse) { //nolint:unparam
