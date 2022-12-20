@@ -108,9 +108,11 @@ func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilena
 }
 
 // Terraform resource schema definition.
+//
 //go:embed schema.tmpl
 var resourceSchemaTemplateBody string
 
 // Terraform acceptance tests.
+//
 //go:embed tests.tmpl
 var acceptanceTestsTemplateBody string
