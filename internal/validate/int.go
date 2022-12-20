@@ -166,7 +166,6 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 		validator.valid,
 		i,
 	))
-
 }
 
 func newIntNotInSliceError(p path.Path, valid []int, value int64) diag.Diagnostic {
