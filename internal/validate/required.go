@@ -303,7 +303,6 @@ func evaluateRequiredAttributesFuncs(names []string, fs ...RequiredAttributesFun
 	}
 
 	return diags
-
 }
 
 // specifiedAttributes returns the names of the attributes that are set in an object.

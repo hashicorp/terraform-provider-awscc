@@ -54,7 +54,7 @@ func (t toCloudControl) AsString(ctx context.Context, schema *tfsdk.Schema, val 
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) { //nolint:unparam
+func (t toCloudControl) rawFromValue(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}

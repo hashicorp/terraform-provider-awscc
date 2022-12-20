@@ -108,9 +108,11 @@ func (s *SingularDataSourceGenerator) Generate(packageName, schemaFilename, acct
 }
 
 // Terraform data source schema definition.
+//
 //go:embed schema.tmpl
 var dataSourceSchemaTemplateBody string
 
 // Terraform acceptance tests.
+//
 //go:embed tests.tmpl
 var acceptanceTestsTemplateBody string
