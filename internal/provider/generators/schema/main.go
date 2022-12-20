@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"go/format"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -95,7 +94,7 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	tempDirectory, err := ioutil.TempDir("", "*")
+	tempDirectory, err := os.MkdirTemp("", "*")
 
 	if err != nil {
 		ui.Error(fmt.Sprintf("error creating temporary directory: %s", err))
@@ -337,7 +336,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("sanitizing schema: %w", err)
 		}
 
-		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
+		err = os.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("writing schema to %q: %w", dst, err)
