@@ -366,7 +366,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	})
 
 	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
-	desiredState, err := translator.AsString(ctx, &request.Plan.Schema, request.Plan.Raw)
+	desiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
@@ -491,7 +491,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
-	schema := &currentState.Schema
+	schema := currentState.Schema
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
 
 	if err != nil {
@@ -504,7 +504,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	response.State = tfsdk.State{
-		Schema: *schema,
+		Schema: schema,
 		Raw:    val,
 	}
 
@@ -558,7 +558,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	}
 
 	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
-	currentDesiredState, err := translator.AsString(ctx, &currentState.Schema, currentState.Raw)
+	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentState.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
@@ -566,7 +566,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	plannedDesiredState, err := translator.AsString(ctx, &request.Plan.Schema, request.Plan.Raw)
+	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))

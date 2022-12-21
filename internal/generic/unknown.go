@@ -79,7 +79,7 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	// Get the Terraform Value of the ResourceModel.
 	translator := toTerraform{cfToTfNameMap: cfToTfNameMap}
 	schema := state.Schema
-	val, err := translator.FromString(ctx, &schema, resourceModel)
+	val, err := translator.FromString(ctx, schema, resourceModel)
 
 	if err != nil {
 		return err
