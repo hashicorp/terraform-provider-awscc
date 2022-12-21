@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -92,7 +93,7 @@ func TestTranslateToCloudControl(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
 			translator := toCloudControl{tfToCfNameMap: testCase.TfToCfNameMap}
-			got, err := translator.AsRaw(context.TODO(), &testCase.Plan.Schema, testCase.Plan.Raw)
+			got, err := translator.AsRaw(context.TODO(), testCase.Plan.Schema, testCase.Plan.Raw)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
@@ -114,7 +115,7 @@ func TestTranslateToCloudControl(t *testing.T) {
 func TestTranslateToTerraform(t *testing.T) {
 	testCases := []struct {
 		TestName      string
-		Schema        tfsdk.Schema
+		Schema        schema.Schema
 		CfToTfNameMap map[string]string
 		ResourceModel map[string]interface{}
 		ExpectedError bool

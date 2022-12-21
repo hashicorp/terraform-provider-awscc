@@ -7,55 +7,46 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-var testSimpleSchema = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"arn": {
-			Type:     types.StringType,
+var testSimpleSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"arn": schema.StringAttribute{
 			Computed: true,
 		},
-		"identifier": {
-			Type:     types.StringType,
+		"identifier": schema.StringAttribute{
 			Computed: true,
 		},
-		"name": {
-			Type:     types.StringType,
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"number": {
-			Type:     types.NumberType,
+		"number": schema.StringAttribute{
 			Optional: true,
 		},
 	},
 }
 
-var testSimpleSchemaWithList = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"arn": {
-			Type:     types.StringType,
+var testSimpleSchemaWithList = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"arn": schema.StringAttribute{
 			Computed: true,
 		},
-		"identifier": {
-			Type:     types.StringType,
+		"identifier": schema.StringAttribute{
 			Computed: true,
 		},
-		"name": {
-			Type:     types.StringType,
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"number": {
-			Type:     types.NumberType,
+		"number": schema.NumberAttribute{
 			Optional: true,
 		},
-		"ports": {
-			Type: types.ListType{
-				ElemType: types.NumberType,
-			},
-			Optional: true,
+		"ports": schema.ListAttribute{
+			ElementType: types.NumberType,
+			Optional:    true,
 		},
 	},
 }
@@ -69,79 +60,67 @@ var simpleCfToTfNameMap = map[string]string{
 }
 
 // Adapted from https://github.com/hashicorp/terraform-plugin-framework/blob/1a7927fec93459115be87f283dd1ee7941b30578/tfsdk/state_test.go.
-var testComplexSchema = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"name": {
-			Type:     types.StringType,
+var testComplexSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"machine_type": {
-			Type:     types.StringType,
+		"machine_type": schema.StringAttribute{
 			Optional: true,
 		},
-		"ports": {
-			Type: types.ListType{
-				ElemType: types.NumberType,
-			},
-			Required: true,
+		"ports": schema.ListAttribute{
+			ElementType: types.NumberType,
+			Required:    true,
 		},
-		"tags": {
-			Type: types.SetType{
-				ElemType: types.StringType,
-			},
-			Required: true,
+		"tags": schema.SetAttribute{
+			ElementType: types.StringType,
+			Required:    true,
 		},
-		"disks": {
-			Attributes: tfsdk.ListNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.StringType,
-					Required: true,
+		"disks": schema.ListNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.StringAttribute{
+						Required: true,
+					},
+					"delete_with_instance": schema.BoolAttribute{
+						Optional: true,
+					},
 				},
-				"delete_with_instance": {
-					Type:     types.BoolType,
-					Optional: true,
-				},
-			}),
+			},
 			Optional: true,
 			Computed: true,
 		},
-		"boot_disk": {
-			Attributes: tfsdk.SingleNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.StringType,
+		"boot_disk": schema.SingleNestedAttribute{
+			Attributes: map[string]schema.Attribute{
+				"id": schema.StringAttribute{
 					Required: true,
 				},
-				"delete_with_instance": {
-					Type:     types.BoolType,
+				"delete_with_instance": schema.BoolAttribute{
 					Optional: true,
 				},
-			}),
+			},
 		},
-		"scratch_disk": {
-			Type: types.ObjectType{
-				AttrTypes: map[string]attr.Type{
-					"interface": types.StringType,
+		"scratch_disk": schema.ObjectAttribute{
+			AttributeTypes: map[string]attr.Type{
+				"interface": types.StringType,
+			},
+			Optional: true,
+		},
+		"video_ports": schema.SetNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.NumberAttribute{
+						Required: true,
+					},
+					"flags": schema.ListAttribute{
+						ElementType: types.BoolType,
+						Optional:    true,
+					},
 				},
 			},
 			Optional: true,
 		},
-		"video_ports": {
-			Attributes: tfsdk.SetNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.NumberType,
-					Required: true,
-				},
-				"flags": {
-					Type: types.ListType{
-						ElemType: types.BoolType,
-					},
-					Optional: true,
-				},
-			}),
-			Optional: true,
-		},
-		"identifier": {
-			Type:     types.StringType,
+		"identifier": schema.StringAttribute{
 			Computed: true,
 		},
 	},
@@ -592,36 +571,32 @@ var complexTfToCfNameMap = map[string]string{
 	"tags":                 "Tags",
 }
 
-var testMapsSchema = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"name": {
-			Type:     types.StringType,
+var testMapsSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"simple_map": {
-			Type: types.MapType{
-				ElemType: types.StringType,
+		"simple_map": schema.MapAttribute{
+			ElementType: types.StringType,
+			Optional:    true,
+		},
+		"complex_map": schema.MapNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.NumberAttribute{
+						Required: true,
+					},
+					"flags": schema.ListAttribute{
+						ElementType: types.BoolType,
+						Optional:    true,
+					},
+				},
 			},
 			Optional: true,
 		},
-		"complex_map": {
-			Attributes: tfsdk.MapNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.NumberType,
-					Required: true,
-				},
-				"flags": {
-					Type: types.ListType{
-						ElemType: types.BoolType,
-					},
-					Optional: true,
-				},
-			}),
-			Optional: true,
-		},
-		"json_string": {
-			Type:     JSONStringType,
-			Optional: true,
+		"json_string": schema.StringAttribute{
+			CustomType: JSONStringType,
+			Optional:   true,
 		},
 	},
 }
