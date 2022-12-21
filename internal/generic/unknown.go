@@ -108,9 +108,13 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	return nil
 }
 
+type typeAtTerraformPather interface {
+	TypeAtTerraformPath(context.Context, *tftypes.AttributePath) (attr.Type, error)
+}
+
 // Lifted from github.com/hashicorp/terraform-plugin-framework/tfsdk/tftypes_attribute_path.go.
 // attributePath returns the path.Path equivalent of a *tftypes.AttributePath.
-func attributePath(ctx context.Context, tfType *tftypes.AttributePath, schema tfsdk.Schema) (path.Path, diag.Diagnostics) {
+func attributePath(ctx context.Context, tfType *tftypes.AttributePath, schema typeAtTerraformPather) (path.Path, diag.Diagnostics) {
 	fwPath := path.Empty()
 
 	for tfTypeStepIndex, tfTypeStep := range tfType.Steps() {
