@@ -7,8 +7,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -116,22 +116,13 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		plannedValue  attr.Value
-		currentValue  attr.Value
-		expectedValue attr.Value
+		plannedValue  basetypes.StringValuable
+		currentValue  basetypes.StringValuable
+		expectedValue basetypes.StringValuable
 		expectError   bool
 	}
 	tests := map[string]testCase{
-		"planned not JSONString": {
-			plannedValue: types.Int64Value(1),
-			currentValue: JSONStringValue(`{}`),
-			expectError:  true,
-		},
-		"current not JSONString": {
-			plannedValue: JSONStringValue(`{}`),
-			currentValue: types.Int64Value(1),
-			expectError:  true,
-		},
+
 		"current null": {
 			plannedValue:  JSONStringValue(`{"k1": 42}`),
 			currentValue:  JSONStringNull(),
@@ -163,13 +154,26 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
-			request := tfsdk.ModifyAttributePlanRequest{
-				AttributePath:  path.Root("test"),
-				AttributePlan:  test.plannedValue,
-				AttributeState: test.currentValue,
+
+			plannedValue, diags := test.plannedValue.ToStringValue(ctx)
+
+			if diags.HasError() {
+				t.Fatal(tfresource.DiagsError(diags))
 			}
-			response := tfsdk.ModifyAttributePlanResponse{}
-			JSONStringType.AttributePlanModifier().Modify(ctx, request, &response)
+
+			currentValue, diags := test.currentValue.ToStringValue(ctx)
+
+			if diags.HasError() {
+				t.Fatal(tfresource.DiagsError(diags))
+			}
+
+			request := planmodifier.StringRequest{
+				PlanValue:  plannedValue,
+				Path:       path.Root("test"),
+				StateValue: currentValue,
+			}
+			response := planmodifier.StringResponse{}
+			JSONStringType.AttributePlanModifier().PlanModifyString(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
@@ -179,7 +183,7 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 
-			if diff := cmp.Diff(response.AttributePlan, test.expectedValue); diff != "" {
+			if diff := cmp.Diff(response.PlanValue, test.expectedValue); diff != "" {
 				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 			}
 		})

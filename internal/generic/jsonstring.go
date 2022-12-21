@@ -10,7 +10,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/attr/xattr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -123,7 +124,21 @@ func (t jsonStringType) Validate(ctx context.Context, v tftypes.Value, p path.Pa
 	return diags
 }
 
-func (t jsonStringType) AttributePlanModifier() tfsdk.AttributePlanModifier {
+func (t jsonStringType) ValueFromString(_ context.Context, s basetypes.StringValue) (basetypes.StringValuable, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	if s.IsUnknown() {
+		return JSONStringUnknown(), diags
+	}
+
+	if s.IsNull() {
+		return JSONStringNull(), diags
+	}
+
+	return JSONStringValue(s.ValueString()), diags
+}
+
+func (t jsonStringType) AttributePlanModifier() planmodifier.String {
 	return jsonStringAttributePlanModifier{}
 }
 
@@ -231,9 +246,19 @@ func (s JSONString) ValueJSONString() string {
 	return s.value
 }
 
-type jsonStringAttributePlanModifier struct {
-	tfsdk.AttributePlanModifier
+func (s JSONString) ToStringValue(context.Context) (basetypes.StringValue, diag.Diagnostics) {
+	if s.IsUnknown() {
+		return basetypes.NewStringUnknown(), nil
+	}
+
+	if s.IsNull() {
+		return basetypes.NewStringNull(), nil
+	}
+
+	return basetypes.NewStringValue(s.value), nil
 }
+
+type jsonStringAttributePlanModifier struct{}
 
 func (attributePlanModifier jsonStringAttributePlanModifier) Description(_ context.Context) string {
 	return "Suppresses semantically insignificant differences."
@@ -243,9 +268,9 @@ func (attributePlanModifier jsonStringAttributePlanModifier) MarkdownDescription
 	return attributePlanModifier.Description(ctx)
 }
 
-func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.Context, request tfsdk.ModifyAttributePlanRequest, response *tfsdk.ModifyAttributePlanResponse) {
-	if request.AttributeState == nil {
-		response.AttributePlan = request.AttributePlan
+func (attributePlanModifier jsonStringAttributePlanModifier) PlanModifyString(ctx context.Context, request planmodifier.StringRequest, response *planmodifier.StringResponse) {
+	if request.StateValue.IsNull() {
+		response.PlanValue = request.PlanValue
 
 		return
 	}
@@ -253,16 +278,7 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 	// If the current value is semantically equivalent to the planned value
 	// then return the current value, else return the planned value.
 
-	var planned JSONString
-	diags := tfsdk.ValueAs(ctx, request.AttributePlan, &planned)
-
-	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
-
-		return
-	}
-
-	plannedMap, err := expandJSONFromString(planned.ValueJSONString())
+	plannedMap, err := expandJSONFromString(request.PlanValue.ValueString())
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -273,19 +289,10 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		return
 	}
 
-	var current JSONString
-	diags = tfsdk.ValueAs(ctx, request.AttributeState, &current)
-
-	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
-
-		return
-	}
-
-	if current.IsNull() {
-		response.AttributePlan = request.AttributePlan
+	if request.StateValue.IsNull() {
+		response.PlanValue = request.PlanValue
 	} else {
-		currentMap, err := expandJSONFromString(current.ValueJSONString())
+		currentMap, err := expandJSONFromString(request.StateValue.ValueString())
 
 		if err != nil {
 			response.Diagnostics.AddError(
@@ -297,9 +304,9 @@ func (attributePlanModifier jsonStringAttributePlanModifier) Modify(ctx context.
 		}
 
 		if reflect.DeepEqual(plannedMap, currentMap) {
-			response.AttributePlan = request.AttributeState
+			response.PlanValue = request.StateValue
 		} else {
-			response.AttributePlan = request.AttributePlan
+			response.PlanValue = request.PlanValue
 		}
 	}
 }
