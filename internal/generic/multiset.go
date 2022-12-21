@@ -4,18 +4,15 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 )
 
-type multisetAttributePlanModifier struct {
-	tfsdk.AttributePlanModifier
-}
+type multisetAttributePlanModifier struct{}
 
 // A multiset is an array allowing non-unique items with insertion order not significant.
 // Multisets do not correspond directly with either Terraform Lists (insertion order is significant) or Sets (unique items).
 // Multiset Attributes are declared as Lists with a plan modifier that suppresses semantically insignificant differences.
-func Multiset() tfsdk.AttributePlanModifier {
+func Multiset() planmodifier.List {
 	return multisetAttributePlanModifier{}
 }
 
@@ -27,9 +24,9 @@ func (attributePlanModifier multisetAttributePlanModifier) MarkdownDescription(c
 	return attributePlanModifier.Description(ctx)
 }
 
-func (attributePlanModifier multisetAttributePlanModifier) Modify(ctx context.Context, request tfsdk.ModifyAttributePlanRequest, response *tfsdk.ModifyAttributePlanResponse) {
-	if request.AttributeState == nil {
-		response.AttributePlan = request.AttributePlan
+func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx context.Context, request planmodifier.ListRequest, response *planmodifier.ListResponse) {
+	if request.StateValue.IsNull() {
+		response.PlanValue = request.PlanValue
 
 		return
 	}
@@ -37,8 +34,7 @@ func (attributePlanModifier multisetAttributePlanModifier) Modify(ctx context.Co
 	// If the current value is semantically equivalent to the planned value
 	// then return the current value, else return the planned value.
 
-	var planned types.List
-	diags := tfsdk.ValueAs(ctx, request.AttributePlan, &planned)
+	planned, diags := request.PlanValue.ToListValue(ctx)
 
 	if diags.HasError() {
 		response.Diagnostics = append(response.Diagnostics, diags...)
@@ -46,8 +42,7 @@ func (attributePlanModifier multisetAttributePlanModifier) Modify(ctx context.Co
 		return
 	}
 
-	var current types.List
-	diags = tfsdk.ValueAs(ctx, request.AttributeState, &current)
+	current, diags := request.StateValue.ToListValue(ctx)
 
 	if diags.HasError() {
 		response.Diagnostics = append(response.Diagnostics, diags...)
@@ -56,7 +51,7 @@ func (attributePlanModifier multisetAttributePlanModifier) Modify(ctx context.Co
 	}
 
 	if len(planned.Elements()) != len(current.Elements()) {
-		response.AttributePlan = request.AttributePlan
+		response.PlanValue = request.PlanValue
 
 		return
 	}
@@ -77,8 +72,8 @@ func (attributePlanModifier multisetAttributePlanModifier) Modify(ctx context.Co
 
 	if len(currentVals) == 0 {
 		// Every planned value is equal to a current value.
-		response.AttributePlan = request.AttributeState
+		response.PlanValue = request.StateValue
 	} else {
-		response.AttributePlan = request.AttributePlan
+		response.PlanValue = request.PlanValue
 	}
 }
