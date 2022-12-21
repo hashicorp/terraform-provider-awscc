@@ -122,7 +122,6 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 		expectError   bool
 	}
 	tests := map[string]testCase{
-
 		"current null": {
 			plannedValue:  JSONStringValue(`{"k1": 42}`),
 			currentValue:  JSONStringNull(),
@@ -167,6 +166,12 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 				t.Fatal(tfresource.DiagsError(diags))
 			}
 
+			expectedValue, diags := test.expectedValue.ToStringValue(ctx)
+
+			if diags.HasError() {
+				t.Fatal(tfresource.DiagsError(diags))
+			}
+
 			request := planmodifier.StringRequest{
 				PlanValue:  plannedValue,
 				Path:       path.Root("test"),
@@ -183,7 +188,7 @@ func TestJSONStringTypeAttributePlanModifier(t *testing.T) {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 
-			if diff := cmp.Diff(response.PlanValue, test.expectedValue); diff != "" {
+			if diff := cmp.Diff(response.PlanValue.ValueString(), expectedValue.ValueString()); diff != "" {
 				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 			}
 		})

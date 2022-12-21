@@ -24,7 +24,7 @@ var testSimpleSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"number": schema.StringAttribute{
+		"number": schema.NumberAttribute{
 			Optional: true,
 		},
 	},
