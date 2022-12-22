@@ -23,6 +23,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
 	github.com/mitchellh/cli v1.1.5
+	golang.org/x/exp v0.0.0-20221217163422-3c43f8badb15
 )
 
 require (
@@ -86,7 +87,7 @@ require (
 	github.com/zclconf/go-cty v1.12.1 // indirect
 	golang.org/x/crypto v0.0.0-20220517005047-85d78b3ac167 // indirect
 	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
-	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20200711021454-869866162049 // indirect

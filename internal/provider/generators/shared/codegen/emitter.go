@@ -13,17 +13,44 @@ import (
 )
 
 // Features of the emitted code.
-type Features int
+type Features struct {
+	HasIDRootProperty       bool // Has a root property named "id".
+	HasRequiredRootProperty bool // At least one root property is required.
+	HasUpdatableProperty    bool // At least one property can be updated.
+	HasValidator            bool // At least one validator.
+	UsesFrameworkAttr       bool // Uses a type from the terraform-plugin-framework/attr package.
+	UsesInternalValidate    bool // Uses a type or function from the internal/validate package.
+	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
-const (
-	HasUpdatableProperty      Features = 1 << iota // At least one property can be updated.
-	HasRequiredRootProperty                        // At least one root property is required.
-	UsesFrameworkAttr                              // Uses a type from the terraform-plugin-framework/attr package.
-	UsesRegexpInValidation                         // Uses a type from the Go standard regexp package for attribute validation.
-	UsesValidation                                 // Uses a type or function from the internal/validate package.
-	HasIDRootProperty                              // Has a root property named "id"
-	HasFrameworkPlanModifiers                      // Has any Attribute PlanModifiers implemented in terraform-plugin-framework/resource.
-)
+	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
+	FrameworkValidatorsPackages   []string // Package names for any terraform-plugin-framework-validators validators. May contain duplicates.
+}
+
+func (f *Features) LogicalOr(features Features) {
+	f.FrameworkPlanModifierPackages = append(f.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
+	f.FrameworkValidatorsPackages = append(f.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
+	if features.HasIDRootProperty {
+		f.HasIDRootProperty = true
+	}
+	if features.HasRequiredRootProperty {
+		f.HasRequiredRootProperty = true
+	}
+	if features.HasUpdatableProperty {
+		f.HasUpdatableProperty = true
+	}
+	if features.HasValidator {
+		f.HasValidator = true
+	}
+	if features.UsesFrameworkAttr {
+		f.UsesFrameworkAttr = true
+	}
+	if features.UsesInternalValidate {
+		f.UsesInternalValidate = true
+	}
+	if features.UsesRegexpInValidation {
+		f.UsesRegexpInValidation = true
+	}
+}
 
 var (
 	tfMetaArguments = []string{
@@ -36,9 +63,10 @@ var (
 )
 
 type Emitter struct {
-	CfResource *cfschema.Resource
-	Ui         cli.Ui
-	Writer     io.Writer
+	CfResource   *cfschema.Resource
+	IsDataSource bool
+	Ui           cli.Ui
+	Writer       io.Writer
 }
 
 type parent struct {
@@ -72,31 +100,31 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string, co
 	features, err := e.emitSchema(attributeNameMap, parent{reqd: cfResource}, cfResource.Properties, computedOnly)
 
 	if err != nil {
-		return 0, err
+		return features, err
 	}
 
 	for name, property := range cfResource.Properties {
 		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
 			// Ensure that any schema-declared top-level ID property is of type String and is the primary identifier.
 			if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
-				return 0, fmt.Errorf("top-level property %s has type: %s", name, propertyType)
+				return features, fmt.Errorf("top-level property %s has type: %s", name, propertyType)
 			}
 
 			if !cfResource.PrimaryIdentifier.ContainsPath([]string{name}) {
-				return 0, fmt.Errorf("top-level property %s is not a primary identifier", name)
+				return features, fmt.Errorf("top-level property %s is not a primary identifier", name)
 			}
 
-			features |= HasIDRootProperty
+			features.HasIDRootProperty = true
 		}
 
 		for _, tfMetaArgument := range tfMetaArguments {
 			if naming.CloudFormationPropertyToTerraformAttribute(name) == tfMetaArgument {
-				return 0, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
+				return features, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
 			}
 		}
 
 		if cfResource.IsRequired(name) {
-			features |= HasRequiredRootProperty
+			features.HasRequiredRootProperty = true
 		}
 	}
 
@@ -110,55 +138,54 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	var features Features
 	var validators []string
 	var planModifiers []string
-
-	e.printf("{\n")
-	e.printf("// Property: %s\n", name)
-
-	// Only dump top-level property schemas as nested properties have been expanded here.
-	if len(path) == 1 {
-		e.printf("// CloudFormation resource type schema:\n")
-		// Comment out each line.
-		e.printf("%s\n", regexp.MustCompile(`(?m)^`).ReplaceAllString(fmt.Sprintf("%v", property), "// "))
-	}
-
-	if description := property.Description; description != nil {
-		e.printf("Description:%q,\n", *description)
-	}
+	var fwPlanModifierPackage, fwPlanModifierType, fwValidatorType string
 
 	switch propertyType := property.Type.String(); propertyType {
 	//
 	// Primitive types.
 	//
 	case cfschema.PropertyTypeBoolean:
-		e.printf("Type:types.BoolType,\n")
+		e.printf("schema.BoolAttribute{\n")
+		fwPlanModifierPackage = "boolplanmodifier"
+		fwPlanModifierType = "Bool"
+		fwValidatorType = "Bool"
 
 	case cfschema.PropertyTypeInteger:
-		e.printf("Type:types.Int64Type,\n")
+		e.printf("schema.Int64Attribute{\n")
+		fwPlanModifierPackage = "int64planmodifier"
+		fwPlanModifierType = "Int64"
+		fwValidatorType = "Int64"
 
 		if f, v, err := integerValidators(path, property); err != nil {
-			return 0, err
+			return features, err
 		} else if len(v) > 0 {
-			features |= f
+			features.LogicalOr(f)
 			validators = append(validators, v...)
 		}
 
 	case cfschema.PropertyTypeNumber:
-		e.printf("Type:types.Float64Type,\n")
+		e.printf("schema.Float64Attribute{\n")
+		fwPlanModifierPackage = "float64planmodifier"
+		fwPlanModifierType = "Float64"
+		fwValidatorType = "Float64"
 
 		if f, v, err := numberValidators(path, property); err != nil {
-			return 0, err
+			return features, err
 		} else if len(v) > 0 {
-			features |= f
+			features.LogicalOr(f)
 			validators = append(validators, v...)
 		}
 
 	case cfschema.PropertyTypeString:
-		e.printf("Type:types.StringType,\n")
+		e.printf("schema.StringAttribute{\n")
+		fwPlanModifierPackage = "stringplanmodifier"
+		fwPlanModifierType = "String"
+		fwValidatorType = "String"
 
 		if f, v, err := stringValidators(path, property); err != nil {
-			return 0, err
+			return features, err
 		} else if len(v) > 0 {
-			features |= f
+			features.LogicalOr(f)
 			validators = append(validators, v...)
 		}
 
@@ -175,6 +202,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			var elementType string
 			var validatorsGenerator primitiveValidatorsGenerator
 
+			fwPlanModifierPackage = "setplanmodifier"
+			fwPlanModifierType = "Set"
+			fwValidatorType = "Set"
+
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
 				elementType = "types.BoolType"
@@ -193,14 +224,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return 0, unsupportedTypeError(path, "set of key-value map")
+					return features, unsupportedTypeError(path, "set of key-value map")
 				}
 
 				if len(property.Items.Properties) == 0 {
-					return 0, unsupportedTypeError(path, "set of undefined schema")
+					return features, unsupportedTypeError(path, "set of undefined schema")
 				}
 
-				e.printf("Attributes:tfsdk.SetNestedAttributes(\n")
+				e.printf("schema.SetNestedAttribute{\n")
+				e.printf("NestedObject: schema.NestedAttributeObject{\n")
+				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
 					attributeNameMap,
@@ -212,44 +245,45 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					computedOnly)
 
 				if err != nil {
-					return 0, err
+					return features, err
 				}
 
-				features |= f
+				features.LogicalOr(f)
 
 				e.printf(",\n")
-				e.printf("),\n")
+				e.printf("},\n")
 
 				if v, err := arrayLengthValidator(path, property); err != nil {
-					return 0, err
+					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
 				}
 
 				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
-					return 0, err
+					return features, err
 				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
 			default:
-				return 0, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
+				return features, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
 
 			if elementType != "" {
-				e.printf("Type:types.SetType{ElemType:%s},\n", elementType)
+				e.printf("schema.SetAttribute{\n")
+				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := arrayLengthValidator(path, property); err != nil {
-					return 0, err
+					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
 				}
 
 				if validatorsGenerator != nil {
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
-						return 0, err
+						return features, err
 					} else if len(v) > 0 {
-						features |= f
+						features.LogicalOr(f)
 						for _, v := range v {
 							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
 						}
@@ -263,6 +297,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			var elementType string
 			var validatorsGenerator primitiveValidatorsGenerator
 
+			fwPlanModifierPackage = "listplanmodifier"
+			fwPlanModifierType = "List"
+			fwValidatorType = "List"
+
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
 				elementType = "types.BoolType"
@@ -281,14 +319,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return 0, unsupportedTypeError(path, "list of key-value map")
+					return features, unsupportedTypeError(path, "list of key-value map")
 				}
 
 				if len(property.Items.Properties) == 0 {
-					return 0, unsupportedTypeError(path, "list of undefined schema")
+					return features, unsupportedTypeError(path, "list of undefined schema")
 				}
 
-				e.printf("Attributes:tfsdk.ListNestedAttributes(\n")
+				e.printf("schema.ListNestedAttribute{\n")
+				e.printf("NestedObject: schema.NestedAttributeObject{\n")
+				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
 					attributeNameMap,
@@ -300,16 +340,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					computedOnly)
 
 				if err != nil {
-					return 0, err
+					return features, err
 				}
 
-				features |= f
+				features.LogicalOr(f)
 
 				e.printf(",\n")
-				e.printf("),\n")
+				e.printf("},\n")
 
 				if v, err := arrayLengthValidator(path, property); err != nil {
-					return 0, err
+					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
 				}
@@ -322,20 +362,21 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				}
 
 				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
-					return 0, err
+					return features, err
 				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
 			default:
-				return 0, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
+				return features, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
 			}
 
 			if elementType != "" {
-				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
+				e.printf("schema.ListAttribute{\n")
+				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := arrayLengthValidator(path, property); err != nil {
-					return 0, err
+					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
 				}
@@ -349,9 +390,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				if validatorsGenerator != nil {
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
-						return 0, err
+						return features, err
 					} else if len(v) > 0 {
-						features |= f
+						features.LogicalOr(f)
 						for _, v := range v {
 							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
 						}
@@ -365,7 +406,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		// If the property has no specified type but has properties then assume it's an object.
 		//
 		if len(property.PatternProperties) > 0 || len(property.Properties) == 0 {
-			return 0, unsupportedTypeError(path, propertyType)
+			return features, unsupportedTypeError(path, propertyType)
 		}
 		fallthrough
 
@@ -375,8 +416,12 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			// Map.
 			//
 			if len(property.Properties) > 0 {
-				return 0, fmt.Errorf("%s has both Properties and PatternProperties", strings.Join(path, "/"))
+				return features, fmt.Errorf("%s has both Properties and PatternProperties", strings.Join(path, "/"))
 			}
+
+			fwPlanModifierPackage = "mapplanmodifier"
+			fwPlanModifierType = "Map"
+			fwValidatorType = "Map"
 
 			// Sort the patterns to reduce diffs.
 			patterns := make([]string, 0)
@@ -395,16 +440,20 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			// Primitive types.
 			//
 			case cfschema.PropertyTypeBoolean:
-				e.printf("Type:types.MapType{ElemType:types.BoolType},\n")
+				e.printf("schema.MapAttribute{\n")
+				e.printf("ElementType:types.BoolType,\n")
 
 			case cfschema.PropertyTypeInteger:
-				e.printf("Type:types.MapType{ElemType:types.Int64Type},\n")
+				e.printf("schema.MapAttribute{\n")
+				e.printf("ElementType:types.Int64Type,\n")
 
 			case cfschema.PropertyTypeNumber:
-				e.printf("Type:types.MapType{ElemType:types.Float64Type},\n")
+				e.printf("schema.MapAttribute{\n")
+				e.printf("ElementType:types.Float64Type,\n")
 
 			case cfschema.PropertyTypeString:
-				e.printf("Type:types.MapType{ElemType:types.StringType},\n")
+				e.printf("schema.MapAttribute{\n")
+				e.printf("ElementType:types.StringType,\n")
 
 			//
 			// Complex types.
@@ -413,46 +462,54 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				if aggregateType(patternProperty) == aggregateSet {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
 					case cfschema.PropertyTypeBoolean:
-						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.BoolType}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.SetType{ElemType:types.BoolType},\n")
 
 					case cfschema.PropertyTypeInteger:
-						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.Int64Type}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.SetType{ElemType:types.Int64Type},\n")
 
 					case cfschema.PropertyTypeNumber:
-						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.Float64Type}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.SetType{ElemType:types.Float64Type},\n")
 
 					case cfschema.PropertyTypeString:
-						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.StringType}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.SetType{ElemType:types.StringType},\n")
 
 					default:
-						return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
+						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
 					}
 				} else {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
 					case cfschema.PropertyTypeBoolean:
-						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.ListType{ElemType:types.BoolType},\n")
 
 					case cfschema.PropertyTypeInteger:
-						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.Int64Type}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.ListType{ElemType:types.Int64Type},\n")
 
 					case cfschema.PropertyTypeNumber:
-						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.Float64Type}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.ListType{ElemType:types.Float64Type},\n")
 
 					case cfschema.PropertyTypeString:
-						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
+						e.printf("schema.MapAttribute{\n")
+						e.printf("ElementType:types.ListType{ElemType:types.StringType},\n")
 
 					default:
-						return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
+						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
 					}
 				}
 
 			case cfschema.PropertyTypeObject:
 				if len(patternProperty.PatternProperties) > 0 {
-					return 0, unsupportedTypeError(path, "key-value map of key-value map")
+					return features, unsupportedTypeError(path, "key-value map of key-value map")
 				}
 
 				if len(patternProperty.Properties) == 0 {
-					return 0, unsupportedTypeError(path, "key-value map of undefined schema")
+					return features, unsupportedTypeError(path, "key-value map of undefined schema")
 				}
 
 				e.printf("Attributes:tfsdk.MapNestedAttributes(\n")
@@ -467,17 +524,17 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					computedOnly)
 
 				if err != nil {
-					return 0, err
+					return features, err
 				}
 
-				features |= f
+				features.LogicalOr(f)
 
 				if !computedOnly {
 					if patternProperty.MinItems != nil {
-						return 0, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
+						return features, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
 					}
 					if patternProperty.MaxItems != nil {
-						return 0, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
+						return features, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
 					}
 				}
 
@@ -485,7 +542,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("),\n")
 
 			default:
-				return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
+				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
 
 			for _, pattern := range patterns[1:] {
@@ -501,18 +558,33 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		if len(property.Properties) == 0 {
 			if *e.CfResource.TypeName == "AWS::NetworkManager::CoreNetwork" && len(path) == 1 && name == "PolicyDocument" {
 				// Hack for AWS::NetworkManager::CoreNetwork.PolicyDocument.
-				e.printf("Type:JSONStringType,\n")
+				e.printf("schema.StringAttribute{\n")
+				e.printf("CustomType:JSONStringType,\n")
 				planModifiers = append(planModifiers, "JSONStringType.AttributePlanModifier()")
+
+				fwPlanModifierPackage = "stringplanmodifier"
+				fwPlanModifierType = "String"
+				fwValidatorType = "String"
 			} else {
 				// Schemaless object => key-value map of string.
 				e.warnf("%s is of type %s but has no schema", strings.Join(path, "/"), propertyType)
-				e.printf("Type:types.MapType{ElemType:types.StringType},\n")
+				e.printf("schema.MapAttribute{\n")
+				e.printf("ElementType:types.StringType,\n")
+
+				fwPlanModifierPackage = "mapplanmodifier"
+				fwPlanModifierType = "Map"
+				fwValidatorType = "Map"
 			}
 
 			break
 		}
 
-		e.printf("Attributes:tfsdk.SingleNestedAttributes(\n")
+		fwPlanModifierPackage = "objectplanmodifier"
+		fwPlanModifierType = "Object"
+		fwValidatorType = "Object"
+
+		e.printf("schema.SingleNestedAttribute{\n")
+		e.printf("Attributes:")
 		f, err := e.emitSchema(
 			attributeNameMap,
 			parent{
@@ -523,22 +595,26 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			computedOnly)
 
 		if err != nil {
-			return 0, err
+			return features, err
 		}
 
-		features |= f
+		features.LogicalOr(f)
 
 		e.printf(",\n")
 		e.printf("),\n")
 
 		if validator, err := propertyRequiredAttributesValidator(property); err != nil {
-			return 0, err
+			return features, err
 		} else if validator != "" {
 			validators = append(validators, validator)
 		}
 
 	default:
-		return 0, unsupportedTypeError(path, propertyType)
+		return features, unsupportedTypeError(path, propertyType)
+	}
+
+	if description := property.Description; description != nil {
+		e.printf("Description:%q,\n", *description)
 	}
 
 	// Return early as attribute validations are not required
@@ -554,14 +630,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	var hasDefaultValue bool
 
 	if f, planModifier, err := defaultValueAttributePlanModifier(path, property); err != nil {
-		return 0, err
+		return features, err
 	} else if planModifier != "" {
 		if required {
 			e.warnf("%s is Required and has a default value. Emitting as Computed,Optional", strings.Join(path, "/"))
 		}
 
 		hasDefaultValue = true
-		features |= f
+		features.LogicalOr(f)
 		planModifiers = append(planModifiers, planModifier)
 	}
 
@@ -613,31 +689,31 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	// Don't emit validators for Computed-only attributes.
 	if !computed || optional {
 		if len(validators) > 0 {
-			features |= UsesValidation
-			e.printf("Validators:[]tfsdk.AttributeValidator{\n")
+			features.HasValidator = true
+			e.printf("Validators:[]validator.%s{\n", fwValidatorType)
 			for _, validator := range validators {
 				e.printf("%s,\n", validator)
 			}
 			e.printf("},\n")
 		}
 	} else {
-		features &^= UsesRegexpInValidation
+		features.UsesRegexpInValidation = false
 	}
 
 	if computed {
 		// Computed.
-		planModifiers = append(planModifiers, "resource.UseStateForUnknown()")
-		features |= HasFrameworkPlanModifiers
+		planModifiers = append(planModifiers, fmt.Sprintf("%s.UseStateForUnknown()", fwPlanModifierPackage))
+		features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
 	}
 
 	if createOnly {
 		// ForceNew.
-		planModifiers = append(planModifiers, "resource.RequiresReplace()")
-		features |= HasFrameworkPlanModifiers
+		planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplace()", fwPlanModifierPackage))
+		features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
 	}
 
 	if len(planModifiers) > 0 {
-		e.printf("PlanModifiers:[]tfsdk.AttributePlanModifier{\n")
+		e.printf("PlanModifiers:[]planmodifier.%s{\n", fwPlanModifierType)
 		for _, planModifier := range planModifiers {
 			e.printf("%s,\n", planModifier)
 		}
@@ -649,7 +725,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	if !createOnly && !readOnly {
-		features |= HasUpdatableProperty
+		features.HasUpdatableProperty = true
 	}
 
 	e.printf("}")
@@ -671,16 +747,25 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 
 	var features Features
 
-	e.printf("map[string]tfsdk.Attribute{\n")
+	e.printf("map[string]schema.Attribute{\n")
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
 		cfPropertyName, ok := attributeNameMap[tfAttributeName]
 		if ok {
 			if cfPropertyName != name {
-				return 0, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+				return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
 			}
 		} else {
 			attributeNameMap[tfAttributeName] = name
+		}
+
+		e.printf("// Property: %s\n", name)
+
+		// Only dump top-level property schemas as nested properties have been expanded here.
+		if len(parent.path) == 0 {
+			e.printf("// CloudFormation resource type schema:\n")
+			// Comment out each line.
+			e.printf("%s\n", regexp.MustCompile(`(?m)^`).ReplaceAllString(fmt.Sprintf("%v", properties[name]), "// "))
 		}
 
 		e.printf("%q:", tfAttributeName)
@@ -694,10 +779,10 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 			computedOnly)
 
 		if err != nil {
-			return 0, err
+			return features, err
 		}
 
-		features |= f
+		features.LogicalOr(f)
 
 		e.printf(",\n")
 	}
@@ -798,7 +883,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		case cfschema.PropertyTypeNumber:
 			return features, fmt.Sprintf("DefaultValue(types.Float64Value(%f))", v), nil
 		default:
-			return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
 	case string:
 		return features, fmt.Sprintf("DefaultValue(types.StringValue(%q))", v), nil
@@ -809,9 +894,9 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	case []interface{}:
 		switch arrayType := aggregateType(property); arrayType {
 		case aggregateNone:
-			return 0, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
+			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
-			features |= UsesFrameworkAttr
+			features.UsesFrameworkAttr = true
 
 			w := &strings.Builder{}
 			fprintf(w, "DefaultValue(types.SetValueMust(types.StringType, []attr.Value{\n")
@@ -820,13 +905,13 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 				case string:
 					fprintf(w, "types.StringValue(%q),\n", v)
 				default:
-					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
 			fprintf(w, "}))")
 			return features, w.String(), nil
 		default:
-			features |= UsesFrameworkAttr
+			features.UsesFrameworkAttr = true
 
 			w := &strings.Builder{}
 			fprintf(w, "DefaultValue(types.ListValueMust(types.StringType, []attr.Value{\n")
@@ -835,7 +920,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 				case string:
 					fprintf(w, "types.StringValue(%q),\n", v)
 				default:
-					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
 			fprintf(w, "}))")
@@ -843,7 +928,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		}
 
 	case map[string]interface{}:
-		features |= UsesFrameworkAttr
+		features.UsesFrameworkAttr = true
 
 		w := &strings.Builder{}
 		fprintf(w, "DefaultValue(types.ObjectValueMust(map[string]attr.Type{\n")
@@ -862,13 +947,13 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 					case string:
 						fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
 					default:
-						return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1, key2), "/"), v)
+						return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1, key2), "/"), v)
 					}
 				}
 				fprintf(w, "},\n")
 				fprintf(w, "},\n")
 			default:
-				return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1), "/"), v)
+				return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1), "/"), v)
 			}
 		}
 		fprintf(w, "},\n")
@@ -909,7 +994,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		return features, w.String(), nil
 
 	default:
-		return 0, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
+		return features, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
 	}
 }
 
@@ -932,7 +1017,8 @@ func integerValidators(path []string, property *cfschema.Property) (Features, []
 			return features, nil, err
 		}
 
-		validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", min))
+		validators = append(validators, fmt.Sprintf("int64validator.AtLeast(%d)", min))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "int64validator")
 	} else if property.Minimum == nil && property.Maximum != nil {
 		max, err := (*property.Maximum).Int64()
 
@@ -940,7 +1026,8 @@ func integerValidators(path []string, property *cfschema.Property) (Features, []
 			return features, nil, err
 		}
 
-		validators = append(validators, fmt.Sprintf("validate.IntAtMost(%d)", max))
+		validators = append(validators, fmt.Sprintf("int64validator.AtMost(%d)", max))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "int64validator")
 	} else if property.Minimum != nil && property.Maximum != nil {
 		min, err := (*property.Minimum).Int64()
 
@@ -954,7 +1041,8 @@ func integerValidators(path []string, property *cfschema.Property) (Features, []
 			return features, nil, err
 		}
 
-		validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", min, max))
+		validators = append(validators, fmt.Sprintf("int64validator.Between(%d,%d)", min, max))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "int64validator")
 	}
 
 	if property.Format != nil {
@@ -965,13 +1053,14 @@ func integerValidators(path []string, property *cfschema.Property) (Features, []
 
 	if len(property.Enum) > 0 {
 		w := &strings.Builder{}
-		fprintf(w, "validate.IntInSlice([]int{\n")
+		fprintf(w, "int64validator.OneOf(\n")
 		for _, enum := range property.Enum {
 			fprintf(w, "%d", int(enum.(float64)))
 			fprintf(w, ",\n")
 		}
-		fprintf(w, "})")
+		fprintf(w, ")")
 		validators = append(validators, w.String())
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "int64validator")
 	}
 
 	return features, validators, nil
@@ -994,7 +1083,8 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 			return features, nil, err
 		}
 
-		validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", min))
+		validators = append(validators, fmt.Sprintf("float64validator.AtLeast(%f)", min))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "float64validator")
 	} else if property.Minimum == nil && property.Maximum != nil {
 		max, err := (*property.Maximum).Float64()
 
@@ -1002,7 +1092,8 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 			return features, nil, err
 		}
 
-		validators = append(validators, fmt.Sprintf("validate.FloatAtMost(%f)", max))
+		validators = append(validators, fmt.Sprintf("float64validator.AtMost(%f)", max))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "float64validator")
 	} else if property.Minimum != nil && property.Maximum != nil {
 		min, err := (*property.Minimum).Float64()
 
@@ -1016,7 +1107,8 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 			return features, nil, err
 		}
 
-		validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", min, max))
+		validators = append(validators, fmt.Sprintf("float64validator.Between(%f,%f)", min, max))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "float64validator")
 	}
 
 	if property.Format != nil {
@@ -1043,24 +1135,30 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	var validators []string
 
 	if property.MinLength != nil && property.MaxLength == nil {
-		validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
+		validators = append(validators, fmt.Sprintf("stringvalidator.LengthAtLeast(%d)", *property.MinLength))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	} else if property.MinLength == nil && property.MaxLength != nil {
-		validators = append(validators, fmt.Sprintf("validate.StringLenAtMost(%d)", *property.MaxLength))
+		validators = append(validators, fmt.Sprintf("stringvalidator.LengthAtMost(%d)", *property.MaxLength))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	} else if property.MinLength != nil && property.MaxLength != nil {
-		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", *property.MinLength, *property.MaxLength))
+		validators = append(validators, fmt.Sprintf("stringvalidator.LengthBetween(%d,%d)", *property.MinLength, *property.MaxLength))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	}
 
 	if property.Pattern != nil && *property.Pattern != "" {
-		features |= UsesRegexpInValidation
-		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(%q), \"\")", *property.Pattern))
+		features.UsesRegexpInValidation = true
+		validators = append(validators, fmt.Sprintf("stringvalidator.RegexMatches(regexp.MustCompile(%q), \"\")", *property.Pattern))
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	}
 
 	if property.Format != nil {
 		switch format := *property.Format; format {
 		case "date-time":
+			features.UsesInternalValidate = true
 			validators = append(validators, "validate.IsRFC3339Time()")
 		case "string":
 		case "uri":
+			features.UsesInternalValidate = true
 			validators = append(validators, "validate.IsURI()")
 		default:
 			// TODO
@@ -1070,14 +1168,15 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 
 	if len(property.Enum) > 0 {
 		w := &strings.Builder{}
-		fprintf(w, "validate.StringInSlice([]string{\n")
+		fprintf(w, "stringvalidator.OneOf(\n")
 		for _, enum := range property.Enum {
 			fprintf(w, "\"")
 			fprintf(w, enum.(string))
 			fprintf(w, "\",\n")
 		}
-		fprintf(w, "})")
+		fprintf(w, ")")
 		validators = append(validators, w.String())
+		features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "stringvalidator")
 	}
 
 	return features, validators, nil
