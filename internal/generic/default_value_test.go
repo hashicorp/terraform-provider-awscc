@@ -11,6 +11,76 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
+func TestDefaultInt64Value(t *testing.T) {
+	t.Parallel()
+
+	type testCase struct {
+		plannedValue  types.Int64
+		currentValue  types.Int64
+		defaultValue  types.Int64
+		expectedValue types.Int64
+		expectError   bool
+	}
+	tests := map[string]testCase{
+		"non-default non-Null string": {
+			plannedValue:  types.Int64Value(3),
+			currentValue:  types.Int64Value(2),
+			defaultValue:  types.Int64Value(1),
+			expectedValue: types.Int64Value(3),
+		},
+		"non-default non-Null string, current Null": {
+			plannedValue:  types.Int64Value(3),
+			currentValue:  types.Int64Null(),
+			defaultValue:  types.Int64Value(1),
+			expectedValue: types.Int64Value(3),
+		},
+		"non-default Null string, current Null": {
+			plannedValue:  types.Int64Null(),
+			currentValue:  types.Int64Value(2),
+			defaultValue:  types.Int64Value(1),
+			expectedValue: types.Int64Null(),
+		},
+		"default string": {
+			plannedValue:  types.Int64Null(),
+			currentValue:  types.Int64Value(1),
+			defaultValue:  types.Int64Value(1),
+			expectedValue: types.Int64Value(1),
+		},
+		"default string on create": {
+			plannedValue:  types.Int64Null(),
+			currentValue:  types.Int64Null(),
+			defaultValue:  types.Int64Value(1),
+			expectedValue: types.Int64Null(),
+		},
+	}
+
+	for name, test := range tests {
+		name, test := name, test
+		t.Run(name, func(t *testing.T) {
+			ctx := context.TODO()
+			request := planmodifier.Int64Request{
+				PlanValue:  test.plannedValue,
+				Path:       path.Root("test"),
+				StateValue: test.currentValue,
+			}
+			response := planmodifier.Int64Response{}
+			Int64DefaultValue(test.defaultValue).PlanModifyInt64(ctx, request, &response)
+
+			if !response.Diagnostics.HasError() && test.expectError {
+				t.Fatal("expected error, got no error")
+			}
+
+			if response.Diagnostics.HasError() && !test.expectError {
+				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
+			}
+
+			if diff := cmp.Diff(response.PlanValue, test.expectedValue); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
 func TestDefaultStringValue(t *testing.T) {
 	t.Parallel()
 

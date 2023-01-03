@@ -842,7 +842,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("DefaultValue(types.Int64Value(%d))", int64(v)), nil
+			return features, fmt.Sprintf("Int64Value(types.Int64Value(%d))", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
 			return features, fmt.Sprintf("DefaultValue(types.Float64Value(%f))", v), nil
 		default:
