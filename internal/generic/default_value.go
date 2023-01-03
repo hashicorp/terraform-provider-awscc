@@ -3,6 +3,7 @@ package generic
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
@@ -74,6 +75,62 @@ func Int64DefaultValue(val int64) planmodifier.Int64 {
 }
 
 func (attributePlanModifier int64DefaultValueAttributePlanModifier) PlanModifyInt64(ctx context.Context, request planmodifier.Int64Request, response *planmodifier.Int64Response) {
+	// If the planned value is Null and there is a current value and the current value is the default
+	// then return the current value, else return the planned value.
+	if request.PlanValue.IsNull() && !request.StateValue.IsNull() && request.StateValue.Equal(attributePlanModifier.val) {
+		response.PlanValue = request.StateValue
+	} else {
+		response.PlanValue = request.PlanValue
+	}
+}
+
+type listOfStringDefaultValueAttributePlanModifier struct {
+	defaultValueAttributePlanModifier
+	val types.List
+}
+
+// ListOfStringDefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
+func ListOfStringDefaultValue(vals ...string) planmodifier.List {
+	var elements []attr.Value
+
+	for _, val := range vals {
+		elements = append(elements, types.StringValue(val))
+	}
+
+	return listOfStringDefaultValueAttributePlanModifier{
+		val: types.ListValueMust(types.StringType, elements),
+	}
+}
+
+func (attributePlanModifier listOfStringDefaultValueAttributePlanModifier) PlanModifyList(ctx context.Context, request planmodifier.ListRequest, response *planmodifier.ListResponse) {
+	// If the planned value is Null and there is a current value and the current value is the default
+	// then return the current value, else return the planned value.
+	if request.PlanValue.IsNull() && !request.StateValue.IsNull() && request.StateValue.Equal(attributePlanModifier.val) {
+		response.PlanValue = request.StateValue
+	} else {
+		response.PlanValue = request.PlanValue
+	}
+}
+
+type setOfStringDefaultValueAttributePlanModifier struct {
+	defaultValueAttributePlanModifier
+	val types.Set
+}
+
+// SetOfStringDefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
+func SetOfStringDefaultValue(vals ...string) planmodifier.Set {
+	var elements []attr.Value
+
+	for _, val := range vals {
+		elements = append(elements, types.StringValue(val))
+	}
+
+	return setOfStringDefaultValueAttributePlanModifier{
+		val: types.SetValueMust(types.StringType, elements),
+	}
+}
+
+func (attributePlanModifier setOfStringDefaultValueAttributePlanModifier) PlanModifySet(ctx context.Context, request planmodifier.SetRequest, response *planmodifier.SetResponse) {
 	// If the planned value is Null and there is a current value and the current value is the default
 	// then return the current value, else return the planned value.
 	if request.PlanValue.IsNull() && !request.StateValue.IsNull() && request.StateValue.Equal(attributePlanModifier.val) {

@@ -862,31 +862,31 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			features.UsesFrameworkAttr = true
 
 			w := &strings.Builder{}
-			fprintf(w, "DefaultValue(types.SetValueMust(types.StringType, []attr.Value{\n")
+			fprintf(w, "SetOfStringsDefaultValue\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
-					fprintf(w, "types.StringValue(%q),\n", v)
+					fprintf(w, "%q,\n", v)
 				default:
 					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
-			fprintf(w, "}))")
+			fprintf(w, ")")
 			return features, w.String(), nil
 		default:
 			features.UsesFrameworkAttr = true
 
 			w := &strings.Builder{}
-			fprintf(w, "DefaultValue(types.ListValueMust(types.StringType, []attr.Value{\n")
+			fprintf(w, "ListOfStringsDefaultValue(\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
-					fprintf(w, "types.StringValue(%q),\n", v)
+					fprintf(w, "%q,\n", v)
 				default:
 					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
-			fprintf(w, "}))")
+			fprintf(w, ")")
 			return features, w.String(), nil
 		}
 
