@@ -920,7 +920,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 
 	case map[string]interface{}:
 		w := &strings.Builder{}
-		fprintf(w, "ObjectDefaultValue()\n")
+		fprintf(w, "ObjectDefaultValue()")
 		return features, w.String(), nil
 
 	default:

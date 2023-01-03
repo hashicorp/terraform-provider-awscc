@@ -11,7 +11,7 @@ import (
 	{{- end}}
 	{{if .ImportFrameworkValidator }}"github.com/hashicorp/terraform-plugin-framework/schema/validator"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-    "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	{{if gt (len .FrameworkPlanModifierPackages) 0 }}"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"{{- end}}
 	{{- range .FrameworkPlanModifierPackages }}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
