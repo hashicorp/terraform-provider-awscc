@@ -122,9 +122,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if !codeFeatures.HasRequiredRootProperty {
 		templateData.HasRequiredAttribute = false
 	}
-	if codeFeatures.UsesFrameworkAttr {
-		templateData.ImportFrameworkAttr = true
-	}
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
@@ -201,7 +198,6 @@ type TemplateData struct {
 	FrameworkValidatorsPackages   []string
 	HasRequiredAttribute          bool
 	HasUpdateMethod               bool
-	ImportFrameworkAttr           bool
 	ImportFrameworkValidator      bool
 	ImportInternalValidate        bool
 	ImportRegexp                  bool

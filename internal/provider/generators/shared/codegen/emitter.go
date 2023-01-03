@@ -18,7 +18,6 @@ type Features struct {
 	HasRequiredRootProperty bool // At least one root property is required.
 	HasUpdatableProperty    bool // At least one property can be updated.
 	HasValidator            bool // At least one validator.
-	UsesFrameworkAttr       bool // Uses a type from the terraform-plugin-framework/attr package.
 	UsesInternalValidate    bool // Uses a type or function from the internal/validate package.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
@@ -40,9 +39,6 @@ func (f *Features) LogicalOr(features Features) {
 	}
 	if features.HasValidator {
 		f.HasValidator = true
-	}
-	if features.UsesFrameworkAttr {
-		f.UsesFrameworkAttr = true
 	}
 	if features.UsesInternalValidate {
 		f.UsesInternalValidate = true
@@ -859,8 +855,6 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		case aggregateNone:
 			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
-			features.UsesFrameworkAttr = true
-
 			w := &strings.Builder{}
 			fprintf(w, "SetOfStringsDefaultValue\n")
 			for _, elem := range v {
@@ -874,8 +868,6 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			fprintf(w, ")")
 			return features, w.String(), nil
 		default:
-			features.UsesFrameworkAttr = true
-
 			w := &strings.Builder{}
 			fprintf(w, "ListOfStringsDefaultValue(\n")
 			for _, elem := range v {
@@ -891,69 +883,8 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		}
 
 	case map[string]interface{}:
-		features.UsesFrameworkAttr = true
-
 		w := &strings.Builder{}
-		fprintf(w, "DefaultValue(types.ObjectValueMust(map[string]attr.Type{\n")
-		for key1, v := range v {
-			switch v := v.(type) {
-			case bool:
-				fprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
-			case string:
-				fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
-			case map[string]interface{}:
-				fprintf(w, "%q: types.ObjectType{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
-				for key2, v := range v {
-					switch v := v.(type) {
-					case bool:
-						fprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
-					case string:
-						fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
-					default:
-						return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1, key2), "/"), v)
-					}
-				}
-				fprintf(w, "},\n")
-				fprintf(w, "},\n")
-			default:
-				return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1), "/"), v)
-			}
-		}
-		fprintf(w, "},\n")
-		fprintf(w, "map[string]attr.Value{\n")
-		for key1, v := range v {
-			switch v := v.(type) {
-			case bool:
-				fprintf(w, "%q: types.BoolValue(%t),\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
-			case string:
-				fprintf(w, "%q: types.StringValue(%q),\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
-			case map[string]interface{}:
-				fprintf(w, "%q: types.ObjectValueMust(map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
-				for key2, v := range v {
-					switch v.(type) {
-					case bool:
-						fprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
-					case string:
-						fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
-					}
-				}
-				fprintf(w, "},\n")
-				fprintf(w, "map[string]attr.Value{\n")
-				for key2, v := range v {
-					switch v := v.(type) {
-					case bool:
-						fprintf(w, "%q: types.BoolValue(%t),\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
-					case string:
-						fprintf(w, "%q: types.StringValue(%q),\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
-					}
-				}
-				fprintf(w, "},\n")
-				fprintf(w, "),\n")
-			}
-		}
-		fprintf(w, "},\n")
-		fprintf(w, "),\n")
-		fprintf(w, ")")
+		fprintf(w, "ObjectDefaultValue()\n")
 		return features, w.String(), nil
 
 	default:
@@ -1143,67 +1074,4 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	}
 
 	return features, validators, nil
-}
-
-func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {
-	var nRequired int
-
-	if len(p.AllOf) > 0 {
-		var n int
-		w := &strings.Builder{}
-
-		fprintf(w, "validate.AllOfRequired(\n")
-		for _, a := range p.AllOf {
-			n += addPropertyRequiredAttributes(w, a)
-		}
-		fprintf(w, "),\n")
-
-		if n > 0 {
-			fprintf(writer, w.String())
-		}
-
-		nRequired += n
-	}
-	if len(p.AnyOf) > 0 {
-		var n int
-		w := &strings.Builder{}
-
-		fprintf(w, "validate.AnyOfRequired(\n")
-		for _, a := range p.AnyOf {
-			n += addPropertyRequiredAttributes(w, a)
-		}
-		fprintf(w, "),\n")
-
-		if n > 0 {
-			fprintf(writer, w.String())
-		}
-
-		nRequired += n
-	}
-	if len(p.OneOf) > 0 {
-		var n int
-		w := &strings.Builder{}
-
-		fprintf(w, "validate.OneOfRequired(\n")
-		for _, a := range p.OneOf {
-			n += addPropertyRequiredAttributes(w, a)
-		}
-		fprintf(w, "),\n")
-
-		if n > 0 {
-			fprintf(writer, w.String())
-		}
-
-		nRequired += n
-	}
-	if len(p.Required) > 0 {
-		fprintf(writer, "validate.Required(\n")
-		for _, r := range p.Required {
-			fprintf(writer, "%q,\n", naming.CloudFormationPropertyToTerraformAttribute(r))
-			nRequired++
-		}
-		fprintf(writer, "),\n")
-	}
-
-	return nRequired
 }

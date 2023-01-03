@@ -112,6 +112,20 @@ func (attributePlanModifier listOfStringDefaultValueAttributePlanModifier) PlanM
 	}
 }
 
+type objectDefaultValueAttributePlanModifier struct {
+	defaultValueAttributePlanModifier
+}
+
+// ObjectDefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
+func ObjectDefaultValue() planmodifier.Object {
+	return objectDefaultValueAttributePlanModifier{}
+}
+
+func (attributePlanModifier objectDefaultValueAttributePlanModifier) PlanModifyObject(ctx context.Context, request planmodifier.ObjectRequest, response *planmodifier.ObjectResponse) {
+	// NoOp.
+	response.PlanValue = request.PlanValue
+}
+
 type setOfStringDefaultValueAttributePlanModifier struct {
 	defaultValueAttributePlanModifier
 	val types.Set
