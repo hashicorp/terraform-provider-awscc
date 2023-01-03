@@ -17,6 +17,28 @@ func (attributePlanModifier defaultValueAttributePlanModifier) MarkdownDescripti
 	return attributePlanModifier.Description(ctx)
 }
 
+type boolDefaultValueAttributePlanModifier struct {
+	defaultValueAttributePlanModifier
+	val types.Bool
+}
+
+// BoolDefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
+func BoolDefaultValue(val types.Bool) planmodifier.Bool {
+	return boolDefaultValueAttributePlanModifier{
+		val: val,
+	}
+}
+
+func (attributePlanModifier boolDefaultValueAttributePlanModifier) PlanModifyBool(ctx context.Context, request planmodifier.BoolRequest, response *planmodifier.BoolResponse) {
+	// If the planned value is Null and there is a current value and the current value is the default
+	// then return the current value, else return the planned value.
+	if request.PlanValue.IsNull() && !request.StateValue.IsNull() && request.StateValue.Equal(attributePlanModifier.val) {
+		response.PlanValue = request.StateValue
+	} else {
+		response.PlanValue = request.PlanValue
+	}
+}
+
 type stringDefaultValueAttributePlanModifier struct {
 	defaultValueAttributePlanModifier
 	val types.String
