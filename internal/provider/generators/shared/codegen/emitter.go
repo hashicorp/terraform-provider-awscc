@@ -128,13 +128,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	// Primitive types.
 	//
 	case cfschema.PropertyTypeBoolean:
-		e.printf("schema.BoolAttribute{\n")
+		e.printf("schema.BoolAttribute{/*START ATTRIBUTE*/\n")
 		fwPlanModifierPackage = "boolplanmodifier"
 		fwPlanModifierType = "Bool"
 		fwValidatorType = "Bool"
 
 	case cfschema.PropertyTypeInteger:
-		e.printf("schema.Int64Attribute{\n")
+		e.printf("schema.Int64Attribute{/*START ATTRIBUTE*/\n")
 		fwPlanModifierPackage = "int64planmodifier"
 		fwPlanModifierType = "Int64"
 		fwValidatorType = "Int64"
@@ -147,7 +147,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 
 	case cfschema.PropertyTypeNumber:
-		e.printf("schema.Float64Attribute{\n")
+		e.printf("schema.Float64Attribute{/*START ATTRIBUTE*/\n")
 		fwPlanModifierPackage = "float64planmodifier"
 		fwPlanModifierType = "Float64"
 		fwValidatorType = "Float64"
@@ -160,7 +160,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 
 	case cfschema.PropertyTypeString:
-		e.printf("schema.StringAttribute{\n")
+		e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
 		fwPlanModifierPackage = "stringplanmodifier"
 		fwPlanModifierType = "String"
 		fwValidatorType = "String"
@@ -214,8 +214,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, unsupportedTypeError(path, "set of undefined schema")
 				}
 
-				e.printf("schema.SetNestedAttribute{\n")
-				e.printf("NestedObject: schema.NestedAttributeObject{\n")
+				e.printf("schema.SetNestedAttribute{/*START ATTRIBUTE*/\n")
+				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
@@ -233,7 +233,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features.LogicalOr(f)
 
 				e.printf(",\n")
-				e.printf("},\n")
+				e.printf("}/*END NESTED OBJECT*/,\n")
 
 				if v, err := setLengthValidator(path, property); err != nil {
 					return features, err
@@ -246,7 +246,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 
 			if elementType != "" {
-				e.printf("schema.SetAttribute{\n")
+				e.printf("schema.SetAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := setLengthValidator(path, property); err != nil {
@@ -302,8 +302,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, unsupportedTypeError(path, "list of undefined schema")
 				}
 
-				e.printf("schema.ListNestedAttribute{\n")
-				e.printf("NestedObject: schema.NestedAttributeObject{\n")
+				e.printf("schema.ListNestedAttribute{/*START ATTRIBUTE*/\n")
+				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
@@ -321,7 +321,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features.LogicalOr(f)
 
 				e.printf(",\n")
-				e.printf("},\n")
+				e.printf("}/*END NESTED OBJECT*/,\n")
 
 				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
@@ -341,7 +341,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 
 			if elementType != "" {
-				e.printf("schema.ListAttribute{\n")
+				e.printf("schema.ListAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := listLengthValidator(path, property); err != nil {
@@ -363,6 +363,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					} else if len(v) > 0 {
 						features.LogicalOr(f)
 						for _, v := range v {
+							// TODO
 							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
 						}
 					}
@@ -409,19 +410,19 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			// Primitive types.
 			//
 			case cfschema.PropertyTypeBoolean:
-				e.printf("schema.MapAttribute{\n")
+				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.BoolType,\n")
 
 			case cfschema.PropertyTypeInteger:
-				e.printf("schema.MapAttribute{\n")
+				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.Int64Type,\n")
 
 			case cfschema.PropertyTypeNumber:
-				e.printf("schema.MapAttribute{\n")
+				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.Float64Type,\n")
 
 			case cfschema.PropertyTypeString:
-				e.printf("schema.MapAttribute{\n")
+				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.StringType,\n")
 
 			//
@@ -431,19 +432,19 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				if aggregateType(patternProperty) == aggregateSet {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
 					case cfschema.PropertyTypeBoolean:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.SetType{ElemType:types.BoolType},\n")
 
 					case cfschema.PropertyTypeInteger:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/n")
 						e.printf("ElementType:types.SetType{ElemType:types.Int64Type},\n")
 
 					case cfschema.PropertyTypeNumber:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.SetType{ElemType:types.Float64Type},\n")
 
 					case cfschema.PropertyTypeString:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.SetType{ElemType:types.StringType},\n")
 
 					default:
@@ -452,19 +453,19 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				} else {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
 					case cfschema.PropertyTypeBoolean:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.ListType{ElemType:types.BoolType},\n")
 
 					case cfschema.PropertyTypeInteger:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.ListType{ElemType:types.Int64Type},\n")
 
 					case cfschema.PropertyTypeNumber:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.ListType{ElemType:types.Float64Type},\n")
 
 					case cfschema.PropertyTypeString:
-						e.printf("schema.MapAttribute{\n")
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.ListType{ElemType:types.StringType},\n")
 
 					default:
@@ -481,7 +482,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, unsupportedTypeError(path, "key-value map of undefined schema")
 				}
 
-				e.printf("Attributes:tfsdk.MapNestedAttributes(\n")
+				e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
+				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
 					attributeNameMap,
@@ -507,7 +510,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				}
 
 				e.printf(",\n")
-				e.printf("),\n")
+				e.printf("}/*END NESTED OBJECT*/,\n")
 
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
@@ -526,7 +529,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		if len(property.Properties) == 0 {
 			if *e.CfResource.TypeName == "AWS::NetworkManager::CoreNetwork" && len(path) == 1 && name == "PolicyDocument" {
 				// Hack for AWS::NetworkManager::CoreNetwork.PolicyDocument.
-				e.printf("schema.StringAttribute{\n")
+				e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("CustomType:JSONStringType,\n")
 				planModifiers = append(planModifiers, "JSONStringType.AttributePlanModifier()")
 
@@ -536,7 +539,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			} else {
 				// Schemaless object => key-value map of string.
 				e.warnf("%s is of type %s but has no schema", strings.Join(path, "/"), propertyType)
-				e.printf("schema.MapAttribute{\n")
+				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.StringType,\n")
 
 				fwPlanModifierPackage = "mapplanmodifier"
@@ -551,7 +554,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		fwPlanModifierType = "Object"
 		fwValidatorType = "Object"
 
-		e.printf("schema.SingleNestedAttribute{\n")
+		e.printf("schema.SingleNestedAttribute{/*START ATTRIBUTE*/\n")
 		e.printf("Attributes:")
 		f, err := e.emitSchema(
 			attributeNameMap,
@@ -568,7 +571,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		features.LogicalOr(f)
 
 		e.printf(",\n")
-		e.printf("),\n")
 
 	default:
 		return features, unsupportedTypeError(path, propertyType)
@@ -581,7 +583,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	// Return early as attribute validations are not required and additional configurations are not supported for data source.
 	if e.IsDataSource {
 		e.printf("Computed:true,\n")
-		e.printf("}")
+		e.printf("}/*END ATTRIBUTE*/")
 
 		return features, nil
 	}
@@ -650,11 +652,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	if !computed || optional {
 		if len(validators) > 0 {
 			features.HasValidator = true
-			e.printf("Validators:[]validator.%s{\n", fwValidatorType)
+			e.printf("Validators:[]validator.%s{/*START VALIDATORS*/\n", fwValidatorType)
 			for _, validator := range validators {
 				e.printf("%s,\n", validator)
 			}
-			e.printf("},\n")
+			e.printf("}/*END VALIDATORS*/,\n")
 		}
 	} else {
 		features.UsesRegexpInValidation = false
@@ -673,11 +675,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	if len(planModifiers) > 0 {
-		e.printf("PlanModifiers:[]planmodifier.%s{\n", fwPlanModifierType)
+		e.printf("PlanModifiers:[]planmodifier.%s{/*START PLAN MODIFIERS*/\n", fwPlanModifierType)
 		for _, planModifier := range planModifiers {
 			e.printf("%s,\n", planModifier)
 		}
-		e.printf("},\n")
+		e.printf("}/*END PLAN MODIFIERS*/,\n")
 	}
 
 	if writeOnly {
@@ -688,7 +690,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		features.HasUpdatableProperty = true
 	}
 
-	e.printf("}")
+	e.printf("}/*END ATTRIBUTE*/")
 
 	return features, nil
 }
@@ -707,7 +709,7 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 
 	var features Features
 
-	e.printf("map[string]schema.Attribute{\n")
+	e.printf("map[string]schema.Attribute{/*START SCHEMA*/\n")
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
 		cfPropertyName, ok := attributeNameMap[tfAttributeName]
@@ -745,7 +747,7 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 
 		e.printf(",\n")
 	}
-	e.printf("}")
+	e.printf("}/*END SCHEMA*/")
 
 	return features, nil
 }
