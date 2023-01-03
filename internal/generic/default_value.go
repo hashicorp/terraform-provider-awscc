@@ -23,9 +23,9 @@ type boolDefaultValueAttributePlanModifier struct {
 }
 
 // BoolDefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
-func BoolDefaultValue(val types.Bool) planmodifier.Bool {
+func BoolDefaultValue(val bool) planmodifier.Bool {
 	return boolDefaultValueAttributePlanModifier{
-		val: val,
+		val: types.BoolValue(val),
 	}
 }
 
@@ -45,9 +45,9 @@ type float64DefaultValueAttributePlanModifier struct {
 }
 
 // Float64DefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
-func Float64DefaultValue(val types.Float64) planmodifier.Float64 {
+func Float64DefaultValue(val float64) planmodifier.Float64 {
 	return float64DefaultValueAttributePlanModifier{
-		val: val,
+		val: types.Float64Value(val),
 	}
 }
 
@@ -67,9 +67,9 @@ type int64DefaultValueAttributePlanModifier struct {
 }
 
 // Int64DefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
-func Int64DefaultValue(val types.Int64) planmodifier.Int64 {
+func Int64DefaultValue(val int64) planmodifier.Int64 {
 	return int64DefaultValueAttributePlanModifier{
-		val: val,
+		val: types.Int64Value(val),
 	}
 }
 
@@ -89,9 +89,9 @@ type stringDefaultValueAttributePlanModifier struct {
 }
 
 // StringDefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
-func StringDefaultValue(val types.String) planmodifier.String {
+func StringDefaultValue(val string) planmodifier.String {
 	return stringDefaultValueAttributePlanModifier{
-		val: val,
+		val: types.StringValue(val),
 	}
 }
 

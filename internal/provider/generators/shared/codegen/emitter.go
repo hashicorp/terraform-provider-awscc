@@ -838,18 +838,18 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	// Primitive types.
 	//
 	case bool:
-		return features, fmt.Sprintf("BoolDefaultValue(types.BoolValue(%t))", v), nil
+		return features, fmt.Sprintf("BoolDefaultValue(%t)", v), nil
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("Int64Value(types.Int64Value(%d))", int64(v)), nil
+			return features, fmt.Sprintf("Int64Value(%d)", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("Float64DefaultValue(types.Float64Value(%f))", v), nil
+			return features, fmt.Sprintf("Float64DefaultValue(%f)", v), nil
 		default:
 			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
 	case string:
-		return features, fmt.Sprintf("StringDefaultValue(types.StringValue(%q))", v), nil
+		return features, fmt.Sprintf("StringDefaultValue(%q)", v), nil
 
 	//
 	// Complex types.

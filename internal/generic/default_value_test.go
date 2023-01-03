@@ -17,7 +17,7 @@ func TestDefaultInt64Value(t *testing.T) {
 	type testCase struct {
 		plannedValue  types.Int64
 		currentValue  types.Int64
-		defaultValue  types.Int64
+		defaultValue  int64
 		expectedValue types.Int64
 		expectError   bool
 	}
@@ -25,31 +25,31 @@ func TestDefaultInt64Value(t *testing.T) {
 		"non-default non-Null string": {
 			plannedValue:  types.Int64Value(3),
 			currentValue:  types.Int64Value(2),
-			defaultValue:  types.Int64Value(1),
+			defaultValue:  1,
 			expectedValue: types.Int64Value(3),
 		},
 		"non-default non-Null string, current Null": {
 			plannedValue:  types.Int64Value(3),
 			currentValue:  types.Int64Null(),
-			defaultValue:  types.Int64Value(1),
+			defaultValue:  1,
 			expectedValue: types.Int64Value(3),
 		},
 		"non-default Null string, current Null": {
 			plannedValue:  types.Int64Null(),
 			currentValue:  types.Int64Value(2),
-			defaultValue:  types.Int64Value(1),
+			defaultValue:  1,
 			expectedValue: types.Int64Null(),
 		},
 		"default string": {
 			plannedValue:  types.Int64Null(),
 			currentValue:  types.Int64Value(1),
-			defaultValue:  types.Int64Value(1),
+			defaultValue:  1,
 			expectedValue: types.Int64Value(1),
 		},
 		"default string on create": {
 			plannedValue:  types.Int64Null(),
 			currentValue:  types.Int64Null(),
-			defaultValue:  types.Int64Value(1),
+			defaultValue:  1,
 			expectedValue: types.Int64Null(),
 		},
 	}
@@ -87,7 +87,7 @@ func TestDefaultStringValue(t *testing.T) {
 	type testCase struct {
 		plannedValue  types.String
 		currentValue  types.String
-		defaultValue  types.String
+		defaultValue  string
 		expectedValue types.String
 		expectError   bool
 	}
@@ -95,31 +95,31 @@ func TestDefaultStringValue(t *testing.T) {
 		"non-default non-Null string": {
 			plannedValue:  types.StringValue("gamma"),
 			currentValue:  types.StringValue("beta"),
-			defaultValue:  types.StringValue("alpha"),
+			defaultValue:  "alpha",
 			expectedValue: types.StringValue("gamma"),
 		},
 		"non-default non-Null string, current Null": {
 			plannedValue:  types.StringValue("gamma"),
 			currentValue:  types.StringNull(),
-			defaultValue:  types.StringValue("alpha"),
+			defaultValue:  "alpha",
 			expectedValue: types.StringValue("gamma"),
 		},
 		"non-default Null string, current Null": {
 			plannedValue:  types.StringNull(),
 			currentValue:  types.StringValue("beta"),
-			defaultValue:  types.StringValue("alpha"),
+			defaultValue:  "alpha",
 			expectedValue: types.StringNull(),
 		},
 		"default string": {
 			plannedValue:  types.StringNull(),
 			currentValue:  types.StringValue("alpha"),
-			defaultValue:  types.StringValue("alpha"),
+			defaultValue:  "alpha",
 			expectedValue: types.StringValue("alpha"),
 		},
 		"default string on create": {
 			plannedValue:  types.StringNull(),
 			currentValue:  types.StringNull(),
-			defaultValue:  types.StringValue("alpha"),
+			defaultValue:  "alpha",
 			expectedValue: types.StringNull(),
 		},
 	}
