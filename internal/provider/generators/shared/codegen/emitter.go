@@ -18,6 +18,7 @@ type Features struct {
 	HasRequiredRootProperty bool // At least one root property is required.
 	HasUpdatableProperty    bool // At least one property can be updated.
 	HasValidator            bool // At least one validator.
+	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
 	UsesInternalValidate    bool // Uses a type or function from the internal/validate package.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
@@ -39,6 +40,9 @@ func (f *Features) LogicalOr(features Features) {
 	}
 	if features.HasValidator {
 		f.HasValidator = true
+	}
+	if features.UsesFrameworkTypes {
+		f.UsesFrameworkTypes = true
 	}
 	if features.UsesInternalValidate {
 		f.UsesInternalValidate = true
@@ -246,6 +250,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 
 			if elementType != "" {
+				features.UsesFrameworkTypes = true
+
 				e.printf("schema.SetAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:%s,\n", elementType)
 
@@ -341,6 +347,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 
 			if elementType != "" {
+				features.UsesFrameworkTypes = true
+
 				e.printf("schema.ListAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:%s,\n", elementType)
 
@@ -413,17 +421,25 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.BoolType,\n")
 
+				features.UsesFrameworkTypes = true
+
 			case cfschema.PropertyTypeInteger:
 				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.Int64Type,\n")
+
+				features.UsesFrameworkTypes = true
 
 			case cfschema.PropertyTypeNumber:
 				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.Float64Type,\n")
 
+				features.UsesFrameworkTypes = true
+
 			case cfschema.PropertyTypeString:
 				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.StringType,\n")
+
+				features.UsesFrameworkTypes = true
 
 			//
 			// Complex types.
@@ -450,6 +466,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
 					}
+
+					features.UsesFrameworkTypes = true
 				} else {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
 					case cfschema.PropertyTypeBoolean:
@@ -471,6 +489,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
 					}
+
+					features.UsesFrameworkTypes = true
 				}
 
 			case cfschema.PropertyTypeObject:
@@ -538,6 +558,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				fwValidatorType = "String"
 			} else {
 				// Schemaless object => key-value map of string.
+				features.UsesFrameworkTypes = true
+
 				e.warnf("%s is of type %s but has no schema", strings.Join(path, "/"), propertyType)
 				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:types.StringType,\n")

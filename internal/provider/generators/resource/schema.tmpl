@@ -16,7 +16,7 @@ import (
 	{{- range .FrameworkPlanModifierPackages }}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
 	{{- end}}
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{- end}}
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	{{if .ImportInternalValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
