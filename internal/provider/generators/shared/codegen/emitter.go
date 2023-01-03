@@ -243,6 +243,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
+					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
 				}
 
 			default:
@@ -259,6 +260,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
+					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
 				}
 
 				if validatorsGenerator != nil {
@@ -266,9 +268,23 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						return features, err
 					} else if len(v) > 0 {
 						features.LogicalOr(f)
-						for _, v := range v {
-							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
+
+						w := &strings.Builder{}
+						switch itemType := property.Items.Type.String(); itemType {
+						case cfschema.PropertyTypeString:
+							fprintf(w, "setvalidator.ValueStringsAre(\n")
+						case cfschema.PropertyTypeInteger:
+							fprintf(w, "setvalidator. ValueInt64sAre(\n")
+						default:
+							return features, fmt.Errorf("%s is of unsupported type for set item validation: %s", strings.Join(path, "/"), itemType)
 						}
+						for _, v := range v {
+							fprintf(w, "%s,\n", v)
+						}
+						fprintf(w, ")")
+						validators = append(validators, w.String())
+
+						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
 					}
 				}
 			}
@@ -333,11 +349,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
+					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				}
 
 				switch arrayType {
 				case aggregateOrderedSet:
 					validators = append(validators, "listvalidator.UniqueValues()")
+					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
 					planModifiers = append(planModifiers, "Multiset()")
 				}
@@ -361,6 +379,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				switch arrayType {
 				case aggregateOrderedSet:
 					validators = append(validators, "listvalidator.UniqueValues()")
+					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
 					planModifiers = append(planModifiers, "Multiset()")
 				}
@@ -370,10 +389,23 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						return features, err
 					} else if len(v) > 0 {
 						features.LogicalOr(f)
-						for _, v := range v {
-							// TODO
-							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
+
+						w := &strings.Builder{}
+						switch itemType := property.Items.Type.String(); itemType {
+						case cfschema.PropertyTypeString:
+							fprintf(w, "listvalidator.ValueStringsAre(\n")
+						case cfschema.PropertyTypeInteger:
+							fprintf(w, "listvalidator. ValueInt64sAre(\n")
+						default:
+							return features, fmt.Errorf("%s is of unsupported type for list item validation: %s", strings.Join(path, "/"), itemType)
 						}
+						for _, v := range v {
+							fprintf(w, "%s,\n", v)
+						}
+						fprintf(w, ")")
+						validators = append(validators, w.String())
+
+						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 					}
 				}
 			}
