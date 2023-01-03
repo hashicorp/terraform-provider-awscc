@@ -39,6 +39,28 @@ func (attributePlanModifier boolDefaultValueAttributePlanModifier) PlanModifyBoo
 	}
 }
 
+type float64DefaultValueAttributePlanModifier struct {
+	defaultValueAttributePlanModifier
+	val types.Float64
+}
+
+// Float64DefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
+func Float64DefaultValue(val types.Float64) planmodifier.Float64 {
+	return float64DefaultValueAttributePlanModifier{
+		val: val,
+	}
+}
+
+func (attributePlanModifier float64DefaultValueAttributePlanModifier) PlanModifyFloat64(ctx context.Context, request planmodifier.Float64Request, response *planmodifier.Float64Response) {
+	// If the planned value is Null and there is a current value and the current value is the default
+	// then return the current value, else return the planned value.
+	if request.PlanValue.IsNull() && !request.StateValue.IsNull() && request.StateValue.Equal(attributePlanModifier.val) {
+		response.PlanValue = request.StateValue
+	} else {
+		response.PlanValue = request.PlanValue
+	}
+}
+
 type int64DefaultValueAttributePlanModifier struct {
 	defaultValueAttributePlanModifier
 	val types.Int64

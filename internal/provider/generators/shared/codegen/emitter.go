@@ -844,7 +844,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		case cfschema.PropertyTypeInteger:
 			return features, fmt.Sprintf("Int64Value(types.Int64Value(%d))", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("DefaultValue(types.Float64Value(%f))", v), nil
+			return features, fmt.Sprintf("Float64DefaultValue(types.Float64Value(%f))", v), nil
 		default:
 			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
