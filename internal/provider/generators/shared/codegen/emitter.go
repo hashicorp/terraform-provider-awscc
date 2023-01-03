@@ -849,7 +849,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
 	case string:
-		return features, fmt.Sprintf("DefaultValue(types.StringValue(%q))", v), nil
+		return features, fmt.Sprintf("StringDefaultValue(types.StringValue(%q))", v), nil
 
 	//
 	// Complex types.
