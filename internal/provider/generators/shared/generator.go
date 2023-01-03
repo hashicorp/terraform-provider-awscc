@@ -98,8 +98,7 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 
 	// Generate code for the CloudFormation root properties schema.
 	attributeNameMap := make(map[string]string) // Terraform attribute name to CloudFormation property name.
-	computedOnly := resType == DataSourceType
-	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(attributeNameMap, computedOnly)
+	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(attributeNameMap)
 
 	if err != nil {
 		return nil, fmt.Errorf("emitting schema code: %w", err)
