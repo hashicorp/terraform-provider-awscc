@@ -892,7 +892,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
 			w := &strings.Builder{}
-			fprintf(w, "SetOfStringsDefaultValue\n")
+			fprintf(w, "SetOfStringsDefaultValue(\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
