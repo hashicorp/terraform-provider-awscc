@@ -331,7 +331,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				switch arrayType {
 				case aggregateOrderedSet:
-					validators = append(validators, "validate.UniqueItems()")
+					validators = append(validators, "listvalidator.UniqueValues()")
 				case aggregateMultiset:
 					planModifiers = append(planModifiers, "Multiset()")
 				}
@@ -352,7 +352,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				switch arrayType {
 				case aggregateOrderedSet:
-					validators = append(validators, "validate.UniqueItems()")
+					validators = append(validators, "listvalidator.UniqueValues()")
 				case aggregateMultiset:
 					planModifiers = append(planModifiers, "Multiset()")
 				}
