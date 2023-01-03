@@ -107,15 +107,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	rootPropertiesSchema := sb.String()
 	sb.Reset()
 
-	err = codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
-
-	if err != nil {
-		return nil, fmt.Errorf("emitting schema required attributes validator: %w", err)
-	}
-
-	requiredAttributesValidator := sb.String()
-	sb.Reset()
-
 	templateData := &TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
 		AttributeNameMap:             attributeNameMap,
@@ -145,7 +136,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	}
 
 	templateData.HasUpdateMethod = true
-	templateData.RequiredAttributesValidator = requiredAttributesValidator
 	templateData.SyntheticIDAttribute = true
 
 	if !codeFeatures.HasUpdatableProperty {
@@ -154,7 +144,7 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures.UsesRegexpInValidation {
 		templateData.ImportRegexp = true
 	}
-	if codeFeatures.UsesInternalValidate || requiredAttributesValidator != "" {
+	if codeFeatures.UsesInternalValidate {
 		templateData.ImportInternalValidate = true
 	}
 	if codeFeatures.HasIDRootProperty {
@@ -216,7 +206,6 @@ type TemplateData struct {
 	ImportInternalValidate        bool
 	ImportRegexp                  bool
 	PackageName                   string
-	RequiredAttributesValidator   string
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64

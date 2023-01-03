@@ -72,9 +72,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 {{ if .HasUpdateMethod }}
 	opts = opts.WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }})
 {{- end }}
-{{ if .RequiredAttributesValidator }}
-	opts = opts.WithRequiredAttributesValidators({{ .RequiredAttributesValidator }})
-{{- end }}
 
 	v, err := NewResource(ctx, opts...)
 

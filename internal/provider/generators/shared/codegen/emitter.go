@@ -76,19 +76,6 @@ type parent struct {
 	}
 }
 
-// EmitResourceSchemaRequiredAttributesValidator generates any resource schema-level required Attributes validators.
-func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() error {
-	v, err := resourceRequiredAttributesValidator(e.CfResource)
-
-	if err != nil {
-		return err
-	}
-
-	e.printf(v)
-
-	return nil
-}
-
 // EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
@@ -258,12 +245,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, v)
 				}
 
-				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
-					return features, err
-				} else if validator != "" {
-					validators = append(validators, validator)
-				}
-
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
@@ -357,12 +338,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "validate.UniqueItems()")
 				case aggregateMultiset:
 					planModifiers = append(planModifiers, "Multiset()")
-				}
-
-				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
-					return features, err
-				} else if validator != "" {
-					validators = append(validators, validator)
 				}
 
 			default:
@@ -598,12 +573,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 		e.printf(",\n")
 		e.printf("),\n")
-
-		if validator, err := propertyRequiredAttributesValidator(property); err != nil {
-			return features, err
-		} else if validator != "" {
-			validators = append(validators, validator)
-		}
 
 	default:
 		return features, unsupportedTypeError(path, propertyType)
@@ -1237,126 +1206,4 @@ func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubsche
 	}
 
 	return nRequired
-}
-
-func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaComposition) int {
-	var nRequired int
-
-	if allOf := r.All(); len(allOf) > 0 {
-		var n int
-		w := &strings.Builder{}
-
-		fprintf(w, "validate.AllOfRequired(\n")
-		for _, a := range allOf {
-			n += addPropertyRequiredAttributes(w, a)
-		}
-		fprintf(w, "),\n")
-
-		if n > 0 {
-			fprintf(writer, w.String())
-		}
-
-		nRequired += n
-	}
-	if anyOf := r.Any(); len(anyOf) > 0 {
-		var n int
-		w := &strings.Builder{}
-
-		fprintf(w, "validate.AnyOfRequired(\n")
-		for _, a := range anyOf {
-			n += addPropertyRequiredAttributes(w, a)
-		}
-		fprintf(w, "),\n")
-
-		if n > 0 {
-			fprintf(writer, w.String())
-		}
-
-		nRequired += n
-	}
-	if oneOf := r.One(); len(oneOf) > 0 {
-		var n int
-		w := &strings.Builder{}
-
-		fprintf(w, "validate.OneOfRequired(\n")
-		for _, a := range oneOf {
-			n += addPropertyRequiredAttributes(w, a)
-		}
-		fprintf(w, "),\n")
-
-		if n > 0 {
-			fprintf(writer, w.String())
-		}
-
-		nRequired += n
-	}
-
-	return nRequired
-}
-
-func propertyRequiredAttributesValidator(p *cfschema.Property) (string, error) { //nolint:unparam
-	if p == nil {
-		return "", nil
-	}
-
-	w := &strings.Builder{}
-	fprintf(w, "validate.RequiredAttributes(\n")
-	nRequired := addSchemaCompositionRequiredAttributes(w, property(*p))
-	fprintf(w, ")")
-
-	if nRequired == 0 {
-		return "", nil
-	}
-
-	return w.String(), nil
-}
-
-func resourceRequiredAttributesValidator(r *cfschema.Resource) (string, error) { //nolint:unparam
-	if r == nil {
-		return "", nil
-	}
-
-	w := &strings.Builder{}
-	nRequired := addSchemaCompositionRequiredAttributes(w, resource(*r))
-
-	if nRequired == 0 {
-		return "", nil
-	}
-
-	return w.String(), nil
-}
-
-// The schemaComposition interface can be implemented by Property and Resource.
-type schemaComposition interface {
-	All() []*cfschema.PropertySubschema
-	Any() []*cfschema.PropertySubschema
-	One() []*cfschema.PropertySubschema
-}
-
-type property cfschema.Property
-
-func (p property) All() []*cfschema.PropertySubschema {
-	return p.AllOf
-}
-
-func (p property) Any() []*cfschema.PropertySubschema {
-	return p.AnyOf
-}
-
-func (p property) One() []*cfschema.PropertySubschema {
-	return p.OneOf
-}
-
-type resource cfschema.Resource
-
-func (r resource) All() []*cfschema.PropertySubschema {
-	return r.AllOf
-}
-
-func (r resource) Any() []*cfschema.PropertySubschema {
-	return r.AnyOf
-}
-
-func (r resource) One() []*cfschema.PropertySubschema {
-	return r.OneOf
 }
