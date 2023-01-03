@@ -9,6 +9,4 @@ meta_schema {
 
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
-
-  suppress_plural_data_source_generation = true
 }
