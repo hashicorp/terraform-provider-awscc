@@ -235,7 +235,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf(",\n")
 				e.printf("},\n")
 
-				if v, err := arrayLengthValidator(path, property); err != nil {
+				if v, err := setLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -249,7 +249,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("schema.SetAttribute{\n")
 				e.printf("ElementType:%s,\n", elementType)
 
-				if v, err := arrayLengthValidator(path, property); err != nil {
+				if v, err := setLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -323,7 +323,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf(",\n")
 				e.printf("},\n")
 
-				if v, err := arrayLengthValidator(path, property); err != nil {
+				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -344,7 +344,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("schema.ListAttribute{\n")
 				e.printf("ElementType:%s,\n", elementType)
 
-				if v, err := arrayLengthValidator(path, property); err != nil {
+				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -810,14 +810,26 @@ func unsupportedTypeError(path []string, typ string) error {
 	return fmt.Errorf("%s is of unsupported type: %s", strings.Join(path, "/"), typ)
 }
 
-// arrayLengthValidator returns any array length AttributeValidator for the specified Property.
-func arrayLengthValidator(path []string, property *cfschema.Property) (string, error) { //nolint:unparam
+// listLengthValidator returns any list length AttributeValidator for the specified Property.
+func listLengthValidator(path []string, property *cfschema.Property) (string, error) { //nolint:unparam
 	if property.MinItems != nil && property.MaxItems == nil {
-		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems), nil
+		return fmt.Sprintf("listvalidator.SizeAtLeast(%d)", *property.MinItems), nil
 	} else if property.MinItems == nil && property.MaxItems != nil {
-		return fmt.Sprintf("validate.ArrayLenAtMost(%d)", *property.MaxItems), nil
+		return fmt.Sprintf("listvalidator.SizeAtMost(%d)", *property.MaxItems), nil
 	} else if property.MinItems != nil && property.MaxItems != nil {
-		return fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", *property.MinItems, *property.MaxItems), nil
+		return fmt.Sprintf("listvalidator.SizeBetween(%d,%d)", *property.MinItems, *property.MaxItems), nil
+	}
+
+	return "", nil
+}
+
+func setLengthValidator(path []string, property *cfschema.Property) (string, error) { //nolint:unparam
+	if property.MinItems != nil && property.MaxItems == nil {
+		return fmt.Sprintf("setvalidator.SizeAtLeast(%d)", *property.MinItems), nil
+	} else if property.MinItems == nil && property.MaxItems != nil {
+		return fmt.Sprintf("setvalidator.SizeAtMost(%d)", *property.MaxItems), nil
+	} else if property.MinItems != nil && property.MaxItems != nil {
+		return fmt.Sprintf("setvalidator.SizeBetween(%d,%d)", *property.MinItems, *property.MaxItems), nil
 	}
 
 	return "", nil
