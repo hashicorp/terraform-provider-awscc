@@ -823,7 +823,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									ListOfStringsDefaultValue(
+									ListOfStringDefaultValue(
 										"GET",
 										"HEAD",
 									),
@@ -844,7 +844,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									ListOfStringsDefaultValue(
+									ListOfStringDefaultValue(
 										"GET",
 										"HEAD",
 									),
@@ -1157,7 +1157,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								Int64Value(80),
+								Int64DefaultValue(80),
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1166,7 +1166,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								Int64Value(443),
+								Int64DefaultValue(443),
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1195,7 +1195,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								ListOfStringsDefaultValue(
+								ListOfStringDefaultValue(
 									"GET",
 									"HEAD",
 								),
@@ -1217,7 +1217,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								ListOfStringsDefaultValue(
+								ListOfStringDefaultValue(
 									"GET",
 									"HEAD",
 								),
@@ -1617,7 +1617,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64Value(80),
+											Int64DefaultValue(80),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1626,7 +1626,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64Value(443),
+											Int64DefaultValue(443),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1635,7 +1635,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64Value(5),
+											Int64DefaultValue(5),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1648,7 +1648,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64Value(30),
+											Int64DefaultValue(30),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1658,7 +1658,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											ListOfStringsDefaultValue(
+											ListOfStringDefaultValue(
 												"TLSv1",
 												"SSLv3",
 											),

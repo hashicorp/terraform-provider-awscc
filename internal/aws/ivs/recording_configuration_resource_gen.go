@@ -146,7 +146,7 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 				int64validator.Between(0, 300),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64Value(0),
+				Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

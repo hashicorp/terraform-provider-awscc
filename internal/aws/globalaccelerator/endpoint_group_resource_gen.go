@@ -90,7 +90,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 							int64validator.Between(0, 255),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							Int64Value(100),
+							Int64DefaultValue(100),
 							int64planmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -144,7 +144,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64Value(30),
+				Int64DefaultValue(30),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -183,7 +183,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 				int64validator.Between(-1, 65535),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64Value(-1),
+				Int64DefaultValue(-1),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -299,7 +299,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64Value(3),
+				Int64DefaultValue(3),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

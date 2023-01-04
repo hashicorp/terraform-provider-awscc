@@ -43,7 +43,7 @@ func roleAliasResource(ctx context.Context) (resource.Resource, error) {
 				int64validator.Between(900, 43200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64Value(3600),
+				Int64DefaultValue(3600),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

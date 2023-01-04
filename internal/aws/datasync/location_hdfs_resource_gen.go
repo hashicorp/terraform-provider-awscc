@@ -370,7 +370,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 				int64validator.Between(1, 512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64Value(3),
+				Int64DefaultValue(3),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

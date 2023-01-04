@@ -2286,7 +2286,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										int64validator.Between(2, 10000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										Int64Value(0),
+										Int64DefaultValue(0),
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2445,7 +2445,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										int64validator.Between(1, 10),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										Int64Value(0),
+										Int64DefaultValue(0),
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2511,7 +2511,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											int64validator.Between(0, 100000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64Value(0),
+											Int64DefaultValue(0),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2530,7 +2530,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											int64validator.Between(0, 1000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64Value(0),
+											Int64DefaultValue(0),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2802,7 +2802,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												int64validator.Between(21, 200),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												Int64Value(0),
+												Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/

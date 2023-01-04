@@ -546,7 +546,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						Int64Value(30),
+						Int64DefaultValue(30),
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
